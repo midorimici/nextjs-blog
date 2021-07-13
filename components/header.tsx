@@ -2,12 +2,26 @@ import Link from 'next/link'
 
 const Header = () => {
   return (
-    <h2 className="text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight mb-20 mt-8">
-      <Link href="/">
-        <a className="hover:underline">Blog</a>
-      </Link>
-      .
-    </h2>
+    <header className="py-8">
+      <div className="flex justify-between items-center">
+        <Link href="/">
+          <a>
+            <span className="font-bold text-5xl">
+              みどりみちのブログ
+            </span>
+          </a>
+        </Link>
+        <nav className="flex items-center gap-8">
+          <Link href="/tags">
+            <a>Tags</a>
+          </Link>
+          <Link href="/about">
+            <a>About</a>
+          </Link>
+        </nav>
+      </div>
+      <div className="bg-yellowgreen h-2 mt-4"></div>
+    </header>
   )
 }
 
