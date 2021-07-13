@@ -20,7 +20,7 @@ const Header = () => {
           </Link>
         </nav>
       </div>
-      <div className="bg-yellowgreen h-2 mt-4"></div>
+      <div className="bg-yellowgreen rounded h-2 mt-4"></div>
     </header>
   )
 }
