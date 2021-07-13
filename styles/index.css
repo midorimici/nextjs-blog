@@ -13,3 +13,27 @@
 /* Stop purging. */
 
 /* Your own custom utilities */
+
+/*
+"genjyuu" Licensed under SIL Open Font License 1.1 (http://scripts.sil.org/OFL)
+© 2015 自家製フォント工房, © 2014, 2015 Adobe Systems Incorporated, © 2015 M+
+FONTS PROJECT
+http://jikasei.me/font/genjyuu/
+*/
+
+@font-face {
+    font-family: 'genjyuu';
+    font-display: swap;
+    font-weight: inherit;
+    font-style: inherit;
+    src: url("/fonts/genjyuu/GenJyuuGothic-Regular_subset.eot");
+    src: url("/fonts/genjyuu/GenJyuuGothic-Regular_subset.eot?#iefix") format('embedded-opentype'),
+    url("/fonts/genjyuu/GenJyuuGothic-Regular_subset.woff2") format('woff2'),
+    url("/fonts/genjyuu/GenJyuuGothic-Regular_subset.woff") format('woff'),
+    url("/fonts/genjyuu/GenJyuuGothic-Regular_subset.ttf") format('truetype');
+}
+
+body {
+    @apply text-xl;
+    font-family: genjyuu, "Meiryo", serif;
+}
