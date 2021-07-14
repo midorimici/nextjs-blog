@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTags, faUser } from '@fortawesome/free-solid-svg-icons'
 
 const Header = () => {
   return (
@@ -13,10 +15,18 @@ const Header = () => {
         </Link>
         <nav className="flex items-center gap-8">
           <Link href="/tags">
-            <a>Tags</a>
+            <a className='hover:text-pink-400 transition-colors duration-300'>
+              <FontAwesomeIcon icon={faTags} />
+              &nbsp;
+              Tags
+            </a>
           </Link>
           <Link href="/about">
-            <a>About</a>
+            <a className='hover:text-pink-400 transition-colors duration-300'>
+              <FontAwesomeIcon icon={faUser} />
+              &nbsp;
+              About
+            </a>
           </Link>
         </nav>
       </div>
