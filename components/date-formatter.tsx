@@ -1,12 +1,23 @@
 import { parseISO, format } from 'date-fns'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCalendarAlt, faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
 
 type Props = {
   dateString: string
+  type: 'date' | 'lastmod'
 }
 
-const DateFormatter = ({ dateString }: Props) => {
+const DateFormatter = ({ dateString, type }: Props) => {
   const date = parseISO(dateString)
-  return <time dateTime={dateString}>{format(date, 'LLLL	d, yyyy')}</time>
+  return (
+    <time dateTime={dateString} className="flex items-center gap-2">
+      <FontAwesomeIcon
+        icon={type === 'date' ? faCalendarAlt : faCalendarCheck}
+        className="w-4"
+      />
+      {format(date, 'yyyy.MM.dd')}
+    </time>
+  )
 }
 
 export default DateFormatter
