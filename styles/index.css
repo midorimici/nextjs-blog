@@ -34,6 +34,6 @@ http://jikasei.me/font/genjyuu/
 }
 
 body {
-    @apply text-xl text-gray-600;
+    @apply sm:text-xl text-gray-600;
     font-family: genjyuu, "Meiryo", serif;
 }

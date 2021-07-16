@@ -14,22 +14,22 @@ const Header = () => {
         <Link href="/">
           <a className="flex items-center">
             <BrandMi />
-            <span className="font-bold text-5xl">
+            <span className="font-bold sm:text-5xl">
               どりみちのブログ
             </span>
           </a>
         </Link>
-        <nav className="flex items-center gap-8">
+        <nav className="flex items-center gap-6 sm:gap-8">
           <Link href="/tags">
             <a className={buttonStyle}>
               <FontAwesomeIcon icon={faTags} className={iconStyle} />
-              Tags
+              <span className="hidden sm:block">Tags</span>
             </a>
           </Link>
           <Link href="/about">
             <a className={buttonStyle}>
               <FontAwesomeIcon icon={faUser} className={iconStyle} />
-              About
+              <span className="hidden sm:block">About</span>
             </a>
           </Link>
         </nav>
