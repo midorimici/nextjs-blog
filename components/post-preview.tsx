@@ -18,16 +18,22 @@ const PostPreview = ({
   slug,
 }: Props) => {
   return (
-    <article className="relative rounded-2xl transition duration-300 shadow hover:shadow-md hover:bg-white">
+    <article className={`
+      relative
+      rounded-2xl
+      cursor-pointer
+      transition duration-300
+      shadow hover:shadow-md hover:bg-white
+    `}>
       <Link as={`/posts/${slug}`} href="/posts/[slug]">
         <a className="absolute top-0 left-0 w-full h-full"></a>
       </Link>
       <CoverImage
         slug={slug}
         title={title}
-        src={`/public/assets/${slug}.jpg`}
+        src={`/assets/${slug}.jpg`}
       />
-      <section className="mx-4">
+      <section className="m-4">
         <h3 className="text-3xl mb-3 leading-snug">
           {title}
         </h3>
@@ -35,7 +41,7 @@ const PostPreview = ({
           <DateFormatter dateString={date} type='date' />
           <DateFormatter dateString={lastmod} type='lastmod' />
         </div>
-        <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
+        <p className="text-lg leading-relaxed">{excerpt}</p>
       </section>
     </article>
   )
