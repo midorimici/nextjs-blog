@@ -62,7 +62,7 @@ export async function getStaticProps({ params }: Params) {
     'title',
     'date',
     'slug',
-    'excerpt',
+    'summary',
     'lastmod',
     'tags',
     'content',
