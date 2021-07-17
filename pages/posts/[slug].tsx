@@ -29,7 +29,7 @@ const Post = ({ post }: Props) => {
         <PostTitle>Loading…</PostTitle>
       ) : (
         <>
-          <article className="mb-32">
+          <article className="mb-8">
             <Head>
               <title>
                 {post.title} | {SITE_NAME}
@@ -38,7 +38,6 @@ const Post = ({ post }: Props) => {
             </Head>
             <PostHeader
               title={post.title}
-              coverImage={imagePath}
               date={post.date}
               lastmod={post.lastmod}
             />
