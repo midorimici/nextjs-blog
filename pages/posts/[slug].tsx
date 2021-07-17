@@ -16,9 +16,13 @@ type Props = {
 
 const Post = ({ post }: Props) => {
   const router = useRouter()
+
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
+
+  const imagePath = `/assets/${post.slug}.jpg`
+
   return (
     <Layout>
       {router.isFallback ? (
@@ -30,13 +34,13 @@ const Post = ({ post }: Props) => {
               <title>
                 {post.title} | {SITE_NAME}
               </title>
-              <meta property="og:image" content={post.ogImage.url} />
+              <meta property="og:image" content={imagePath} />
             </Head>
             <PostHeader
               title={post.title}
-              coverImage={post.coverImage}
+              coverImage={imagePath}
               date={post.date}
-              author={post.author}
+              lastmod={post.lastmod}
             />
             <PostBody content={post.content} />
           </article>
@@ -59,10 +63,10 @@ export async function getStaticProps({ params }: Params) {
     'title',
     'date',
     'slug',
-    'author',
+    'excerpt',
+    'lastmod',
+    'tags',
     'content',
-    'ogImage',
-    'coverImage',
   ])
   const content = await markdownToHtml(post.content || '')
 
