@@ -1,42 +1,51 @@
-import Avatar from './avatar'
 import DateFormatter from './date-formatter'
 import CoverImage from './cover-image'
 import Link from 'next/link'
-import Author from '../types/author'
 
 type Props = {
   title: string
-  coverImage: string
   date: string
-  excerpt: string
-  author: Author
+  lastmod: string
+  excerpt?: string
   slug: string
 }
 
 const PostPreview = ({
   title,
-  coverImage,
   date,
+  lastmod,
   excerpt,
-  author,
   slug,
 }: Props) => {
   return (
-    <div>
-      <div className="mb-5">
-        <CoverImage slug={slug} title={title} src={coverImage} />
-      </div>
-      <h3 className="text-3xl mb-3 leading-snug">
-        <Link as={`/posts/${slug}`} href="/posts/[slug]">
-          <a className="hover:underline">{title}</a>
-        </Link>
-      </h3>
-      <div className="text-lg mb-4">
-        <DateFormatter dateString={date} />
-      </div>
-      <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
-      <Avatar name={author.name} picture={author.picture} />
-    </div>
+    <article className={`
+      post-preview
+      mx-auto
+      relative
+      rounded-2xl
+      cursor-pointer
+      transition duration-300
+      shadow hover:shadow-lg hover:bg-white
+      hover:opacity-80
+    `}>
+      <Link as={`/posts/${slug}`} href="/posts/[slug]">
+        <a className="absolute top-0 left-0 w-full h-full z-10"></a>
+      </Link>
+      <CoverImage
+        title={title}
+        src={`/assets/${slug}.jpg`}
+      />
+      <section className="m-4">
+        <h3 className="text-3xl mb-3 leading-snug">
+          {title}
+        </h3>
+        <div className="text-lg mb-4">
+          <DateFormatter dateString={date} type='date' />
+          <DateFormatter dateString={lastmod} type='lastmod' />
+        </div>
+        <p className="text-lg leading-relaxed">{excerpt}</p>
+      </section>
+    </article>
   )
 }
 
