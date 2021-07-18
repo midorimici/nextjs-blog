@@ -8,7 +8,6 @@ import PostHeader from '../../components/post-header'
 import Layout from '../../components/layout'
 import { getPostBySlug, getAllPosts } from '../../lib/api'
 import PostTitle from '../../components/post-title'
-import PostImage from '../../components/post-image'
 
 import { SITE_NAME } from '../../lib/constants'
 import PostType from '../../types/post'
@@ -21,13 +20,6 @@ type Props = {
   }
 }
 
-type PostImageProps = {
-  src: string
-  alt: string
-  ext?: 'png' | 'gif' | 'jpg'
-  width?: number | 'auto'
-}
-
 const Post = ({ post, source }: Props) => {
   const router = useRouter()
 
@@ -36,10 +28,6 @@ const Post = ({ post, source }: Props) => {
   }
 
   const imagePath = `/posts/${post.slug}/index.jpg`
-
-  const components = {
-    postimage: (props: PostImageProps) => <PostImage slug={post.slug} {...props} />,
-  }
 
   return (
     <Layout>
@@ -59,7 +47,7 @@ const Post = ({ post, source }: Props) => {
               date={post.date}
               lastmod={post.lastmod}
             />
-            <PostBody source={source} components={components} />
+            <PostBody source={source} slug={post.slug} />
           </article>
         </>
       )}
