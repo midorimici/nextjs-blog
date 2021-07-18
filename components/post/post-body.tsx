@@ -1,5 +1,6 @@
 import { MDXRemote } from 'next-mdx-remote'
 import PostImage from './post-image'
+import CodeBlock from './code-block'
 import markdownStyles from './markdown-styles.module.css'
 
 type Props = {
@@ -16,9 +17,15 @@ type PostImageProps = {
   ext?: 'png' | 'gif' | 'jpg'
 }
 
+type codeBlockProps = {
+  children: string
+  className: string
+}
+
 const PostBody = ({ source, slug }: Props) => {
   const components = {
     postimage: (props: PostImageProps) => <PostImage slug={slug} {...props} />,
+    code: (props: codeBlockProps) => <CodeBlock {...props} />
   }
 
   return (
