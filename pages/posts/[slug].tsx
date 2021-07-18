@@ -1,27 +1,45 @@
+import { serialize } from 'next-mdx-remote/serialize'
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
+import Head from 'next/head'
+
 import PostBody from '../../components/post-body'
 import PostHeader from '../../components/post-header'
 import Layout from '../../components/layout'
 import { getPostBySlug, getAllPosts } from '../../lib/api'
 import PostTitle from '../../components/post-title'
-import Head from 'next/head'
+import PostImage from '../../components/post-image'
+
 import { SITE_NAME } from '../../lib/constants'
-import markdownToHtml from '../../lib/markdownToHtml'
 import PostType from '../../types/post'
 
 type Props = {
   post: PostType
+  source: {
+    compiledSource: string,
+    scope: {}
+  }
 }
 
-const Post = ({ post }: Props) => {
+type PostImageProps = {
+  src: string
+  alt: string
+  ext?: 'png' | 'gif' | 'jpg'
+  width?: number | 'auto'
+}
+
+const Post = ({ post, source }: Props) => {
   const router = useRouter()
 
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
 
-  const imagePath = `/assets/${post.slug}.jpg`
+  const imagePath = `/posts/${post.slug}/index.jpg`
+
+  const components = {
+    postimage: (props: PostImageProps) => <PostImage slug={post.slug} {...props} />,
+  }
 
   return (
     <Layout>
@@ -41,7 +59,7 @@ const Post = ({ post }: Props) => {
               date={post.date}
               lastmod={post.lastmod}
             />
-            <PostBody content={post.content} />
+            <PostBody source={source} components={components} />
           </article>
         </>
       )}
@@ -67,14 +85,14 @@ export async function getStaticProps({ params }: Params) {
     'tags',
     'content',
   ])
-  const content = await markdownToHtml(post.content || '')
+  const content = await serialize(post.content || '')
 
   return {
     props: {
       post: {
         ...post,
-        content,
       },
+      source: content,
     },
   }
 }

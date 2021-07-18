@@ -33,7 +33,7 @@ const PostPreview = ({
       </Link>
       <CoverImage
         title={title}
-        src={`/assets/${slug}.jpg`}
+        src={`/posts/${slug}/index.jpg`}
       />
       <section className="m-4">
         <h3 className="text-3xl mb-3 leading-snug">
