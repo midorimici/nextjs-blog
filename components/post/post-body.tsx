@@ -14,7 +14,6 @@ type PostImageProps = {
   src: string
   alt: string
   ext?: 'png' | 'gif' | 'jpg'
-  width?: number | 'auto'
 }
 
 const PostBody = ({ source, slug }: Props) => {

@@ -5,10 +5,9 @@ type Props = {
   src: string
   alt: string
   ext?: 'png' | 'gif' | 'jpg'
-  width?: number | 'auto'
 }
 
-const PostImage = ({slug, src, alt, ext = 'jpg', width}: Props) => {
+const PostImage = ({ slug, src, alt, ext = 'jpg' }: Props) => {
   return (
     <p className="relative h-96">
       <Image
