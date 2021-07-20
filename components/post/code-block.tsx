@@ -14,10 +14,15 @@ const CodeBlock = ({ children, className }: Props) => {
       {({className, style, tokens, getLineProps, getTokenProps}) => (
         <pre className={className} style={{...style, padding: '20px'}}>
           {tokens.map((line, i) => (
-            <div key={i} {...getLineProps({line, key: i})}>
-              {line.map((token, key) => (
-                <span key={key} {...getTokenProps({token, key})} />
-              ))}
+            <div key={i} {...getLineProps({line, key: i})} className="table-row">
+              <span className="table-cell text-right select-none">
+                {i+1}
+              </span>
+              <div className="table-cell pl-4">
+                {line.map((token, key) => (
+                  <span key={key} {...getTokenProps({token, key})} />
+                ))}
+              </div>
             </div>
           ))}
         </pre>
