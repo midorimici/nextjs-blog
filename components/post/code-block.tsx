@@ -13,7 +13,7 @@ const CodeBlock = ({ children, className }: Props) => {
     <Highlight {...defaultProps} code={children} language={lang} theme={github}>
       {({className, style, tokens, getLineProps, getTokenProps}) => (
         <pre className={className} style={{...style, padding: '20px'}}>
-          {tokens.map((line, i) => (
+          {tokens.map((line, i) => (!(i === tokens.length - 1 && line[0].empty) &&
             <div key={i} {...getLineProps({line, key: i})} className="table-row">
               <span className="table-cell text-right select-none">
                 {i+1}
