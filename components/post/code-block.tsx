@@ -7,27 +7,39 @@ type Props = {
 }
 
 const CodeBlock = ({ children, className }: Props) => {
-  const lang = className.replace(/language-/, '').split(':')[0] as Language
+  const [lang, fileName] = className.replace(/language-/, '').split(':')
 
   return (
-    <Highlight {...defaultProps} code={children} language={lang} theme={github}>
-      {({className, style, tokens, getLineProps, getTokenProps}) => (
-        <pre className={`${className} p-4 text-sm overflow-auto`} style={style}>
-          {tokens.map((line, i) => (!(i === tokens.length - 1 && line[0].empty) &&
-            <div key={i} {...getLineProps({line, key: i})} className="table-row">
-              <span className="table-cell text-right select-none">
-                {i+1}
-              </span>
-              <div className="table-cell pl-4">
-                {line.map((token, key) => (
-                  <span key={key} {...getTokenProps({token, key})} />
-                ))}
-              </div>
-            </div>
-          ))}
-        </pre>
+    <>
+      {name && (
+        <span className="px-2 py-1 bg-gray-100 rounded-t border-b font-code text-sm">
+          {name}
+        </span>
       )}
-    </Highlight>
+      <Highlight
+        {...defaultProps}
+        code={children}
+        language={lang as Language}
+        theme={github}
+      >
+        {({className, style, tokens, getLineProps, getTokenProps}) => (
+          <pre className={`${className} p-4 text-sm overflow-auto`} style={style}>
+            {tokens.map((line, i) => (!(i === tokens.length - 1 && line[0].empty) &&
+              <div key={i} {...getLineProps({line, key: i})} className="table-row">
+                <span className="table-cell text-right select-none">
+                  {i+1}
+                </span>
+                <div className="table-cell pl-4">
+                  {line.map((token, key) => (
+                    <span key={key} {...getTokenProps({token, key})} />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </pre>
+        )}
+      </Highlight>
+    </>
   )
 }
 
