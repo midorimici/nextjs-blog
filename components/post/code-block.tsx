@@ -16,6 +16,14 @@ export type CodeBlockProps = {
 const CodeBlock = ({ children, className, name, hide_nums, hl_lines, ins, del }: CodeBlockProps) => {
   const lang = className.replace(/language-/, '') as Language
   const isHighlighted = useHighlightLineNumbers(hl_lines)
+  const isInserted = useHighlightLineNumbers(ins)
+  const isDeleted = useHighlightLineNumbers(del)
+
+  const highlightColor = (i: number) => {
+    if (isHighlighted(i)) return 'yellow-100'
+    else if (isInserted(i)) return 'green-100'
+    else if (isDeleted(i)) return 'red-100'
+  }
 
   return (
     <>
@@ -34,7 +42,7 @@ const CodeBlock = ({ children, className, name, hide_nums, hl_lines, ins, del }:
           <pre
             className={`${className} p-4 text-sm overflow-auto`}
             style={style}>
-            {tokens.map((line, i) => (!(i === tokens.length - 1 && line[0].empty) &&
+            {tokens.map((line, i) => (!(i === tokens.length - 1 && line[0].empty) && (
               <div
                 key={i}
                 {...getLineProps({line, key: i})}
@@ -43,14 +51,15 @@ const CodeBlock = ({ children, className, name, hide_nums, hl_lines, ins, del }:
                 {!hide_nums && (
                   <span className={`
                     table-cell pr-4 text-right select-none
-                    ${isHighlighted(i) ? 'bg-yellow-100' : ''}
+                    ${highlightColor(i) ? `bg-${highlightColor(i)}` : ''}
                   `}>
                     {i+1}
                   </span>
                 )}
                 <div className={`
                   table-cell
-                  ${isHighlighted(i) ? 'bg-gradient-to-r from-yellow-100 to-transparent' : ''}
+                  ${highlightColor(i) ?
+                    `bg-gradient-to-r from-${highlightColor(i)} to-transparent` : ''}
                 `}>
                   {line.map((token, key) => (
                     <span key={key} {...getTokenProps({token, key})} />
@@ -58,7 +67,7 @@ const CodeBlock = ({ children, className, name, hide_nums, hl_lines, ins, del }:
                 </div>
                 <div className="w-4" />
               </div>
-            ))}
+            )))}
           </pre>
         )}
       </Highlight>
