@@ -42,7 +42,7 @@ draft: false
 
 とりあえずプロフィールだけ載せます。
 
-```html:sidebar.html
+```html name=sidebar.html
 <div class="sidebar">
     <div class="profile">
         <h4 class="sidebar-header">プロフィール</h4>
@@ -61,7 +61,7 @@ draft: false
 
 この HTML ファイルを、`layouts/partials/post.html`の中で呼び出します。
 
-```html {name="post.html", hl_lines=[5]}
+```html name=post.html hl_lines=5
 <main class="main single" id="main">
     <div class="main-inner">
         ...
@@ -72,7 +72,7 @@ draft: false
 
 CSS のほうでは、機能的には`float`を指定するぐらいで大丈夫です。
 
-```css {name="/assets/scss/_custom/custom.scss　または　/static/css/custom.css", hl_lines=[2, 8]}
+```css name=/assets/scss/_custom/custom.scss　または　/static/css/custom.css hl_lines=2,8
 .main-inner {
     float: left;
     padding-right: 3em;
@@ -112,7 +112,7 @@ CSS のほうでは、機能的には`float`を指定するぐらいで大丈夫
 
 HTML の`head`タグ内に
 
-```html {linenos=false}
+```html hide_nums
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
 ```
 
@@ -130,7 +130,7 @@ HTML の`head`タグ内に
 
 どういうときにサイドバーが下に移るんだろう、とか。
 
-```css {name="custom.scss", id=4}
+```scss name=custom.scss
 @media (max-width: 1199px) {
     #main {
         width: 90%;

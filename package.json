@@ -2,7 +2,7 @@
   "name": "mici-blog",
   "version": "1.0.0",
   "scripts": {
-    "dev": "next",
+    "dev": "next-remote-watch public/posts/",
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc"
