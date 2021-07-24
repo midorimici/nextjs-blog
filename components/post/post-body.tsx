@@ -1,5 +1,6 @@
 import { MDXRemote } from 'next-mdx-remote'
 import Link from 'next/link'
+import { Tweet } from 'react-twitter-widgets'
 
 import PostImage from '../mdx/post-image'
 import CodeBlock, { CodeBlockProps } from '../mdx/code-block'
@@ -35,6 +36,7 @@ const PostBody = ({ source, slug }: Props) => {
         </a>
       </Link>
     ),
+    tweet: ({ id }: { id: string }) => <Tweet tweetId={id} />,
   }
 
   return (
