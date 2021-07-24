@@ -24,3 +24,7 @@
 .markdown a {
   @apply underline transition-colors duration-300 hover:text-pink-400
 }
+
+.markdown hr {
+  @apply my-4
+}
