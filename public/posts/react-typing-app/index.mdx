@@ -47,7 +47,7 @@ draft: false
 
 例えば、このように書いていたのを、
 
-```jsx name=/src/App.js del=1,3-10,13-16,19-20 inline_hl=1:4;3:2,4-5
+```jsx name=/src/App.js del=1,3-10,13-16,19-20 inline_hl=1:5;3:5,9-11
 import React, { Component } from 'react';
 
 export default class App extends Component {
@@ -81,7 +81,7 @@ export default class App extends Component {
 
 次のように**簡潔に書くことができる**ようになります。
 
-```jsx name=/src/App.js ins=1,3-5,7 inline_hl=0:4;1:2,4;4:0,5-10
+```jsx name=/src/App.js ins=1,3-5,7 inline_hl=1:5;3:5,8-9;7:1,12-19
 import React, { useState } from 'react';
 
 export default function App() {
@@ -113,7 +113,7 @@ Hooks を使うことで、**関数内部のどこからでも宣言なしでさ
 
 次のように使います。
 
-```jsx {hl_lines=[11]}
+```jsx hl_lines=11
 import React from 'react';
 
 function MyComponent() {
@@ -142,7 +142,7 @@ function AnotherComponent() {
 
 関数を呼び出すときに引数を渡すのと同じように、次のように書きます。
 
-```jsx {hl_lines=[3, 4, 11], inline_hl=[0:[3], 1:["7-11"], 2:["2-4"]]}
+```jsx hl_lines=3,4,11 inline_hl=3:5;4:7-11;11:4-8
 import React from 'react';
 
 function MyComponent(props) {
@@ -193,7 +193,7 @@ function MyComponent({ adjective }) {
 
 例えば、ボタンを表示させるには、次のようにします。
 
-```jsx {hl_lines=[2, "9-11"]}
+```jsx hl_lines=2,9-11
 import React from 'react';
 import Button from '@material-ui/core/Button';
 
@@ -244,7 +244,7 @@ npx create-react-app my-react-app --typescript
 
 `components`フォルダの下に`MyButton.tsx`を作成します。
 
-```jsx {name="/src/components/MyButton.tsx", id=6}
+```tsx name=/src/components/MyButton.tsx
 import React from 'react';
 import Button from '@material-ui/core/Button';
 
@@ -278,7 +278,7 @@ export default function MyButton({ children, onClick }: Props) {
 
 この設定を解除します。
 
-```jsx {name="/src/components/MyButton.tsx", hl_lines=[2, "5-11", 20, 24], id=7}
+```tsx name=/src/components/MyButton.tsx hl_lines=2,5-11,20,24
 import React from 'react';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -317,7 +317,7 @@ export default function MyButton({ children, onClick }: Props) {
 
 ここで`export`したコンポーネントを、`App.tsx`でインポートして使用します。
 
-```jsx {name="/src/App.tsx", hl_lines=[7], id=8}
+```tsx name=/src/App.tsx hl_lines=7
 import React from 'react';
 import MyButton from './components/MyButton';
 
@@ -345,7 +345,7 @@ export default function App() {
 
 まず、ボタンで入力可能・不可能を切り替えるためのブール変数を用意します。
 
-```jsx {name="/src/App.tsx", hl_lines=[5, 7, 11], id=9}
+```tsx name=/src/App.tsx hl_lines=5,7,11
 import React, { useState } from 'react';
 import MyButton from './components/MyButton';
 
@@ -372,7 +372,7 @@ export default function App() {
 
 これはリセットボタンを押すと変化するようにするので、state に入れています。
 
-```jsx {name="/src/App.tsx", hl_lines=[5, "12-14"], id=10}
+```tsx name=/src/App.tsx hl_lines=5,12-14
 import React, { useState } from 'react';
 import MyButton from './components/MyButton';
 
@@ -399,7 +399,7 @@ React には[合成イベント](https://ja.reactjs.org/docs/events.html#keyboar
 
 `onKeyPress`を使って、とりあえず入力したキーを表示させてみます。
 
-```jsx {name="/src/App.tsx", hl_lines=[10, 13], id=11}
+```tsx name=/src/App.tsx hl_lines=10,13
 import React, { useState } from 'react';
 import MyButton from './components/MyButton';
 
@@ -446,7 +446,7 @@ VS Code であれば Quick Fix 機能を使っていい感じに補完してく�
 
 現在どこの文字を入力しようとしているか（位置）の情報が必要なので、state に追加します。
 
-```jsx {name="/src/App.tsx", hl_lines=[3, 8, "12-21", 26, 27], id=12}
+```tsx name=/src/App.tsx hl_lines=3,8,12-21,26,27
 import React, { useState } from 'react';
 import MyButton from './components/MyButton';
 import './App.scss';
@@ -513,7 +513,7 @@ SCSS を使うためには、ターミナルで`npm install -D node-sass`と入�
 
 ただ、最初の１文字だけははじめから「現在入力待ちの文字」にしています。
 
-```jsx {name="/src/App.tsx", hl_lines=[9, "16-42", "49-55"], id=13}
+```tsx name=/src/App.tsx hl_lines=9,16-42,49-55
 import React, { useState } from 'react';
 import MyButton from './components/MyButton';
 import "./App.scss";
@@ -596,7 +596,7 @@ export default function App() {
 
 リセットすると、すべての文字が入力待ちになり、打ち間違えもリセットされます。
 
-```jsx {name="/src/App.tsx", hl_lines=["2-15", 30], id=14}
+```tsx name=/src/App.tsx hl_lines=2-15,30
 ...
 const refresh = () => {
   // 文字の配列を取得
