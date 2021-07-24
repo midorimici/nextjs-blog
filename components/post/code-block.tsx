@@ -1,7 +1,7 @@
 import Highlight, { defaultProps, Language } from 'prism-react-renderer'
-import github from 'prism-react-renderer/themes/github'
 
 import { useHighlightLineNumbers } from './useHighlightLineNumbers'
+import { theme } from './codeTheme'
 
 export type CodeBlockProps = {
   children: string
@@ -20,9 +20,9 @@ const CodeBlock = ({ children, className, name, hide_nums, hl_lines, ins, del }:
   const isDeleted = useHighlightLineNumbers(del)
 
   const highlightColor = (i: number) => {
-    if (isHighlighted(i)) return 'yellow-100'
-    else if (isInserted(i)) return 'green-100'
-    else if (isDeleted(i)) return 'red-100'
+    if (isHighlighted(i)) return 'yellow'
+    else if (isInserted(i)) return 'green'
+    else if (isDeleted(i)) return 'red'
   }
 
   return (
@@ -36,7 +36,7 @@ const CodeBlock = ({ children, className, name, hide_nums, hl_lines, ins, del }:
         {...defaultProps}
         code={children}
         language={lang}
-        theme={github}
+        theme={theme}
       >
         {({className, style, tokens, getLineProps, getTokenProps}) => (
           <pre
@@ -50,16 +50,17 @@ const CodeBlock = ({ children, className, name, hide_nums, hl_lines, ins, del }:
               >
                 {!hide_nums && (
                   <span className={`
-                    table-cell pr-4 text-right select-none
-                    ${highlightColor(i) ? `bg-${highlightColor(i)}` : ''}
+                    table-cell px-2 text-right select-none
+                    ${highlightColor(i) ? `bg-${highlightColor(i)}-100` : ''}
                   `}>
                     {i+1}
                   </span>
                 )}
                 <div className={`
                   table-cell
+                  pl-2
                   ${highlightColor(i) ?
-                    `bg-gradient-to-r from-${highlightColor(i)} to-transparent` : ''}
+                    `bg-gradient-to-r from-${highlightColor(i)}-50 to-transparent` : ''}
                 `}>
                   {line.map((token, key) => (
                     <span key={key} {...getTokenProps({token, key})} />
