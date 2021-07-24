@@ -1,6 +1,8 @@
 import { MDXRemote } from 'next-mdx-remote'
-import PostImage from './post-image'
-import CodeBlock, { CodeBlockProps } from './code-block'
+import Link from 'next/link'
+
+import PostImage from '../mdx/post-image'
+import CodeBlock, { CodeBlockProps } from '../mdx/code-block'
 import markdownStyles from './markdown-styles.module.css'
 
 type Props = {
@@ -17,10 +19,22 @@ type PostImageProps = {
   ext?: 'png' | 'gif' | 'jpg'
 }
 
+type PostLinkProps = {
+  label: string
+  to: string
+}
+
 const PostBody = ({ source, slug }: Props) => {
   const components = {
     postimage: (props: PostImageProps) => <PostImage slug={slug} {...props} />,
-    code: (props: CodeBlockProps) => <CodeBlock {...props} />
+    code: (props: CodeBlockProps) => <CodeBlock {...props} />,
+    pstlk: (props: PostLinkProps) => (
+      <Link href={props.to}>
+        <a className="underline transition-colors duration-300 hover:text-pink-400">
+          {props.label}
+        </a>
+      </Link>
+    ),
   }
 
   return (
