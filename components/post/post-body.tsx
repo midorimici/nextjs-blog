@@ -4,6 +4,7 @@ import { Tweet } from 'react-twitter-widgets'
 
 import PostImage from '../mdx/post-image'
 import CodeBlock, { CodeBlockProps } from '../mdx/code-block'
+import Sandbox from '../mdx/sandbox'
 import markdownStyles from './markdown-styles.module.css'
 
 type Props = {
@@ -37,6 +38,7 @@ const PostBody = ({ source, slug }: Props) => {
       </Link>
     ),
     tweet: ({ id }: { id: string }) => <Tweet tweetId={id} />,
+    sandbox: (props: { name: string, link: string }) => <Sandbox {...props} />,
   }
 
   return (
