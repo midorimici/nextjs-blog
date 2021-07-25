@@ -55,3 +55,7 @@ body {
 ::-webkit-scrollbar-thumb {
   @apply rounded bg-gray-200 transition-colors duration-300 hover:bg-pink-200
 }
+
+.emoji {
+  @apply inline-block mx-1 w-6
+}

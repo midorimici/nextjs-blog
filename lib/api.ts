@@ -1,6 +1,7 @@
 import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
+import twemoji from 'twemoji'
 
 const postsDirectory = join(process.cwd(), 'public/posts')
 
@@ -25,7 +26,7 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
       items[field] = slug
     }
     if (field === 'content') {
-      items[field] = content
+      items[field] = twemoji.parse(content)
     }
     if (field === 'date' || field === 'lastmod') {
       items[field] = data[field].toISOString()
