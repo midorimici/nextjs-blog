@@ -59,3 +59,7 @@ body {
 .emoji {
   @apply inline-block mx-1 w-6
 }
+
+.heading-link:hover > .heading-icon {
+  @apply opacity-100;
+}

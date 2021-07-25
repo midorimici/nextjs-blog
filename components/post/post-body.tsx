@@ -2,6 +2,7 @@ import { MDXRemote } from 'next-mdx-remote'
 import Link from 'next/link'
 import { Tweet } from 'react-twitter-widgets'
 
+import Heading from '../mdx/heading'
 import PostImage from '../mdx/post-image'
 import CodeBlock, { CodeBlockProps } from '../mdx/code-block'
 import Sandbox from '../mdx/sandbox'
@@ -29,6 +30,8 @@ type PostLinkProps = {
 
 const PostBody = ({ source, slug }: Props) => {
   const components = {
+    h2: ({ children }: { children: string }) => <Heading type={2} content={children} />,
+    h3: ({ children }: { children: string }) => <Heading type={3} content={children} />,
     postimage: (props: PostImageProps) => <PostImage slug={slug} {...props} />,
     code: (props: CodeBlockProps) => <CodeBlock {...props} />,
     pstlk: (props: PostLinkProps) => (
