@@ -26,13 +26,13 @@
 }
 
 .markdown code {
-  @apply mx-1 px-2 py-1 bg-gray-100 rounded font-code
+  @apply mx-1 px-2 py-1 bg-gray-100 rounded font-code;
 }
 
 .markdown p > a {
-  @apply underline transition-colors duration-300 hover:text-pink-400
+  @apply underline transition-colors duration-300 hover:text-pink-400;
 }
 
 .markdown hr {
-  @apply my-4
+  @apply my-4;
 }

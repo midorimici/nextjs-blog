@@ -56,10 +56,25 @@ body {
   @apply rounded bg-gray-200 transition-colors duration-300 hover:bg-pink-200
 }
 
+/* post body */
+
 .emoji {
   @apply inline-block mx-1 w-6
 }
 
 .heading-link:hover > .heading-icon {
   @apply opacity-100;
+}
+
+.tooltip {
+  @apply opacity-0 absolute bottom-full bg-pink-100 rounded p-2 text-sm transition-opacity duration-300;
+  z-index: -1;
+}
+
+.tooltip-container a {
+  @apply underline;
+}
+
+.tooltip-container:hover > .tooltip {
+  @apply opacity-100 z-10;
 }
