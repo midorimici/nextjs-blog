@@ -7,6 +7,8 @@ import PostImage from '../mdx/post-image'
 import Video, { VideoProps } from '../mdx/video'
 import CodeBlock, { CodeBlockProps } from '../mdx/code-block'
 import Tooltip, { TooltipProps } from '../mdx/tltp'
+import Manga, { MangaProps } from '../mdx/manga'
+import MangaText, { MangaTextProps } from '../mdx/manga-text'
 import Sandbox from '../mdx/sandbox'
 import markdownStyles from './markdown-styles.module.css'
 
@@ -44,6 +46,8 @@ const PostBody = ({ source, slug }: Props) => {
       </Link>
     ),
     tltp: (props: TooltipProps) => <Tooltip {...props} />,
+    manga: (props: Omit<MangaProps, 'slug'>) => <Manga slug={slug} {...props} />,
+    'manga-text': (props: MangaTextProps) => <MangaText {...props} />,
     tweet: ({ id }: { id: string }) => <Tweet tweetId={id} />,
     sandbox: (props: { name: string, link: string }) => <Sandbox {...props} />,
   }
