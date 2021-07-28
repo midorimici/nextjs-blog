@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react'
-import markdownToHtml from '../../lib/markdownToHtml'
+import { useParsedMarkdown } from '../useParsedMarkdown'
 
 export type MangaTextProps = {
   x: number
@@ -10,16 +9,7 @@ export type MangaTextProps = {
 }
 
 const MangaText = ({ x, y, text, size = 'xl', color }: MangaTextProps) => {
-  const [content, setContent] = useState('');
-
-  useEffect(() => {
-    parseMarkdown()
-  }, [])
-
-  const parseMarkdown = async () => {
-    const html = await markdownToHtml(text)
-    setContent(html.replace(/<p>([\s\S]*)<\/p>/, '$1'))
-  }
+  const content = useParsedMarkdown(text)
   
   return (
     <div

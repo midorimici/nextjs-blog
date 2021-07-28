@@ -5,7 +5,8 @@ type PostType = {
   lastmod: string
   tags: string[]
   content: string
-  excerpt?: string
+  summary?: string
+  draft?: boolean
 }
 
 export default PostType
