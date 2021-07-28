@@ -2,11 +2,25 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLink } from '@fortawesome/free-solid-svg-icons'
 
-type Props = { type: 2 | 3, content: string }
+type Props = { type: 2 | 3, content: any }
 
 const Heading = ({ type, content }: Props) => {
   const HeadingComponent: React.ElementType = `h${type}`
-  const link = content
+
+  const getHeadingString = (): string => {
+    if (typeof content === 'string') {
+      return content
+    } else if (Array.isArray(content)) {
+      const res = []
+      for (const e of content) {
+        if (typeof e === 'string') res.push(e)
+        else res.push(e.props.children)
+      }
+      return res.join('')
+    } else return content.props.children
+  }
+
+  const link = getHeadingString()
     .replace(/[:\/?#\[\]@!$&'()*+,;=]/g, '')
     .replace(/ /g, '-')
     .toLowerCase()
