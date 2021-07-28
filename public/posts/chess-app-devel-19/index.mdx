@@ -15,7 +15,7 @@ Python プログラムで動かすフェアリーチェスアプリ開発、連�
 
 <!--more-->
 
-<br>
+<br/>
 
 ## キャスリングするかどうか確認
 
@@ -27,7 +27,7 @@ Python プログラムで動かすフェアリーチェスアプリ開発、連�
 
 この表示には、{{< pstlk 第11回 "chess-app-devel-11/#選択肢を表示する吹き出しを描画" >}}で作成した吹き出しを利用します。
 
-<br>
+<br/>
 
 まず、確認が必要な場合とそうでない場合があるので、確認が必要かどうかを示す変数、
 
@@ -162,7 +162,7 @@ class Game:
 
 {{< img src=castling_confirmation alt="キャスリング確認" >}}
 
-<br>
+<br/>
 
 ## 駒の再配置
 
@@ -215,7 +215,7 @@ def renew_gameboard(self, startpos, endpos, gameboard):
 
 位置によってキャスリングが起こる箇所を判定し、ルークを消して別の位置に新たなルークを置いています（ルークの動き）。
 
-<br>
+<br/>
 
 キングの動きに関しては、キングが１歩も動かないこともありえるので、`startpos != endpos`のときのみ`del gameboard[startpos]`を実行するようにします。
 
@@ -298,7 +298,7 @@ def renew_gameboard(self, startpos, endpos, gameboard):
 
 {{< video src=castling2 opt=1 >}}
 
-<br>
+<br/>
 
 ここ数回分の変更は [GitHub](https://github.com/midorimici/chess-program-for-python-and-OpenGL/commit/06886ba60cbe2856db1e7cc52bc9fba67693c328#diff-6707418c2a43eec365d78e30985aafe1) で見ることができます。
 

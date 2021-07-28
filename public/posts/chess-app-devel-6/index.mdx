@@ -19,7 +19,7 @@ Python プログラムで動かすフェアリーチェスアプリ開発、連�
 
 <!--more-->
 
-<br>
+<br/>
 
 ## OpenGL とは
 
@@ -31,7 +31,7 @@ Windows と Python で OpenGL をインストールする方法はこちらが�
 
 → [WindowsのPythonでOpenGLを使う](http://tadaoyamaoka.hatenablog.com/entry/2017/02/28/064625)
 
-<br>
+<br/>
 
 ちょっとはまったのですが、ダウンロードしてきた freeglut の中の dll ファイルを `C:\Windows\SysWOW64`にコピーしてこないと GLUT が認識されないもようです。
 
@@ -51,7 +51,7 @@ OpenGL.error.NullFunctionError: Attempt to call an undefined function glutInit, 
 
 ちなみに私の実行環境は Windows 10 64bit と Python 3.7.4 on win32 です。
 
-<br>
+<br/>
 
 後に Python 3.8.3 / PyOpenGL 3.1.5 に変更するとまた動かなくなってしまいました。
 
@@ -65,7 +65,7 @@ PyOpenGL を[公式サイト](http://pyopengl.sourceforge.net/#installation)か�
 
 ちなみに、`freeglut32.vc9.dll`とかもありました。
 
-<br>
+<br/>
 
 ## ウィンドウ表示
 
@@ -113,7 +113,7 @@ class Game():
 
 これで茶色い画面が表示されるはずです。
 
-<br>
+<br/>
 
 ## 盤面の描画
 
@@ -246,9 +246,9 @@ class Game():
 ### 文字を設置
 
 前後左右がわかりやすいように、
-{{% tooltip %}}ファイル((縦の列<br>アルファベットで表す{{% /tooltip %}}
+{{% tooltip %}}ファイル((縦の列<br/>アルファベットで表す{{% /tooltip %}}
 と
-{{% tooltip %}}ランク((横の行<br>数字で表す{{% /tooltip %}}
+{{% tooltip %}}ランク((横の行<br/>数字で表す{{% /tooltip %}}
 の文字を入れましょう。
 
 OpenGL 単体はあまり文字描画に強くない印象ですが、それでも一応間に合ってはいるので大丈夫だと思います。

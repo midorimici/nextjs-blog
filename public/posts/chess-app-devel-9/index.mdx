@@ -18,7 +18,7 @@ Python プログラムで動かすフェアリーチェスアプリ開発、連�
 
 <!--more-->
 
-<br>
+<br/>
 
 ## 完成イメージ
 
@@ -26,7 +26,7 @@ Python プログラムで動かすフェアリーチェスアプリ開発、連�
 
 もともといたマスからクリックしたマスまでスムーズに移動しています。
 
-<br>
+<br/>
 
 ## GLUT でアニメーションさせる
 
@@ -123,7 +123,7 @@ class Game:
 
 それ以外のときは`self.endpos`に入っています。
 
-<br>
+<br/>
 
 ## 駒の時間-位置関数を指定する
 
@@ -156,7 +156,7 @@ draw_img(self.startpos[0] + (self.endpos[0] - self.startpos[0]) * self.time / 10
 <details>
 <summary>もっとなめらかな動きにしたいなら？</summary>
 
-<br>
+<br/>
 
 直線的な補間の場合、動き始めから終わりまでつねに同じ速さです。
 
@@ -174,7 +174,7 @@ $ y = \sin x $ のグラフは２点 $ \left(-\frac{\pi}{2}, -1 \right), \left(\
 
 この２点が変形後に $ (0, {\sf self.startpos}), (10, {\sf self.endpos}) $ に重なるようにします。
 
-<br>
+<br/>
 
 まず、拡大縮小操作をして幅と高さを合わせます。
 
@@ -226,7 +226,7 @@ draw_img(self.startpos[0] + ((self.endpos[0] - self.startpos[0]) / 2)
 
 </details>
 
-<br>
+<br/>
 
 さて、ここで一度動作を見てみましょう。
 
@@ -234,7 +234,7 @@ draw_img(self.startpos[0] + ((self.endpos[0] - self.startpos[0]) / 2)
 
 おっと、移動中は移動先に表示される駒を隠さないといけませんね。
 
-<br>
+<br/>
 
 ## 行先に表示される駒を隠す
 

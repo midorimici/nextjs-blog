@@ -15,7 +15,7 @@ Python でつくるガイスター、連載第 4 回です。
 
 <!--more-->
 
-<br>
+<br/>
 
 ## モジュールに切り分ける
 
@@ -24,9 +24,7 @@ Python でつくるガイスター、連載第 4 回です。
 共通部分だけ`main.py`に置いて、そこから各モジュールを呼び出す形にします。
 
 <details>
-<summary><code>setup.py</code></summary>
-<br>
-
+<summary><code>setup.py</code></summary><br/>
 ```py {name="setup.py"}
 import sys
 
@@ -111,9 +109,7 @@ def main(screen, font, select_snd, decide_snd, forbid_snd):
 </details>
 
 <details>
-<summary><code>game.py</code></summary>
-<br>
-
+<summary><code>game.py</code></summary><br/>
 ```py {name="game.py"}
 import sys
 
@@ -145,9 +141,7 @@ def main(screen):
 </details>
 
 <details>
-<summary><code>main.py</code></summary>
-<br>
-
+<summary><code>main.py</code></summary><br/>
 ```py {name="main.py", hl_lines=["21-22"]}
 import sys
 
@@ -175,11 +169,11 @@ if __name__ == '__main__':
 
 </details>
 
-<br>
+<br/>
 
 `setup.py`での`while`ループが終了すれば`game.py`でのループが開始します。
 
-<br>
+<br/>
 
 ## 駒クラスを作成する
 
@@ -227,11 +221,11 @@ class Piece:
 
 `print`したときに出力される文字列を返しますが、これがないとオブジェクトidだけを返すので属性の情報がわかりづらくなります。
 
-<br>
+<br/>
 
 `convering_squares`メソッドの条件分岐は、良いおばけが相手の陣地の角から脱出することができるようにするものです。
 
-<br>
+<br/>
 
 ## 初期盤面を生成する
 
@@ -263,7 +257,7 @@ def _init_board(order1, order2):
 
 先手は平行移動だけですが、後手は180度回転もしています。
 
-<br>
+<br/>
 
 これで`_init_board(*_order)`とすれば、初期盤面を返すことができます。
 
@@ -382,7 +376,7 @@ def board(screen, board, turn):
 
 `BLACK`や`GREY`は色の定数で、`config.py`に定義しています。
 
-<br>
+<br/>
 
 これを`game.py`で呼び出します。
 

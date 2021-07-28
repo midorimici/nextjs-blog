@@ -21,9 +21,7 @@ Python プログラムで動かすフェアリーチェスアプリ開発、連�
 今回は、ポーンの最初の動きを付け加えてみましょう。
 
 本来ポーンは、最初の動きだけは2歩まで進むことができます。
-<!--more-->
-<br>
-
+<!--more--><br/>
 ## 駒に関するクラス
 
 まず、`Pawn`{{% tooltip %}}クラス((オブジェクトの型、設計図のようなもの{{% /tooltip %}}
@@ -62,7 +60,7 @@ class Pawn(Piece):
         return answers
 ```
 
-<br>
+<br/>
 
 ## `__init__()` がある
 
@@ -76,7 +74,7 @@ class Pawn(Piece):
 
 `direction`には`1`を指定すれば白から見て前方向、`-1`を指定すれば後方向ですね。
 
-<br>
+<br/>
 
 ## ポーンの特殊な動きを再現
 
@@ -89,21 +87,19 @@ class Pawn(Piece):
 次の`availableMoves()`は盤面上の`(x, y)`の位置にいる駒の動けるマスを出力します。
 
 <details>
-<summary>:question:なぜわかる？</summary>
-<br>
-これは例えば、
+<summary>:question:なぜわかる？</summary><br/>これは例えば、
 
-> その駒が本来動けない場所への移動を指定したときに`invalid move`とプリントされる<br>
-> → `Game`クラスの`main()`の中の`if target.isValid(startpos,endpos,target.Color,self.gameboard):`にかからなかった<br>
-> → `target.isValid(startpos,endpos,target.Color,self.gameboard)`は`False`<br>
-> → `Piece`クラスの`isValid(self,startpos,endpos,Color,gameboard)`が`endpos in self.availableMoves(startpos[0],startpos[1],gameboard, Color = Color)`ならば`True`を返す<br>
+> その駒が本来動けない場所への移動を指定したときに`invalid move`とプリントされる<br/>
+> → `Game`クラスの`main()`の中の`if target.isValid(startpos,endpos,target.Color,self.gameboard):`にかからなかった<br/>
+> → `target.isValid(startpos,endpos,target.Color,self.gameboard)`は`False`<br/>
+> → `Piece`クラスの`isValid(self,startpos,endpos,Color,gameboard)`が`endpos in self.availableMoves(startpos[0],startpos[1],gameboard, Color = Color)`ならば`True`を返す<br/>
 > → `availableMoves()`は移動可能なマスの位置を表している
 
 というふうにしてわかります。
 
 </details>
 
-<br>
+<br/>
 
 以下のコードは原文を少し整形しています。
 
@@ -176,7 +172,7 @@ def noConflict(self, gameboard, initialColor, x, y):
 
 そもそも、コード内で`Color != self.Color`になることがないので…
 
-<br>
+<br/>
 
 ## 最初の動きを追加
 

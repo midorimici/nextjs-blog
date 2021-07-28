@@ -8,7 +8,7 @@ draft: false
 ---
 
 <p>
-{{% tooltip %}}Hugo((本ブログで使用している静的サイトジェネレータ<br>[公式サイト](https://gohugo.io){{% /tooltip %}}
+{{% tooltip %}}Hugo((本ブログで使用している静的サイトジェネレータ<br/>[公式サイト](https://gohugo.io){{% /tooltip %}}
 は WordPress などの動的なサイト生成ツールとは異なり、予約投稿機能がありません。
 </p>
 
@@ -22,7 +22,7 @@ draft: false
 
 {{< relpos ssg-toha >}}
 
-<br>
+<br/>
 
 ## GitHub Actions とは
 
@@ -40,7 +40,7 @@ GitHub ユーザならプライベートリポジトリでも Free プランか�
 
 macOS で一日12回実行しても大丈夫そうです。
 
-<br>
+<br/>
 
 ## Netlify でビルド用 URL を取得する
 
@@ -60,7 +60,7 @@ Netlify にアクセスして、`Settings > Build & deploy > Build hooks > Add b
 
 展開すると下にコマンドが出てくるので、こちらをコピーします。
 
-<br>
+<br/>
 
 ## 定期実行の内容を表す yml ファイルを作成する
 
@@ -121,7 +121,7 @@ git commit -m "github actions: add workflow, scheduler"
 git push origin master
 ```
 
-<br>
+<br/>
 
 ## GitHub の Secrets を設定する
 
@@ -135,7 +135,7 @@ GitHub のリポジトリにアクセスし、`Settings > Secrets > Add a new se
 
 {{< relpos netlify-deploy-css-js >}}
 
-<br>
+<br/>
 
 ## 予約投稿したい記事のマークダウンのフロントマターの日付を設定する
 
@@ -166,7 +166,7 @@ Netlify はデプロイをしてくれます。
 
 （たまにデプロイが失敗することもあるようですが…）
 
-<br>
+<br/>
 
 ## 記事以外の場合
 
@@ -205,9 +205,7 @@ cron: '0 6-18/6 * * *'
 関係各所の調整がちょっと面倒かもしれないですが。
 
 <details>
-<summary>たぶんこんな感じになるかと思います。</summary>
-<br>
-次のコードを必ず通る場所に置きます。
+<summary>たぶんこんな感じになるかと思います。</summary><br/>次のコードを必ず通る場所に置きます。
 
 ```go-html-template
 {{ range .Site.RegularPages }}

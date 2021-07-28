@@ -7,7 +7,7 @@ tags: [サイト構築, Hugo, HTML]
 draft: false
 ---
 
-{{% tooltip %}}Hugo((本ブログで使用している静的サイトジェネレータ<br>[公式サイト](https://gohugo.io){{% /tooltip %}}
+{{% tooltip %}}Hugo((本ブログで使用している静的サイトジェネレータ<br/>[公式サイト](https://gohugo.io){{% /tooltip %}}
 には、記事内の h タグから自動で目次を出力してくれる機能があり、
 
 通常は`.TableOfContents`で呼び出すことができます。
@@ -18,7 +18,7 @@ draft: false
 
 <!--more-->
 
-<br>
+<br/>
 
 ## `.TableOfContents`の構造
 
@@ -92,7 +92,7 @@ HTML では
 
 {{< relpos add-toc >}}
 
-<br>
+<br/>
 
 ## テンプレートのコーディング
 
@@ -108,9 +108,7 @@ HTML では
 
 `$Content`のようになっていれば、直前に`{{ $Content := .Scratch.Get "Content" }}`などと書かれていると思います。
 
-<details><summary>:question:<code>.Scratch</code>って？</summary>
-<br>
-
+<details><summary>:question:<code>.Scratch</code>って？</summary><br/>
 Hugo では変数は`{{ $var := value }}`のように定義できますが、`$`がつく形の変数はローカルにしか参照できません。
 
 別のファイルに持ち込んだり、`range`や`with`などの関数の外部から参照することができないので、
@@ -123,7 +121,7 @@ Hugo では変数は`{{ $var := value }}`のように定義できますが、`$`
 
 </details>
 
-<br>
+<br/>
 
 ここでは、ある程度の処理が加えられた後の`.Content`のデータが`.Scratch.Get "Content"`で呼び出すことができ、それが最終的に出力されているものとして進めていきます。
 
@@ -150,7 +148,7 @@ Hugo では変数は`{{ $var := value }}`のように定義できますが、`$`
 `.`は「改行以外の任意の一文字」、`\n`は「改行」を表します。
 
 つまりここでは、id 属性以外の
-{{% tooltip %}}属性((要素に設定を付加するもの<br><code>class="classname"</code>など{{% /tooltip %}}
+{{% tooltip %}}属性((要素に設定を付加するもの<br/><code>class="classname"</code>など{{% /tooltip %}}
 の有無を問わずレベル2から9の h タグがマッチします。
 
 `()`で囲った部分はグループ化され、後から`$1`、`$2`、…という形で参照することができますが、
@@ -229,7 +227,7 @@ h タグの数字の部分を取り出しましょう。
 
 {{< relpos hugo-findre-replacere >}}
 
-<br>
+<br/>
 
 ## HTML のコーディング
 

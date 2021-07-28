@@ -15,7 +15,7 @@ TypeScript では定数・変数・関数を定義するときに、型を同時
 
 <!--more-->
 
-<br>
+<br/>
 
 ## 配列の型定義
 
@@ -35,7 +35,7 @@ const complexArray: ((number | string | boolean)[] | number)[] = [
 ];
 ```
 
-<br>
+<br/>
 
 要素数が決まっている場合は`[(型), (型)]`のように書くこともできます。
 
@@ -49,7 +49,7 @@ const complexArray: [[number, string], [boolean, string], number] = [
 ];
 ```
 
-<br>
+<br/>
 
 ## オブジェクトの型定義
 
@@ -57,7 +57,7 @@ const complexArray: [[number, string], [boolean, string], number] = [
 
 もっと厳密に定義することもできます。
 
-<br>
+<br/>
 
 プロパティが決まっているなら、`{(プロパティ): (型), (プロパティ): (型)}`のように書くことができます。
 
@@ -65,7 +65,7 @@ const complexArray: [[number, string], [boolean, string], number] = [
 const obj: { key1: number; key2: string } = { key1: 3, key2: 'a' };
 ```
 
-<br>
+<br/>
 
 プロパティが具体的には決まっていないが、型だけはわかる場合、
 
@@ -83,7 +83,7 @@ const arrayObj: { [key: number]: string[] } = {
 };
 ```
 
-<br>
+<br/>
 
 ## 関数の型定義
 
@@ -97,7 +97,7 @@ const arrayObj: { [key: number]: string[] } = {
 let func: (param: number) => void;
 ```
 
-<br>
+<br/>
 
 型と一緒に関数の内容も同時に定義するときは、`((引数名): (引数の型)): (返り値の型)`とします。
 
@@ -107,7 +107,7 @@ const func = (param: number): void => console.log(param);
 // const func = function (param: number): void {console.log(param)};
 ```
 
-<br>
+<br/>
 
 省略可能な引数については、`(引数名)?: (引数の型)`とします。
 
@@ -120,7 +120,7 @@ const func = (param: number, suffix: string = 'st'): void =>
 	console.log(param + suffix);
 ```
 
-<br>
+<br/>
 
 可変長引数は、`...(引数名): (引数の取りうる型)[]`とします。
 

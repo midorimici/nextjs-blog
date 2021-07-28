@@ -15,7 +15,7 @@ Python プログラムで動かすフェアリーチェスアプリ開発、連�
 
 <!--more-->
 
-<br>
+<br/>
 
 ## 駒クラスのコンストラクタの引数
 
@@ -53,7 +53,7 @@ class Pawn(Piece):
 
 これによって、駒インスタンス生成時の引数がひとつ減って、色だけになります。
 
-<br>
+<br/>
 
 ## コードを圧縮
 
@@ -88,7 +88,7 @@ class Piece:
 
 引数にとる必要がないということで削除しています。
 
-<br>
+<br/>
 
 また、`is_valid()`は他には１箇所にしか使われていないので、`available_moves()`で代用してしまいます。
 
@@ -101,7 +101,7 @@ def can_see_king(self, kingpos, piecelist, gameboard):
             return True
 ```
 
-<br>
+<br/>
 
 ## 変数名・関数名の変更
 
@@ -111,7 +111,7 @@ def can_see_king(self, kingpos, piecelist, gameboard):
 
 （フェアリーチェスの世界では、ナイトのように駒を跳び越すことができる駒を leaper といいます。）
 
-<br>
+<br/>
 
 ## 駒色の変数名
 

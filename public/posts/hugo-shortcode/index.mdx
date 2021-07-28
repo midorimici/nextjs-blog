@@ -8,7 +8,7 @@ draft: false
 ---
 
 <p>
-{{% tooltip %}}Hugo((本ブログで使用している静的サイトジェネレータ<br>[公式サイト](https://gohugo.io){{% /tooltip %}}ではショートコードという機能があり、
+{{% tooltip %}}Hugo((本ブログで使用している静的サイトジェネレータ<br/>[公式サイト](https://gohugo.io){{% /tooltip %}}ではショートコードという機能があり、
 
 これを使うことで複雑な HTML 構造も簡潔な形でマークダウン（.md）ファイルの中に記述することができるようになります。
 </p>
@@ -17,7 +17,7 @@ draft: false
 
 <!--more-->
 
-<br>
+<br/>
 
 ## ショートコードを設定する
 
@@ -34,7 +34,7 @@ HTML ファイル内には、ショートコードを使用したマークダウ
 <p>今日の天気は晴れです。</p>
 ```
 
-<br>
+<br/>
 
 ## マークダウンファイルでショートコードを呼び出す
 
@@ -49,7 +49,7 @@ HTML ファイル内には、ショートコードを使用したマークダウ
 
 ショートコードのファイルのほうにマークダウンの記法（**など）を使いたい場合は、`< >`は`% %`とします。
 
-<br>
+<br/>
 
 ## 引数を使用する
 
@@ -107,7 +107,7 @@ HTML ファイルの中では、引数は`{{ .Get 0 }}`のように、引数の�
 
 {{< relpos hugo-scratch >}}
 
-<br>
+<br/>
 
 ## タグで囲まれた範囲をショートコードとする
 
@@ -124,7 +124,7 @@ HTML ファイルの中では、引数は`{{ .Get 0 }}`のように、引数の�
 <div class="highlight" style="position: relative;"><pre class="chroma"><code class="language-html" data-lang="html"><span>{</span>{% greet %}}
 本日はお日柄もよく、
 **たいへん気持ちのいい朝**ですね。
-<span>{</span>{% /greet %}}<br>
+<span>{</span>{% /greet %}}<br/>
 -&gt;
 <span class="p">&lt;</span><span class="nt">p</span><span class="p"></span><span class="p">&gt;</span>おはようございます。<span class="p">&lt;</span><span class="p">/</span><span class="nt">p</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">p</span><span class="p"></span><span class="p">&gt;</span>本日はお日柄もよく、
@@ -134,7 +134,7 @@ HTML ファイルの中では、引数は`{{ .Get 0 }}`のように、引数の�
 
 こちらでも引数を指定することができます。
 
-<br>
+<br/>
 
 ## ショートコードをネストする
 
@@ -153,9 +153,9 @@ HTML ファイルの中では、引数は`{{ .Get 0 }}`のように、引数の�
 今日の天気は{{ .Get "weather" }}です。
 ```
 
-<div class="highlight" style="position: relative;"><pre class="chroma"><code class="language-html" data-lang="html"><span>{</span>{% greet %}}<br>
-<span>{</span>{% name-weather name="ジロウ" weather="快晴" %}}<br>
-<span>{</span>{% /greet %}}<br>
+<div class="highlight" style="position: relative;"><pre class="chroma"><code class="language-html" data-lang="html"><span>{</span>{% greet %}}<br/>
+<span>{</span>{% name-weather name="ジロウ" weather="快晴" %}}<br/>
+<span>{</span>{% /greet %}}<br/>
 -&gt;
 <span class="p">&lt;</span><span class="nt">p</span><span class="p"></span><span class="p">&gt;</span>おはようございます、<span class="p">&lt;</span><span class="p">/</span><span class="nt">p</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">p</span><span class="p"></span><span class="p">&gt;</span>ジロウさん。
@@ -172,8 +172,8 @@ HTML ファイルの中では、引数は`{{ .Get 0 }}`のように、引数の�
 ```
 
 <div class="highlight" style="position: relative;"><pre class="chroma"><code class="language-html" data-lang="html"><span class="hl"><span>{</span>{% greet <span class="mark">"今日は暑いですね。"</span> %}}</span>
-<span>{</span>{% name-weather name="ジロウ" weather="快晴" %}}<br>
-<span>{</span>{% /greet %}}<br>
+<span>{</span>{% name-weather name="ジロウ" weather="快晴" %}}<br/>
+<span>{</span>{% /greet %}}<br/>
 -&gt;
 <span class="p">&lt;</span><span class="nt">p</span><span class="p"></span><span class="p">&gt;</span>おはようございます、<span class="p">&lt;</span><span class="p">/</span><span class="nt">p</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">p</span><span class="p"></span><span class="p">&gt;</span>ジロウさん。

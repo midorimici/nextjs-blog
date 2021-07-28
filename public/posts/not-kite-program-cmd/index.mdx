@@ -17,7 +17,7 @@ draft: false
 
 コマンド一本で済ませられないかなーと試行錯誤した結果、うまくいきました。
 
-<br>
+<br/>
 
 ## 規定のプログラムで開く場合
 
@@ -31,7 +31,7 @@ Mac や Linux なら`open ファイル名`のコマンドを打てば、
 
 このとき、ファイル名へのパスはカレントディレクトリからの相対パスを指定します。
 
-<br>
+<br/>
 
 ## 規定ではないプログラムで開く場合
 
@@ -39,7 +39,7 @@ Mac や Linux なら`open ファイル名`のコマンドを打てば、
 
 というようなときには、規定のプログラム（VS Code）ではないプログラム（ブラウザ）を指定することになります。
 
-<br>
+<br/>
 
 Windows のコマンドプロンプトなら`start プログラム名 ファイル名`と指定します。
 
@@ -50,7 +50,7 @@ start firefox index.html
 
 ファイル名へのパスはカレントディレクトリからの相対パスを指定します。
 
-<br>
+<br/>
 
 Mac や Linux なら`open -a プログラム名 ファイル名`です。
 
@@ -60,7 +60,7 @@ open -a Firefox index.html
 
 こちらもファイル名へのパスはカレントディレクトリからの相対パスで大丈夫だと思います。
 
-<br>
+<br/>
 
 ここまでは特に問題ないのですが、
 
@@ -74,7 +74,7 @@ open -a Firefox index.html
 start firefox $(cygpath -w $(pwd)/index.html)
 ```
 
-<br>
+<br/>
 
 Git Bash で`start firefox index.html`と打つと、
 
@@ -82,7 +82,7 @@ Git Bash で`start firefox index.html`と打つと、
 
 Chrome でも同様です。
 
-<br>
+<br/>
 
 そこで絶対パスを指定しなければなりません。
 
@@ -123,7 +123,7 @@ start firefox $(cygpath -w $(pwd)/index.html)
 
 でも大丈夫です。
 
-<br>
+<br/>
 
 ## シェルスクリプトで簡略化
 
@@ -220,7 +220,7 @@ $ export PATH="$PATH:/c/Users/username/Documents/shellscripts"
 
 コマンドを使わないなら、Windows なら`システム環境変数の編集 > 環境変数 > Path`から追加することもできます。
 
-<br>
+<br/>
 
 これでどこからでも`open.sh`を使えるようになりました。
 
@@ -228,7 +228,7 @@ $ export PATH="$PATH:/c/Users/username/Documents/shellscripts"
 
 `open.sh index.html c`とすれば Chrome で立ち上げてくれます。
 
-<br>
+<br/>
 
 また、`open.sh`としましたが、実は拡張子がなくても動きます。
 

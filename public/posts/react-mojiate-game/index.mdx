@@ -5,20 +5,20 @@ lastmod: 2021-07-12T12:00:00+09:00
 categories: [プログラミング, Web アプリ]
 tags: [React, アプリ開発]
 summary: "最近 React を勉強していて、何か簡単なものを作りたいと思って、このような文字当てゲームを作りました。
-<br><br>
+<br/><br/>
 今回、この記事で実装について解説していきます。
-<br><br>
+<br/><br/>
 コンポーネントや props はほとんど使っておらず、"
 draft: false
 ---
 
-<br>
+<br/>
 
 最近 React を勉強していて、何か簡単なものを作りたいと思って、このような文字当てゲームを作りました。
 
 {{< tweet 1266654890907930625 >}}
 
-<br>
+<br/>
 
 {{< sandbox "react-typing-game" "https://codesandbox.io/s/react-typing-game-cn92x?fontsize=14&hidenavigation=1&theme=dark" >}}
 
@@ -32,7 +32,7 @@ draft: false
 
 ぐらいの人向けの記事になるかなと思います。
 
-<br>
+<br/>
 
 ## React の導入
 
@@ -52,7 +52,7 @@ npx create-react-app my-react-app
 
 ローカルホストが立ち上がり、ブラウザで見られるようになります。
 
-<br>
+<br/>
 
 ## React の仕組み
 
@@ -109,7 +109,7 @@ serviceWorker.unregister();
 
 `ReactDOM.render`によって、`id="root"`のタグの中身に`<React.StrictMode><App /></React.StrictMode>`が入るという仕組みです。
 
-<br>
+<br/>
 
 そして、`<App />`の部分には`/src/App.js`の内容が展開されます。
 
@@ -134,7 +134,7 @@ export default class App extends Component {
 
 {{< relpos react-toha >}}
 
-<br>
+<br/>
 
 ## 実装
 
@@ -182,7 +182,7 @@ export default class App extends Component {
 
 `this`はクラス自体を指しているということでとりあえずいいと思います。
 
-<br>
+<br/>
 
 次に出力する HTML となる部分を書きます。
 
@@ -229,7 +229,7 @@ onInput = e => {
 
 これを見ることでどのアルファベットが選択されたかがわかります。
 
-<br>
+<br/>
 
 次に、`check`メソッドで答えの中に指定したアルファベットが含まれているか確認します。
 
@@ -267,13 +267,13 @@ check = () => {
 
 そのため、`displayTmp`を仮に作ってから、後で`display`を変更しています。
 
-<br>
+<br/>
 
 ちなみに、`~`はビットを反転するもので、`~-1`が`0`になります。
 
 `0`が`false`とみなされるのを利用しています。
 
-<br>
+<br/>
 
 最後に、「次の問題」ボタンを押したときに動作する`reset`メソッドです。
 
@@ -310,14 +310,12 @@ reset = shown => {
 
 `shown`にはその時点で出題されている問題の答えの文字列が渡されます。
 
-<br>
+<br/>
 
 以上で完成になります。
 
 <details>
-<summary>App.js のソースコード全文</summary>
-<br>
-
+<summary>App.js のソースコード全文</summary><br/>
 ```jsx {name="/src/App.js", id=9}
 import React, { Component } from 'react';
 import './App.css';

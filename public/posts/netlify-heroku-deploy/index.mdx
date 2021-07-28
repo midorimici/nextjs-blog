@@ -7,7 +7,7 @@ tags: [Netlify, JavaScript/TypeScript]
 draft: false
 ---
 
-<p>{{% tltp Socket.IO %}}クライアント-サーバ間の双方向通信ができる JS ライブラリ<br>[公式サイト](https://socket.io/){{% /tltp %}}
+<p>{{% tltp Socket.IO %}}クライアント-サーバ間の双方向通信ができる JS ライブラリ<br/>[公式サイト](https://socket.io/){{% /tltp %}}
  で作成した通信対戦アプリをデプロイするときに結構苦労したので、その記録を書いておきます。</p>
 
 <!--more-->
@@ -16,7 +16,7 @@ draft: false
 
 → [Geister Online](https://geister-online.netlify.app)
 
-<br>
+<br/>
 
 ## アプリの構造
 
@@ -52,7 +52,7 @@ webpack.config.js
 ...
 ```
 
-<br>
+<br/>
 
 ## デプロイ方法
 
@@ -68,11 +68,11 @@ webpack.config.js
 
 {{< yout M9RDYkFs-EQ >}}
 
-<br>
+<br/>
 
 しかし、ここでいくつか問題が発生してしまいました。
 
-<br>
+<br/>
 
 ## 問題点
 
@@ -150,7 +150,7 @@ Heroku のプロジェクトパスには`dist`を指定しているのですが�
 
 クライアント側か？サーバ側か？
 
-<br>
+<br/>
 
 クライアント側だとすれば、Netlify の`netlify.toml`や`_headers`ファイルで HTTP ヘッダを指定することができます。
 
@@ -160,7 +160,7 @@ Heroku のプロジェクトパスには`dist`を指定しているのですが�
 
 先の動画でもそのコードでも何か特別なことをしているようには見えなかったし、八方塞がりでありました。
 
-<br>
+<br/>
 
 ところが、ふと「Socket.IO CORS」で調べると、
 
@@ -176,7 +176,7 @@ Heroku のプロジェクトパスには`dist`を指定しているのですが�
 
 Netlify の設定ファイルも Express の CORS のコードも必要なく、これだけでヘッダを認識するようになりました。
 
-<br>
+<br/>
 
 それで、origin として設定する URL は Netlify の URL にすべきだったのですが、
 
@@ -186,7 +186,7 @@ Heroku の URL にするものだと勘違いしていたため、またも[エ�
 
 Heroku 側が Netlify 側をブロックしてるんだから、Netlify の URL を書くべきだったんですね。
 
-<br>
+<br/>
 
 これでエラーもきれいになくなり、期待通りに動くようになりました。
 

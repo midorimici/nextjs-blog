@@ -13,7 +13,7 @@ Docker の導入は済んでいるものとします。
 
 <!--more-->
 
-<br>
+<br/>
 
 ## Docker とは
 
@@ -21,13 +21,13 @@ Docker の導入は済んでいるものとします。
 
 仮想環境を作ることで、物理的な制約とは無関係な仮想的な環境で作業をすることができます。
 
-<br>
+<br/>
 
 「イメージ」と呼ばれるものを元にしてコンテナを作成します。
 
 {{< relpos windows10home-docker >}}
 
-<br>
+<br/>
 
 ## Svelte とは
 
@@ -35,7 +35,7 @@ JavaScript のフレームワークです。
 
 初版が 2016 年と、React や Vue と比べても比較的新しいものです。
 
-<br>
+<br/>
 
 HTML、JavaScript とほぼ同じコード形態で書けるために**学習コストが少なく、**
 
@@ -43,7 +43,7 @@ HTML、JavaScript とほぼ同じコード形態で書けるために**学習コ
 
 その名前の表す通り、ミニマムな印象です。
 
-<br>
+<br/>
 
 関係ないですが、読み方は英語読みだと「スヴェルト」。
 
@@ -51,7 +51,7 @@ HTML、JavaScript とほぼ同じコード形態で書けるために**学習コ
 
 {{< relpos library-framework-chigai >}}
 
-<br>
+<br/>
 
 ## 戦略
 
@@ -63,7 +63,7 @@ HTML、JavaScript とほぼ同じコード形態で書けるために**学習コ
 
 そうすることでホストOS内のファイルを編集することなく、Svelte をいじれます。
 
-<br>
+<br/>
 
 ## 手順
 
@@ -83,7 +83,7 @@ $ cd svelte-docker-test
 
 いったんローカルに初期ファイルを置いて、それを Docker コンテナ内に移すことにしています。
 
-<br>
+<br/>
 
 次にプロジェクトのディレクトリ以下で、イメージ作成のための Dockerfile を作成します。
 
@@ -124,7 +124,7 @@ $ docker build -t svelte-image .
 
 `docker images`コマンドでイメージが作成されたことを確認します。
 
-<br>
+<br/>
 
 続いて、このイメージを元にコンテナを作成します。
 
@@ -138,7 +138,7 @@ $ docker run -p 5000:5000 --name svelte-container svelte-image
 
 `docker ps`でコンテナが起動していることを確認してください。
 
-<br>
+<br/>
 
 ### コンテナ内部の操作
 
@@ -153,7 +153,7 @@ $ winpty docker exec -it svelte-container sh
 
 最後の引数は使用するシェルで、bash だとエラーになるので sh を指定しました。
 
-<br>
+<br/>
 
 localhost を立ち上げます。
 
@@ -189,7 +189,7 @@ created public/build/bundle.js in 833ms
 
 {{< img src=hello-world alt="Svelte スタート画面" >}}
 
-<br>
+<br/>
 
 ### ファイルの編集
 
@@ -213,7 +213,7 @@ App.svelte  main.js
 
 vim が入っていなかったら`apk add vim`コマンドなどでインストールできます。
 
-<br>
+<br/>
 
 main.js を編集します。
 

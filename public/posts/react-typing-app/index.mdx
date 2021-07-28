@@ -5,9 +5,9 @@ lastmod: 2020-06-05T12:00:00+09:00
 categories: [プログラミング, Web アプリ]
 tags: [React, アプリ開発]
 summary: "前回、React で文字当てゲームを作りました。
-<br><br>
+<br/><br/>
 今回は、このようなタイピング練習アプリを作ってみました。
-<br><br>
+<br/><br/>
 この記事では、このタイピングアプリの実装について解説しながら、"
 draft: false
 ---
@@ -18,7 +18,9 @@ draft: false
 
 <tweet id="1268135841366339585" />
 
+
 <br/>
+
 
 <sandbox name="react-simple-typing-app" link="https://codesandbox.io/s/react-simple-typing-app-s8quj?fontsize=14&hidenavigation=1&module=%2Fsrc%2FApp.tsx&view=preview" />
 
@@ -37,7 +39,9 @@ draft: false
 
 {{< relpos react-mojiate-game >}}
 
+
 <br/>
+
 
 ## React Hooks (useState)
 
@@ -105,7 +109,9 @@ export default function App() {
 
 Hooks を使うことで、**関数内部のどこからでも宣言なしでさっと state を参照できて、とても便利**です。
 
+
 <br/>
+
 
 ## コンポーネントと props
 
@@ -134,7 +140,9 @@ function AnotherComponent() {
 
 `<p>This is my component.</p>`が展開されます。
 
+
 <br/>
+
 
 <strong>props は「外部から値を入れられる変数」</strong>のことです。
 
@@ -173,7 +181,9 @@ function MyComponent({ adjective }) {
 
 ちなみに、コンポーネント名の先頭は大文字である必要があります。
 
+
 <br/>
+
 
 ## Material-UI
 
@@ -189,13 +199,17 @@ function MyComponent({ adjective }) {
 
 すぐに使い始めることができます。
 
+
 <br/>
+
 
 いろいろなコンポーネントが用意されていて、JSX に書き込むだけで、
 
 その位置にきれいなデザインのボタンやカード、ダイアログなどを表示できます。
 
+
 <br/>
+
 
 例えば、ボタンを表示させるには、次のようにします。
 
@@ -220,7 +234,9 @@ function ButtonSample() {
 
 これで**簡単にきれいなデザインを実装する**ことができます。
 
+
 <br/>
+
 
 ## TypeScript
 
@@ -238,7 +254,9 @@ TypeScript による開発を始めることができます。
 npx create-react-app my-react-app --typescript
 ```
 
+
 <br/>
+
 
 ## 実装
 
@@ -274,11 +292,15 @@ export default function MyButton({ children, onClick }: Props) {
 
 だとしても型定義はしないと怒られます。
 
+
 <br/>
+
 
 `() => void`は返り値のない関数であることを示します。
 
+
 <br/>
+
 
 ところで Material-UI の`Button`は、デフォルトではテキストがすべて大文字になってしまうので、
 
@@ -319,7 +341,9 @@ export default function MyButton({ children, onClick }: Props) {
 
 これでボタンにスタイルが適用され、ボタンの文字が大文字化しなくなります。
 
+
 <br/>
+
 
 ここで`export`したコンポーネントを、`App.tsx`でインポートして使用します。
 
@@ -347,7 +371,9 @@ export default function App() {
 
 となります。
 
+
 <br/>
+
 
 まず、ボタンで入力可能・不可能を切り替えるためのブール変数を用意します。
 
@@ -372,7 +398,9 @@ export default function App() {
 
 ボタンの表示は ON OFF と切り替わります。
 
+
 <br/>
+
 
 次に、タイピング用のテキストを用意します。
 
@@ -430,19 +458,25 @@ export default function App() {
 
 `tabIndex`を指定しないとキーに反応しないので注意してください。
 
+
 <br/>
+
 
 `React.KeyboardEvent<HTMLDivElement>`というのは TypeScript の型定義で、
 
 VS Code であれば Quick Fix 機能を使っていい感じに補完してくれたりします。
 
+
 <br/>
+
 
 これで入力したキーを認識し、表示することができます。
 
 <postimage src="key-event-test" ext="gif" alt="React キーボードイベント テスト" />
 
+
 <br/>
+
 
 さて、ここからタイピングアプリにしていくので、あらかじめ用意された文字列と比較して、
 
@@ -491,7 +525,9 @@ export default function App() {
 
 SCSS を使うためには、ターミナルで`npm install -D node-sass`と入力しておきます。
 
+
 <br/>
+
 
 正しい文字を打つと文字が黒くなり、正しい文字を打たないと先に進みません。
 
@@ -513,7 +549,9 @@ SCSS を使うためには、ターミナルで`npm install -D node-sass`と入�
 
 文字が黒かグレーか赤かを決めます。
 
+
 <br/>
+
 
 これを実現するために`map`メソッドを使い、`map`を使うために`split`メソッドで文字列を配列に変換します。
 
@@ -588,7 +626,9 @@ export default function App() {
 
 `null`でないときにのみ動くようになります。
 
+
 <br/>
+
 
 あとは CSS のほうで色の設定をします。
 

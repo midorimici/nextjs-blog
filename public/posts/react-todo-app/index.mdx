@@ -19,7 +19,7 @@ draft: false
 
 {{< sandbox "react-mui-todo-app" "https://codesandbox.io/s/react-mui-todo-app-gx6us?fontsize=14&hidenavigation=1&theme=dark" >}}
 
-<br>
+<br/>
 
 タイピング練習アプリ制作のときにはスパイス的に入れていた [Material-UI](https://material-ui.com/ja/) を、
 
@@ -27,7 +27,7 @@ draft: false
 
 また、2020年5月に発表された状態管理ライブラリ [Recoil](https://recoiljs.org/) を試験的に利用しています。
 
-<br>
+<br/>
 
 <strong>この記事では、Recoil の Atom という機能の簡単な説明をした後に、
 
@@ -39,7 +39,7 @@ draft: false
 
 {{< relpos react-typing-app >}}
 
-<br>
+<br/>
 
 ## Recoil とは
 
@@ -53,7 +53,7 @@ React はいくつかの state を持つことが多いのですが、
 
 効率が悪く</strong>なります。
 
-<br>
+<br/>
 
 そこで、Redux などの状態管理ライブラリが使われます。
 
@@ -65,7 +65,7 @@ Redux よりも直観的で導入しやすいと感じたので、
 
 Recoil を選択しました。
 
-<br>
+<br/>
 
 Recoil のインストールは、コマンドで`npm install recoil`または`yarn add recoil`とすることでできます。
 
@@ -88,7 +88,7 @@ export const textState = atom({
 
 `default`はデフォルト値です。
 
-<br>
+<br/>
 
 これをコンポーネントファイルの中で使うには、次のようにします。
 
@@ -119,7 +119,7 @@ export default function App() {
 
 これらの関数を使うことで、より効率的な処理が行われます。
 
-<br>
+<br/>
 
 なお、Recoil を使うときは、
 
@@ -127,7 +127,7 @@ export default function App() {
 
 {{< relpos react-toha >}}
 
-<br>
+<br/>
 
 ## 実装
 
@@ -234,7 +234,7 @@ export default function TodoList() {
 
 コンポーネント内部でこれを呼び出し、JSX のタグに`className={classes.button}`のように指定します。
 
-<br>
+<br/>
 
 22行目の`Box`は Material-UI のものですが、
 
@@ -388,11 +388,11 @@ HTML に現れない`<></>`を使っています。
 
 これらを [Grid](https://material-ui.com/components/grid/) で並べています。
 
-<br>
+<br/>
 
 長くなったので、コンポーネントとして分けました。
 
-<br>
+<br/>
 
 入力した情報は state として管理下におきたいので、atom の設定をします。
 
@@ -683,7 +683,7 @@ export default function RegisterDialog({ open, onClose }: Props) {
 
 ボタンを押すとダイアログを閉じるので、`handleRegister`関数の中にも`onClose()`を書いています。
 
-<br>
+<br/>
 
 続いてタスクの一覧を表示する表のコンポーネントを作成します。
 
@@ -1012,13 +1012,13 @@ export default function TodoTable() {
 
 正順または逆順に並べ替えるようにしています。
 
-<br>
+<br/>
 
 30行目の`tasks.concat()`は、`tasks`のコピーを作っています。
 
 `sort`メソッドは破壊的処理なので、このようにしないと`tasks`自体を変更しようとしてエラーが発生します。
 
-<br>
+<br/>
 
 49, 58行目は、矢印の向きを指定しています。
 

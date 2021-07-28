@@ -19,7 +19,7 @@ Python プログラムで動かすフェアリーチェスアプリ開発、連�
 
 ゲーム構造の核心に近い部分に触れていきますよ。
 
-<br>
+<br/>
 
 ## すでに`isCheck()`はあるが…
 
@@ -59,7 +59,7 @@ def canSeeKing(self,kingpos,piecelist):
 
 この 3 つを追加していきたいと思います。
 
-<br>
+<br/>
 
 ## どれを先にやる？
 
@@ -73,7 +73,7 @@ def canSeeKing(self,kingpos,piecelist):
 
 先にこちらに取り掛かりたいと思います。
 
-<br>
+<br/>
 
 ## 自らチェックされに行くような手の禁止
 
@@ -183,7 +183,7 @@ class Game:
 
 「白はチェックされてる？」と聞けば「白はね、されてるよ」とか「白はね、されてるとはいえないみたいだよ」とか答えてくれます。
 
-<br>
+<br/>
 
 ところで、動いた後の盤面を仮定して、その盤面上でチェック判定をするんでした。
 
@@ -276,9 +276,7 @@ def isValidMove(self, piece, startpos, endpos, gameboard):
 
 <details>
 <summary>:question:なぜ直接代入しない？</summary>
-<div>
-<br>
-
+<div><br/>
 `copy()`を使用しないと、盤面の更新をした際にもとの盤面も一緒に書き換えられてしまいます。
 
 これは
@@ -298,7 +296,7 @@ def isValidMove(self, piece, startpos, endpos, gameboard):
 </div>
 </details>
 
-<br>
+<br/>
 
 今までの編集で`isCheck()`や`isValidMove()`の引数が変わっているので、
 

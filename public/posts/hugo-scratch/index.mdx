@@ -7,7 +7,7 @@ tags: [サイト構築, Hugo]
 draft: false
 ---
 
-{{% tooltip %}}Hugo((本ブログで使用している静的サイトジェネレータ<br>[公式サイト](https://gohugo.io){{% /tooltip %}}  
+{{% tooltip %}}Hugo((本ブログで使用している静的サイトジェネレータ<br/>[公式サイト](https://gohugo.io){{% /tooltip %}}  
 のテンプレート文を眺めていると、
 
 結構な頻度で[`.Scratch`](https://gohugo.io/functions/scratch/)というものがでてきます。
@@ -16,7 +16,7 @@ draft: false
 
 <!--more-->
 
-<br>
+<br/>
 
 ## スコープ問題
 
@@ -62,7 +62,7 @@ v: init
 
 `.Scratch`の実際のスコープは「ページ単位」「ショートコード単位」だそうです。
 
-<br>
+<br/>
 
 ## `.Scratch`の使い方
 
@@ -162,7 +162,7 @@ golang で対応している + 演算子の使い方は使えるようです。
 
 {{< relpos hugo-shortcode >}}
 
-<br>
+<br/>
 
 ## ローカルスコープの`newScratch`
 
@@ -194,7 +194,7 @@ Hugo 0.43 からは、[`newScratch`](https://gohugo.io/functions/scratch/#get-a-
 {{ $scr.Get "v" }} -> changed
 ```
 
-<br>
+<br/>
 
 ## `with`や`range`と併用する際の注意点
 

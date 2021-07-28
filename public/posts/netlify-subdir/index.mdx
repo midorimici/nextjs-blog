@@ -19,7 +19,7 @@ Netlify での場合を説明していますが、
 
 <!--more-->
 
-<br>
+<br/>
 
 ## サイトを２つデプロイする
 
@@ -27,17 +27,17 @@ Netlify での場合を説明していますが、
 
 まずは`example.com`のサイトと`example.com/subdir`にする予定のサイトのデプロイを完了させます。
 
-<br>
+<br/>
 
 この時点では`example.com/subdir`にする予定のサイトの URL は別のもの、
 
 例えば`marvellous-sheep.netlify.app`のようになっていると思います。
 
-<br>
+<br/>
 
 これは変更してもいいですし、そのままにしておいても構いません。
 
-<br>
+<br/>
 
 ## リダイレクトを設定する
 
@@ -65,13 +65,13 @@ Netlify での場合を説明していますが、
 
 見た目上はサブディレクトリにそのサイトが配置される形になります。
 
-<br>
+<br/>
 
 7-11 行目は、`example.com/subdir`にアクセスがあると、
 
 `https://marvellous-sheep.netlify.com`に 200 リダイレクトするという意味になります。
 
-<br>
+<br/>
 
 {{< img src=404err alt="CSS や画像が見つからない" >}}
 
@@ -81,7 +81,7 @@ Netlify での場合を説明していますが、
 
 `https://marvellous-sheep.netlify.com/static`以下に移しています。
 
-<br>
+<br/>
 
 `:splat`というのは`*`（ワイルドカード）の部分を展開しているので、
 
@@ -93,11 +93,11 @@ Netlify での場合を説明していますが、
 
 `https://marvellous-sheep.netlify.com/static/images/image1.png`に移ります。
 
-<br>
+<br/>
 
 これでリソースの読み込みも正常に行われます。
 
-<br>
+<br/>
 
 ## ユースケース
 
@@ -109,7 +109,7 @@ Netlify での場合を説明していますが、
 
 というようなことができるようになります。
 
-<br>
+<br/>
 
 とはいえ、そう見えているだけであって、実際には他の URL が存在しているので、
 
