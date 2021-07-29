@@ -6,7 +6,7 @@ import Head from 'next/head'
 import PostBody from '../../components/post/post-body'
 import PostHeader from '../../components/post/post-header'
 import Layout from '../../components/layout'
-import { getPostBySlug, getAllPosts } from '../../lib/api'
+import { getPostBySlug, getPostSlugs } from '../../lib/api'
 import PostTitle from '../../components/post/post-title'
 
 import { SITE_NAME } from '../../lib/constants'
@@ -86,13 +86,13 @@ export async function getStaticProps({ params }: Params) {
 }
 
 export async function getStaticPaths() {
-  const posts = getAllPosts(['slug'])
+  const slugs = getPostSlugs()
 
   return {
-    paths: posts.map((posts) => {
+    paths: slugs.map((slug) => {
       return {
         params: {
-          slug: posts.slug,
+          slug,
         },
       }
     }),
