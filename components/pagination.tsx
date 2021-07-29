@@ -19,6 +19,18 @@ const Pagination = ({ postNumbers }: Props) => {
       onPageChange={({ selected }) => { router.push(selected === 0 ? '/' : `/page/${selected+1}`)}}
       previousLabel='<'
       nextLabel='>'
+      containerClassName="mt-8 flex justify-center"
+      pageClassName="mx-4 text-4xl"
+      pageLinkClassName="outline-none"
+      breakClassName="mx-4"
+      breakLinkClassName="outline-none"
+      previousClassName="mr-4 text-4xl"
+      previousLinkClassName="outline-none"
+      nextClassName="ml-4 text-4xl"
+      nextLinkClassName="outline-none"
+      activeClassName="text-pink-400"
+      activeLinkClassName="outline-none"
+      disabledClassName="invisible"
     />
   )
 }
