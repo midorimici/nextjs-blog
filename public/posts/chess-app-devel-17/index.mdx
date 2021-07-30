@@ -10,7 +10,7 @@ draft: false
 
 Python プログラムで動かすフェアリーチェスアプリ開発、連載第 17 回です。
 
-{{< pstlk 前回 chess-app-devel-16 >}}は Pygame でゲームに効果音を追加しました。
+<pstlk label="前回" to="chess-app-devel-16" />は Pygame でゲームに効果音を追加しました。
 
 今回は変則チェスのひとつである[チェス960](https://ja.wikipedia.org/wiki/%E3%83%81%E3%82%A7%E3%82%B9960)を追加してみたいと思います。
 
@@ -199,7 +199,7 @@ class Chess960:
 
 ## ゲーム追加
 
-{{< pstlk 第15回 chess-app-devel-15 >}}の方法と同様にして、定義したゲームを追加していきます。
+<pstlk label="第15回" to="chess-app-devel-15" />の方法と同様にして、定義したゲームを追加していきます。
 
 ```py {name="games.py", hl_lines=[3, 4], ins=[1], del=[0], inline_hl=[1:[8]]}
 ...
@@ -222,7 +222,7 @@ game_name_dict = {0: ('Normal Chess', 'Chess 960', 'Unicorn')}
 
 ところが、チェス960のキャスリングは少々特殊な処理を加える必要があります。
 
-{{< pstlk 次回 chess-app-devel-18 >}}はキャスリング部分の実装をしていきます。
+<pstlk label="次回" to="chess-app-devel-18" />はキャスリング部分の実装をしていきます。
 
 お読みいただきありがとうございました。
 

@@ -10,7 +10,7 @@ draft: false
 
 Python プログラムで動かすフェアリーチェスアプリ開発、連載第 9 回です。
 
-{{< pstlk 前回 chess-app-devel-8 >}}はマウス操作で駒を動かせるようにしました。
+<pstlk label="前回" to="chess-app-devel-8" />はマウス操作で駒を動かせるようにしました。
 
 しかし、その駒の移動がカクカクしているので、
 
@@ -238,7 +238,7 @@ draw_img(self.startpos[0] + ((self.endpos[0] - self.startpos[0]) / 2)
 
 ## 行先に表示される駒を隠す
 
-これは{{< pstlk 第６回 chess-app-devel-6 >}}で用意した`dark_squares_list`を使えば簡単にできます。
+これは<pstlk label="第６回" to="chess-app-devel-6" />で用意した`dark_squares_list`を使えば簡単にできます。
 
 ```py:main.py {hl_lines=["4-9"]}
 def draw(self):
@@ -284,7 +284,7 @@ def draw(self):
 
 アニメーションが追加されて、より迫力のある遊び心地になりました。
 
-{{< pstlk 次回 chess-app-devel-10 >}}はチェスの特殊ルールのひとつであるアンパッサンを実装したいと思います。
+<pstlk label="次回" to="chess-app-devel-10" />はチェスの特殊ルールのひとつであるアンパッサンを実装したいと思います。
 
 読んでくれてありがとうございました。
 

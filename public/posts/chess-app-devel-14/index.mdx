@@ -9,9 +9,9 @@ draft: false
 
 Python プログラムで動かすフェアリーチェスアプリ開発、連載第 14 回です。
 
-{{< pstlk 前々回 chess-app-devel-12 >}}までで通常のチェスが問題なくプレイできるようになり、
+<pstlk label="前々回" to="chess-app-devel-12" />までで通常のチェスが問題なくプレイできるようになり、
 
-{{< pstlk 前回 chess-app-devel-13 >}}はコードを整形しました。
+<pstlk label="前回" to="chess-app-devel-13" />はコードを整形しました。
 
 今回は、いよいよフェアリーチェスの幕開けです！
 
@@ -226,7 +226,7 @@ class Game:
             self.gameboard[(i, 7)] = placers[i](B)
 ```
 
-この部分の詳細な説明は{{< pstlk 第２回 "chess-app-devel-2/#黒のクイーンとキングの位置" >}}でしましたが、
+この部分の詳細な説明は<pstlk label="第２回" to=""chess-app-devel-2/#黒のクイーンとキングの位置"" />でしましたが、
 
 ざっくり言うと`gameboard`の特定の位置に特定の駒オブジェクトを配置しています。
 
@@ -314,7 +314,7 @@ class Game:
 
 しかし、このままだと一種類のチェスしかできないので、
 
-{{< pstlk 次回 chess-app-devel-15 >}}はさまざまな種類のゲームを切り替えられるようにします。
+<pstlk label="次回" to="chess-app-devel-15" />はさまざまな種類のゲームを切り替えられるようにします。
 
 お読みいただきありがとうございました。
 

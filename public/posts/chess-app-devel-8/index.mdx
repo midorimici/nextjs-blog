@@ -10,7 +10,7 @@ draft: false
 
 Python プログラムで動かすフェアリーチェスアプリ開発、連載第８回です。
 
-{{< pstlk 前回 chess-app-devel-7 >}}は
+<pstlk label="前回" to="chess-app-devel-7" />は
 {{% tooltip %}}Pillow((Python の画像処理ライブラリ{{% /tooltip %}}
 で画像を読み込み、盤面上に駒を表示しました。
 
@@ -225,7 +225,7 @@ class Game:
 
 ワールド座標はユーザが定義できます。
 
-{{< pstlk 第6回 "chess-app-devel-6#四角形の描画" >}}で`glOrtho()`を使って指定しているのもワールド座標です。
+<pstlk label="第6回" to=""chess-app-devel-6#四角形の描画"" />で`glOrtho()`を使って指定しているのもワールド座標です。
 
 さて、実際にマウスポインタの位置を情報として使用するにあたっては、
 
@@ -306,7 +306,7 @@ def draw(self):
 
 `available_moves()`は移動先のリストを返しますが、**チェック回避を考慮していないので、そのままでは使えません。**
 
-そのため、{{< pstlk 第4回 "chess-app-devel-4#盤面を仮定する" >}}でチェック回避を考慮した`is_valid_move()`を作ったのですが、
+そのため、<pstlk label="第4回" to=""chess-app-devel-4#盤面を仮定する"" />でチェック回避を考慮した`is_valid_move()`を作ったのですが、
 
 こちらは移動可能かどうかを判定するだけで、**移動先の座標のリストを返すわけではありません。**
 
@@ -415,7 +415,7 @@ def mouse(self, button, state, x, y):
 
 ただ、駒の動きがカクカクしています。
 
-{{< pstlk 次回 chess-app-devel-9 >}} はおまけ的な感じで、駒の動きをスムーズにしてみたいと思います。
+<pstlk label="次回" to="chess-app-devel-9" /> はおまけ的な感じで、駒の動きをスムーズにしてみたいと思います。
 
 参考になったらうれしいです。
 
