@@ -56,9 +56,9 @@ class Rook(Piece):
         return self.rider(x, y, gameboard, self.color, chess_cardinals)
 ```
 
-`available_moves`{{% tltp メソッド %}}オブジェクトに対して使用される処理のまとまり{{% /tltp %}}で駒の動きを定義しています。
+`available_moves`<tltp label="メソッド">オブジェクトに対して使用される処理のまとまり</tltp>で駒の動きを定義しています。
 
-返り値は２要素{{% tltp タプル %}}多数のデータを格納する、要素が変更不可能な構造{{% /tltp %}}のリストです。
+返り値は２要素<tltp label="タプル">多数のデータを格納する、要素が変更不可能な構造</tltp>のリストです。
 
 <br/>
 
@@ -123,7 +123,7 @@ class Rook(Piece):
 
 この駒は、ナイトが走るように、つまりナイト方向に一直線に動きます。
 
-他の駒{{% tltp クラス %}}オブジェクトの型、設計図のようなもの{{% /tltp %}}定義にならって、ユニコーンクラスを定義します。
+他の駒<tltp label="クラス">オブジェクトの型、設計図のようなもの</tltp>定義にならって、ユニコーンクラスを定義します。
 
 ```py {name="pieces.py"}
 class Unicorn(Piece):

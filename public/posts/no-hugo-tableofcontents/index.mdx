@@ -7,7 +7,7 @@ tags: [サイト構築, Hugo, HTML]
 draft: false
 ---
 
-{{% tooltip %}}Hugo((本ブログで使用している静的サイトジェネレータ<br/>[公式サイト](https://gohugo.io){{% /tooltip %}}
+<tltp label="Hugo">本ブログで使用している静的サイトジェネレータ<br/>[公式サイト](https://gohugo.io)</tltp>
 には、記事内の h タグから自動で目次を出力してくれる機能があり、
 
 通常は`.TableOfContents`で呼び出すことができます。
@@ -148,7 +148,7 @@ Hugo では変数は`{{ $var := value }}`のように定義できますが、`$`
 `.`は「改行以外の任意の一文字」、`\n`は「改行」を表します。
 
 つまりここでは、id 属性以外の
-{{% tooltip %}}属性((要素に設定を付加するもの<br/><code>class="classname"</code>など{{% /tooltip %}}
+<tltp label="属性">要素に設定を付加するもの<br/><code>class="classname"</code>など</tltp>
 の有無を問わずレベル2から9の h タグがマッチします。
 
 `()`で囲った部分はグループ化され、後から`$1`、`$2`、…という形で参照することができますが、

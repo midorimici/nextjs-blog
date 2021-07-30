@@ -65,7 +65,7 @@ Python プログラムで動かすフェアリーチェスアプリ開発、連�
 ## 画像の読み込みと設定
 
 <p>
-{{% tooltip %}}[Pillow](https://pillow.readthedocs.io/en/stable/)((Python の画像処理ライブラリ{{% /tooltip %}}
+<tltp label="[Pillow](https://pillow.readthedocs.io/en/stable/)">Python の画像処理ライブラリ</tltp>
 を使って画像を処理します。
 </p>
 
@@ -173,7 +173,7 @@ def draw_pieces(gameboard, imgID_dict, size=8):
 `glTexImage2D()`の最後の引数は`img.tobytes()`というふうに、バイトに変換しなければならないようです。
 
 `imgID_dict`は`{'WN': 1, 'WR': 2, ...}`みたいな感じの
-{{% tooltip %}}ディクショナリ((キーと値が 1 対 1 に対応する形でまとめられた構造{{% /tooltip %}}
+<tltp label="ディクショナリ">キーと値が 1 対 1 に対応する形でまとめられた構造</tltp>
 にしています。
 
 ```py:pieces.py
@@ -200,7 +200,7 @@ for i, piece in enumerate(piece_names):
 [元のコードの`uniDict`](https://gist.github.com/rsheldiii/2993225#file-chess-py-L234)は、あとからまとめて指定している感じですが、
 
 これから駒が増えていくのに備えて、各駒のクラス内で駒を表す新たな
-{{% tooltip %}}プロパティ((オブジェクトが参照できるデータ{{% /tooltip %}}
+<tltp label="プロパティ">オブジェクトが参照できるデータ</tltp>
 （`abbr`）を定義しました。
 
 `uniDict`を使わなくなったので、関係各所で調整を入れつつ、
