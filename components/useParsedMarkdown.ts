@@ -10,7 +10,7 @@ export const useParsedMarkdown = (markdown: string) => {
 
   const parseMarkdown = async () => {
     const html = await markdownToHtml(markdown)
-    setContent(html.replace(/^<p>([\s\S]*)<\/p>$/, '$1'))
+    setContent(html.replace(/<p>([\s\S]*)<\/p>/, '$1'))
   }
 
   return content

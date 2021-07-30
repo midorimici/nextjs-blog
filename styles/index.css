@@ -68,6 +68,7 @@ body {
 
 .tooltip {
   @apply opacity-0 absolute bottom-full bg-pink-100 rounded p-2 text-sm transition-opacity duration-300;
+  min-width: 8rem;
   z-index: -1;
 }
 
