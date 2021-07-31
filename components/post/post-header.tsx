@@ -10,7 +10,7 @@ type Props = {
 const PostHeader = ({ title, date, lastmod }: Props) => {
   return (
     <div className="max-w-2xl mx-auto">
-      <PostTitle>{title}</PostTitle>
+      <PostTitle title={title} />
       <div className="mb-6 text-lg">
         <DateFormatter dateString={date} type='date' />
         <DateFormatter dateString={lastmod} type='lastmod' />

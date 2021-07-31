@@ -1,21 +1,24 @@
-import { ReactNode } from 'react'
+import { useParsedMarkdown } from '../useParsedMarkdown'
 
 type Props = {
-  children?: ReactNode
+  title: string
 }
 
-const PostTitle = ({ children }: Props) => {
+const PostTitle = ({ title }: Props) => {
+  const parsedTitle = useParsedMarkdown(title)
+  
   return (
-    <h1 className={`
-      text-4xl
-      mb-12
-      text-left
-      font-bold
-      tracking-wide
-      leading-relaxed
-    `}>
-      {children}
-    </h1>
+    <h1
+      className={`
+        text-4xl
+        mb-12
+        text-left
+        font-bold
+        tracking-wide
+        leading-relaxed
+      `}
+      dangerouslySetInnerHTML={{ __html: parsedTitle }}
+    />
   )
 }
 

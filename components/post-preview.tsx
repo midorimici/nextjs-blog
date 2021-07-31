@@ -19,6 +19,7 @@ const PostPreview = ({
   lastmod,
   summary,
 }: Props) => {
+  const parsedTitle = useParsedMarkdown(title)
   const content = useParsedMarkdown(summary)
   
   return (
@@ -40,9 +41,10 @@ const PostPreview = ({
         src={`/posts/${slug}/index.jpg`}
       />
       <section className="m-4">
-        <h3 className="text-3xl mb-3 leading-snug">
-          {title}
-        </h3>
+        <h3
+          className="text-3xl mb-3 leading-snug"
+          dangerouslySetInnerHTML={{ __html: parsedTitle }}
+        />
         <div className="text-lg mb-4">
           <DateFormatter dateString={date} type='date' />
           <DateFormatter dateString={lastmod} type='lastmod' />

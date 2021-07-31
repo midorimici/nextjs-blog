@@ -32,13 +32,13 @@ const Post = ({ post, source }: Props) => {
   return (
     <Layout>
       {router.isFallback ? (
-        <PostTitle>Loading…</PostTitle>
+        <PostTitle title='Loading…' />
       ) : (
         <>
           <article className="mb-8">
             <Head>
               <title>
-                {post.title} | {SITE_NAME}
+                {post.title.replace(/<br\/>/g, '')} | {SITE_NAME}
               </title>
               <meta property="og:image" content={imagePath} />
             </Head>
