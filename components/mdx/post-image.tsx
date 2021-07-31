@@ -1,5 +1,7 @@
 import Image from 'next/image'
 
+import { useImageSize } from './useImageSize'
+
 type Props = {
   slug: string
   src: string
@@ -8,16 +10,17 @@ type Props = {
 }
 
 const PostImage = ({ slug, src, alt, ext = 'jpg' }: Props) => {
+  const path = `/posts/${slug}/${src}.${ext}`
+  const size = useImageSize(path)
+  
   return (
-    <p className="relative h-96">
-      <Image
-        src={`/posts/${slug}/${src}.${ext}`}
-        alt={alt}
-        title={alt}
-        layout="fill"
-        objectFit="contain"
-      />
-    </p>
+    <Image
+      src={path}
+      alt={alt}
+      title={alt}
+      width={size.width}
+      height={size.height}
+    />
   )
 }
 
