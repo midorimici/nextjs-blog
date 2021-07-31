@@ -22,7 +22,7 @@ Python プログラムで動かすフェアリーチェスアプリ開発、連�
 
 ## 完成イメージ
 
-{{< img src=../chess-app-devel-8/goal ext=gif alt=完成図 width=300 >}}
+<postimage src="../chess-app-devel-8/goal" ext="gif" alt="完成図" />
 
 もともといたマスからクリックしたマスまでスムーズに移動しています。
 
@@ -133,7 +133,7 @@ class Game:
 
 とりあえず、直線的な動きをさせてみます。
 
-{{< img src=linear-interpolation ext=png alt=直線による補間 >}}
+<postimage src="linear-interpolation" ext="png" alt="直線による補間" />
 
 ちょっと数学の話です。
 
@@ -162,7 +162,7 @@ draw_img(self.startpos[0] + (self.endpos[0] - self.startpos[0]) * self.time / 10
 
 正弦曲線（サインカーブ）を用いて、動き始めと終わりは減速させるようなもっとなめらかな動きをさせることができます。
 
-{{< img src=sin-curve-interpolation ext=png alt=正弦曲線による補間 >}}
+<postimage src="sin-curve-interpolation" ext="png" alt="正弦曲線による補間" />
 
 コードを導くには、しっかりとした（高校レベルぐらいの）数学の計算をやらなければならなりません。
 
@@ -230,7 +230,7 @@ draw_img(self.startpos[0] + ((self.endpos[0] - self.startpos[0]) / 2)
 
 さて、ここで一度動作を見てみましょう。
 
-{{< img src=before-masking ext=gif alt=駒ダブル width=300 >}}
+<postimage src="before-masking" ext="gif" alt="駒ダブル" />
 
 おっと、移動中は移動先に表示される駒を隠さないといけませんね。
 
@@ -261,7 +261,7 @@ def draw(self):
             glDisable(GL_TEXTURE_2D)
 ```
 
-{{< img src=after-masking ext=gif alt=マスク後 width=300 >}}
+<postimage src="after-masking" ext="gif" alt="マスク後" />
 
 いい感じですね。
 

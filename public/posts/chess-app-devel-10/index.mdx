@@ -39,7 +39,7 @@ en + passer の現在分詞なのでおそらくジェロンディフという�
 
 これを**アンパッサン**といいます。
 
-{{< img src="en-passant" ext=gif alt=アンパッサン >}}
+<postimage src="en-passant" ext="gif" alt="アンパッサン" />
 
 これを実装するためには、アンパッサンができる条件をしっかりと把握しておく必要があります。
 
@@ -90,7 +90,7 @@ class Game:
 
 下を白側とすると、位置関係は次の図のようになります。
 
-{{< img src=position ext=png alt=位置関係 >}}
+<postimage src="position" ext="png" alt="位置関係" />
 
 ```py:main.py
 def en_passant_requirements(self, piece, startpos, endpos):
@@ -208,7 +208,7 @@ def renew_gameboard(self, startpos, endpos, gameboard):
 
 これでアンパッサンを実装することができました！
 
-{{< img src="en-passant-success" ext=gif alt=アンパッサン完成 width=360 >}}
+<postimage src="en-passant-success" ext="gif" alt="アンパッサン完成" />
 
 ---
 

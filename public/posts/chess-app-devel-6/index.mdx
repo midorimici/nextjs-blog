@@ -175,7 +175,7 @@ class Game():
 
 中心に赤い正方形が表示されたと思います。
 
-{{< img src=img1 ext=png width=300 alt=赤い正方形 >}}
+<postimage src="img1" ext="png" alt="赤い正方形" />
 
 さて、チェス盤は 8x8 の計 64 の正方形が並んでいるので、大きさを合わせていきたいのですが、
 
@@ -196,7 +196,7 @@ def glmain(self):
 
 これで左下(-1.0, -1.0)、右上(8.0, 8.0)になりました。
 
-{{< img src=img2 ext=png alt=赤い正方形左下 width=300 >}}
+<postimage src="img2" ext="png" alt="赤い正方形左下" />
 
 この大きさの正方形なら、左下(-0.5, -0.5)、右上(7.5, 7.5)の盤面ができるので、
 
@@ -241,7 +241,7 @@ class Game():
         glutSwapBuffers()   # 強制描画
 ```
 
-{{< img src=board1 ext=png alt=盤面 width=300 >}}
+<postimage src="board1" ext="png" alt="盤面" />
 
 ### 文字を設置
 
@@ -329,7 +329,7 @@ class Game():
         glutSwapBuffers()   # 強制描画
 ```
 
-{{< img src=board2 ext=png alt="盤面 文字付き" width=300 >}}
+<postimage src="board2" ext="png" alt="盤面 文字付き" />
 
 ---
 

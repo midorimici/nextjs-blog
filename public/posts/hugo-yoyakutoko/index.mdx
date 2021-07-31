@@ -46,7 +46,7 @@ macOS で一日12回実行しても大丈夫そうです。
 
 Netlify にアクセスして、`Settings > Build & deploy > Build hooks > Add build hook`とします。
 
-{{< img src=add-build-hook ext=png alt="Build hook 追加" >}}
+<postimage src="add-build-hook" ext="png" alt="Build hook 追加" />
 
 `Build hook name`のところには任意の名前をつけます。
 
@@ -56,7 +56,7 @@ Netlify にアクセスして、`Settings > Build & deploy > Build hooks > Add b
 
 `Save`を押すと、ビルドを引き起こす URL が得られます。
 
-{{< img src=build-hook-command ext=png alt="Build hook コマンド" >}}
+<postimage src="build-hook-command" ext="png" alt="Build hook コマンド" />
 
 展開すると下にコマンドが出てくるので、こちらをコピーします。
 
@@ -127,7 +127,7 @@ git push origin master
 
 GitHub のリポジトリにアクセスし、`Settings > Secrets > Add a new secret`から値を登録します。
 
-{{< img src=github-secret ext=png alt="GitHub Secrets" >}}
+<postimage src="github-secret" ext="png" alt="GitHub Secrets" />
 
 `Name`にはさきほどの変数名（`xxx`）を入れ、`Value`に Build hook の URL を入れます。
 
