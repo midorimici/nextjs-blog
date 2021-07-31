@@ -9,7 +9,7 @@ export type MangaTextProps = {
 }
 
 const MangaText = ({ x, y, text, size = 'xl', color }: MangaTextProps) => {
-  const content = useParsedMarkdown(text)
+  const content = useParsedMarkdown(text, false)
   
   return (
     <div
