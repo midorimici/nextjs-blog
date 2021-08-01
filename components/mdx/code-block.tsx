@@ -28,7 +28,7 @@ const CodeBlock = ({
   del,
   inline_hl
 }: CodeBlockProps) => {
-  const lang = className.replace(/language-/, '') as Language
+  const lang = (className ? className.replace(/language-/, '') : 'txt') as Language
   const isHighlighted = useHighlightLineNumbers(hl_lines)
   const isInserted = useHighlightLineNumbers(ins)
   const isDeleted = useHighlightLineNumbers(del)

@@ -38,6 +38,7 @@ const PostBody = ({ source, slug }: Props) => {
     postimage: (props: PostImageProps) => <PostImage slug={slug} {...props} />,
     video: (props: Omit<VideoProps, 'slug'>) => <Video slug={slug} {...props} />,
     code: (props: CodeBlockProps) => <CodeBlock {...props} />,
+    icode: (props: any) => <code>{props.children}</code>,
     pstlk: (props: PostLinkProps) => (
       <Link href={props.to}>
         <a className="underline transition-colors duration-300 hover:text-pink-400">
