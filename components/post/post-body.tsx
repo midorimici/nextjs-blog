@@ -33,6 +33,9 @@ type PostLinkProps = {
 
 const PostBody = ({ source, slug }: Props) => {
   const components = {
+    a: ({ href, children }: { href: string, children: string }) => (
+      <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>
+    ),
     h2: ({ children }: { children: any }) => <Heading type={2} content={children} />,
     h3: ({ children }: { children: any }) => <Heading type={3} content={children} />,
     postimage: (props: PostImageProps) => <PostImage slug={slug} {...props} />,
