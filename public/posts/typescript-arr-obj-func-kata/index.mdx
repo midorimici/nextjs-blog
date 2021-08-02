@@ -21,7 +21,7 @@ TypeScript では定数・変数・関数を定義するときに、型を同時
 
 配列の型定義は、`(型)[]`または`Array<(型)>`とします。
 
-```ts
+```ts hide_nums
 const numArray: number[] = [1, 2, 3]; // または Array<number>
 const str2dimArray: string[][] = [
 	['a', 'b', 'c'],
@@ -39,7 +39,7 @@ const complexArray: ((number | string | boolean)[] | number)[] = [
 
 要素数が決まっている場合は`[(型), (型)]`のように書くこともできます。
 
-```ts
+```ts hide_nums
 const numArray: [number, number, number] = [1, 2, 3];
 const mixedArray: [string, number, boolean] = ['str', 4, false];
 const complexArray: [[number, string], [boolean, string], number] = [
@@ -61,7 +61,7 @@ const complexArray: [[number, string], [boolean, string], number] = [
 
 プロパティが決まっているなら、`{(プロパティ): (型), (プロパティ): (型)}`のように書くことができます。
 
-```ts
+```ts hide_nums
 const obj: { key1: number; key2: string } = { key1: 3, key2: 'a' };
 ```
 
@@ -71,7 +71,7 @@ const obj: { key1: number; key2: string } = { key1: 3, key2: 'a' };
 
 `{[key: (プロパティの型)]: (値の型)}`のように書くことができます。
 
-```ts
+```ts hide_nums
 const obj: { [key: string]: string } = { key1: 'a', key2: 'i', key3: 'e' };
 const objArray: { [key: string]: number }[] = [
 	{ A: 3, B: 2, C: 1 },
@@ -93,7 +93,7 @@ const arrayObj: { [key: number]: string[] } = {
 
 返り値がない場合、`void`を指定します。
 
-```ts
+```ts hide_nums
 let func: (param: number) => void;
 ```
 
@@ -101,7 +101,7 @@ let func: (param: number) => void;
 
 型と一緒に関数の内容も同時に定義するときは、`((引数名): (引数の型)): (返り値の型)`とします。
 
-```ts
+```ts hide_nums
 const func = (param: number): void => console.log(param);
 // function func(param: number): void {console.log(param)};
 // const func = function (param: number): void {console.log(param)};
@@ -111,7 +111,7 @@ const func = (param: number): void => console.log(param);
 
 省略可能な引数については、`(引数名)?: (引数の型)`とします。
 
-```ts
+```ts hide_nums
 // デフォルト値を指定しない場合
 const func = (param: number, suffix?: string): void =>
 	console.log(param + suffix);
@@ -126,7 +126,7 @@ const func = (param: number, suffix: string = 'st'): void =>
 
 引数は配列として取得されるので、配列型です。
 
-```ts
+```ts hide_nums
 const func = (...param: (number | string)[]): void => console.log(param);
 const mixedFunc = (
 	required: string,

@@ -31,7 +31,7 @@ Python プログラムで動かすフェアリーチェスアプリ開発、連�
 まず編集しやすくするために、コードを2つの<tltp label="モジュール">import によって呼び出すことができるプログラムファイル</tltp>に分けます。
 
 
-```py:main.py
+```py name=main.py
 from pieces import *
 　
 uniDict = ...
@@ -43,7 +43,7 @@ Game()
 ```
 
 
-```py:pieces.py
+```py name=pieces.py
 WHITE = "white"
 BLACK = "black"
 　
@@ -75,7 +75,7 @@ def f():
 
 コンストラクタは初期化メソッドで、インスタンス生成時に自動で実行されます。
 
-```python:main.py
+```python name=main.py
 class Game:
     def __init__(self):
         self.playersturn = BLACK
@@ -92,7 +92,7 @@ class Game:
 
 （`self`がついてたりついてなかったりするのは、初期の段階ではあまり気にしなくて大丈夫です！おまじないみたいなものだと思ってください）
 
-```python:main.py
+```python name=main.py
     ...
 　
     def main(self):
@@ -119,7 +119,7 @@ class Game:
 
 `Game`中の`self.playersturn`がにおいますね。
 
-```python:main.py {hl_lines=[5]}
+```python name=main.py hl_lines=5
 ...
 　
 class Game:
@@ -147,7 +147,7 @@ class Game:
 
 駒の配置に問題があるので、名前だけ見ると`placePieces()`が怪しいですね。
 
-```python:main.py {hl_lines=["6-8"]}
+```python name=main.py hl_lines=6-8
 class Game:
     ...
 　
@@ -190,7 +190,7 @@ uniDict = {WHITE : {Pawn : "♙", Rook : "♖", Knight : "♘", Bishop : "♗", 
 
 確か、コードの下の方に`Pawn`クラスがありましたね。
 
-```python:pieces.py
+```python name=pieces.py
 class Pawn(Piece):
     def __init__(self,color,name,direction):
         self.name = name
@@ -213,7 +213,7 @@ class Pawn(Piece):
 
 さて、以降はこれを拡張しただけです。
 
-```python:main.py
+```python name=main.py
 placers = [Rook,Knight,Bishop,Queen,King,Bishop,Knight,Rook]
 　
 for i in range(0,8):

@@ -37,7 +37,7 @@ draft: false
 
 次のように書きます。
 
-```txt {linenos=false}
+```go hide_nums
 findRE (正規表現のパターン) (入力) [(最初から何番目までを返すか)]
 ```
 
@@ -45,7 +45,7 @@ findRE (正規表現のパターン) (入力) [(最初から何番目までを�
 
 例えば、
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ findRE `a(.*?)e` `abcde apple je m'appelle apfel` }}
 
 -> [abcde,
@@ -78,7 +78,7 @@ findRE (正規表現のパターン) (入力) [(最初から何番目までを�
 
 この中から`h3`タグで挟まれている部分だけ取り出したいときは次のようになります。
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ findRE `<h3.*?>(.|\n)*?</h3>` $input }}
 　
 -> [<h3 class="komidashi" id="#小見出し１">小見出し１</h3>,
@@ -88,7 +88,7 @@ findRE (正規表現のパターン) (入力) [(最初から何番目までを�
 
 `h3`タグ直後の`p`タグを取り出したい場合は次のようになります。
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ findRE `</h3>( |\n)*?<p>(.|\n)*?</p>` $input }}
 　
 -> [</h3>
@@ -101,7 +101,7 @@ findRE (正規表現のパターン) (入力) [(最初から何番目までを�
 
 また、第三引数を指定することで、その個数分だけ取り出します。
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ findRE `</h3>( |\n)*?<p>(.|\n)*?</p>` $input 1 }}
 　
 -> [</h3>
@@ -130,7 +130,7 @@ findRE (正規表現のパターン) (入力) [(最初から何番目までを�
 
 次のように書きます。
 
-```txt {linenos=false}
+```go hide_nums
 replaceRE (正規表現のパターン) (置換先) (入力)
 または
 (入力) | replaceRE (正規表現のパターン) (置換先)
@@ -144,7 +144,7 @@ replaceRE (正規表現のパターン) (置換先) (入力)
 
 例えば、
 
-```go-html-template {linenos=false}
+```html hide_nums
 {{ replaceRE `a(.*?)e` `a-e` `abcde apple je m'appelle apfel` }}
 　
 -> a-e a-e je m'a-elle a-el
@@ -176,7 +176,7 @@ replaceRE (正規表現のパターン) (置換先) (入力)
 </div>
 ```
 
-```go-html-template {linenos=false, hl_lines=[8, 12, 15], inline_hl=[0:["2-7"], 1:["2-7"], 2:["2-7"]]}
+```go hide_nums, hl_lines=8,12,15 inline_hl=8:2-7;12:2-7;15:2-7
 {{ replaceRE `<h3>(.*?)</h3>` `<h3 class="komidashi" id="#$1">$1</h3>` $input }}
 　
 ->
@@ -209,7 +209,7 @@ replaceRE (正規表現のパターン) (置換先) (入力)
 
 `h3`タグ直後の`p`タグの内容を取得しようとして、
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ $pattern := `</h3>(?: |\n)*?<p>((?:.|\n)*?)</p>` }}
 {{ $find := findRE $pattern $input }}
 {{ range $find }}
@@ -219,7 +219,7 @@ replaceRE (正規表現のパターン) (置換先) (入力)
 
 とすれば
 
-```txt {linenos=false}
+```txt hide_nums
 わかよたれそ
 ういのおくやま
 あさきゆめみし
@@ -229,7 +229,7 @@ replaceRE (正規表現のパターン) (置換先) (入力)
 
 しかし、
 
-```go-html-template {linenos=false, hl_lines=[4], inline_hl=[0:[8]]}
+```go hide_nums, hl_lines=4 inline_hl=4:8
 {{ $pattern := `</h3>(?: |\n)*?<p>((?:.|\n)*?)</p>` }}
 {{ $find := findRE $pattern $input }}
 {{ range $find }}
@@ -239,7 +239,7 @@ replaceRE (正規表現のパターン) (置換先) (入力)
 
 とすれば
 
-```txt {linenos=false}
+```txt hide_nums
 </h3>
 わかよたれそ
 </h3>

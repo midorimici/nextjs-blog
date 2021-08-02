@@ -26,7 +26,7 @@ Hugo で変数を定義するとき、その変数の
 
 例えば、[次のような例](https://github.com/golang/go/issues/10608)（原文ママ）があります。
 
-```go-text-template {linenos=false}
+```go hide_nums
 {{ $v := "init" }}
 {{ if true }}
     {{ $v := "changed" }}
@@ -38,7 +38,7 @@ v: {{ $v }} {{/* => init */}}
 
 関数内部から外部で定義された関数を参照することはできますが、逆はできません。
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ $v := "init" }}
 v: {{ $v }}
 {{ range seq 0 1 }}
@@ -72,13 +72,13 @@ v: init
 
 スクラッチを作るには、`.Scratch.Set`を使います。
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ .Scratch.Set "key" "value" }}
 ```
 
 すでに指定したキーに対応する値があった場合、上書きをします。
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ .Scratch.Set "key" "value" }}
 {{ .Scratch.Set "key" "newvalue" }}
 {{ .Scratch.Get "key" }} -> newvalue
@@ -88,7 +88,7 @@ v: init
 
 値を呼び出すには次のようにします。
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ .Scratch.Get "key" }} -> value
 ```
 
@@ -100,7 +100,7 @@ golang で対応している + 演算子の使い方は使えるようです。
 
 数値の加算、文字列の結合、リストの結合などができます。
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ .Scratch.Add "key" "added" }}
 {{ .Scratch.Get "key" }} -> valueadded
 ```
@@ -113,7 +113,7 @@ golang で対応している + 演算子の使い方は使えるようです。
 
 次の例は[公式のもの](https://gohugo.io/functions/scratch/#setinmap)がもと。
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ .Scratch.SetInMap "greetings" "english" "Hello" }}
 --何か処理--
 {{ .Scratch.SetInMap "greetings" "french" "Bonjour" }}
@@ -124,7 +124,7 @@ golang で対応している + 演算子の使い方は使えるようです。
 
 `.SetInMap`を使わなければ次のようになるでしょう。
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ .Scratch.Set "greetings" (dict "english" "Hello") }}
 --何か処理--
 {{ .Scratch.Set "greetings" (merge (.Scratch.Get "greetings") (dict "french" "Bonjour")) }}
@@ -135,7 +135,7 @@ golang で対応している + 演算子の使い方は使えるようです。
 
 マップから値のみを取り出した配列を返します。この例も公式のがもとです。
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ .Scratch.SetInMap "greetings" "english" "Hello" }}
 {{ .Scratch.SetInMap "greetings" "french" "Bonjour" }}
 {{ .Scratch.GetSortedMapValues "greetings" }} -> [Hello Bonjour]
@@ -143,7 +143,7 @@ golang で対応している + 演算子の使い方は使えるようです。
 
 使わなければこんな感じ。
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ .Scratch.SetInMap "greetings" "english" "Hello" }}
 {{ .Scratch.SetInMap "greetings" "french" "Bonjour" }}
 {{ $greetings := .Scratch.Get "greetings" }}
@@ -155,7 +155,7 @@ golang で対応している + 演算子の使い方は使えるようです。
 
 スクラッチを削除します。
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ .Scratch.Delete "key" }}
 {{ .Scratch.Get "key" }} -> 
 ```
@@ -174,7 +174,7 @@ Hugo 0.43 からは、[`newScratch`](https://gohugo.io/functions/scratch/#get-a-
 
 名前衝突による上書きを避ける目的で私は積極的に使っています。
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ $scr := newScratch }}
 {{ $scr.Set "a" "b" }}
 {{ if true }}
@@ -185,7 +185,7 @@ Hugo 0.43 からは、[`newScratch`](https://gohugo.io/functions/scratch/#get-a-
 
 さきほど問題になっていたコードは、スクラッチによってこのように解決されます。
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ $scr := newScratch }}
 {{ $scr.Set "v" "init" }}
 {{ if true }}
@@ -204,7 +204,7 @@ Hugo 0.43 からは、[`newScratch`](https://gohugo.io/functions/scratch/#get-a-
 
 これは、`with A`や`range A`と書いたブロックの中での`.`は`A`や`A.`という意味に捉えられるからです。
 
-```go-html-template {linenos=false, hl_lines=[3]}
+```go hide_nums hl_lines=3
 {{ .Scratch.Set "v" "init" }}
 {{ with .Scratch.Get "v" }}
     {{ . }}
@@ -212,7 +212,7 @@ Hugo 0.43 からは、[`newScratch`](https://gohugo.io/functions/scratch/#get-a-
     -> init
 ```
 
-```go-html-template {linenos=false, hl_lines=[3]}
+```go hide_nums hl_lines=3
 {{ .Scratch.Set "v" "init" }}
 {{ with .Scratch.Get "v" }}
     {{ .Scratch.Set "v" "changed" }}
@@ -222,7 +222,7 @@ Hugo 0.43 からは、[`newScratch`](https://gohugo.io/functions/scratch/#get-a-
 
 先頭に`$`をつければこれが回避できます。
 
-```go-html-template {linenos=false, hl_lines=[3]}
+```go hide_nums hl_lines=3
 {{ .Scratch.Set "v" "init" }}
 {{ with .Scratch.Get "v" }}
     {{ $.Scratch.Set "v" "changed" }}

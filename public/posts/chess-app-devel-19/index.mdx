@@ -33,7 +33,7 @@ Python プログラムで動かすフェアリーチェスアプリ開発、連�
 
 そして確認の結果キャスリングすることを選択したかを示す変数を設定します。
 
-```py {name="main.py", hl_lines=["7-10"]}
+```py name=main.py hl_lines=7-10
 class Game:
     def __init__(self):
         ...
@@ -51,7 +51,7 @@ class Game:
 
 このときの条件を記述していきます。
 
-```py {name="main.py"}
+```py name=main.py
 class Game:
     ...
     def castle_or_not(self, piece, endpos):
@@ -85,7 +85,7 @@ class Game:
 
 次に、この判定をマウスクリック時に行わせ、
 
-```py {name="main.py"}
+```py name=main.py
 class Game:
     ...
     def mouse(self, button, state, x, y):
@@ -104,7 +104,7 @@ class Game:
 
 キャスリングを確認するときには、吹き出しとボタンで確認ダイアログを作成して表示します。
 
-```py {name="utils.py"}
+```py name=utils.py
 def draw_castling_confirmation(endpos):
     '''キャスリング確認ダイアログを表示する'''
     draw_balloon(*endpos)
@@ -116,7 +116,7 @@ def draw_castling_confirmation(endpos):
                 (1.0, 1.0, 1.0), (0.0, 0.0, 0.0))
 ```
 
-```py {name="main.py"}
+```py name=main.py
 class Game:
     ...
     def draw(self):
@@ -132,7 +132,7 @@ class Game:
 
 表示されたボタンをクリックすることで、キャスリングの意図があるかどうかが確認できます。
 
-```py {name="main.py", hl_lines=["10-22"]}
+```py name=main.py hl_lines=10-22
 class Game:
     ...
     def mouse(self, button, state, x, y):
@@ -170,7 +170,7 @@ class Game:
 
 コードでは、もとの位置にあった駒（＝ルーク）を削除して特定の位置に再配置しています。
 
-```py {name="main.py"}
+```py name=main.py
 def renew_gameboard(self, startpos, endpos, gameboard):
     '''
     盤面を更新する
@@ -227,7 +227,7 @@ def renew_gameboard(self, startpos, endpos, gameboard):
 
 これをもとに拡張して書き換えると、以下のようになります。
 
-```py {name="main.py"}
+```py name=main.py
 def renew_gameboard(self, startpos, endpos, gameboard):
     '''
     盤面を更新する

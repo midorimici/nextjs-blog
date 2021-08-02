@@ -29,7 +29,7 @@ Python プログラムで動かすフェアリーチェスアプリ開発、連�
 
 そのため、駒の名前を別個で定義する必要はありません。
 
-```py {name="pieces.py", hl_lines=["2-4", 7, "13-15", 18], ins=[1, 3, 5, 7], del=[0, 2, 4, 6], inline_hl=[0:["6-7"], 4:["8-9"]]}
+```py name=pieces.py ins=3,7,14,18 del=2,4,13,15 inline_hl=2:8-9;13:10-11
 class Piece:
     def __init__(self, color, name):
     def __init__(self, color):
@@ -59,7 +59,7 @@ class Pawn(Piece):
 
 定義されてはいるものの明らかに使われていないコードがあるので削除します。
 
-```py {name="pieces.py", hl_lines=["3-6", 8, 9, "14-17"], ins=[7], del=["0-6", "8-10"], inline_hl=[6:["10-13"]]}
+```py name=pieces.py ins=15 del=3-6,8-9,14,16-17 inline_hl=14:12-15
 class Piece:
     ...
     def is_valid(self, startpos, endpos, color, gameboard):
@@ -92,7 +92,7 @@ class Piece:
 
 また、`is_valid()`は他には１箇所にしか使われていないので、`available_moves()`で代用してしまいます。
 
-```py {name="main.py", hl_lines=[4, 5], ins=[1], del=[0]}
+```py name=main.py ins=5 del=4
 def can_see_king(self, kingpos, piecelist, gameboard):
     ...
     for piece, position in piecelist:
@@ -119,7 +119,7 @@ def can_see_king(self, kingpos, piecelist, gameboard):
 
 変数の名前は１文字にしてもよく、そのほうが簡単なので、これを変更します。
 
-```py {name="pieces.py", hl_lines=["1-4", "10-13"], ins=[1, 3, 5, 7], del=[0, 2, 4, 6], inline_hl=[0:[0], 1:[0], 2:[0], 3:[0], 4:[6], 5:[6], 6:[6], 7:[6]]}
+```py name=pieces.py ins=2,4,11,13 del=1,3,10,12 inline_hl=1:0;2:0;3:0;4:0;10:10;11:10;12:8;13:8
 WHITE = "W"
 W = "W"
 BLACK = "B"

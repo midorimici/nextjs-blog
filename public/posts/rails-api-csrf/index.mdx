@@ -65,7 +65,7 @@ API モードでなければこの工程は不要です。
 
 次に CSRF Token を生成して、レスポンスヘッダに設定します。
 
-```ruby {name="application_controller.rb"}
+```ruby name=application_controller.rb
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   ...
@@ -87,7 +87,7 @@ end
 
 また、クライアント側とドメインが異なる場合、クロスオリジンの検証を無効にする必要があります。
 
-```ruby {name="config/application.rb", hl_lines=[4]}
+```ruby name=config/application.rb hl_lines=4
 ...
   class Application < Rails::Application
     ...
@@ -100,7 +100,7 @@ end
 
 [`rack-cors`](https://github.com/cyu/rack-cors) の場合は次のようになります。
 
-```ruby {name="config/initializers/cors.rb", hl_lines=[8]}
+```ruby name=config/initializers/cors.rb hl_lines=8
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins 'http://localhost:3000', 'https://frontend.url'
@@ -121,7 +121,7 @@ POST リクエストなどをする前にヘッダに Rails 側から取得し�
 
 Axios の場合、
 
-```js {hl_lines=[4]}
+```js hl_lines=4
 ...
 .then(res =>
   ...
@@ -144,7 +144,7 @@ Cookie の SameSite 属性によっても CSRF 対策がなされています。
 
 SameSite を None にしたときには Secure を True にする必要があるので、設定は次のようになります。
 
-```ruby {name="config/initializers/session_store.rb", hl_lines=["4-5"]}
+```ruby name=config/initializers/session_store.rb hl_lines=4-5
 if Rails.env == 'production'
   Rails.application.config.session_store :cookie_store, key: '_api-key',
                                                         domain: 'backend.url',

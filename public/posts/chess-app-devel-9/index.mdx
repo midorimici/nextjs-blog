@@ -42,7 +42,7 @@ GLUT でアニメーションを実現するには、一定時間後に指定し
 
 アニメーション中であることを示す変数`self.moving`と、経過時間を表す変数`self.time`を追加します。
 
-```py:main.py {hl_lines=[2, 8, 9, 10, "14-22", 28, "33-38", "53-56"]}
+```py name=main.py hl_lines=2,8,9,10,14-22,28,33-38,53-56
 ...
 from time import sleep
 ...
@@ -240,7 +240,7 @@ draw_img(self.startpos[0] + ((self.endpos[0] - self.startpos[0]) / 2)
 
 これは<pstlk label="第６回" to="chess-app-devel-6" />で用意した`dark_squares_list`を使えば簡単にできます。
 
-```py:main.py {hl_lines=["4-9"]}
+```py name=main.py hl_lines=4-9
 def draw(self):
     ...
     if self.moving:
@@ -267,7 +267,7 @@ def draw(self):
 
 ついでですが、開始位置がわかりやすいようにマスに色付けをします。
 
-```py:main.py {hl_lines=["4-7"]}
+```py name=main.py hl_lines=4-7
 def draw(self):
     ...
     draw_squares()

@@ -43,7 +43,7 @@ promotion は英語で昇格という意味です。
 
 まずはプロモーションの条件を定義します。
 
-```py {name="main.py", hl_lines=[5, 19, "24-41"]}
+```py name=main.py hl_lines=5,19,24-41
 class Game:
     def __init__(self):
         ...
@@ -97,7 +97,7 @@ class Game:
 
 `glVertex()`で指定しているのはワールド座標であり、このプログラムでは縦横軸ともに -1.0 ～ 8.0 の値をとるように調整しています（<pstlk label="第６回" to=""chess-app-devel-6/#四角形の描画"" />）。
 
-```py {name="utils.py"}
+```py name=utils.py
 def draw_balloon(x, y):
     '''
     プロモーションのときの吹き出しを描画する
@@ -123,7 +123,7 @@ def draw_balloon(x, y):
 
 プロモーションできる状態にある、すなわちさきほど設定した変数`self.prom`が`True`となるときに、この吹き出しを描画させます。
 
-```py {name="main.py", hl_lines=["9-11"]}
+```py name=main.py hl_lines=9-11
 def draw(self):
     ...
     # 可能な移動先の表示
@@ -147,7 +147,7 @@ def draw(self):
 
 駒の描画は`draw_img()`を使えばできます（定義は<pstlk label="第７回" to=""chess-app-devel-7/#テクスチャの設定"" />にて）。
 
-```py {name="main.py", hl_lines=["6-12"]}
+```py name=main.py hl_lines=6-12
 def draw(self):
     ...
     # プロモーション
@@ -167,7 +167,7 @@ def draw(self):
 
 駒色の文字列を変更します。
 
-```py {name="pieces.py", hl_lines=["1-4"], ins=[1, 3], del=[0, 2], inline_hl=[0:["3-5"], 1:["3-5"], 2:["3-5"], 3:["3-5"]]}
+```py name=pieces.py ins=2,4 del=1,3 inline_hl=1:3;2:3;3:3;4:3
 WHITE = "white"
 WHITE = "W"
 BLACK = "black"
@@ -187,7 +187,7 @@ BLACK = "B"
 
 特定の範囲内をクリックしたときに`True`となるような関数を作ります。
 
-```py {name="utils.py"}
+```py name=utils.py
 def on_square(x, y, left, right, bottom, top):
     '''
     left < x < right かつ bottom < y < top のとき，True
@@ -215,7 +215,7 @@ def on_square(x, y, left, right, bottom, top):
 を生成してポーンと置き換えます。
 </p>
 
-```py {name="main.py", hl_lines=[7, "9-23"]}
+```py name=main.py hl_lines=7,9-23
 def mouse(self, button, state, x, y):
     ...
     self.mousepos = window2world(x, y, WSIZE)

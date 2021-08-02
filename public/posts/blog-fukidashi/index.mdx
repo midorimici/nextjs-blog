@@ -54,7 +54,7 @@ ontouchstart というのは、スマホなどのタッチデバイスで指が�
 
 SCSS で書いています。
 
-```scss {hl_lines=[2, 17, 28, 31, "36-38", 44]}
+```scss hl_lines=2,17,28,31,36-38,44
 .tooltip {
     position: relative;
     cursor: help;       // マウスカーソルを変更
@@ -132,7 +132,7 @@ SCSS で書いています。
 
 ショートコード名と同名のファイルを作成します。
 
-```go-html-template {name="/layouts/shortcodes/tooltip.html"}
+```html name=/layouts/shortcodes/tooltip.html
 {{- $inner := .Inner -}}
 {{- $split := split $inner `((` -}}
 {{- $tooltip_base := index $split 0 -}}
@@ -146,13 +146,13 @@ SCSS で書いています。
 
 `.Inner`には
 
-<code><span>{</span>{< shortcode_name >}}<span>{</span>{< /shortcode_name >}}</code>
+`{{< shortcode_name >}}{{< /shortcode_name >}}`
 
 で挟まれた部分が渡されます。
 
 <br/>
 
-例えば<code><span>{</span>{< tooltip >}}やっほー((`**太字**`だよ<span>{</span>{< /tooltip >}}</code>と書けば、
+例えば`{{< tooltip >}}やっほー((**太字**だよ{{< /tooltip >}}`と書けば、
 
 `.Inner`に`やっほー((**太字**だよ`が変数`$inner`に渡されます。
 
@@ -168,7 +168,7 @@ SCSS で書いています。
 
 今回は`((`で前後を分けていますが、より複雑な分け方をしたい場合は正規表現を使うとよいでしょう。
 
-```go-html-template {name="tooltip.html"}
+```html name=tooltip.html
 ...
 {{- $pattern := `^(.+)\\(\\((.+)$` -}}
 {{- $tooltip_base := replaceRE $pattern `$1` $inner -}}

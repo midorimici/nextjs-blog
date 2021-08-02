@@ -42,7 +42,7 @@ Node.js をインストールした後は、次のコマンドをコマンドラ
 
 カレントディレクトリ（今いるディレクトリ）直下に新たなディレクトリ（`my-react-app`）が作られます。
 
-```txt {linenos=false}
+```bash hide_nums
 npx create-react-app my-react-app
 ```
 
@@ -64,7 +64,7 @@ React は **JavaScript で HTML を書いてしまおう**という発想のラ�
 
 `/public/index.html`と`/src/index.js`というのがあります。
 
-```html {name="/public/index.html", hl_lines=[4], id=0}
+```html name=/public/index.html hl_lines=4
 ...
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -87,7 +87,7 @@ React は **JavaScript で HTML を書いてしまおう**という発想のラ�
 
 中身を JavaScript で生成して、`<div id="root"></div>`の中に入れ込むことになります。
 
-```jsx {name="/src/index.js", hl_lines=["7-12"], id=1}
+```jsx name=/src/index.js hl_lines=7-12
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -115,7 +115,7 @@ serviceWorker.unregister();
 
 このファイルの基本構造は次のようになります。
 
-```jsx {name="/src/App.js", id=2}
+```jsx name=/src/App.js
 import React, { Component } from 'react';
 import './App.css';
 
@@ -142,7 +142,7 @@ export default class App extends Component {
 
 その中からランダムで答えを取り出します。
 
-```jsx {name="/src/App.js", hl_lines=[4, 5], id=3}
+```jsx name=/src/App.js hl_lines=4,5
 import React, { Component } from 'react';
 import './App.css';
 
@@ -156,7 +156,7 @@ let answer = answers[Math.floor(Math.random()*answers.length)];
 
 対して props は、関数の引数のように、外部から定義できる変数ですが、今回は使いません。
 
-```jsx {name="/src/App.js", hl_lines=["9-17"], id=4}
+```jsx name=/src/App.js hl_lines=9-17
 import React, { Component } from 'react';
 import './App.css';
 
@@ -186,7 +186,7 @@ export default class App extends Component {
 
 次に出力する HTML となる部分を書きます。
 
-```jsx {name="/src/App.js", hl_lines=["3-14"], id=5}
+```jsx name=/src/App.js hl_lines=3-14
 ...
 render() {
   const { ans, display, correct } = this.state;
@@ -217,7 +217,7 @@ state を使うときには３行目のようにデータを受け取る必要�
 
 `onInput`メソッドで、アルファベットボタンが押されたときにどのアルファベットが選択されたのかのデータを取得します。
 
-```jsx {name="/src/App.js", id=6}
+```jsx name=/src/App.js
 onInput = e => {
   this.setState({
     inputted: e.target.name
@@ -235,7 +235,7 @@ onInput = e => {
 
 これは「回答」ボタンを押したときに動作します。
 
-```jsx {name="/src/App.js", id=7}
+```jsx name=/src/App.js
 check = () => {
   const { ans, display, inputted } = this.state;
   let displayTmp = display;
@@ -279,7 +279,7 @@ check = () => {
 
 別の問題を出題しますが、同じ問題は２度と出ないようにします。
 
-```jsx {name="/src/App.js", id=8}
+```jsx name=/src/App.js
 reset = shown => {
   // 答えのリストからすでに出題した答えを除く
   answers = answers.filter(n => n !== shown);
@@ -316,7 +316,8 @@ reset = shown => {
 
 <details>
 <summary>App.js のソースコード全文</summary><br/>
-```jsx {name="/src/App.js", id=9}
+
+```jsx name=/src/App.js
 import React, { Component } from 'react';
 import './App.css';
 

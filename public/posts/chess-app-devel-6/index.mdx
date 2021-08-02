@@ -39,7 +39,7 @@ Windows と Python で OpenGL をインストールする方法はこちらが�
 
 ちなみに`glut32.dll`を取り除くとこんなエラーが出ました。
 
-```
+```txt hide_nums
 OpenGL.error.NullFunctionError: Attempt to call an undefined function glutInit, check for bool(glutInit) before calling
 ```
 
@@ -71,7 +71,7 @@ PyOpenGL を[公式サイト](http://pyopengl.sourceforge.net/#installation)か�
 
 描いた絵を表示する領域を作ります。
 
-```py:main.py {hl_lines=[16], del=[0], id=0}
+```py name=main.py del=16
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 　
@@ -123,7 +123,7 @@ class Game():
 
 とりあえず、新しいファイルを作り、四角形を描画する関数を定義します。
 
-```py:utils.py
+```py name=utils.py
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 　
@@ -157,7 +157,7 @@ def square(x, y):
 
 とりあえず、これを使って四角形を表示してみましょう。
 
-```py:main.py {hl_lines=["11-13"]}
+```py name=main.py hl_lines=11-13
 from utils import *
 　
 ...
@@ -187,7 +187,7 @@ class Game():
 
 [`glOrtho()`](http://wisdom.sakura.ne.jp/system/opengl/gl12.html)を用いてこの範囲を指定することができます。
 
-```py:main.py {hl_lines=[3]}
+```py name=main.py hl_lines=3
 def glmain(self):
     ...
     glOrtho(-1.0, 8.0, -1.0, 8.0, -4, 4)
@@ -208,7 +208,7 @@ def glmain(self):
 
 暗い色のマスの位置を示すリストを利用することにします。
 
-```py:utils.py
+```py name=utils.py
 dark_squares_list = ([(i, j) for i in range(0, 8, 2) for j in range(0, 8, 2)]
     + [(i, j) for i in range(1, 8, 2) for j in range(1, 8, 2)])
 　
@@ -230,7 +230,7 @@ def draw_squares():
 
 さきほど`draw()`の中で四角形を描画していた部分を`draw_squares()`に書き換えれば、盤面が表示されます。
 
-```py:main.py {hl_lines=[7]}
+```py name=main.py hl_lines=7
 class Game():
     ...
     def draw(self):
@@ -257,7 +257,7 @@ OpenGL 単体はあまり文字描画に強くない印象ですが、それで�
 
 まずは文字列を描画する関数を定義します。
 
-```py:utils.py
+```py name=utils.py
 def draw_str(x, y, string, font=GLUT_BITMAP_HELVETICA_18, gap=0.25):
     '''
     文字列を描画する
@@ -291,7 +291,7 @@ def draw_str(x, y, string, font=GLUT_BITMAP_HELVETICA_18, gap=0.25):
 
 次にファイルとランクの文字を描画する関数です。
 
-```py:utils.py
+```py name=utils.py
 def draw_file():
     '''ファイルの文字を描画する'''
     glColor(1.0, 1.0, 1.0)
@@ -307,7 +307,7 @@ def draw_rank():
 
 `chr()`は文字の番号をもとに文字に変換するもので、
 
-```py {linenos=false}
+```py hide_nums
 >>> chr(97) == 'a'
 True
 ```
@@ -316,7 +316,7 @@ True
 
 これを`draw()`の中に書き加えていけばOKです。
 
-```py:main.py {hl_lines=[8, 9]}
+```py name=main.py hl_lines=8-9
 class Game():
     ...
     def draw(self):

@@ -7,11 +7,8 @@ tags: [サイト構築, Hugo]
 draft: false
 ---
 
-
-<p>
 <tltp label="Hugo">本ブログで使用している静的サイトジェネレータ<br/>[公式サイト](https://gohugo.io)</tltp>
-のテンプレート文にたびたび出現する<code>print</code>関数と<code>printf</code>関数について、
-</p>
+のテンプレート文にたびたび出現する<icode>print</icode>関数と<icode>printf</icode>関数について、
 
 その使い方を詳しく解説していきます。
 
@@ -25,13 +22,13 @@ draft: false
 
 次のように書きます。
 
-```go-html-template {linenos=false}
+```go hide_nums
 print (入力)
 ```
 
 以下は使用例です。
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ print `foo` }}           -> foo
 {{ print `foo` `bar` }}     -> foobar
 {{ print (slice 1 2 3) }}   -> [1 2 3]
@@ -40,7 +37,7 @@ print (入力)
 
 変数を使うこともできます。
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ $x := `foo` }}
 {{ print $x }}
 
@@ -57,7 +54,7 @@ print (入力)
 
 基本的には変数に代入することで使いまわしをすることが多いです。
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ $dirname := `static` }}
 {{ $filename := `image` }}
 {{ $extention := `jpg` }}
@@ -80,7 +77,7 @@ print (入力)
 
 書き方は次の通り。
 
-```go-html-template {linenos=false}
+```go hide_nums
 printf (フォーマット) (入力)
 ```
 
@@ -90,7 +87,7 @@ printf (フォーマット) (入力)
 
 例えば次のように書きます。
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ printf `My favorite color is %s.` `green` }}
 
 -> My favorite color is green.
@@ -100,7 +97,7 @@ printf (フォーマット) (入力)
 
 こんな書き方をするのはまれで、だいたい第２引数以降は変数が来ます。
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ $day_word := `Today` }}
 {{ $year := 2020 }}
 {{ $month := 5 }}
@@ -120,7 +117,7 @@ printf (フォーマット) (入力)
 
 `printf`関数を使えば、さきほどの例もより簡潔に表すことができます。
 
-```go-html-template {linenos=false}
+```go hide_nums
 {{ $dirname := `static` }}
 {{ $filename := `image` }}
 {{ $extention := `jpg` }}

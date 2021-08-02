@@ -21,7 +21,11 @@ Python プログラムで動かすフェアリーチェスアプリ開発、連�
 今回は、ポーンの最初の動きを付け加えてみましょう。
 
 本来ポーンは、最初の動きだけは2歩まで進むことができます。
-<!--more--><br/>
+
+<!--more-->
+
+<br/>
+
 ## 駒に関するクラス
 
 まず、`Pawn`<tltp label="クラス">オブジェクトの型、設計図のようなもの</tltp>
@@ -44,7 +48,7 @@ Python プログラムで動かすフェアリーチェスアプリ開発、連�
 
 それでは、`Pawn`の中身を見ていきましょう。（下は原文ママ）
 
-```py:pieces.py
+```py name=pieces.py
 class Pawn(Piece):
     def __init__(self,color,name,direction):
         self.name = name
@@ -103,7 +107,7 @@ class Pawn(Piece):
 
 以下のコードは原文を少し整形しています。
 
-```py:pieces.py
+```py name=pieces.py
 def availableMoves(self, x, y, gameboard, Color=None):
     if Color is None:
         Color = self.Color
@@ -143,7 +147,7 @@ def availableMoves(self, x, y, gameboard, Color=None):
 
 `noConflict()`は`Piece`クラスで定義されていて、中身はこんな感じです。
 
-```py:pieces.py
+```py name=pieces.py
 def noConflict(self, gameboard, initialColor, x, y):
     if (self.isInBounds(x, y)
             and ((x, y) not in gameboard
@@ -182,7 +186,7 @@ def noConflict(self, gameboard, initialColor, x, y):
 
 まずは、駒がないマスならば前２歩まで進めることを表現してみましょう。
 
-```py:pieces.py {hl_lines=["13-15"]}
+```py name=pieces.py hl_lines=13-15
 def availableMoves(self, x, y, gameboard, Color=None):
     if Color is None:
         Color = self.Color
@@ -217,7 +221,7 @@ def availableMoves(self, x, y, gameboard, Color=None):
 
 この位置情報を条件として付与すればよさそうです。
 
-```py:pieces.py {hl_lines=["13-14"]}
+```py name=pieces.py hl_lines=13-14
 def availableMoves(self, x, y, gameboard, Color=None):
     if Color is None:
         Color = self.Color

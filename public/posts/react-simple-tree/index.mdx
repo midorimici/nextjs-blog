@@ -27,7 +27,7 @@ Figma だとこんな感じに表示されますが、こういうのを React �
 
 例えば、
 
-```
+```txt hide_nums
 a - b - c
   - d - e
       - f
@@ -37,7 +37,7 @@ h - i
 
 という構造は
 
-```js {linenos=false}
+```js hide_nums
 [['a', -1, 0], ['b', 0, 1], ['c', 1, 2],
     ['d', 0, 1], ['e', 3, 2],
         ['f', 3, 2],
@@ -85,7 +85,7 @@ export default () => {
 
 レイヤーが選択されていればその子として、選択されていなければ最上階層として追加します。
 
-```jsx {hl_lines=["2-3", "8-15"]}
+```jsx hl_lines=2-3,8-15
   ...
   const [layers, setLayers] = useState<[string, number, number][]>([]);
   const [selectedLayer, setSelectedLayer] = useState(-1);
@@ -105,7 +105,7 @@ export default () => {
   ...
 ```
 
-`layers` は<pstlk label="上" to=""react-simple-tree#レイヤーのデータ構造"" />で説明した通りの構造になっています。
+`layers` は<pstlk label="上" to="react-simple-tree#レイヤーのデータ構造" />で説明した通りの構造になっています。
 
 `selectedLayer` は現在選択されているレイヤーの、`layers` 内でのインデックスです。
 
@@ -129,7 +129,7 @@ export default () => {
 
 `layers` のそれぞれの要素をリストとして並べて描画します。
 
-```jsx {hl_lines=["2-42", "48-52"]}
+```jsx hl_lines=2-42,48-52
   ...
   const nextSameDepthLayerIndex = (current: number) =>
     layers.flatMap((e, i) =>
@@ -244,7 +244,7 @@ React では配列 state の要素の変更は state の変更だと認識され
 
 畳んだり開いたりするたびに `layers` を更新するのは大変なので `layers` とは別 state で管理します。
 
-```jsx {hl_lines=[2, "6-16", "25-27", "29-40", 61]}
+```jsx hl_lines=2,6-16,25-27,29-40,61
   ...
   const [folded, setFolded] = useState<boolean[]>([]);
 

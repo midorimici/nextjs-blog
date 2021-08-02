@@ -55,7 +55,7 @@ en + passer の現在分詞なのでおそらくジェロンディフという�
 
 条件式に使うために、相手のポーンが２歩進んだ直後にのみその座標を表す変数を設定します。
 
-```py:main.py {hl_lines=[4, "11-16"]}
+```py name=main.py hl_lines=4,11-16
 class Game:
     def __init__(self):
         ...
@@ -92,7 +92,7 @@ class Game:
 
 <postimage src="position" ext="png" alt="位置関係" />
 
-```py:main.py
+```py name=main.py
 def en_passant_requirements(self, piece, startpos, endpos):
     '''
     アンパッサンの条件を満たすとき True を返す
@@ -130,7 +130,7 @@ def en_passant_requirements(self, piece, startpos, endpos):
 
 これは移動可能なマスのリストを出力するメソッド`valid_moves()`を編集します。
 
-```py:main.py {hl_lines=["4-7"]}
+```py name=main.py hl_lines=4-7
 def valid_moves(self, piece, startpos, gameboard):
     ...
     result = piece.available_moves(*startpos, gameboard, color=piece.color)
@@ -160,7 +160,7 @@ def valid_moves(self, piece, startpos, gameboard):
 
 </p>
 
-```py:main.py {hl_lines=[3, 11, 14, 31, "34-43"]}
+```py name=main.py hl_lines=3,11,14,31,34-43
 def __init__(self):
     ...
     self.en_passant = False

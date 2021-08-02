@@ -31,7 +31,7 @@ pygame について役に立つ日本語のサイトがあります。
 
 まずは pygame をインストールします。
 
-```bash
+```bash hide_nums
 $ pip install pygame
 ```
 
@@ -41,7 +41,7 @@ $ pip install pygame
 
 ウィンドウを表示するコードは以下のようになります。
 
-```py {name="main.py"}
+```py name=main.py
 import sys
 
 import pygame
@@ -76,7 +76,7 @@ if __name__ == '__main__': main()
 
 コマンドライン引数を受け付けて表示変更できるようにすると、このようになります。
 
-```py {name="main.py", hl_lines=["4-6"], inline_hl=[2:[12]]}
+```py name=main.py hl_lines=4-6
 ...
 def main():
     pygame.init()
@@ -96,7 +96,7 @@ def main():
 
 いろいろ描くので、ひとつの関数にまとめて別のモジュールに置きます。
 
-```py {name="draw.py"}
+```py name=draw.py
 import pygame
 from pygame.locals import *
 
@@ -104,7 +104,7 @@ def setup():
     pass
 ```
 
-```py {name="main.py", hl_lines=[2, 8]}
+```py name=main.py hl_lines=2,8
 ...
 import draw
 ...
@@ -128,7 +128,7 @@ pygame ではテキストに日本語フォントを使うこともできます�
 
 `blit`メソッドで位置を指定します。
 
-```py {name="main.py", hl_lines=[4, 8]}
+```py name=main.py hl_lines=4,8
 ...
 def main():
     ...
@@ -140,7 +140,7 @@ def main():
         ...
 ```
 
-```py {name="draw.py"}
+```py name=draw.py
 ...
 def setup(screen, font, turn):
     '''

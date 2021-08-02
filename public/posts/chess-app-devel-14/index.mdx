@@ -41,7 +41,7 @@ Python プログラムで動かすフェアリーチェスアプリ開発、連�
 
 例えば、ナイトとルークはこのようになっています。
 
-```py {name="pieces.py"}
+```py name=pieces.py
 class Knight(Piece):
     abbr = 'N'
 
@@ -64,7 +64,7 @@ class Rook(Piece):
 
 これを少しいじってみましょう。
 
-```py {name="pieces.py", hl_lines=[5, 12], inline_hl=[0:[19], 1:["15-27"]]}
+```py name=pieces.py hl_lines=5,12 inline_hl=5:25;12:17-32
 class Knight(Piece):
     abbr = 'N'
 
@@ -125,7 +125,7 @@ class Rook(Piece):
 
 他の駒<tltp label="クラス">オブジェクトの型、設計図のようなもの</tltp>定義にならって、ユニコーンクラスを定義します。
 
-```py {name="pieces.py"}
+```py name=pieces.py
 class Unicorn(Piece):
     abbr = 'Un'
 
@@ -137,7 +137,7 @@ class Unicorn(Piece):
 
 ところで、それぞれの中身は次のようになっています。
 
-```py {name="pieces.py"}
+```py name=pieces.py
 class Piece:
     ...
     def rider(self, x, y, gameboard, color, intervals):
@@ -211,7 +211,7 @@ def leaper(x, y, int1, int2):
 
 盤面に駒を置いているのは、`main.py`の`place_pieces`メソッドです。
 
-```py {name="main.py"}
+```py name=main.py
 class Game:
     ...
     def place_pieces(self):
@@ -232,7 +232,7 @@ class Game:
 
 とりあえず、次の行を追加します。
 
-```py {name="main.py", hl_lines=[14]}
+```py name=main.py hl_lines=14
 class Game:
     ...
     def place_pieces(self):
@@ -263,7 +263,7 @@ class Game:
 
 それと、画像と ID の紐づけもしておきます。
 
-```py {name="pieces.py", hl_lines=[1], inline_hl=[0:["14-15"]]}
+```py name=pieces.py hl_lines=1 inline_hl=1:15-16
 piece_names = [Knight, Rook, Bishop, Queen, King, Pawn, Unicorn]
 
 # 画像IDの割り当て
@@ -287,7 +287,7 @@ for i, piece in enumerate(piece_names):
 
 その場合は次のように書きます。
 
-```py {name="main.py", hl_lines=[8], inline_hl=[0:[15]]}
+```py name=main.py hl_lines=8 inline_hl=8:15-16
 class Game:
     ...
     def place_pieces(self):

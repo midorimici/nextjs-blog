@@ -48,7 +48,7 @@ castling と書き、キングの入城という意味です。
 
 各方向へのキャスリングが可能かどうかを表す変数を定義します。
 
-```py {name="main.py", hl_lines=["4-6", "14-37"]}
+```py name=main.py hl_lines=4-6,14-37
 class Game:
     def __init__(self):
         ...
@@ -97,7 +97,7 @@ class Game:
 を作ります。
 </p>
 
-```py {name="main.py"}
+```py name=main.py
 class Game:
     ...
     def castling_requirements(self, piece, endpos, side, gameboard):
@@ -182,7 +182,7 @@ class Game:
 
 `castling_requirements()`メソッドの内部でしか使わないので、内部で関数を定義しています。
 
-```py {name="main.py", hl_lines=["3-45", 60, 61, 69, 70, 84, 85, 93, 94]}
+```py name=main.py hl_lines=3-45,60,61,69,70,84,85,93,94
 def castling_requirements(self, piece, endpos, side, gameboard):
     ...
     def create_tmp_board(startpos_y, endpos):
@@ -290,7 +290,7 @@ def castling_requirements(self, piece, endpos, side, gameboard):
 
 動ける位置を出力している`valid_moves()`メソッドを書き換えます。
 
-```py {name="main.py"}
+```py name=main.py
 def valid_moves(self, piece, startpos, gameboard):
     ...
     # キャスリング
@@ -316,7 +316,7 @@ def valid_moves(self, piece, startpos, gameboard):
 
 盤面の更新の処理が定義されている`renew_gameboard()`メソッドを書き換えます。
 
-```py {name="main.py"}
+```py name=main.py
 def renew_gameboard(self, startpos, endpos, gameboard):
     ...
     # キャスリング

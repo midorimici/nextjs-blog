@@ -26,7 +26,7 @@ draft: false
 
 ブラウザが対応していれば、
 
-```html {linenos=false}
+```html hide_nums
 <img src="example.webp">
 ```
 
@@ -51,7 +51,7 @@ draft: false
 
 この`img`タグは、普通の`img`タグと同様に属性を付加できます。
 
-```html {hl_lines=[3], inline_hl=[1:["2-4"_"8-13"]]}
+```html hl_lines=3 inline_hl=3:4-8,16-26
 <picture>
     <source type="image/webp" srcset="example.png.webp">
     <img class="example-img" src="example.png" alt="example" title="これは例です">
@@ -76,7 +76,7 @@ draft: false
 
 例えば、コードは次のようになります。
 
-```go-html-template {name="img.html", id=2}
+```html name=img.html
 {{ $name := .Get "src" }}
 {{ $extention := .Get "ext" | default "jpg" }}
 {{ $alt := .Get "alt" }}
@@ -101,8 +101,9 @@ draft: false
 
 例えば、`/posts/example/index.md`内で
 
-<div class="highlight" style="position: relative;"><pre class="chroma"><code class="language-go-html-template" data-lang="go-html-template"><span>{</span>{<span class="p">&lt;</span> <span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">example</span> <span class="na">ext</span><span class="o">=</span><span class="s">png</span> <span class="na">alt</span><span class="o">=</span><span class="s">例</span> <span class="na">width</span><span class="o">=</span><span class="s">300</span> <span class="p"></span><span class="p">&gt;</span>}}
-</code><button class="copy-button" type="button">Copy</button></pre></div>
+```go hide_nums
+{{< img src=example ext=png alt=例 width=300 >}}
+```
 
 と書けば、
 

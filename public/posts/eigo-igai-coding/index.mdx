@@ -89,55 +89,7 @@ prime_factorize(int(num), 2)
 
 私にとって一番馴染み深い日本語から。
 
-```txt {lang="ja, 0"}
-'これは素因数分解を実行するプログラムです。'
-　
-　
-数学 から 天井関数, 平方根 を読み込む
-　
-　
-関数 素数である(イ) を定義する。
-    'イが素数かどうか判定する'
-    もし イ == 2 ならば、 真 を返す
-    もし イ % 2 == 0 ならば、 偽 を返す
-    範囲(3, 天井関数(平方根(イ))) + 1, 2) の中にある それぞれの ロ について、
-        もし イ % ロ == 0 ならば、
-            偽 を返す
-    真 を返す
-　
-　
-関数 素数集(イ, 始め) を定義する。
-    '始めからイまでの素数'
-    範囲(始め, イ + 1) の中にある それぞれの ロ について、
-        もし 素数である(ロ) ならば、
-            ロ を生成する
-　
-　
-関数 素因数分解する(イ, 始め) を定義する。
-    '素因数分解を実行する'
-    イ % 2 == 0 かつ イ != 2 である間、
-        表示する('2 *' , 文末=' ')
-        イ //= 2
-    素数集(天井関数(平方根(イ)), 始め) の中にある それぞれの ロ について、
-        もし イ % ロ == 0 ならば、
-            表示する(f'{ロ} *', 文末=' ')
-            素因数分解する(整数(イ // ロ), ロ)
-            脱出する
-    もし 素数である(イ) ならば、
-        表示する(整数(イ))
-　
-　
-真 である間、
-    数 = 入力する('１より大きい整数を入力してください。\n')
-    もし 数.数字である() かつ 整数(数) > 1 ならば、
-        脱出する
-    それ以外ならば、
-        表示する('無効な入力です。もう一度試してください。')
-　
-　
-表示する('=')
-素因数分解する(整数(数), 2)
-```
+<postimage src="ja" alt="ja" />
 
 なるほど、日本語は後置修飾型の言語だということを再認識しました。
 
@@ -159,55 +111,7 @@ prime_factorize(int(num), 2)
 
 文法とか間違ってたらごめんなさい🙏
 
-```txt {lang="fr, 1"}
-« C'est un programme qui exécute factorisation en nombres premiers. »
-　
-　
-de math importer plafond, rccr
-　
-　
-déf être_premier(n):
-    « juger si n est un nombre premier »
-    si n == 2: retourner Vrai
-    si n % 2 == 0: retourner Faux
-    pour i dans portée(3, plafond(rccr(n)) + 1, 2):
-        si n % i == 0:
-            retourner Faux
-    retourner Vrai
-　
-　
-déf premiers(n, début):
-    « premiers de début à n »
-    pour i dans portée(début, n + 1):
-        si être_premier(i):
-            produire i
-　
-　
-déf factoriser_en_premiers(n, début):
-    « exécuter factorisation en nombres premiers »
-    pendant n % 2 == 0 et n != 2:
-        imprimer(«2 *» , fin=« »)
-        n //= 2
-    pour i en premiers(plafond(rccr(n)), début):
-        si n % i == 0:
-            imprimer(f«{i} *», fin=« »)
-            factoriser_en_premiers(entier(n // i), i)
-            sortir
-    si être_premier(n):
-        imprimer(entier(n))
-　
-　
-pendant Vrai:
-    nomb = introduire(«Introduisez un entier plus grand qu'un.\n»)
-    si nomb.estchiffre() et entier(nomb) > 1:
-        sortir
-    sinon:
-        imprimer(«C'est entrée non valide. Essayez encore.»)
-　
-　
-imprimer(«=»)
-factoriser_en_premiers(entier(nomb), 2)
-```
+<postimage src="fr" alt="fr" />
 
 `rccr`は racine carrée （平方根）、`déf`は définir を略したものです。
 
@@ -227,55 +131,7 @@ ne と pas で挟まれた部分が否定されるので、括弧いらずです
 
 その後も学術用語として広く用いられてきたラテン語です。
 
-```txt {lang="la, 2"}
-'Hic programma quī execūtat factorizatiōnem numerum prīmum.'
-　
-　
-dē mathēmatica importā tēctum, rdqd
-　
-　
-dēf prīmus_est(n):
-    'utrum n prīmus necne iūdicō'
-    sī n == 2: redde Vērus
-    sī n % 2 == 0: redde Falsus
-    per i in spatium(3, tēctum(rdqd(n)) + 1, 2):
-        sī n % i == 0:
-            redde Falsus
-    redde Vērus
-　
-　
-dēf prīmī(n, initium):
-    'prīmī ab initium ad n'
-    per i in spatium(initium, n + 1):
-        sī prīmus_est(i):
-            dā i
-　
-　
-dēf prīmum_factorit(n, initium):
-    'factorizatiōnem numerum prīmum execūtō'
-    dum n % 2 == 0 et n != 2:
-        imprime('2 *' , finis=' ')
-        n //= 2
-    per i in prīmī(tēctum(rdqd(n)), initium):
-        sī n % i == 0:
-            imprime(f'{i} *', finis=' ')
-            prīmum_factorit(int(n // i), i)
-            trānsī
-    sī prīmus_est(n):
-        imprime(int(n))
-　
-　
-dum Vērus:
-    num = scrīptum('Scrībe numerum integerum maior quam I.\n')
-    sī num.numerusest() et int(num) > 1:
-        trānsī
-    alius:
-        imprime('Istud scrīptum invalidus est. Cōnāre iterum.')
-　
-　
-imprime('=')
-prīmum_factorit(int(num), 2)
-```
+<postimage src="la" alt="la" />
 
 格変化、合ってるかなあ…笑
 
@@ -283,55 +139,7 @@ prīmum_factorit(int(num), 2)
 
 せっかくなので、もうちょっとクラシックにしてみますか。
 
-```txt {lang="LA, 3"}
-'HIC PROGRAMMA QVI EXECVTAT FACTORIZATIONEM NVMERVM PRIMVM'
-　
-　
-DE MATHEMATICA IMPORTA TECTVM, RDPD
-　
-　
-DEF PRIMVS_EST(N):
-    'VTRVM N PRIMVS NECNE IVDICO'
-    SI N == II: REDDE VERVS
-    SI N % II == NIHIL: REDDE FALSVS
-    PER P IN SPATIVM(III, TECTVM(RDPD(N)) + I, II):
-        SI N % P == NIHIL:
-            REDDE FALSVS
-    REDDE VERVS
-　
-　
-DEF PRIMI(N, INITIVM):
-    'PRIMI AB INITIVM AD N'
-    PER P IN SPATIVM(INITIVM, N + I):
-        SI PRIMVS_EST(P):
-            DA P
-　
-　
-DEF PRIMVM_FACTORIT(N, INITIVM):
-    'FACTORIZATIONEM NUMERVM PRIMVM EXECVTO'
-    DVM N % II == NIHIL ET N != II:
-        IMPRIME('II *' , FINIS=' ')
-        N //= II
-    PER P IN PRIMI(TECTVM(RDPD(N)), INITIVM):
-        SI N % P == NIHIL:
-            IMPRIME(F'{P} *', FINIS=' ')
-            PRIMVM_FACTORIT(INT(N // P), P)
-            TRANSI
-    SI PRIMVS_EST(N):
-        IMPRIME(INT(N))
-　
-　
-DVM VERVS:
-    NVM = SCRIPTVM('SCRIBE NVMERVM INTEGERVM MAIOR QVAM I\N')
-    SI NVM.NVMERVSEST() ET INT(NVM) > I:
-        TRANSI
-    ALIVS:
-        IMPRIME('ISTVD SCRIPTVM INVALIDVS EST CONARE ITERVM')
-　
-　
-IMPRIME('=')
-PRIMVM_FACTORIT(INT(NVM), II)
-```
+<postimage src="cl" alt="classical la" />
 
 もともとは単語の分かち書きもしないのですが、それだとプログラムが動かなくなりそうだし、すでに十分暗号です。笑
 

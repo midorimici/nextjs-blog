@@ -29,7 +29,7 @@ Python プログラムで動かすフェアリーチェスアプリ開発、連�
 
 これは<pstlk label="第15回" to=""chess-app-devel-15/#ゲームを定義する"" />ですでに完了しています。
 
-```py {name="games.py", hl_lines=[7, 8]}
+```py name=games.py hl_lines=7-8
 class Normal:
     '''通常のチェス'''
     # 盤面のサイズ
@@ -60,7 +60,7 @@ class Normal:
 
 現在プロモーション選択肢の表示部分のコードは次のようになっています。
 
-```py {name="main.py", hl_lines=["12-15"]}
+```py name=main.py hl_lines=12-15
 ...
 class Game:
     ...
@@ -86,7 +86,7 @@ class Game:
 
 表示幅は 4 列までとして行を増やしていく形で描画します。
 
-```py {name="main.py", hl_lines=["6-14"], ins=["4-8"], del=["0-3"]}
+```py name=main.py ins=10-14 del=6-9
 # プロモーション
 if self.prom:
     draw_balloon(*self.endpos)
@@ -110,7 +110,7 @@ if self.prom:
 
 吹き出しは`draw_balloon`関数が描画していますので、そちらの中身を書き換えます。
 
-```py {name="utils.py", hl_lines=["1-2", "10-11", "15-22"], ins=["1-3", "8-11"], del=[0, "4-7"], inline_hl=[1:["6-9"], 6:["2-4"], 7:["2-4"], 8:["5-15"], 9:["5-15"], 10:["2-23"], 11:["2-23"]]}
+```py name=utils.py ins=2,10-11,19-22 del=1,15-18 inline_hl=2:8-11;19:6-24;20:6-24;21:2-13,18-36;22:2-13,18-36
 def draw_balloon(x, y):
 def draw_balloon(x, y, num=4):
     '''
@@ -155,7 +155,7 @@ def draw_balloon(x, y, num=4):
 
 吹き出し描画部分のコードも変更します。
 
-```py {name="main.py", hl_lines=["3-4"], ins=[1], del=[0], inline_hl=[1:["6-16"]]}
+```py name=main.py ins=4 del=3 inline_hl=4:6-16
 # プロモーション
 if self.prom:
     draw_balloon(*self.endpos)
@@ -186,7 +186,7 @@ if self.prom:
 
 マウスクリックでこの選択肢の中から駒を選択するわけですが、今のコードは次のようになっています。
 
-```py {name="main.py", hl_lines=["12-23"]}
+```py name=main.py hl_lines=12-23
 ...
 class Game:
     ...
@@ -215,7 +215,7 @@ class Game:
 
 座標も駒も固定になっていますので、これを変更します。
 
-```py {name="main.py", hl_lines=["4-11"]}
+```py name=main.py hl_lines=4-11
 # プロモーション
 if self.prom:
     piece_color = self.gameboard[self.endpos].color

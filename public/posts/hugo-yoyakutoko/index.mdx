@@ -74,7 +74,7 @@ Netlify にアクセスして、`Settings > Build & deploy > Build hooks > Add b
 
 これがワークフローを定義するファイルとなります。
 
-```yml {name="/.github/workflows/schedule.yml"}
+```yml name=/.github/workflows/schedule.yml
 # 任意の名前
 name: scheduler
 　
@@ -115,7 +115,7 @@ cron の指定は`(分[0-59]) (時[0-23]) (日[1-31]) (月[1-12]) (曜日[0-7])`
 
 一度 push しておきましょう。
 
-```
+```bash hide_nums
 git add .
 git commit -m "github actions: add workflow, scheduler"
 git push origin master
@@ -149,7 +149,7 @@ Netlify はデプロイをしてくれます。
 
 <p>
 <tltp label="フロントマター">マークダウンファイルの先頭の、その記事に関する情報を書く部分</tltp>
-の<strong><code>date</code>の日付を投稿したい日時に合わせます。
+の<strong><icode>date</icode>の日付を投稿したい日時に合わせます。
 </strong></p>
 
 こうするとその日時になるまではいくら push しようがデプロイしようが、その日時がまだ存在しないので、
@@ -176,7 +176,7 @@ Hugo には[`now`](https://gohugo.io/functions/now/)という、地域の時間�
 
 これを利用して、例えば時間帯によって条件分岐して表示させるものを変えることができます。
 
-```go-html-template
+```go
 {{- /* 朝（06:00-11:59）のとき */ -}}
 {{- if in (seq 6 11) (int (now.Format "15")) -}}
     おはよう！
@@ -207,7 +207,7 @@ cron: '0 6-18/6 * * *'
 <details>
 <summary>たぶんこんな感じになるかと思います。</summary><br/>次のコードを必ず通る場所に置きます。
 
-```go-html-template
+```go
 {{ range .Site.RegularPages }}
     {{ if .PublishDate.Before now }}
         {{ .Scratch.Add "existing_pages" (slice .) }}

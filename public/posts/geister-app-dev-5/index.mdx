@@ -27,7 +27,7 @@ Python でつくるガイスター、連載第 5 回です。
 
 まずは行先を表す円を描画します。
 
-```py {name="draw.py"}
+```py name=draw.py
 ...
 def dest(screen, pos, board):
     '''
@@ -55,7 +55,7 @@ def dest(screen, pos, board):
 
 これを、駒をクリックしたときに表示します。
 
-```py {name="main.py", hl_lines=["2-9", "15-18", "30-44"], inline_hl=[0:["5-8"], 8:[8]]}
+```py name=main.py hl_lines=2-9,15-18,30-44 inline_hl=2:6-9;15:7-8
 ...
 def main(screen, font, font_small, orders, move_snd):
     # ボード描画に渡すパラメータ
@@ -113,7 +113,7 @@ def main(screen, font, font_small, orders, move_snd):
 
 まずは引継ぎ画面を描画する関数を定義します。
 
-```py {name="draw.py"}
+```py name=draw.py
 ...
 def confirmation(screen, font, font_small, turn):
     '''
@@ -145,7 +145,7 @@ def confirmation(screen, font, font_small, turn):
 
 もう一方のプレイヤーが画面をクリックするとそのプレイヤーに交代することになります。
 
-```py {name="game.py", hl_lines=["6-8", "13-15", "27-30", "35-42"]}
+```py name=game.py hl_lines=6-8,13-15,27-30,35-42
 ...
 def main(screen, font, font_small, orders, move_snd, chturn_snd):
     # ボード描画に渡すパラメータ

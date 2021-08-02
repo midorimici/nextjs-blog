@@ -41,7 +41,7 @@ Python プログラムで動かすフェアリーチェスアプリ開発、連�
 
 これらのクラスの定義をまとめたモジュール`games.py`を作成します。
 
-```py {name="games.py"}
+```py name=games.py
 '''ゲームの種類によって変わる駒の配置や名前、画像IDを記録したモジュール'''
 
 from pieces import *
@@ -99,7 +99,7 @@ class withUnicorn:
 
 ひとまずインスタンスを代入する変数の宣言をしておきます。
 
-```py {name="main.py", hl_lines=["5-7", "10-16", "19-35"], ins=["1-9", "19-26"], del=[0, "10-18"]}
+```py name=main.py ins=6-7,10-16,28-35 del=5,19-27
 class Game:
     def __init__(self):
         self.playersturn = W
@@ -146,7 +146,7 @@ class Game:
 
 色によって進む方向は明白なので特別に定義する必要はありません。
 
-```py {name="pieces.py", hl_lines=["6-11", 13], ins=[6], del=["0-5"]}
+```py name=pieces.py ins=13 del=6-11
 ...
 
 class Pawn(Piece):
@@ -170,7 +170,7 @@ class Pawn(Piece):
 
 ５行２列にボタンを並べる関数を定義します。
 
-```py {name="utils.py"}
+```py name=utils.py
 ...
 def draw_button(left, right, bottom, top,
         letter, back_color=(1.00, 0.81, 0.62), font_color=(0.82, 0.55, 0.28)):
@@ -217,7 +217,7 @@ def draw_game_menu():
 
 これを描画イベント内部で使用します。
 
-```py {name="main.py", hl_lines=["8-10"]}
+```py name=main.py hl_lines=8-10
 from utils import *
 ...
 
@@ -246,7 +246,7 @@ class Game:
 
 まず、表示位置に対応するゲームクラスを格納するディクショナリを定義します。
 
-```py {name="games.py"}
+```py name=games.py
 ...
 # ゲーム選択画面に表示するゲーム
 game_dict = {0: (Normal, withUnicorn)}
@@ -258,7 +258,7 @@ game_dict = {0: (Normal, withUnicorn)}
 
 これを使ってマウスイベントの処理を書きます。
 
-```py {name="main.py", hl_lines=[2, "13-21"]}
+```py name=main.py hl_lines=2,13-21
 ...
 from games import *
 ...

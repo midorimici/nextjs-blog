@@ -73,7 +73,7 @@ HTML、JavaScript とほぼ同じコード形態で書けるために**学習コ
 
 プロジェクトのディレクトリ名（最後の引数）は任意です。
 
-```bash
+```bash hide_nums
 $ npx degit sveltejs/template svelte-docker-test
 
 $ cd svelte-docker-test
@@ -87,7 +87,7 @@ $ cd svelte-docker-test
 
 次にプロジェクトのディレクトリ以下で、イメージ作成のための Dockerfile を作成します。
 
-```docker {name="Dockerfile"}
+```docker name=Dockerfile
 # Node.js のイメージを元にする
 FROM node:14-alpine
 
@@ -118,7 +118,7 @@ ENV HOST=0.0.0.0
 
 `svelte-image`の部分はイメージ名で、任意です。
 
-```bash
+```bash hide_nums
 $ docker build -t svelte-image .
 ```
 
@@ -128,7 +128,7 @@ $ docker build -t svelte-image .
 
 続いて、このイメージを元にコンテナを作成します。
 
-```bash
+```bash hide_nums
 $ docker run -p 5000:5000 --name svelte-container svelte-image
 ```
 
@@ -144,7 +144,7 @@ $ docker run -p 5000:5000 --name svelte-container svelte-image
 
 続いて、コンテナ内部に入ります。
 
-```bash
+```bash hide_nums
 $ winpty docker exec -it svelte-container sh
 /usr/src/app # 
 ```
@@ -157,7 +157,7 @@ $ winpty docker exec -it svelte-container sh
 
 localhost を立ち上げます。
 
-```sh
+```sh hide_nums
 /usr/src/app # npm run dev
 
 > svelte-app@1.0.0 dev /usr/src/app
@@ -199,7 +199,7 @@ created public/build/bundle.js in 833ms
 
 試しに`main.js`を編集してみます。
 
-```sh
+```sh hide_nums
 /usr/src/app # ls
 node_modules       package.json       rollup.config.js
 package-lock.json  public             src
@@ -217,7 +217,7 @@ vim が入っていなかったら`apk add vim`コマンドなどでインスト
 
 main.js を編集します。
 
-```js {name="main.js", hl_lines=[6,7], ins=[1], del=[0]}
+```js name=main.js ins=7 del=6
 import App from './App.svelte';
 
 const app = new App({

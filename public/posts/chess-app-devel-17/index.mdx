@@ -61,7 +61,7 @@ $$ \begin{aligned}
 
 条件を満たすまでポーン以外の駒の配置をシャッフルで生成する方法です。
 
-```py {name="games.py"}
+```py name=games.py
 from random import shuffle
 
 class Chess960:
@@ -133,7 +133,7 @@ KRN コードの定義が少し面倒です。
 
 キングがルークの間になければならないという制約があるので、ただ単にありえる順列を列挙すればいいというわけではありません。
 
-```py {name="games.py", hl_lines=[1, "15-57"]}
+```py name=games.py hl_lines=1,15-57
 from random import randint
 
 class Chess960:
@@ -201,14 +201,14 @@ class Chess960:
 
 <pstlk label="第15回" to="chess-app-devel-15" />の方法と同様にして、定義したゲームを追加していきます。
 
-```py {name="games.py", hl_lines=[3, 4], ins=[1], del=[0], inline_hl=[1:[8]]}
+```py name=games.py ins=4 del=3 inline_hl=4:9-10
 ...
 # ゲーム選択画面に表示するゲーム
 game_dict = {0: (Normal, withUnicorn)}
 game_dict = {0: (Normal, Chess960, withUnicorn)}
 ```
 
-```py {name="utils.py", hl_lines=[3, 4], ins=[1], del=[0], inline_hl=[1:[8]]}
+```py name=utils.py ins=4 del=3 inline_hl=4:9-11
 ...
 # ゲーム選択画面に表示するゲーム名
 game_name_dict = {0: ('Normal Chess', 'Unicorn')}

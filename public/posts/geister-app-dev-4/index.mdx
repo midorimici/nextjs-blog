@@ -23,15 +23,141 @@ Python でつくるガイスター、連載第 4 回です。
 
 共通部分だけ`main.py`に置いて、そこから各モジュールを呼び出す形にします。
 
-<details>
-<summary><code>setup.py</code></summary><br/>
-```py {name="setup.py"}
+```py name=setup.py
 import sys
 
 import pygame
 from pygame.locals import *
 
-</details
+from config import IVORY
+import draw, mouse
+
+
+def _check_color(colors):
+    '''
+    駒がすべて配置済みで赤と青が半分ずつあるか
+    -> bool
+
+    colors : list <- [str]
+        色のリスト
+    '''
+    return (len(colors) == 8
+        and len([s for s in colors if s == 'R'])
+            == len([s for s in colors if s == 'B']))
+
+
+def main(screen, font, select_snd, decide_snd, forbid_snd):
+    # 配置を決定する側
+    # 0 - 先攻, 1 - 後攻
+    _state = 0
+    # 決定された初期配置
+    # [{(int, int): Piece}]
+    _order = [{}, {}]
+
+    while True:
+        satisfied = _check_color(list(_order[_state].values()))
+
+        screen.fill(IVORY)
+        draw.setup(screen, font, _state, _order[_state], not satisfied)
+        pygame.display.update()
+
+        # イベントハンドリング
+        for event in pygame.event.get():
+            # 閉じるボタン
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            # マウスクリック
+            if event.type == MOUSEBUTTONDOWN:
+                # 左
+                if event.button == 1:
+                    _mouse_pos = event.pos
+                    _square_pos = tuple(mouse.chcoord(_mouse_pos))
+
+                    for i in range(1, 5):
+                        for j in range(2, 4):
+                            if _square_pos == (i, j):
+                                select_snd.play()
+                                _order[_state][(i, j)] = 'R'
+                    
+                    if mouse.on_area(*_mouse_pos, 500, 530, 80, 50):
+                        if satisfied:
+                            decide_snd.play()
+                            _state += 1
+                        else:
+                            forbid_snd.play()
+                # 右
+                elif event.button == 3:
+                    _mouse_pos = event.pos
+                    _square_pos = tuple(mouse.chcoord(_mouse_pos))
+
+                    for i in range(1, 5):
+                        for j in range(2, 4):
+                            if _square_pos == (i, j):
+                                select_snd.play()
+                                _order[_state][(i, j)] = 'B'
+            # キー
+            if event.type == KEYDOWN:
+                # Esc キー
+                if event.key == K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
+```
+
+```py name=game.py
+import sys
+
+import pygame
+from pygame.locals import *
+
+from config import IVORY
+
+
+def main(screen):
+    while True:
+        screen.fill(IVORY)
+        pygame.display.update()
+
+        # イベントハンドリング
+        for event in pygame.event.get():
+            # 閉じるボタン
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            # キー
+            if event.type == KEYDOWN:
+                # Esc キー
+                if event.key == K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
+```
+
+```py name=main.py hl_lines=21-22
+import sys
+
+import pygame
+from pygame.locals import *
+
+from config import DISP_SIZE
+import setup, game
+
+
+if __name__ == '__main__':
+    pygame.init()
+    # 音声の設定
+    snd = pygame.mixer.Sound
+    select_snd = snd('./sounds/select.wav')
+    decide_snd = snd('./sounds/decide.wav')
+    forbid_snd = snd('./sounds/forbid.wav')
+
+    pygame.display.set_caption('Geister')
+    font = pygame.font.SysFont('hg丸ｺﾞｼｯｸmpro', 16)
+
+
+    setup.main(screen, font, select_snd, decide_snd, forbid_snd)
+
+    game.main(screen)
+```
 
 <br/>
 
@@ -45,7 +171,7 @@ from pygame.locals import *
 
 駒はオブジェクトとして、どちら側の駒か、色は何かなどの属性を持たせます。
 
-```py {name="piece.py"}
+```py name=piece.py
 import numpy as np
 
 class Piece:
@@ -95,7 +221,7 @@ class Piece:
 
 プレイヤーの配置から初期盤面を生成する関数を作ります。
 
-```py {name="setup.py"}
+```py name=setup.py
 ...
 from piece import Piece
 ...
@@ -129,7 +255,7 @@ def _init_board(order1, order2):
 
 さらに`game.py`に引数として渡すことで盤面を描画していきます。
 
-```py {name="setup.py", hl_lines=[14]}
+```py name=setup.py hl_lines=14
 ...
         # イベントハンドリング
         for event in pygame.event.get():
@@ -148,7 +274,7 @@ def _init_board(order1, order2):
                         ...
 ```
 
-```py {name="main.py", hl_lines=["4-5"], inline_hl=[0:["0-1"], 1:["5-6"]]}
+```py name=main.py hl_lines=4-5, inline_hl=4:0;5:5-6
 ...
 if __name__ == '__main__':
     ...
@@ -156,7 +282,7 @@ if __name__ == '__main__':
     game.main(screen, orders)
 ```
 
-```py {name="game.py", hl_lines=[2], inline_hl=[0:["4-5"]]}
+```py name=game.py hl_lines=2 inline_hl=2:6-7
 ...
 def main(screen, orders):
     ...
@@ -170,7 +296,7 @@ def main(screen, orders):
 
 角に矢印を描いています。
 
-```py {name="draw.py"}
+```py name=draw.py
 ...
 def _arrow(screen, coord, direction):
     '''
@@ -244,7 +370,7 @@ def board(screen, board, turn):
 
 これを`game.py`で呼び出します。
 
-```py {name="game.py", hl_lines=[10]}
+```py name=game.py hl_lines=10
 ...
 import draw
 ...

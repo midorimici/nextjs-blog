@@ -47,7 +47,7 @@ Python プログラムで動かすフェアリーチェスアプリ開発、連�
 <tltp label="メソッド">クラス内で定義される関数のようなもの</tltp>
 を作りましょう。
 
-```py:main.py
+```py name=main.py
 class Game:
     ...
     def cannotMove(self, color, gameboard):
@@ -72,7 +72,7 @@ class Game:
 
 この際この 2 行を表すメソッドを作ってしまいましょう。
 
-```py:main.py
+```py name=main.py
 class Game:
     ...
     def renewGameboard(self, startpos, endpos, gameboard):
@@ -83,7 +83,7 @@ class Game:
 
 これで`main()`と`isValidMove()`と`cannotMove()`は次のようになります。
 
-```py:main.py {hl_lines=[10, 18, 32]}
+```py name=main.py hl_lines=10,18,32
 class Game:
     ...
     def main(self):
@@ -135,7 +135,7 @@ class Game:
 
 どこで判定してどこでメッセージ表示しているのでしょうか。
 
-```py:main.py {hl_lines=[11, 22]}
+```py name=main.py hl_lines=11,22
 class Game:
     ...
     def main(self):
@@ -165,7 +165,7 @@ class Game:
 
 せっかく`isCheck()`に真偽判定をさせているので、こっちの書き方のほうがすっきりするかな。
 
-```py:main.py {hl_lines=["11-13", 24], ins=[1, 2], del=[0, 3], inline_hl=[1:[0_12]]}
+```py name=main.py ins=12-13 del=11,24 inline_hl=12:1,14
 class Game:
     ...
     def main(self):
@@ -199,7 +199,7 @@ class Game:
 
 あと、メイトになるとゲームは終了するので、プログラムを終了させるようにましょう。
 
-```py:main.py {hl_lines=["13-19"]}
+```py name=main.py hl_lines=13-19
 import sys
 　
 def main(self):

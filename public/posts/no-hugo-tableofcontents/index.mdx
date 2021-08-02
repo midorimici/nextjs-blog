@@ -108,8 +108,9 @@ HTML では
 
 `$Content`のようになっていれば、直前に`{{ $Content := .Scratch.Get "Content" }}`などと書かれていると思います。
 
-<details><summary>❓<code>.Scratch</code>って？</summary><br/>
-Hugo では変数は`{{ $var := value }}`のように定義できますが、`$`がつく形の変数はローカルにしか参照できません。
+<details><summary>❓<icode>.Scratch</icode>って？</summary><br/>
+
+Hugo では変数は`｛{ $var := value }}`のように定義できますが、`$`がつく形の変数はローカルにしか参照できません。
 
 別のファイルに持ち込んだり、`range`や`with`などの関数の外部から参照することができないので、
 
@@ -125,14 +126,14 @@ Hugo では変数は`{{ $var := value }}`のように定義できますが、`$`
 
 ここでは、ある程度の処理が加えられた後の`.Content`のデータが`.Scratch.Get "Content"`で呼び出すことができ、それが最終的に出力されているものとして進めていきます。
 
-```go-html-template {name="layouts/partials/custom/toc.html"}
+```go name=layouts/partials/custom/toc.html
 {{- /* Content を呼び出す */ -}}
 {{- $Content := .Scratch.Get "Content" -}}
 ```
 
 次に[`findRE`](https://gohugo.io/functions/findre/)を使って h タグを探します。
 
-```go-html-template {name="toc.html", hl_lines=["3-6"]}
+```go name=toc.html hl_lines=3-6
 {{- /* Content を呼び出す */ -}}
 {{- $Content := .Scratch.Get "Content" -}}
 {{- /* 検索に使用する正規表現パターン */ -}}
@@ -161,7 +162,7 @@ Hugo では変数は`{{ $var := value }}`のように定義できますが、`$`
 
 それぞれの要素を取り出していきますが、ここで[`range`](https://gohugo.io/functions/range/)を使います。
 
-```go-html-template {name="toc.html", hl_lines=["7-12"]}
+```go name=toc.html hl_lines=7-12
 {{- /* Content を呼び出す */ -}}
 {{- $Content := .Scratch.Get "Content" -}}
 {{- /* 検索に使用する正規表現パターン */ -}}
@@ -202,7 +203,7 @@ h タグの数字の部分を取り出しましょう。
 
 そして新たに`$depth`に階層の深さの情報を入れます。
 
-```go-html-template {name="toc.html", hl_lines=[4, "8-13"], inline_hl=[0:[6]]}
+```go name=toc.html hl_lines=4,8-13 inline_hl=4:7
 {{- /* Content を呼び出す */ -}}
 {{- $Content := .Scratch.Get "Content" -}}
 {{- /* 検索に使用する正規表現パターン */ -}}
@@ -231,11 +232,11 @@ h タグの数字の部分を取り出しましょう。
 
 ## HTML のコーディング
 
-さきほど示した[`.TableOfContents`の構造](#tableofcontentsの構造)をまねて、 HTML を書いていきます。
+さきほど示した<pstlk label="`.TableOfContents`の構造" to="#.TableOfContentsの構造" />をまねて、 HTML を書いていきます。
 
 ここはもうパズルです笑
 
-```go-html-template {name="toc.html"}
+```go name=toc.html
 ...
 {{- /* ループで直前に調べたものの階層の深さ */ -}}
 {{- $scratch := newScratch -}}
@@ -297,7 +298,7 @@ h2 と h3 しか使わないよという人なら、これで十分です（と�
 
 <details><summary>コード全文（h2 h3 しか使わない場合）</summary>
 
-```go-html-template {name="toc.html"}
+```go name=toc.html
 {{- /* Content を呼び出す */ -}}
 {{- $Content := .Scratch.Get "Content" -}}
 {{- /* 検索に使用する正規表現パターン */ -}}

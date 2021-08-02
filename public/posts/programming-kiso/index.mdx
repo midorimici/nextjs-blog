@@ -104,14 +104,14 @@ draft: false
 
 ひとつの「=」記号が使われることが多いですが、両辺が等しいというような意味はありません。
 
-```py {linenos=false}
+```py hide_nums
 # Python の例
 x = 3       # 変数 x に 3 を代入
 string = "This is a string."    # 変数 string に文字列を代入
 x = string  # 変数 x に 変数 string を代入
 ```
 
-```js {linenos=false}
+```js hide_nums
 // JavaScript の例
 var x = 3;
 var string = "This is a string.";
@@ -126,7 +126,7 @@ var x = string;
 
 数値を指定することで呼び出せるものと、文字列など数値以外のもので呼び出せるもの（連想配列）とがあることが一般的です。
 
-```py {linenos=false}
+```py hide_nums
 # Python の例
 l = [1, 2, 3]   # 配列（リスト）
 l[0]            # 配列に格納されている値を呼び出す．数値は 0 から始まることが多い
@@ -137,7 +137,7 @@ d["key2"]   # キーを指定することで値を呼び出すことができる
 # -> value2
 ```
 
-```js {linenos=false}
+```js hide_nums
 // JavaScript の例
 const l = [1, 2, 3];
 l[0]    // -> 1
@@ -153,7 +153,7 @@ d.key2      // -> value2
 
 多くは「if」を使います。
 
-```py {linenos=false}
+```py hide_nums
 # Python の例
 x = 5
 if x == 3:
@@ -169,7 +169,7 @@ else:
 a   # -> 3
 ```
 
-```js {linenos=false}
+```js hide_nums
 // JavaScript の例
 const x = 5;
 if (x === 3) {
@@ -191,7 +191,7 @@ a   // -> 3
 
 指定された回数だけ実行する「for」文があります。
 
-```py {linenos=false}
+```py hide_nums
 # Python の例
 x = 1
 while x <= 3:
@@ -208,7 +208,7 @@ for i in range(3):
 x   # -> 4
 ```
 
-```js {linenos=false}
+```js hide_nums
 // JavaScript の例
 var x = 1;
 while (x <= 3) {
@@ -243,7 +243,7 @@ x   // -> 4
 
 **返り値**という何らかの値を返すこともできます。
 
-```py {linenos=false}
+```py hide_nums
 # Python の例
 def func(arg1, arg2):
     return arg1 + arg2
@@ -252,7 +252,7 @@ func(2, 3)  # -> 5
 func(func(1, 2) + 3)    # -> 6
 ```
 
-```js {linenos=false}
+```js hide_nums
 // JavaScript の例
 function func(arg1, arg2) {
     return arg1 + arg2;

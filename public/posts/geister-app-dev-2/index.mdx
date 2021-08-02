@@ -35,7 +35,7 @@ Python でつくるガイスター、連載第 2 回です。
 
 定数は別モジュールにまとめておきます。
 
-```py {name="config.py"}
+```py name=config.py
 import numpy as np
 
 # ウィンドウサイズ
@@ -49,7 +49,7 @@ SQUARE_SIZE = 90
 MARGIN = (np.asarray(DISP_SIZE) - 6*SQUARE_SIZE)/2
 ```
 
-```py {name="draw.py", hl_lines=["5-25", 33]}
+```py name=draw.py hl_lines=5-25,33
 import numpy as np
 
 from config import *
@@ -103,7 +103,7 @@ def setup(screen, font, turn):
 
 相手の駒なら逆三角形です。
 
-```py {name="config.py", hl_lines=["6-7", "13-14"]}
+```py name=config.py hl_lines=6-7,13-14
 ...
 # ウィンドウサイズ
 DISP_SIZE = (600, 600)
@@ -120,7 +120,7 @@ MARGIN = (np.asarray(DISP_SIZE) - 6*SQUARE_SIZE)/2
 PIECE_SIZE = 60
 ```
 
-```py {name="draw.py"}
+```py name=draw.py
 ...
 def _piece(screen, color, pos, rev=False):
     '''
@@ -151,7 +151,7 @@ def _piece(screen, color, pos, rev=False):
 
 ためしに一か所に赤駒を置いてみます。
 
-```py {name="draw.py", hl_lines=[8]}
+```py name=draw.py hl_lines=8
 def setup(screen, font, turn):
     ...
     _text = font.render(
@@ -170,7 +170,7 @@ def setup(screen, font, turn):
 
 配置を決定したあとに押す確定ボタンを描きます。
 
-```py {name="draw.py", hl_lines=["2-24", 33]}
+```py name=draw.py hl_lines=2-24,33
 ...
 def _button(screen, font, coord, size, text, disabled=True):
     '''

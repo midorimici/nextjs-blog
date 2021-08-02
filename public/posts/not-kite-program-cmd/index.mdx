@@ -43,7 +43,7 @@ Mac や Linux なら`open ファイル名`のコマンドを打てば、
 
 Windows のコマンドプロンプトなら`start プログラム名 ファイル名`と指定します。
 
-```bash
+```bash hide_nums
 start firefox index.html
 ```
 
@@ -54,7 +54,7 @@ start firefox index.html
 
 Mac や Linux なら`open -a プログラム名 ファイル名`です。
 
-```bash
+```bash hide_nums
 open -a Firefox index.html
 ```
 
@@ -70,7 +70,7 @@ open -a Firefox index.html
 
 答えから言うと、`start プログラム名 $(cygpath -w $(pwd)/ファイル名)`です。
 
-```bash
+```bash hide_nums
 start firefox $(cygpath -w $(pwd)/index.html)
 ```
 
@@ -92,14 +92,14 @@ Chrome でも同様です。
 
 でも`pwd`が出力するパスの形式は Windows のものとは異なります。
 
-```bash
+```bash hide_nums
 $ pwd
 /c/Users/username/Documents
 ```
 
 そこで、パスを Windows 形式に変更するために、`cygpath -w`を使います。
 
-```bash
+```bash hide_nums
 $ cygpath -w $(pwd)
 C:\Users\username\Documents
 
@@ -107,17 +107,17 @@ $ cygpath -w $(pwd)\\index.html
 C:\Users\username\Documents\index.html
 ```
 
-コマンドを`$()`または<code>``</code>で囲むことで、その出力を別のコマンドに利用することができます。
+コマンドを`$()`または<icode>``</icode>で囲むことで、その出力を別のコマンドに利用することができます。
 
 これで絶対パスを取得できたので、これを引数として`start`コマンドに渡します。
 
-```bash
+```bash hide_nums
 start firefox $(cygpath -w $(pwd)\\index.html)
 ```
 
 なお、URL のアドレスバーでは`\`は`/`になりますので、
 
-```bash
+```bash hide_nums
 start firefox $(cygpath -w $(pwd)/index.html)
 ```
 
@@ -141,7 +141,7 @@ Git Bash で使うならシェルスクリプトのほうがタイプ数が少�
 
 その中に`.sh`ファイルを作成します。
 
-```bash
+```bash hide_nums
 $ mkdir shellscripts
 
 $ cd shellscripts
@@ -151,7 +151,7 @@ $ vi open.sh
 
 ファイルの中には次のように書きます。
 
-```bash {name="open.sh"}
+```bash name=open.sh
 #!/bin/bash
 
 file=$1
@@ -185,7 +185,7 @@ exit 0
 
 まず実行権限を確認します。
 
-```bash
+```bash hide_nums
 $ ls -l open.sh
 -rwxr-xr-x ...
 ```
@@ -196,7 +196,7 @@ $ ls -l open.sh
 
 もし`rw-`のように、実行権限がなくなっていたら、`chmod`コマンドで権限を付与します。
 
-```bash
+```bash hide_nums
 $ ls -l open.sh
 -rw-r-xr-x ...
 
@@ -214,7 +214,7 @@ $ ls -l open.sh
 
 シェルスクリプトへのパスを次のように指定します。
 
-```bash
+```bash hide_nums
 $ export PATH="$PATH:/c/Users/username/Documents/shellscripts"
 ```
 
@@ -232,7 +232,7 @@ $ export PATH="$PATH:/c/Users/username/Documents/shellscripts"
 
 また、`open.sh`としましたが、実は拡張子がなくても動きます。
 
-```bash
+```bash hide_nums
 $ mv open.sh open
 ```
 

@@ -36,7 +36,7 @@ draft: false
 
 とりあえずそれを利用してみます。
 
-```go-html-template {name="sidebar.html", hl_lines=["6-14"]}
+```html name=sidebar.html hl_lines=6-14
 <div class="sidebar">
     <div class="profile">
         <h4 class="sidebar-header">プロフィール</h4>
@@ -118,7 +118,7 @@ CSS で`position: fixed;`とすれば、スクロールしても動かなくな�
 
 その後、`top`や`left`で位置を調整します。
 
-```scss:custom.scss
+```scss name=custom.scss
 .sidebar-toc {
     position: fixed;
     top: 0;
@@ -131,7 +131,7 @@ CSS で`position: fixed;`とすれば、スクロールしても動かなくな�
 
 スクロール量を取得して、一定の値より小さければ非表示にします。
 
-```js:custom.js
+```js name=custom.js
 // sidebar-toc というクラス名の要素のリストを取得し、その最初の要素を取得
 var toc = document.getElementsByClassName('sidebar-toc')[0];
 　
@@ -147,7 +147,7 @@ if (toc) {
 
 クラスを追加することによって、これを CSS で表示・非表示を切り替えることができるようになりました。
 
-```scss:custom.scss {hl_lines=["4-9"]}
+```scss name=custom.scss hl_lines=4-10
 .sidebar-toc {
     position: fixed;
     top: 0;

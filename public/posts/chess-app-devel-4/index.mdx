@@ -27,7 +27,7 @@ Python プログラムで動かすフェアリーチェスアプリ開発、連�
 <tltp label="メソッド">クラス内で定義される関数のようなもの</tltp>
 はすでに用意されています。
 
-```py:main.py
+```py name=main.py
 def isCheck(self):
     #ascertain where the kings are, check all pieces of opposing color against those kings, then if either get hit, check if its checkmate
     king = King
@@ -79,7 +79,7 @@ def canSeeKing(self,kingpos,piecelist):
 
 駒の移動先の可能性を制御しているのは、`isValid()`メソッドです。
 
-```py:pieces.py
+```py name=pieces.py
 def isValid(self,startpos,endpos,Color,gameboard):
     if endpos in self.availableMoves(startpos[0],startpos[1],gameboard, Color = Color):
         return True
@@ -108,7 +108,7 @@ def isValid(self,startpos,endpos,Color,gameboard):
 
 メソッド内で`self`を使っているので、`Game`クラス内に移動した後は新たに駒を示す引数を追加する必要があります。
 
-```py:main.py {hl_lines=[3, 5], inline_hl=[0:["4-5"], 1:[3]]}
+```py name=main.py hl_lines=3,5 inline_hl=3:6-7;5:4
 class Game:
     ...
     def isValidMove(self, piece, startpos, endpos, Color, gameboard):
@@ -136,7 +136,7 @@ class Game:
 
 駒色を引数にとり、その色側がチェックされているときに`True`を返すようにしましょう。
 
-```py:main.py {hl_lines=[1, 2, "10-12", "14-17", 19], ins=[1, "3-5", "7-9"], del=[0, 2, 6], inline_hl=[1:["4-5"], 3:["0-4"], 7:["0-4"]]}
+```py name=main.py ins=2,11-12,14,16-17,19 del=1,10,15 inline_hl=2:6-7;10:2-15;11:2-4
 def isCheck(self):
 def isCheck(self, color):
     king = King
@@ -162,7 +162,7 @@ def isCheck(self, color):
 
 コードの頭に一文追加します。
 
-```py:main.py {hl_lines=[1, "12-14"], inline_hl=[1:[7_"11-13"], 2:[4]]}
+```py name=main.py hl_lines=1,12-14 inline_hl=12:8,13-16;13:5
 opponent = {WHITE: BLACK, BLACK: WHITE}
 　
 class Game:
@@ -191,7 +191,7 @@ class Game:
 
 これは**現在の本当の**盤面なので、仮定された盤面は使えません。
 
-```py:main.py {hl_lines=[1, 2, 5, 6, 10, 11, 15, 16, 18, 19], ins=[1, 3, 5, 7, 9], del=[0, 2, 4, 6, 8], inline_hl=[1:["6-7"], 2:["5-6"], 5:["17-18"], 7:["8-9"], 8:["13-14"]]}
+```py name=main.py ins=2,6,11,16,19 del=1,5,10,15,18 inline_hl=2:8-9;5:6-7;11:18-19;16:10-11;18:14-15
 def isCheck(self, color):
 def isCheck(self, color, gameboard):
     kingDict = {}
@@ -224,7 +224,7 @@ def canSeeKing(self, kingpos, piecelist, gameboard):
 
 `gameboard`を頼りに探すと、`main()`内にあります。
 
-```py:main.py
+```py name=main.py
 self.gameboard[endpos] = self.gameboard[startpos]
 del self.gameboard[startpos]
 ```
@@ -239,7 +239,7 @@ del self.gameboard[startpos]
 
 その後`isCheck()`にかけ、`True`になればその手は禁止します。
 
-```py:main.py {hl_lines=["8-15"]}
+```py name=main.py hl_lines=8-15
 from copy import copy
 ...
 class Game:
@@ -263,7 +263,7 @@ class Game:
 
 引数`Color`と`piece.Color`は同じ意味なので統一しても構わないでしょう。
 
-```py:main.py {hl_lines=[1, 2, 4, 5], ins=[1, 3], del=[0, 2], inline_hl=[0:["10-11"], 3:["19-20"]]}
+```py name=main.py ins=2,5 del=1,4 inline_hl=1:11-12;5:22-23
 def isValidMove(self, piece, startpos, endpos, Color, gameboard):
 def isValidMove(self, piece, startpos, endpos, gameboard):
     '''pieceのstartpos -> endposの動きが可能であるときTrueを返す'''
@@ -285,7 +285,7 @@ def isValidMove(self, piece, startpos, endpos, gameboard):
 
 リストでも同様のことは起こります。
 
-```py {linenos=false}
+```py hide_nums
 >>> a = [1, 2, 3]
 >>> b = a
 >>> b.append(4)
@@ -304,7 +304,7 @@ def isValidMove(self, piece, startpos, endpos, gameboard):
 
 例えば、`main()`はこのようになります。
 
-```py:main.py {hl_lines=[19, 23]}
+```py name=main.py hl_lines=19,23
 def main(self):
 　
     while True:

@@ -28,7 +28,7 @@ pygame では`pygame.event.get()`からイベントを取得し、`event.type`�
 
 クリックの種類とマウスカーソルの位置を表示するコードは次のようになります。
 
-```py {name="main.py"}
+```py name=main.py
 ...
 def main():
     ...
@@ -53,7 +53,7 @@ def main():
 
 この関数はマウス関連の処理をまとめるモジュールに定義します。
 
-```py {name="mouse.py"}
+```py name=mouse.py
 from config import *
 
 def chcoord(pos):
@@ -80,7 +80,7 @@ def chcoord(pos):
 
 駒がどのように配置されているかを表す変数を用意して、クリックしたときにその変数を変更します。
 
-```py {name="main.py", hl_lines=["6-11", 15, "24-29", "32-37"]}
+```py name=main.py hl_lines=6-11,15,24-29,32-37
 ...
 import draw, mouse
 
@@ -123,7 +123,7 @@ def main():
 
 その変数にしたがって駒を描画するようにします。
 
-```py {name="draw.py", hl_lines=["2-3", "10-11"], ins=["1-3"], del=[0], inline_hl=[1:["8-9"]]}
+```py name=draw.py ins=3,10-11 del=2 inline_hl=3:10-11
 ...
 def setup(screen, font, turn):
 def setup(screen, font, turn, posdict):
@@ -138,7 +138,7 @@ def setup(screen, font, turn, posdict):
     ...
 ```
 
-```py {name="main.py", hl_lines=[6], inline_hl=[0:["9-13"]]}
+```py name=main.py hl_lines=6 inline_hl=6:9-13
 ...
 def main():
     ...
@@ -162,7 +162,7 @@ def main():
 
 条件を満たしているか判定する関数を定義します。
 
-```py {name="main.py"}
+```py name=main.py
 ...
 def _check_color(colors):
     '''
@@ -182,7 +182,7 @@ def _check_color(colors):
 
 （左上のほうが座標が小さいことに注意）
 
-```py {name="mouse.py"}
+```py name=mouse.py
 ...
 def on_area(x, y, left, top, w, h):
     '''
@@ -204,7 +204,7 @@ def on_area(x, y, left, top, w, h):
 
 そして、条件を満たしているときかつボタンがクリックされたときにのみ次の画面に進むことができます。
 
-```py {name="main.py", hl_lines=[5, "10-12"]}
+```py name=main.py hl_lines=5,10-12
 ...
 def main():
     ...
@@ -222,7 +222,7 @@ def main():
 
 さらに、ボタンが押せるときと押せないときでボタンの色を変えます。
 
-```py {name="draw.py", hl_lines=["2-3", "10-11"], ins=[1, 3], del=[0, 2], inline_hl=[1:["10-11"], 3:["17-18"]]}
+```py name=draw.py ins=3,11 del=2,10 inline_hl=3:12-13;11:24-25
 ...
 def setup(screen, font, turn, posdict):
 def setup(screen, font, turn, posdict, disabled):
@@ -237,7 +237,7 @@ def setup(screen, font, turn, posdict, disabled):
 ...
 ```
 
-```py {name="main.py", hl_lines=[6], inline_hl=[0:["14-15"]]}
+```py name=main.py hl_lines=6 inline_hl=6:14-17
 ...
 def main():
     ...
@@ -259,7 +259,7 @@ def main():
 
 おまけですが、駒を置いたときやボタンを押したときに効果音をつけてみます。
 
-```py {name="main.py", hl_lines=["4-8", 20, 25, 28]}
+```py name=main.py hl_lines=4-8,20,25,28
 ...
 def main():
     pygame.init()

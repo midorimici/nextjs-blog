@@ -45,7 +45,7 @@ webpack の設定ファイル`config/webpack.config.js`を編集します。
 
 長大なファイルなので、ファイル内検索で`static`を検索します。
 
-```js {name="webpack.config.js", hl_lines=[3, 9, 14, 18, 24, 25]}
+```js name=webpack.config.js hl_lines=3,9,14,18,24,25
 ...
       filename: isEnvProduction
         ? 'static/js/[name].[contenthash:8].js'         // ← ここを変える

@@ -36,7 +36,7 @@ draft: false
 
 例えば、記事一覧のページにあるひとつの記事のタイトルを右クリックしてデベロッパーツールを開くと、HTML は次のようになっていたとします。
 
-```html {hl_lines=[4]}
+```html hl_lines=4
 <ul class="post-list">
     <li class="list-item">…</li>
     <li class="list-item">
@@ -96,7 +96,7 @@ HTML ではループ処理など特殊な構文を使って記述されている
 
 今回の例では、該当部分は次のようになっていたとします。（Hugo の例です。）
 
-```go-html-template {hl_lines=[3]}
+```html hl_lines=3
 <ul class="post-list">
     {{ range .Site.RegularPosts }}
         <li class="list-item">
@@ -109,7 +109,7 @@ HTML ではループ処理など特殊な構文を使って記述されている
 
 さて、タイトルを表すのは４行目なので、その直前に画像（img タグ）を挿入すれば OK です。
 
-```go-html-template {hl_lines=[4]}
+```html hl_lines=4
 <ul class="post-list">
     {{ range .Site.RegularPosts }}
         <li class="list-item">

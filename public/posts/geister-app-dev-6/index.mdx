@@ -21,7 +21,7 @@ Python でつくるガイスター、連載第 6 回です。
 
 勝敗の条件を関数で定義します。
 
-```py {name="game.py", hl_lines=["2-29", "33-37"]}
+```py name=game.py hl_lines=2-29,33-37
 ...
 def win_req(taken, board, side, moved):
     '''
@@ -68,7 +68,7 @@ def main(screen, font, font_small, orders, move_snd, chturn_snd):
 
 マウスイベントの内部です。
 
-```py {name="game.py", hl_lines=[2, "21-23" "30-36"], inline_hl=[0:[15]]}
+```py name=game.py hl_lines=2,21-23,30-36 inline_hl=2:16-17
 ...
 def main(screen, font, font_small, orders, move_snd, chturn_snd, win_snd):
     ...
@@ -121,7 +121,7 @@ def main(screen, font, font_small, orders, move_snd, chturn_snd, win_snd):
 
 表示するものを関数で定義します。
 
-```py {name="draw.py"}
+```py name=draw.py
 ...
 def win_message(screen, font, side):
     '''
@@ -145,7 +145,7 @@ def win_message(screen, font, side):
 
 さらに、その画面でスペースキーを押すと隠れていたすべての駒の色を表示するようにします。
 
-```py {name="game.py", hl_lines=["9-11", "21-24"]}
+```py name=game.py hl_lines=9-11,21-24
 ...
 def main(screen, font, font_small, orders, move_snd, chturn_snd, win_snd):
     ...
