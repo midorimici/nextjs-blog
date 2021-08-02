@@ -38,7 +38,7 @@ const CodeBlock = ({
   }
 
   return (
-    <>
+    <div className="relative my-4">
       {name && (
         <span className="px-2 py-1 bg-gray-100 rounded-t border-b font-code text-sm">
           {name}
@@ -53,7 +53,8 @@ const CodeBlock = ({
         {({className, style, tokens, getLineProps, getTokenProps}) => (
           <pre
             className={`${className} p-4 text-sm overflow-auto`}
-            style={style}>
+            style={style}
+          >
             {tokens.map((line, lineIndex) => (!(lineIndex === tokens.length - 1 && line[0].empty) && (
               <div
                 key={lineIndex}
@@ -91,7 +92,7 @@ const CodeBlock = ({
           </pre>
         )}
       </Highlight>
-    </>
+    </div>
   )
 }
 
