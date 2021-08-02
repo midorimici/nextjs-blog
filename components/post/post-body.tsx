@@ -1,11 +1,11 @@
 import { MDXRemote } from 'next-mdx-remote'
-import Link from 'next/link'
 import { Tweet } from 'react-twitter-widgets'
 
 import Heading from '../mdx/heading'
 import PostImage from '../mdx/post-image'
 import Video, { VideoProps } from '../mdx/video'
 import CodeBlock, { CodeBlockProps } from '../mdx/code-block'
+import PostLink, { PostLinkProps } from '../mdx/pstlk'
 import Tooltip, { TooltipProps } from '../mdx/tltp'
 import Manga, { MangaProps } from '../mdx/manga'
 import MangaText, { MangaTextProps } from '../mdx/manga-text'
@@ -26,11 +26,6 @@ type PostImageProps = {
   ext?: 'png' | 'gif' | 'jpg'
 }
 
-type PostLinkProps = {
-  label: string
-  to: string
-}
-
 const PostBody = ({ source, slug }: Props) => {
   const components = {
     a: ({ href, children }: { href: string, children: string }) => (
@@ -42,13 +37,7 @@ const PostBody = ({ source, slug }: Props) => {
     video: (props: Omit<VideoProps, 'slug'>) => <Video slug={slug} {...props} />,
     code: (props: CodeBlockProps) => <CodeBlock {...props} />,
     icode: (props: any) => <code>{props.children}</code>,
-    pstlk: (props: PostLinkProps) => (
-      <Link href={props.to}>
-        <a className="underline transition-colors duration-300 hover:text-pink-400">
-          {props.label}
-        </a>
-      </Link>
-    ),
+    pstlk: (props: PostLinkProps) => <PostLink {...props} />,
     tltp: (props: TooltipProps) => <Tooltip {...props} />,
     manga: (props: Omit<MangaProps, 'slug'>) => <Manga slug={slug} {...props} />,
     'manga-text': (props: MangaTextProps) => <MangaText {...props} />,
