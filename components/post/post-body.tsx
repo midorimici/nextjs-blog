@@ -10,6 +10,7 @@ import Tooltip, { TooltipProps } from '../mdx/tltp'
 import Manga, { MangaProps } from '../mdx/manga'
 import MangaText, { MangaTextProps } from '../mdx/manga-text'
 import Sandbox from '../mdx/sandbox'
+import YouTube from '../mdx/youtube'
 import markdownStyles from './markdown-styles.module.css'
 
 type Props = {
@@ -37,6 +38,7 @@ const PostBody = ({ source, slug }: Props) => {
     'manga-text': (props: MangaTextProps) => <MangaText {...props} />,
     tweet: ({ id }: { id: string }) => <Tweet tweetId={id} />,
     sandbox: (props: { name: string, link: string }) => <Sandbox {...props} />,
+    yout: ({ id }: { id: string }) => <YouTube id={id} />,
   }
 
   return (
