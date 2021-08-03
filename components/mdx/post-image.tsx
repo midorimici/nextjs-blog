@@ -2,14 +2,14 @@ import Image from 'next/image'
 
 import { useImageSize } from './useImageSize'
 
-type Props = {
+export type PostImageProps = {
   slug: string
   src: string
   alt: string
   ext?: 'png' | 'gif' | 'jpg'
 }
 
-const PostImage = ({ slug, src, alt, ext = 'jpg' }: Props) => {
+const PostImage = ({ slug, src, alt, ext = 'jpg' }: PostImageProps) => {
   const path = `/posts/${slug}/${src}.${ext}`
   const size = useImageSize(path)
   

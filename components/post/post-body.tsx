@@ -2,7 +2,7 @@ import { MDXRemote } from 'next-mdx-remote'
 import { Tweet } from 'react-twitter-widgets'
 
 import Heading from '../mdx/heading'
-import PostImage from '../mdx/post-image'
+import PostImage, { PostImageProps } from '../mdx/post-image'
 import Video, { VideoProps } from '../mdx/video'
 import CodeBlock, { CodeBlockProps } from '../mdx/code-block'
 import PostLink, { PostLinkProps } from '../mdx/pstlk'
@@ -20,12 +20,6 @@ type Props = {
   slug: string
 }
 
-type PostImageProps = {
-  src: string
-  alt: string
-  ext?: 'png' | 'gif' | 'jpg'
-}
-
 const PostBody = ({ source, slug }: Props) => {
   const components = {
     a: ({ href, children }: { href: string, children: string }) => (
@@ -33,7 +27,7 @@ const PostBody = ({ source, slug }: Props) => {
     ),
     h2: ({ children }: { children: any }) => <Heading type={2} content={children} />,
     h3: ({ children }: { children: any }) => <Heading type={3} content={children} />,
-    postimage: (props: PostImageProps) => <PostImage slug={slug} {...props} />,
+    postimage: (props: Omit<PostImageProps, 'slug'>) => <PostImage slug={slug} {...props} />,
     video: (props: Omit<VideoProps, 'slug'>) => <Video slug={slug} {...props} />,
     code: (props: CodeBlockProps) => <CodeBlock {...props} />,
     icode: (props: any) => <code>{props.children}</code>,
