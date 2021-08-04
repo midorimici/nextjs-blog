@@ -6,6 +6,7 @@ import PostImage, { PostImageProps } from '../mdx/post-image'
 import Video, { VideoProps } from '../mdx/video'
 import CodeBlock, { CodeBlockProps } from '../mdx/code-block'
 import PostLink, { PostLinkProps } from '../mdx/pstlk'
+import RelatedPost, { RelatedPostProps } from '../mdx/relpos'
 import Tooltip, { TooltipProps } from '../mdx/tltp'
 import Manga, { MangaProps } from '../mdx/manga'
 import MangaText, { MangaTextProps } from '../mdx/manga-text'
@@ -33,6 +34,7 @@ const PostBody = ({ source, slug }: Props) => {
     code: (props: CodeBlockProps) => <CodeBlock {...props} />,
     icode: (props: any) => <code>{props.children}</code>,
     pstlk: (props: PostLinkProps) => <PostLink {...props} />,
+    relpos: (props: RelatedPostProps) => <RelatedPost {...props} />,
     tltp: (props: TooltipProps) => <Tooltip {...props} />,
     manga: (props: Omit<MangaProps, 'slug'>) => <Manga slug={slug} {...props} />,
     'manga-text': (props: MangaTextProps) => <MangaText {...props} />,
