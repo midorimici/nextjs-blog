@@ -26,7 +26,7 @@ module.exports = {
         '8xl': '6.25rem',
       },
       fontFamily: {
-        'code': ['"Fira Code"', '"Source Code Pro"']
+        'code': ['"Fira Code"', '"Source Code Pro"'],
       },
       boxShadow: {
         small: '0 5px 10px rgba(0, 0, 0, 0.12)',
