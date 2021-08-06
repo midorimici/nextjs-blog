@@ -12,7 +12,15 @@ const Tooltip = ({ label, children }: TooltipProps) => {
 
   return (
     <span className="tooltip-container relative text-pink-400" onTouchStart={() => {}}>
-      <span className="tooltip" dangerouslySetInnerHTML={{ __html: content }} />
+      <span
+        className={`
+          tooltip
+          absolute bottom-full mb-4 p-2
+          opacity-0 bg-pink-100 rounded text-sm
+          transition duration-300
+        `}
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
       <span dangerouslySetInnerHTML={{ __html: parsedLabel }} />
     </span>
   )
