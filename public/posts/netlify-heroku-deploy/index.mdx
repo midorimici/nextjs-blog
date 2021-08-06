@@ -84,11 +84,11 @@ Heroku のプロジェクトパスには`dist`を指定しているのですが�
 
 仕方ないのでルートにあった`package.json`を`dist`に移動すると、ビルドできるようになりました。
 
-{{% fukidashi ase %}}
+<fukidashi face="ase">
 
 こんなところにあっていいんだろうか…
 
-{{% /fukidashi %}}
+</fukidashi>
 
 ### Heroku で Application error
 
@@ -130,11 +130,11 @@ Heroku のプロジェクトパスには`dist`を指定しているのですが�
 
 いまだに Heroku の URL には Not Found と表示されますが、本体は Netlify 側の URL なので問題ないと思います。
 
-{{% fukidashi neut %}}
+<fukidashi face="neut">
 
 コードの変更があるとデプロイのたびにローカルでいちいちコンパイルしないといけないのがつらいけど、仕方ないか
 
-{{% /fukidashi %}}
+</fukidashi>
 
 ### ブラウザで CORS エラー
 
@@ -168,11 +168,11 @@ Heroku のプロジェクトパスには`dist`を指定しているのですが�
 
 → [Handling CORS | Socket.IO](https://socket.io/docs/v3/handling-cors/)
 
-{{% fukidashi ase %}}
+<fukidashi face="ase">
 
 そんなところに原因があるとは思わなかったよ…
 
-{{% /fukidashi %}}
+</fukidashi>
 
 Netlify の設定ファイルも Express の CORS のコードも必要なく、これだけでヘッダを認識するようになりました。
 

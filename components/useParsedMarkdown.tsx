@@ -15,7 +15,7 @@ export const useParsedMarkdown = (markdown: string | ReactElement, minimum: bool
     const md = typeof markdown === 'string' ? markdown : ReactDOMServer.renderToStaticMarkup(markdown)
     let html = await markdownToHtml(md, minimum)
     html = minimum ? html : await tltpReplaced(html)
-    setContent(html.replace(/<p>([\s\S]*)<\/p>/, '$1'))
+    setContent(html.replace(/<p>([\s\S]*?)<\/p>/g, '$1'))
   }
 
   const tltpReplaced = async (str: string) => {

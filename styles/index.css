@@ -79,3 +79,19 @@ body {
 .tooltip-container:hover > .tooltip {
   @apply opacity-100 z-10;
 }
+
+.fukidashi::before {
+  @apply absolute -right-5 top-8;
+  content: "";
+  border-left: solid 1em #333333;
+  border-top: solid .5em transparent;
+  border-bottom: solid .5em transparent;
+}
+
+.fukidashi::after {
+  @apply absolute -right-4 top-8;
+  content: "";
+  border-left: solid .9em white;
+  border-top: solid 0.5em transparent;
+  border-bottom: solid 0.5em transparent;
+}
