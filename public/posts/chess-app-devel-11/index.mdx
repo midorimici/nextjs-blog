@@ -95,7 +95,7 @@ class Game:
 
 プロモーションするポーンから吹き出しをのばして、その吹き出しの中に選択肢となる駒を描画することにします。
 
-`glVertex()`で指定しているのはワールド座標であり、このプログラムでは縦横軸ともに -1.0 ～ 8.0 の値をとるように調整しています（<pstlk label="第６回" to=""chess-app-devel-6/#四角形の描画"" />）。
+`glVertex()`で指定しているのはワールド座標であり、このプログラムでは縦横軸ともに -1.0 ～ 8.0 の値をとるように調整しています（<pstlk label="第６回" to="chess-app-devel-6/#四角形の描画" />）。
 
 ```py name=utils.py
 def draw_balloon(x, y):
@@ -145,7 +145,7 @@ def draw(self):
 
 選択肢として４つの駒をこの吹き出しの上に並べて乗せることになります。
 
-駒の描画は`draw_img()`を使えばできます（定義は<pstlk label="第７回" to=""chess-app-devel-7/#テクスチャの設定"" />にて）。
+駒の描画は`draw_img()`を使えばできます（定義は<pstlk label="第７回" to="chess-app-devel-7/#テクスチャの設定" />にて）。
 
 ```py name=main.py hl_lines=6-12
 def draw(self):
