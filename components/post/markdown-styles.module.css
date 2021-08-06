@@ -37,6 +37,18 @@
   @apply pl-4 border-l-4 border-gray-200 rounded-lg;
 }
 
+.markdown th, .markdown td {
+  @apply p-2;
+}
+
+.markdown thead {
+  @apply border-t border-b border-yellow-200 bg-yellow-100;
+}
+
+.markdown tbody > tr {
+  @apply border-b border-gray-200;
+}
+
 .markdown hr {
   @apply my-4;
 }
