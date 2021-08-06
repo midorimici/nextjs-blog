@@ -33,6 +33,10 @@
   @apply underline transition-colors duration-300 hover:text-pink-400;
 }
 
+.markdown blockquote {
+  @apply pl-4 border-l-4 border-gray-200 rounded-lg;
+}
+
 .markdown hr {
   @apply my-4;
 }
