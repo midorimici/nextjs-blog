@@ -28,7 +28,7 @@ const RelatedPost = ({ link }: RelatedPostProps) => {
   
   return (
     <section className={`
-      relative flex gap-4
+      relative flex flex-col sm:flex-row items-end sm:items-start gap-4
       p-4 my-4
       rounded-2xl
       cursor-pointer
@@ -42,21 +42,21 @@ const RelatedPost = ({ link }: RelatedPostProps) => {
           aria-label={`関連記事:${data.title}`}
         ></a>
       </Link>
-      <section className="flex-grow flex flex-col gap-4 max-w-xs">
+      <section className="flex-grow flex flex-col gap-4 w-full">
         <span className="pb-2 font-bold text-2xl text-pink-400 border-b-2 border-pink-400">
           <FontAwesomeIcon icon={faBookOpen} />&nbsp;
           関連記事
         </span>
         <span dangerouslySetInnerHTML={{ __html : data.title}} />
       </section>
-      <section className="flex-shrink-0">
+      <section className="flex-shrink-0 flex">
         <Image
           src={imgPath}
           alt={data.title}
           title={data.title}
           width={320}
           height={180}
-          className="rounded-r-2xl"
+          className="rounded-b-2xl sm:rounded-l-none sm:rounded-r-2xl"
         />
       </section>
     </section>
