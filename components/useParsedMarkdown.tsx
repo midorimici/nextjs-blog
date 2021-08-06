@@ -9,7 +9,7 @@ export const useParsedMarkdown = (markdown: string | ReactElement, minimum: bool
 
   useEffect(() => {
     parseMarkdown()
-  }, [])
+  }, [markdown])
 
   const parseMarkdown = async () => {
     const md = typeof markdown === 'string' ? markdown : ReactDOMServer.renderToStaticMarkup(markdown)
