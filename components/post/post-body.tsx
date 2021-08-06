@@ -13,6 +13,7 @@ import Manga, { MangaProps } from '../mdx/manga'
 import MangaText, { MangaTextProps } from '../mdx/manga-text'
 import Sandbox from '../mdx/sandbox'
 import YouTube from '../mdx/youtube'
+import Affiliate, { AffiliateProps } from 'components/mdx/affiliate'
 import markdownStyles from './markdown-styles.module.css'
 
 type Props = {
@@ -43,6 +44,7 @@ const PostBody = ({ source, slug }: Props) => {
     tweet: ({ id }: { id: string }) => <Tweet tweetId={id} />,
     sandbox: (props: { name: string, link: string }) => <Sandbox {...props} />,
     yout: ({ id }: { id: string }) => <YouTube id={id} />,
+    affiliate: (props: AffiliateProps) => <Affiliate {...props} />,
   }
 
   return (
