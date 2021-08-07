@@ -1,4 +1,6 @@
 import { serialize } from 'next-mdx-remote/serialize'
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Head from 'next/head'
@@ -41,6 +43,14 @@ const Post = ({ post, source }: Props) => {
                 {post.title.replace(/<br\/>/g, '')} | {SITE_NAME}
               </title>
               <meta property="og:image" content={imagePath} />
+              {post.katex && (
+                <link
+                  rel="stylesheet"
+                  href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"
+                  integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"
+                  crossOrigin="anonymous"
+                />
+              )}
             </Head>
             <PostHeader
               title={post.title}
@@ -71,9 +81,15 @@ export async function getStaticProps({ params }: Params) {
     'summary',
     'lastmod',
     'tags',
+    'katex',
     'content',
   ])
-  const content = await serialize(post.content || '')
+  const content = await serialize(post.content || '', {
+    mdxOptions: {
+      remarkPlugins: [remarkMath],
+      rehypePlugins: [rehypeKatex],
+    }
+  })
 
   return {
     props: {

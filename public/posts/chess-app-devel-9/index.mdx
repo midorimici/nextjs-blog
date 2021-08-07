@@ -22,7 +22,7 @@ Python プログラムで動かすフェアリーチェスアプリ開発、連�
 
 ## 完成イメージ
 
-<postimage src="../chess-app-devel-8/goal" ext="gif" alt="完成図" />
+<postimage src="goal" ext="gif" alt="完成図" />
 
 もともといたマスからクリックしたマスまでスムーズに移動しています。
 
@@ -139,7 +139,7 @@ class Game:
 
 縦軸を $p$、横軸を $t$ としたとき、この赤のグラフは
 
-$$ p = \frac{{\sf self.endpos} - {\sf self.startpos}}{10} t + {\sf self.startpos} $$
+$$p = \frac{{\sf self.endpos} - {\sf self.startpos}}{10} t + {\sf self.startpos}$$
 
 と表すことができます。
 
@@ -168,37 +168,37 @@ draw_img(self.startpos[0] + (self.endpos[0] - self.startpos[0]) * self.time / 10
 
 （でも決してこの計算ができなければいけないわけではありません！）
 
-正弦曲線 $ y = \sin x $ のグラフを拡大縮小・平行移動して、この赤いグラフに重なるようにします。
+正弦曲線 $y = \sin x$ のグラフを拡大縮小・平行移動して、この赤いグラフに重なるようにします。
 
-$ y = \sin x $ のグラフは２点 $ \left(-\frac{\pi}{2}, -1 \right), \left(\frac{\pi}{2}, 1 \right) $ を通ります。
+$y = \sin x$ のグラフは２点 $\left(-\frac{\pi}{2}, -1 \right), \left(\frac{\pi}{2}, 1 \right)$ を通ります。
 
-この２点が変形後に $ (0, {\sf self.startpos}), (10, {\sf self.endpos}) $ に重なるようにします。
+この２点が変形後に $(0, {\sf self.startpos}), (10, {\sf self.endpos})$ に重なるようにします。
 
 <br/>
 
 まず、拡大縮小操作をして幅と高さを合わせます。
 
-幅が $ \frac{\pi}{2} - \left(-\frac{\pi}{2} \right) = \pi $ だったのを $10$ にするので、$x$ 軸方向に $ \frac{10}{\pi} $ 倍に拡大して
+幅が $\frac{\pi}{2} - \left(-\frac{\pi}{2} \right) = \pi$ だったのを $10$ にするので、$x$ 軸方向に $\frac{10}{\pi}$ 倍に拡大して
 
-$$ y = \sin \left(\frac{\pi}{10} x \right) $$
+$$y = \sin \left(\frac{\pi}{10} x \right)$$
 
-高さが $ 1 - (-1) = 2 $ だったのを $ {\sf self.endpos} - {\sf self.startpos} $ にするので、
+高さが $1 - (-1) = 2$ だったのを ${\sf self.endpos} - {\sf self.startpos}$ にするので、
 
-$y$ 軸方向に $ \frac{{\sf self.endpos} - {\sf self.startpos}}{2} $ 倍に拡大して
+$y$ 軸方向に $\frac{{\sf self.endpos} - {\sf self.startpos}}{2}$ 倍に拡大して
 
-$$ y = \frac{{\sf self.endpos} - {\sf self.startpos}}{2} \sin \left(\frac{\pi}{10} x \right) $$
+$$y = \frac{{\sf self.endpos} - {\sf self.startpos}}{2} \sin \left(\frac{\pi}{10} x \right)$$
 
 あとは平行移動をします。
 
-今の変形で点 $ \left(-\frac{\pi}{2}, -1 \right) $ が
+今の変形で点 $\left(-\frac{\pi}{2}, -1 \right)$ が
 
-点 $ \left(-5, -\frac{{\sf self.endpos} - {\sf self.startpos}}{2} \right) $ に移ったので、
+点 $\left(-5, -\frac{{\sf self.endpos} - {\sf self.startpos}}{2} \right)$ に移ったので、
 
-これが点 $ (0, {\sf self.startpos}) $ に来るようにします。
+これが点 $(0, {\sf self.startpos})$ に来るようにします。
 
-$x$ 軸方向に $ 5, y$ 軸方向に
+$x$ 軸方向に $5, y$ 軸方向に
 
-$ {\sf self.startpos} + \frac{{\sf self.endpos} - {\sf self.startpos}}{2} $ だけ平行移動して
+${\sf self.startpos} + \frac{{\sf self.endpos} - {\sf self.startpos}}{2}$ だけ平行移動して
 
 $$
 \begin{aligned}

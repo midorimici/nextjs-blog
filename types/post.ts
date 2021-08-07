@@ -5,6 +5,7 @@ type PostType = {
   lastmod: string
   tags: string[]
   content: string
+  katex?: boolean
   summary?: string
   draft?: boolean
 }
