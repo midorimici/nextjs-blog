@@ -40,6 +40,13 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
   return items
 }
 
+export function getAboutPost() {
+  const fileContents = fs.readFileSync(join(process.cwd(), 'public/about/index.md'), 'utf8')
+  const { data, content } = matter(fileContents)
+
+  return { title: data.title, content: twemoji.parse(content) }
+}
+
 export function getPosts(fields: string[] = [], offset: number = 0, limit: number = PAGINATION_PER_PAGE) {
   const slugs = getPostSlugs()
   const posts = slugs

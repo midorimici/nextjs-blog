@@ -1,3 +1,4 @@
+import type { MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { serialize } from 'next-mdx-remote/serialize'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
@@ -16,10 +17,7 @@ import PostType from '../../types/post'
 
 type Props = {
   post: PostType
-  source: {
-    compiledSource: string,
-    scope: {}
-  }
+  source: MDXRemoteSerializeResult<Record<string, unknown>>
 }
 
 const Post = ({ post, source }: Props) => {
