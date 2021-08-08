@@ -1,41 +1,208 @@
-# A statically generated blog example using Next.js, Markdown, and TypeScript
+# みどりみちのブログ
 
-This is the existing [blog-starter](https://github.com/vercel/next.js/tree/canary/examples/blog-starter) plus TypeScript.
+## MDX Components
 
-This example showcases Next.js's [Static Generation](https://nextjs.org/docs/basic-features/pages) feature using Markdown files as the data source.
+👀 [`components/mdx`](components/mdx)
 
-The blog posts are stored in `/_posts` as Markdown files with front matter support. Adding a new Markdown file in there will create a new blog post.
+### affiliate
 
-To create the blog posts we use [`remark`](https://github.com/remarkjs/remark) and [`remark-html`](https://github.com/remarkjs/remark-html) to convert the Markdown files into an HTML string, and then send it down as a prop to the page. The metadata of every post is handled by [`gray-matter`](https://github.com/jonschlinkert/gray-matter) and also sent in props to the page.
+`affiliate` -> [`Affiliate`](components/mdx/affiliate.tsx)
 
-## Preview
-
-Preview the example live on [StackBlitz](http://stackblitz.com/):
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/blog-starter-typescript)
-
-## Deploy your own
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/blog-starter-typescript&project-name=blog-starter-typescript&repository-name=blog-starter-typescript)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example blog-starter-typescript blog-starter-typescript-app
-# or
-yarn create next-app --example blog-starter-typescript blog-starter-typescript-app
+```ts
+asin: string
+id: string
+label: string   // 商品名
 ```
 
-Your blog should be up and running on [http://localhost:3000](http://localhost:3000)! If it doesn't work, post on [GitHub discussions](https://github.com/vercel/next.js/discussions).
+```md
+<affiliate asin="xxx" id="xxx" label="xxx" />
+```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+### code-block
 
-# Notes
+`code` -> [`CodeBlock`](components/mdx/code-block.tsx)
 
-This blog-starter-typescript uses [Tailwind CSS](https://tailwindcss.com). To control the generated stylesheet's filesize, this example uses Tailwind CSS' v2.0 [`purge` option](https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css) to remove unused CSS.
+```ts
+children: string
+className: string
+name?: string       // コードのファイル名
+hide_nums?: boolean = false // 行番号非表示
+hl_lines?: string   // ハイライト行 numbers
+ins?: string        // 挿入行 numbers
+del?: string        // 削除行 numbers
+inline_hl?: string  // 部分ハイライト 行番号:単語番号 number ':' numbers (';' number ':' numbers)*
+/*
+number = [0-9]+
+range = number '-' number
+number_or_range = number | range
+numbers = number_or_range (',' number_or_range)*
+*/
+```
 
-[Tailwind CSS v2.0 no longer supports Node.js 8 or 10](https://tailwindcss.com/docs/upgrading-to-v2#upgrade-to-node-js-12-13-or-higher). To build your CSS you'll need to ensure you are running Node.js 12.13.0 or higher in both your local and CI environments.
+````md
+```lang name=xxx.lang hl_lines=1,2-3 inline_hl=1:2-3;2:1,5-6
+xxx
+```
+````
+
+### fukidashi
+
+`fukidashi` -> [`Fukidashi`](components/mdx/fukidashi.tsx)
+
+```ts
+children: string | ReactElement
+face?: 'ase' | 'neut' | 'normal' = 'normal'   // 画像の種類
+```
+
+```md
+<fukidashi>xxx</fukidashi>
+<fukidashi face='ase'>xxx</fukidashi>
+```
+
+### icode
+
+`code` がコードブロックとして解析されるため、インラインコード用に。
+
+```ts
+children: string
+```
+
+```md
+<icode>xxx</icode>
+```
+
+### manga
+
+`manga-text` と一緒に使う。
+
+`manga` -> [`Manga`](components/mdx/manga.tsx)
+
+```ts
+src: string   // 画像へのパス
+alt: string   // 代替テキスト
+children: Element
+```
+
+### manga-text
+
+`manga` と一緒に使う。
+
+`manga-text` -> [`MangaText`](components/mdx/manga-text.tsx)
+
+```ts
+x: number     // 左端からの距離
+y: number     // 上端からの距離
+text: string  // 表示する内容 マークダウン・tltp 対応
+size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' = 'xl'  // テキストの大きさ
+color?: string    // テキストの色
+```
+
+```md
+<manga src="xxx" alt="xxx">
+
+<manga-text x={d} y={d} text="xxx" />
+
+</manga-text>
+```
+
+### postimage
+
+`postimage` -> [`PostImage`](components/mdx/post-image.tsx)
+
+```ts
+src: string   // 画像へのパス
+alt: string   // 代替テキスト
+ext?: 'png' | 'gif' | 'jpg' = 'jpg'   // 拡張子
+```
+
+```md
+<postimage src="xxx" alt="xxx" />
+<postimage src="xxx" alt="xxx" ext='gif' />
+```
+
+### pstlk
+
+`pstlk` -> [`PostLink`](components/mdx/pstlk.tsx)
+
+```ts
+label: string   // 表示するテキスト
+to: string      // リンク先
+```
+
+```md
+<pstlk label="xxx" to="xxx" />
+```
+
+### relpos
+
+`relpos` -> [`RelatedPost`](components/mdx/relpos.tsx)
+
+```ts
+link: string  // リンク先
+```
+
+```md
+<relpos link="xxx" />
+```
+
+### sandbox
+
+`sandbox` -> [`Sandbox`](components/mdx/sandbox.tsx)
+
+```ts
+name: string  // 代替テキストに使われるプロジェクト名
+link: string  // リンク
+```
+
+```md
+<sandbox name="xxx" link="xxx" />
+```
+
+### tltp
+
+`tltp` -> [`Tooltip`](components/mdx/tltp.tsx)
+
+```ts
+label: string   // もとのテキスト
+children: string | ReactElement   // ツールチップ内のテキスト マークダウン対応
+```
+
+```md
+<tltp label="xxx">xxx</tltp>
+```
+
+### tweet
+
+```ts
+id: string
+```
+
+```md
+<tweet id="xxx" />
+```
+
+### video
+
+`video` -> [`Video`](components/mdx/video.tsx)
+
+```ts
+src: string   // 動画へのパス
+control?: boolean = false   // コントロール領域を表示する
+```
+
+```md
+<video src="xxx" />
+<video src="xxx" control />
+```
+
+### yout
+
+`yout` -> [`YouTube`](components/mdx/youtube.tsx)
+
+```ts
+id: string
+```
+
+```md
+<yout id="xxx" />
+```
