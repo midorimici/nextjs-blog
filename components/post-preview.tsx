@@ -2,21 +2,26 @@ import DateFormatter from './date-formatter'
 import CoverImage from './cover-image'
 import Link from 'next/link'
 
+import { useParsedMarkdown } from './useParsedMarkdown'
+
 type Props = {
+  slug: string
   title: string
   date: string
   lastmod: string
-  excerpt?: string
-  slug: string
+  summary: string
 }
 
 const PostPreview = ({
+  slug,
   title,
   date,
   lastmod,
-  excerpt,
-  slug,
+  summary,
 }: Props) => {
+  const parsedTitle = useParsedMarkdown(title)
+  const content = useParsedMarkdown(summary)
+  
   return (
     <article className={`
       post-preview
@@ -33,17 +38,23 @@ const PostPreview = ({
       </Link>
       <CoverImage
         title={title}
-        src={`/assets/${slug}.jpg`}
+        src={`/posts/${slug}/index.jpg`}
       />
       <section className="m-4">
-        <h3 className="text-3xl mb-3 leading-snug">
-          {title}
-        </h3>
+        <h3
+          className="text-3xl mb-3 leading-snug"
+          dangerouslySetInnerHTML={{ __html: parsedTitle }}
+        />
         <div className="text-lg mb-4">
           <DateFormatter dateString={date} type='date' />
           <DateFormatter dateString={lastmod} type='lastmod' />
         </div>
-        <p className="text-lg leading-relaxed">{excerpt}</p>
+        {summary && (
+          <p
+            className="text-lg leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
+        )}
       </section>
     </article>
   )

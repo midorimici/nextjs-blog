@@ -1,16 +1,19 @@
+import Head from 'next/head'
+
 import Container from '../components/container'
 import Stories from '../components/stories'
 import Layout from '../components/layout'
-import { getAllPosts } from '../lib/api'
-import Head from 'next/head'
+import Pagination from '../components/pagination'
+import { getPosts, getTotalPostNumbers } from '../lib/api'
 import { SITE_NAME } from '../lib/constants'
 import Post from '../types/post'
 
 type Props = {
-  allPosts: Post[]
+  posts: Post[]
+  postNumbers: number
 }
 
-const Index = ({ allPosts }: Props) => {
+const Index = ({ posts, postNumbers }: Props) => {
   return (
     <>
       <Layout>
@@ -18,8 +21,9 @@ const Index = ({ allPosts }: Props) => {
           <title>{SITE_NAME}</title>
         </Head>
         <Container>
-          {allPosts.length > 0 && <Stories posts={allPosts} />}
+          {posts.length > 0 && <Stories posts={posts} />}
         </Container>
+        <Pagination postNumbers={postNumbers} />
       </Layout>
     </>
   )
@@ -28,16 +32,18 @@ const Index = ({ allPosts }: Props) => {
 export default Index
 
 export const getStaticProps = async () => {
-  const allPosts = getAllPosts([
+  const posts = getPosts([
     'title',
     'date',
     'slug',
-    'excerpt',
+    'summary',
     'lastmod',
     'tags',
+    'content',
   ])
+  const postNumbers = getTotalPostNumbers()
 
   return {
-    props: { allPosts },
+    props: { posts, postNumbers },
   }
 }

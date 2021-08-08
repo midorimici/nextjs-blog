@@ -1,47 +1,63 @@
+import { serialize } from 'next-mdx-remote/serialize'
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
-import PostBody from '../../components/post-body'
-import PostHeader from '../../components/post-header'
-import Layout from '../../components/layout'
-import { getPostBySlug, getAllPosts } from '../../lib/api'
-import PostTitle from '../../components/post-title'
 import Head from 'next/head'
+
+import PostBody from '../../components/post/post-body'
+import PostHeader from '../../components/post/post-header'
+import Layout from '../../components/layout'
+import { getPostBySlug, getPostSlugs } from '../../lib/api'
+import PostTitle from '../../components/post/post-title'
+
 import { SITE_NAME } from '../../lib/constants'
-import markdownToHtml from '../../lib/markdownToHtml'
 import PostType from '../../types/post'
 
 type Props = {
   post: PostType
+  source: {
+    compiledSource: string,
+    scope: {}
+  }
 }
 
-const Post = ({ post }: Props) => {
+const Post = ({ post, source }: Props) => {
   const router = useRouter()
 
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
 
-  const imagePath = `/assets/${post.slug}.jpg`
+  const imagePath = `/posts/${post.slug}/index.jpg`
 
   return (
     <Layout>
       {router.isFallback ? (
-        <PostTitle>Loading…</PostTitle>
+        <PostTitle title='Loading…' />
       ) : (
         <>
           <article className="mb-8">
             <Head>
               <title>
-                {post.title} | {SITE_NAME}
+                {post.title.replace(/<br\/>/g, '')} | {SITE_NAME}
               </title>
               <meta property="og:image" content={imagePath} />
+              {post.katex && (
+                <link
+                  rel="stylesheet"
+                  href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"
+                  integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"
+                  crossOrigin="anonymous"
+                />
+              )}
             </Head>
             <PostHeader
               title={post.title}
               date={post.date}
               lastmod={post.lastmod}
             />
-            <PostBody content={post.content} />
+            <PostBody source={source} slug={post.slug} />
           </article>
         </>
       )}
@@ -62,31 +78,37 @@ export async function getStaticProps({ params }: Params) {
     'title',
     'date',
     'slug',
-    'excerpt',
+    'summary',
     'lastmod',
     'tags',
+    'katex',
     'content',
   ])
-  const content = await markdownToHtml(post.content || '')
+  const content = await serialize(post.content || '', {
+    mdxOptions: {
+      remarkPlugins: [remarkMath],
+      rehypePlugins: [rehypeKatex],
+    }
+  })
 
   return {
     props: {
       post: {
         ...post,
-        content,
       },
+      source: content,
     },
   }
 }
 
 export async function getStaticPaths() {
-  const posts = getAllPosts(['slug'])
+  const slugs = getPostSlugs()
 
   return {
-    paths: posts.map((posts) => {
+    paths: slugs.map((slug) => {
       return {
         params: {
-          slug: posts.slug,
+          slug,
         },
       }
     }),

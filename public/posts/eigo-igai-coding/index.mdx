@@ -1,0 +1,166 @@
+---
+title: "【日本語・フランス語・ラテン語】英語以外でコーディングしてみた"
+date: 2020-03-18T12:00:00+09:00
+lastmod: 2020-07-02T12:00:00+09:00
+categories: [プログラミング, プログラミング一般]
+tags: [言語, プログラミング, Python]
+draft: false
+---
+
+以前、こんな記事を読みました。
+
+→ [「プログラミング＝英語」という状況は正しくない。多言語でコードを書ける世界が求められている｜WIRED.jp](https://wired.jp/2019/08/04/coding-is-for-everyoneas-long-as-you-speak-english/)
+
+ということで、今回は英語以外で Python をコーディングして遊んでみたいと思います！
+
+<!--more-->
+
+<br/>
+
+## 翻訳元となる英語のコード
+
+素因数分解をするプログラムを英語の Python で書いてみます。
+
+```py
+'This is a program which implements prime factorization.'
+　
+　
+from math import ceil, sqrt
+　
+　
+def is_prime(n):
+    'judge if n is a prime'
+    if n == 2: return True
+    if n % 2 == 0: return False
+    for i in range(3, ceil(sqrt(n)) + 1, 2):
+        if n % i == 0:
+            return False
+    return True
+　
+　
+def primes(n, start):
+    'primes from start to n'
+    for i in range(start, n + 1):
+        if is_prime(i):
+            yield i
+　
+　
+def prime_factorize(n, start):
+    'implement prime factorization'
+    while n % 2 == 0 and n != 2:
+        print('2 *' , end=' ')
+        n //= 2
+    for i in primes(ceil(sqrt(n)), start):
+        if n % i == 0:
+            print(f'{i} *', end=' ')
+            prime_factorize(int(n // i), i)
+            break
+    if is_prime(n):
+        print(int(n))
+　
+　
+while True:
+    num = input('Input an integer larger than 1.\n')
+    if num.isdigit() and int(num) > 1:
+        break
+    else:
+        print('That is invalid input. Try again.')
+　
+　
+print('=')
+prime_factorize(int(num), 2)
+```
+
+自作のカッペリーニコードですがお気になさらず！
+
+ちなみに出力はこんな感じです。
+
+<postimage src="jikkou_gamen" ext="png" alt="実行画面" />
+
+<relpos link="pcap-report" />
+
+<br/>
+
+## 各言語に翻訳
+
+翻訳の精度は目をつむってください笑
+
+### 日本語
+
+私にとって一番馴染み深い日本語から。
+
+<postimage src="ja" alt="ja" />
+
+なるほど、日本語は後置修飾型の言語だということを再認識しました。
+
+「関数」「もし」を省くと、一見するだけでは条件文なのか定義文なのか反復処理なのかわからないですね。
+
+**可読性のためには語順が大切**なんですね。
+
+ところでクラス内部だと「関数」は「メソッド」になるのでしょうか…
+
+そう考えると、`定義する 素数である(イ):`みたいに倒置した形で書いていくほうがいいのかも。
+
+あと、書くときは地味に**全角と半角の切り替えが辛い**ので、やるなら全角で統一したほうがいいですね。
+
+ちなみに、日本語プログラミング言語には[なでしこ](https://nadesi.com/top/)や[プロデル](https://rdr.utopiat.net/)などがあります。
+
+### フランス語
+
+フランスの他にもアフリカ西北部やカナダの一部などで話され、多くの国際機関の公用語としても用いられているフランス語です。
+
+文法とか間違ってたらごめんなさい🙏
+
+<postimage src="fr" alt="fr" />
+
+`rccr`は racine carrée （平方根）、`déf`は définir を略したものです。
+
+ここには出ていないのですが、`not`とか面白そう。
+
+`si ne a < b et a*b > 2 pas:`みたいな。
+
+ne と pas で挟まれた部分が否定されるので、括弧いらずです。
+
+フランス語のプログラミング言語には[Linotte](http://langagelinotte.free.fr/)などがあるようです。
+
+動詞は不定形としましたが、これ見た感じだと命令形がいいのかな…？
+
+### ラテン語
+
+何世紀にも渡って今日のヨーロッパ・北アフリカの大部分を支配下に置いた古代ローマ帝国の公用語で、
+
+その後も学術用語として広く用いられてきたラテン語です。
+
+<postimage src="la" alt="la" />
+
+格変化、合ってるかなあ…笑
+
+`rdqd`は radix quadrata 、`dēf`は dēfīni の略。
+
+せっかくなので、もうちょっとクラシックにしてみますか。
+
+<postimage src="cl" alt="classical la" />
+
+もともとは単語の分かち書きもしないのですが、それだとプログラムが動かなくなりそうだし、すでに十分暗号です。笑
+
+ちなみにラテン語のプログラミング言語には[Lingua::Romana::Perligata](https://metacpan.org/pod/Lingua::Romana::Perligata)という、Perl のラテン語版があるそうです。
+
+<br/>
+
+## 言語の壁
+
+個人開発なら面白そうですが、今のところはお仕事はやっぱり英語のほうが喜ばれるでしょう。
+
+もちろんグローバルな作業環境では英語のプログラミング言語を使っていくのが共有しやすくていいんでしょうが、
+
+ローカルの地元の人しかいなくて英語を全然使わないような環境なら、わざわざ英語でプログラミングする必要がないと思うんですよね。
+
+あと、のちのち英語版を使うことになるとしても、他言語版は教育目的で使えると思います。
+
+英語ができないからプログラミングができない！となってしまうのは非常にもったいないことだと思うので、
+
+[BabylScript](http://www.babylscript.com/)みたいなのが増えてくると素敵だなと思います。
+
+最後までありがとうございました！
+
+それではまた👋

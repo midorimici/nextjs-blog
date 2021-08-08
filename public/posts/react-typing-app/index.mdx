@@ -1,0 +1,695 @@
+---
+title: "【React 初心者】React でタイピング練習アプリ！"
+date: 2020-06-05T12:00:00+09:00
+lastmod: 2020-06-05T12:00:00+09:00
+categories: [プログラミング, Web アプリ]
+tags: [React, アプリ開発]
+summary: "前回、React で文字当てゲームを作りました。
+<br/><br/>
+今回は、このようなタイピング練習アプリを作ってみました。
+<br/><br/>
+この記事では、このタイピングアプリの実装について解説しながら、"
+draft: false
+---
+
+<pstlk label="前回" to="react-mojiate-game" />、React で文字当てゲームを作りました。
+
+今回は、このようなタイピング練習アプリを作ってみました。
+
+<tweet id="1268135841366339585" />
+
+
+<br/>
+
+
+<sandbox name="react-simple-typing-app" link="https://codesandbox.io/s/react-simple-typing-app-s8quj?fontsize=14&hidenavigation=1&module=%2Fsrc%2FApp.tsx&view=preview" />
+
+この記事では、このタイピングアプリの実装について解説しながら、
+
+少々ですが練習のために使用した、
+
+- React Hooks
+- コンポーネントと props
+- Material-UI
+- TypeScript
+
+についても書いていきます。
+
+これらの知識がすでにある方は、最初の４項目は[読み飛ばして](#%E5%AE%9F%E8%A3%85)いただいても構いません。
+
+<relpos link="react-mojiate-game" />
+
+
+<br/>
+
+
+## React Hooks (useState)
+
+前回の文字当てゲームでは、クラスを定義して state を使っていました。
+
+しかし、React Hooks という機能を使うことで、関数の中で state を扱うことができるようになります。
+
+例えば、このように書いていたのを、
+
+```jsx name=/src/App.js del=1,3-10,13-16,19-20 inline_hl=1:5;3:5,9-11
+import React, { Component } from 'react';
+
+export default class App extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			firstState: 1,
+			secondState: false,
+		};
+	}
+
+	setValue = () => {
+		const { firstState } = this.state;
+		this.setState({
+			firstState: firstState + 1,
+		});
+	};
+
+	render() {
+		const { firstState, secondState } = this.state;
+
+		return (
+			<div>
+				<p>{firstState}</p>
+				<p>{secondState}</p>
+			</div>
+		);
+	}
+}
+```
+
+次のように**簡潔に書くことができる**ようになります。
+
+```jsx name=/src/App.js ins=1,3-5,7 inline_hl=1:5;3:5,8-9;7:1,12-19
+import React, { useState } from 'react';
+
+export default function App() {
+	const [firstState, setFirstState] = useState(1);
+	const [secondState, setSecondState] = useState(false);
+
+	const setValue = () => setFirstState(firstState + 1);
+
+	return (
+		<div>
+			<p>{firstState}</p>
+			<p>{secondState}</p>
+		</div>
+	);
+}
+```
+
+`const [firstState, setFirstState]`の`firstState`は変数（state）名、`setFirstState`はその変数を変更させるための関数名です。
+
+`useState()`の引数に変数の初期値を渡します。
+
+Hooks を使うことで、**関数内部のどこからでも宣言なしでさっと state を参照できて、とても便利**です。
+
+
+<br/>
+
+
+## コンポーネントと props
+
+コンポーネントとは「部品」のことです。
+
+次のように使います。
+
+```jsx hl_lines=11
+import React from 'react';
+
+function MyComponent() {
+	return <p>This is my component.</p>;
+}
+
+function AnotherComponent() {
+	return (
+		<div>
+			"MyComponent" comes here.
+			<MyComponent />
+		</div>
+	);
+}
+```
+
+`<MyComponent />`と書いた部分に、
+
+`<p>This is my component.</p>`が展開されます。
+
+
+<br/>
+
+
+<strong>props は「外部から値を入れられる変数」</strong>のことです。
+
+関数の引数みたいなイメージです。
+
+関数を呼び出すときに引数を渡すのと同じように、次のように書きます。
+
+```jsx hl_lines=3,4,11 inline_hl=3:5;4:7-11;11:4-8
+import React from 'react';
+
+function MyComponent(props) {
+	return <p>This is my {props.adjective} component.</p>;
+}
+
+function AnotherComponent() {
+	return (
+		<div>
+			"MyComponent" comes here.
+			<MyComponent adjective='great' />
+		</div>
+	);
+}
+```
+
+これで`<MyComponent adjective="great" />`と書いた部分に、
+
+`<p>This is my great component.</p>`が展開されます。
+
+なお、３～５行目は props を省略して次のように書くこともできます。
+
+```jsx
+function MyComponent({ adjective }) {
+	return <p>This is my {adjective} component.</p>;
+}
+```
+
+ちなみに、コンポーネント名の先頭は大文字である必要があります。
+
+
+<br/>
+
+
+## Material-UI
+
+[Material-UI](https://material-ui.com/ja/) は、React コンポーネントを使って
+<tltp label="マテリアルデザイン">
+	Google が提唱したデザイン方法<br/>
+	現実世界の物理的・物質的な性質を取り入れることで、<br/>
+	直感的な操作性を実現する
+</tltp>
+を実現できるライブラリです。
+
+`npm install @material-ui/core`とターミナルに打ってインストールすることで、
+
+すぐに使い始めることができます。
+
+
+<br/>
+
+
+いろいろなコンポーネントが用意されていて、JSX に書き込むだけで、
+
+その位置にきれいなデザインのボタンやカード、ダイアログなどを表示できます。
+
+
+<br/>
+
+
+例えば、ボタンを表示させるには、次のようにします。
+
+```jsx hl_lines=2,9-11
+import React from 'react';
+import Button from '@material-ui/core/Button';
+
+function ButtonSample() {
+  const handleClick = () => // doSomething();
+
+  return (
+    <div>
+      <Button onClick={handleClick} variant="contained" color="primary">
+        Click me!
+      </Button>
+    </div>
+  );
+}
+```
+
+[公式ドキュメント](https://material-ui.com/ja/components/buttons/)には、どうすればどのようなデザインになるのかについて詳しく書かれています。
+
+これで**簡単にきれいなデザインを実装する**ことができます。
+
+
+<br/>
+
+
+## TypeScript
+
+TypeScript とは、型付けができる JavaScript です。
+
+定数や変数を定義するときに、「これは文字列だ」「これは数値だ」と決めておくことで、
+
+**予期せぬエラーを未然に防ぐことができる**ようになります。
+
+Create React App で TypeScript を使う場合、プロジェクト作成の際に`--typescript`オプションをつけるだけで、
+
+TypeScript による開発を始めることができます。
+
+```bash hide_nums
+npx create-react-app my-react-app --typescript
+```
+
+
+<br/>
+
+
+## 実装
+
+さて、ここから実際の実装作業に入っていきます。
+
+### ボタンコンポーネントを作る
+
+まずはボタンのためのコンポーネントを作ります。
+
+`components`フォルダの下に`MyButton.tsx`を作成します。
+
+```tsx name=/src/components/MyButton.tsx
+import React from 'react';
+import Button from '@material-ui/core/Button';
+
+type Props = {
+	children: any,
+	onClick: () => void,
+};
+
+export default function MyButton({ children, onClick }: Props) {
+	return (
+		<Button onClick={onClick} variant='contained' color='primary'>
+			{children}
+		</Button>
+	);
+}
+```
+
+４～７行目では、`MyButton`関数の引数の型をまとめて定義しています。
+
+とはいっても`any`は「何でも OK」というものなので、あまり意味がなかったりしますが、
+
+だとしても型定義はしないと怒られます。
+
+
+<br/>
+
+
+`() => void`は返り値のない関数であることを示します。
+
+
+<br/>
+
+
+ところで Material-UI の`Button`は、デフォルトではテキストがすべて大文字になってしまうので、
+
+この設定を解除します。
+
+```tsx name=/src/components/MyButton.tsx hl_lines=2,5-11,20,24
+import React from 'react';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
+const styles = createMuiTheme({
+	typography: {
+		button: {
+			textTransform: 'none',
+		},
+	},
+});
+
+type Props = {
+	children: any,
+	onClick: () => void,
+};
+
+export default function MyButton({ children, onClick }: Props) {
+	return (
+		<ThemeProvider theme={styles}>
+			<Button onClick={onClick} variant='contained' color='primary'>
+				{children}
+			</Button>
+		</ThemeProvider>
+	);
+}
+```
+
+`Button`コンポーネントを`ThemeProvider`コンポーネントで囲み、
+
+その props の`theme`に、５行目で定義したスタイルを指定しています。
+
+これでボタンにスタイルが適用され、ボタンの文字が大文字化しなくなります。
+
+
+<br/>
+
+
+ここで`export`したコンポーネントを、`App.tsx`でインポートして使用します。
+
+```tsx name=/src/App.tsx hl_lines=7
+import React from 'react';
+import MyButton from './components/MyButton';
+
+export default function App() {
+	return (
+		<div className='App'>
+			<MyButton>ON</MyButton>
+		</div>
+	);
+}
+```
+
+### state と構成を決める
+
+今回のアプリで必要となる state は、
+
+- 表示する文字
+- ボタンで入力可能・不可能を切り替えるブール変数
+- 現在入力している位置
+- タイプミスをした位置の配列
+
+となります。
+
+
+<br/>
+
+
+まず、ボタンで入力可能・不可能を切り替えるためのブール変数を用意します。
+
+```tsx name=/src/App.tsx hl_lines=5,7,11
+import React, { useState } from 'react';
+import MyButton from './components/MyButton';
+
+export default function App() {
+	const [typing, setTyping] = useState(false);
+
+	const typingToggle = () => setTyping(typing ? false : true);
+
+	return (
+		<div className='App'>
+			<MyButton onClick={typingToggle}>{typing ? 'OFF' : 'ON'}</MyButton>
+		</div>
+	);
+}
+```
+
+ボタンを押すと`typingToggle`関数が動作し、`typing`を変更します。
+
+ボタンの表示は ON OFF と切り替わります。
+
+
+<br/>
+
+
+次に、タイピング用のテキストを用意します。
+
+これはリセットボタンを押すと変化するようにするので、state に入れています。
+
+```tsx name=/src/App.tsx hl_lines=5,12-14
+import React, { useState } from 'react';
+import MyButton from './components/MyButton';
+
+export default function App() {
+	const [text, setText] = useState('test text');
+	const [typing, setTyping] = useState(false);
+
+	const typingToggle = () => setTyping(typing ? false : true);
+
+	return (
+		<div className='App'>
+			<div id='textbox'>{text}</div>
+			<MyButton onClick={typingToggle}>{typing ? 'OFF' : 'ON'}</MyButton>
+		</div>
+	);
+}
+```
+
+### キー入力を処理する
+
+React には[合成イベント](https://ja.reactjs.org/docs/events.html#keyboard-events)というものがあり、
+
+キーボードイベントやホイールイベントを処理することができます。
+
+`onKeyPress`を使って、とりあえず入力したキーを表示させてみます。
+
+```tsx name=/src/App.tsx hl_lines=10,13
+import React, { useState } from 'react';
+import MyButton from './components/MyButton';
+
+export default function App() {
+	const [text, setText] = useState('test text');
+	const [typing, setTyping] = useState(false);
+
+	const typingToggle = () => setTyping(typing ? false : true);
+
+	const handleKey = (e: React.KeyboardEvent<HTMLDivElement>) => setText(e.key);
+
+	return (
+		<div className='App' onKeyPress={(e) => handleKey(e)} tabIndex={0}>
+			<div id='textbox'>{text}</div>
+			<MyButton onClick={typingToggle}>{typing ? 'OFF' : 'ON'}</MyButton>
+		</div>
+	);
+}
+```
+
+`onKeyPress`の部分に指定した関数が、なんらかのキーが押されたときに動作します。
+
+`tabIndex`を指定しないとキーに反応しないので注意してください。
+
+
+<br/>
+
+
+`React.KeyboardEvent<HTMLDivElement>`というのは TypeScript の型定義で、
+
+VS Code であれば Quick Fix 機能を使っていい感じに補完してくれたりします。
+
+
+<br/>
+
+
+これで入力したキーを認識し、表示することができます。
+
+<postimage src="key-event-test" ext="gif" alt="React キーボードイベント テスト" />
+
+
+<br/>
+
+
+さて、ここからタイピングアプリにしていくので、あらかじめ用意された文字列と比較して、
+
+文字が一致するかどうかで表示を変えることになります。
+
+とりあえず、入力し終わった文字を黒、まだ入力していない文字をグレーで表示させてみましょう。
+
+現在どこの文字を入力しようとしているか（位置）の情報が必要なので、state に追加します。
+
+```tsx name=/src/App.tsx hl_lines=3,8,12-21,26,27
+import React, { useState } from 'react';
+import MyButton from './components/MyButton';
+import './App.scss';
+
+export default function App() {
+	const [text, setText] = useState('test text');
+	const [typing, setTyping] = useState(false);
+	const [position, setPosition] = useState(0);
+
+	const typingToggle = () => setTyping(typing ? false : true);
+
+	const handleKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
+		// 入力可能のとき
+		if (typing) {
+			// 入力したキーと現在入力しようとしている文字が一致するとき
+			if (e.key === text[position]) {
+				// 次の位置へ移動
+				setPosition(position + 1);
+			}
+		}
+	};
+
+	return (
+		<div className='App' onKeyPress={(e) => handleKey(e)} tabIndex={0}>
+			<div id='textbox'>
+				<span className='typed-letters'>{text.slice(0, position)}</span>
+				<span className='waiting-letters'>{text.slice(position)}</span>
+			</div>
+			<MyButton onClick={typingToggle}>{typing ? 'OFF' : 'ON'}</MyButton>
+		</div>
+	);
+}
+```
+
+今回は SCSS を使っていますが、CSS でも構いません。
+
+SCSS を使うためには、ターミナルで`npm install -D node-sass`と入力しておきます。
+
+
+<br/>
+
+
+正しい文字を打つと文字が黒くなり、正しい文字を打たないと先に進みません。
+
+また、ボタンで文字入力不可の状態にすると、何を打っても反応しなくなります。
+
+<postimage src="typing-test" ext="gif" alt="React タイピング テスト" />
+
+### 打ち間違えた文字を赤くする
+
+打ち間違えた文字を、その瞬間だけ赤くするだけなら、
+
+「入力し終わった文字」「現在入力待ちの文字」「まだ入力されていない文字」の３つに分ければ済みますが、
+
+入力し終わった文字でも打ち間違えていたものは赤くするという場合、
+
+文字ひとつひとつに色付けをしていくことになります。
+
+そのために、ひとつひとつの文字を`span`タグに入れて、その`className`を動的に変更することで、
+
+文字が黒かグレーか赤かを決めます。
+
+
+<br/>
+
+
+これを実現するために`map`メソッドを使い、`map`を使うために`split`メソッドで文字列を配列に変換します。
+
+ただ、最初の１文字だけははじめから「現在入力待ちの文字」にしています。
+
+```tsx name=/src/App.tsx hl_lines=9,16-42,49-55
+import React, { useState } from 'react';
+import MyButton from './components/MyButton';
+import "./App.scss";
+
+export default function App() {
+  const [text, setText] = useState("test text");
+  const [typing, setTyping] = useState(false);
+  const [position, setPosition] = useState(0);
+  const [typo, setTypo] = useState(new Array(0));
+
+  const typingToggle = () => setTyping(typing ? false : true);
+
+  const handleKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    // 入力可能のとき
+    if (typing) {
+      // 文字の配列を取得
+      let textSpans = document.querySelector("#textbox")!.children;
+      // 入力したキーと現在入力しようとしている文字が一致するとき
+      if (e.key === text[position]) {
+        // 現在の文字を入力済とする
+        textSpans[position].classList.add("typed-letters");
+        textSpans[position].classList.remove("current-letter");
+        // まだ入力していない文字があるとき
+        if (position <= text.length - 2) {
+          // 次の位置へ移動
+          textSpans[position + 1].className = "current-letter";
+          setPosition(position + 1);
+        // 全ての文字を入力し終わったとき
+        } else {
+          // 入力不可にする
+          setTyping(false);
+        }
+      // 間違ったキーを入力したとき
+      } else {
+        // その位置でのはじめての打ち間違えであるとき
+        if (typo.indexOf(position) === -1) {
+          // 打ち間違えた位置の配列にその位置を追加
+          setTypo([...typo, position]);
+          // 打ち間違えた文字であることを示す class を追加
+          textSpans[position].classList.add("typo");
+        }
+      }
+    }
+  };
+
+  return (
+    <div className="App" onKeyPress={e => handleKey(e)} tabIndex={0}>
+      <div id="textbox">
+        <span className="current-letter">{text[0]}</span>
+          {text
+            .split("")
+            .slice(1)
+            .map(char => (
+              <span className="waiting-letters">{char}</span>
+            ))}
+      </div>
+      <MyButton onClick={typingToggle}>{typing ? "OFF" : "ON"}</MyButton>
+    </div>
+  );
+}
+```
+
+17 行目の`document.querySelector("#textbox")!`の`!`は、
+
+`document.querySelector("#textbox")`が`null`になる可能性があるために TypeScript に怒られることを避けるためにつけています。
+
+`null`でないときにのみ動くようになります。
+
+
+<br/>
+
+
+あとは CSS のほうで色の設定をします。
+
+ついでに、「現在入力待ちの文字」の位置に下線を表示して点滅させます。
+
+<video src="typo-red" />
+
+だいぶ完成に近づいてきました！
+
+### リセットボタンをつくる
+
+リセットすると、すべての文字が入力待ちになり、打ち間違えもリセットされます。
+
+```tsx name=/src/App.tsx hl_lines=2-15,30
+...
+const refresh = () => {
+  // 文字の配列を取得
+  let textSpans = document.querySelector("#textbox")!.children;
+  // すべての文字のクラス名を変更
+  for (const i of textSpans) {
+    i.className = "waiting-letters";
+  }
+  // 最初の文字のクラス名のみ変更
+  textSpans[0].className = "current-letter";
+  // 位置を最初に
+  setPosition(0);
+  // 打ち間違えた位置の配列をリセット
+  setTypo(new Array(0));
+};
+
+return (
+  <div className="App" onKeyPress={e => handleKey(e)} tabIndex={0}>
+    <div id="textbox">
+      <span className="current-letter">{text[0]}</span>
+        {text
+          .split("")
+          .slice(1)
+          .map(char => (
+            <span className="waiting-letters">{char}</span>
+          ))}
+    </div>
+    <div className="buttons">
+      <MyButton onClick={typingToggle}>{typing ? "OFF" : "ON"}</MyButton>
+      <MyButton onClick={refresh}>Refresh</MyButton>
+    </div>
+  </div>
+);
+```
+
+<video src="typing-refresh" />
+
+これで主要な機能は完成です！
+
+あとはテキストをランダムに生成したり、スタイルを整えたりすれば完成です。
+
+完成形のコード全文は CodeSandbox で見られます。
+
+<sandbox name="react-simple-typing-app" link="https://codesandbox.io/s/react-simple-typing-app-s8quj?fontsize=14&hidenavigation=1&module=%2Fsrc%2FApp.tsx&view=preview" />
+
+---
+
+この記事が参考になったならうれしいです。
+
+では👋
