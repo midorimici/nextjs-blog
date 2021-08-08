@@ -45,7 +45,7 @@ const CodeBlock = ({
   return (
     <div className="relative my-4">
       {name && (
-        <span className="px-2 py-1 bg-gray-100 rounded-t border-b font-code text-sm">
+        <span className="px-2 py-1 bg-gray-100 rounded-t border-b font-code text-sm whitespace-pre-wrap break-words">
           {name}
         </span>
       )}

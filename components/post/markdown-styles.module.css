@@ -26,7 +26,7 @@
 }
 
 .markdown code {
-  @apply mx-1 px-2 py-1 bg-gray-100 rounded font-code;
+  @apply mx-1 px-2 py-1 bg-gray-100 rounded font-code break-words;
 }
 
 .markdown p > a {
