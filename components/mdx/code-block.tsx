@@ -43,68 +43,70 @@ const CodeBlock = ({
   const { successed, handleCopyClick } = useCodeCopyHandler(children)
 
   return (
-    <div className="relative my-4">
+    <div className="my-4">
       {name && (
         <span className="px-2 py-1 bg-gray-100 rounded-t border-b font-code text-sm whitespace-pre-wrap break-words">
           {name}
         </span>
       )}
-      <Highlight
-        {...defaultProps}
-        code={children}
-        language={lang}
-        theme={theme}
-      >
-        {({className, style, tokens, getLineProps, getTokenProps}) => (
-          <pre
-            className={`${className} p-4 text-sm overflow-auto`}
-            style={style}
-          >
-            <div>
-              {tokens.map((line, lineIndex) => (!(lineIndex === tokens.length - 1 && line[0].empty) && (
-                <div
-                  key={lineIndex}
-                  {...getLineProps({line, key: lineIndex})}
-                  className="table-row"
-                >
-                  {!hide_nums && (
-                    <span className={`
-                      table-cell px-2 text-right select-none
-                      ${highlightColor(lineIndex) ? `bg-${highlightColor(lineIndex)}-100` : ''}
+      <div className="relative">
+        <Highlight
+          {...defaultProps}
+          code={children}
+          language={lang}
+          theme={theme}
+        >
+          {({className, style, tokens, getLineProps, getTokenProps}) => (
+            <pre
+              className={`${className} p-4 text-sm overflow-auto`}
+              style={style}
+            >
+              <div>
+                {tokens.map((line, lineIndex) => (!(lineIndex === tokens.length - 1 && line[0].empty) && (
+                  <div
+                    key={lineIndex}
+                    {...getLineProps({line, key: lineIndex})}
+                    className="table-row"
+                  >
+                    {!hide_nums && (
+                      <span className={`
+                        table-cell px-2 text-right select-none
+                        ${highlightColor(lineIndex) ? `bg-${highlightColor(lineIndex)}-100` : ''}
+                      `}>
+                        {lineIndex+1}
+                      </span>
+                    )}
+                    <div className={`
+                      table-cell
+                      pl-2
+                      ${highlightColor(lineIndex) ?
+                        `bg-gradient-to-r from-${highlightColor(lineIndex)}-50 to-transparent` : ''}
                     `}>
-                      {lineIndex+1}
-                    </span>
-                  )}
-                  <div className={`
-                    table-cell
-                    pl-2
-                    ${highlightColor(lineIndex) ?
-                      `bg-gradient-to-r from-${highlightColor(lineIndex)}-50 to-transparent` : ''}
-                  `}>
-                    {line.map((token, key) => (
-                      <span
-                        key={key}
-                        {...getTokenProps({token, key})}
-                        className={isHighlightedInline(lineIndex, key) ?
-                          `bg-${highlightColor(lineIndex)}-100
-                          border-${highlightColor(lineIndex)}-300 border-b-2` : ''
-                        }
-                      />
-                    ))}
+                      {line.map((token, key) => (
+                        <span
+                          key={key}
+                          {...getTokenProps({token, key})}
+                          className={isHighlightedInline(lineIndex, key) ?
+                            `bg-${highlightColor(lineIndex)}-100
+                            border-${highlightColor(lineIndex)}-300 border-b-2` : ''
+                          }
+                        />
+                      ))}
+                    </div>
+                    <div className="w-4" />
                   </div>
-                  <div className="w-4" />
-                </div>
-              )))}
-            </div>
-            <button title="コピー" onClick={() => handleCopyClick()} className={`
-              absolute top-0 right-0 w-8 h-8 bg-gray-400 bg-opacity-60
-              transition-colors duration-300 hover:bg-pink-400
-            `}>
-              <FontAwesomeIcon icon={successed ? faCheck : faCopy} color='#ffffff' className="align-middle" />
-            </button>
-          </pre>
-        )}
-      </Highlight>
+                )))}
+              </div>
+              <button title="コピー" onClick={() => handleCopyClick()} className={`
+                absolute top-0 right-0 w-8 h-8 bg-gray-400 bg-opacity-60
+                transition-colors duration-300 hover:bg-pink-400
+              `}>
+                <FontAwesomeIcon icon={successed ? faCheck : faCopy} color='#ffffff' className="align-middle" />
+              </button>
+            </pre>
+          )}
+        </Highlight>
+      </div>
     </div>
   )
 }
