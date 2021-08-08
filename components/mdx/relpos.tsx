@@ -4,6 +4,8 @@ import useSWR from 'swr'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBookOpen, faSun } from '@fortawesome/free-solid-svg-icons'
 
+import { useImagePlaceholder } from 'components/useImagePlaceholder'
+
 export type RelatedPostProps = {
   link: string
 }
@@ -20,6 +22,7 @@ const fetcher = async (url: string) => {
 
 const RelatedPost = ({ link }: RelatedPostProps) => {
   const imgPath = `/posts/${link}/index.jpg`
+  const placeholder = useImagePlaceholder(320, 180)
 
   const { data, error } = useSWR(`/api/post_titles/${link}`, fetcher)
 
@@ -57,6 +60,8 @@ const RelatedPost = ({ link }: RelatedPostProps) => {
           width={320}
           height={180}
           className="rounded-b-2xl sm:rounded-l-none sm:rounded-r-2xl"
+          placeholder="blur"
+          blurDataURL={`data:image/svg+xml;base64,${placeholder}`}
         />
       </section>
     </section>
