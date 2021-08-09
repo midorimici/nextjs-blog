@@ -53,10 +53,12 @@ const topicEmojiMap: Record<string, string> = {
   'マンガ': '📖',
 }
 
-let topicEmojiSourceMap: Record<string, string> = {};
+let topicEmojiSourceMap: Record<string, string> = {}
 
 for (const [k, v] of Object.entries(topicEmojiMap)) {
   topicEmojiSourceMap[k] = `https://twemoji.maxcdn.com/v/latest/svg/${twemoji.convert.toCodePoint(v).split('-')[0]}.svg`
 }
 
 export { topicEmojiSourceMap }
+
+export const topicNames = Object.keys(brandTopicsMap).concat(Object.keys(topicEmojiMap))

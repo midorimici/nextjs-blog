@@ -32,7 +32,7 @@ export async function getStaticProps({ params }: Params) {
     'topics',
     'content',
     'published',
-  ], PAGINATION_PER_PAGE*(params.id-1))
+  ], { offset: PAGINATION_PER_PAGE*(params.id-1) })
   const postNumbers = getTotalPostNumbers()
 
   return {

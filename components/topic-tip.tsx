@@ -2,7 +2,12 @@ import Link from 'next/link'
 
 import { brandTopicsMap, topicEmojiSourceMap } from 'lib/topics'
 
-const TopicTip = ({ topic }: { topic: string }) => {
+type Props = {
+  topic: string
+  number?: number
+}
+
+const TopicTip = ({ topic, number }: Props) => {
   const { label, logo } = brandTopicsMap[topic.toLowerCase()]
     ?? { label: topic, logo: topicEmojiSourceMap[topic] ?? 'https://placehold.jp/150x150.png?text=(-%20-)%3F' }
   return (
@@ -15,7 +20,7 @@ const TopicTip = ({ topic }: { topic: string }) => {
         transition-color duration-300 hover:bg-white
       `}>
         <img src={logo} alt={label} className="w-8 rounded-2xl" />
-        {label}
+        {label + (number ? ` (${number})` : '')}
       </a>
     </Link>
   )
