@@ -10,14 +10,14 @@ const Tooltip = ({ label, children }: TooltipProps) => {
   const content = useParsedMarkdown(children)
   const parsedLabel = useParsedMarkdown(label)
 
-  const [tooltipOverflowStyle, setTooltipOverflowStyle] = useState('');
+  const [tooltipOverflow, setTooltipOverflow] = useState(false);
   const tooltipRef = useRef<HTMLSpanElement>(null)
 
   const alignTooltip = () => {
     if (tooltipRef.current
       && tooltipRef.current.getBoundingClientRect().right + 16 > document.documentElement.clientWidth
     ) {
-      setTooltipOverflowStyle('right-0')
+      setTooltipOverflow(true)
     }
   }
 
@@ -31,8 +31,8 @@ const Tooltip = ({ label, children }: TooltipProps) => {
       <span
         ref={tooltipRef}
         className={`
-          tooltip
-          absolute bottom-full ${tooltipOverflowStyle} mb-4 p-2
+          tooltip${tooltipOverflow ? '-overflow' : ''}
+          absolute top-full ${tooltipOverflow ? 'right-0' : ''} mt-4 p-2
           opacity-0 bg-pink-100 rounded text-sm
           transition duration-300
         `}
