@@ -6,6 +6,29 @@ import twemoji from 'twemoji'
 import type PostType from 'types/post'
 import { PAGINATION_PER_PAGE } from './constants'
 
+export const necessaryFieldsForPostList: (keyof PostType)[] = [
+  'title',
+  'date',
+  'slug',
+  'summary',
+  'lastmod',
+  'topics',
+  'content',
+  'published',
+]
+
+export const necessaryFieldsForPost: (keyof PostType)[] = [
+  'title',
+  'date',
+  'slug',
+  'summary',
+  'lastmod',
+  'topics',
+  'katex',
+  'content',
+  'published',
+]
+
 const postsDirectory = join(process.cwd(), 'public/posts')
 
 export function getPostSlugs() {
@@ -78,4 +101,13 @@ export function getPostNumbersByTopics(topics: string[]) {
     Object.entries(topicNumberMap).sort((a, b) => b[1] - a[1])
   )
   return sortedTopicNumberMap
+}
+
+export function getPostsByTopic(topic: string) {
+  return getPosts(necessaryFieldsForPostList, { all: true })
+    .filter(post => post.topics && post.topics.some((postTopic: string) => (
+      postTopic.toLowerCase() === topic.toLowerCase()
+    )))
+    // sort posts by date in descending order
+    .sort((post1, post2) => (post1.date && post2.date && post1.date > post2.date ? -1 : 1))
 }

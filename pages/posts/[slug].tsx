@@ -6,14 +6,14 @@ import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Head from 'next/head'
 
-import PostBody from '../../components/post/post-body'
-import PostHeader from '../../components/post/post-header'
-import Layout from '../../components/layout'
-import { getPostBySlug, getPostSlugs } from '../../lib/api'
-import PostTitle from '../../components/post/post-title'
+import PostBody from 'components/post/post-body'
+import PostHeader from 'components/post/post-header'
+import Layout from 'components/layout'
+import { getPostBySlug, getPostSlugs, necessaryFieldsForPost } from 'lib/api'
+import PostTitle from 'components/post/post-title'
 
-import { SITE_NAME } from '../../lib/constants'
-import PostType from '../../types/post'
+import { SITE_NAME } from 'lib/constants'
+import type PostType from 'types/post'
 
 type Props = {
   post: PostType
@@ -73,17 +73,7 @@ type Params = {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const post = getPostBySlug(params.slug, [
-    'title',
-    'date',
-    'slug',
-    'summary',
-    'lastmod',
-    'topics',
-    'katex',
-    'content',
-    'published',
-  ])
+  const post = getPostBySlug(params.slug, necessaryFieldsForPost)
   const content = await serialize(post.content || '', {
     mdxOptions: {
       remarkPlugins: [remarkMath],

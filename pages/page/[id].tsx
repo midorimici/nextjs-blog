@@ -1,7 +1,7 @@
-import Index from '../index'
-import Post from '../../types/post'
-import { getPosts, getTotalPostNumbers } from '../../lib/api'
-import { PAGINATION_PER_PAGE } from '../../lib/constants'
+import Index from 'pages/index'
+import Post from 'types/post'
+import { getPosts, getTotalPostNumbers, necessaryFieldsForPostList } from 'lib/api'
+import { PAGINATION_PER_PAGE } from 'lib/constants'
 
 type Props = {
   posts: Post[]
@@ -23,16 +23,7 @@ type Params = {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const posts = getPosts([
-    'title',
-    'date',
-    'slug',
-    'summary',
-    'lastmod',
-    'topics',
-    'content',
-    'published',
-  ], { offset: PAGINATION_PER_PAGE*(params.id-1) })
+  const posts = getPosts(necessaryFieldsForPostList, { offset: PAGINATION_PER_PAGE*(params.id-1) })
   const postNumbers = getTotalPostNumbers()
 
   return {

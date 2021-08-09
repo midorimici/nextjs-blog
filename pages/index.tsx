@@ -1,12 +1,12 @@
 import Head from 'next/head'
 
-import Container from '../components/container'
-import Stories from '../components/stories'
-import Layout from '../components/layout'
-import Pagination from '../components/pagination'
-import { getPosts, getTotalPostNumbers } from '../lib/api'
-import { SITE_NAME } from '../lib/constants'
-import Post from '../types/post'
+import Container from 'components/container'
+import Stories from 'components/stories'
+import Layout from 'components/layout'
+import Pagination from 'components/pagination'
+import { getPosts, getTotalPostNumbers, necessaryFieldsForPostList } from 'lib/api'
+import { SITE_NAME } from 'lib/constants'
+import Post from 'types/post'
 
 type Props = {
   posts: Post[]
@@ -32,16 +32,7 @@ const Index = ({ posts, postNumbers }: Props) => {
 export default Index
 
 export const getStaticProps = async () => {
-  const posts = getPosts([
-    'title',
-    'date',
-    'slug',
-    'summary',
-    'lastmod',
-    'topics',
-    'content',
-    'published',
-  ])
+  const posts = getPosts(necessaryFieldsForPostList)
   const postNumbers = getTotalPostNumbers()
 
   return {
