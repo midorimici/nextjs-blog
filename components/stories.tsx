@@ -15,6 +15,7 @@ const Stories = ({ posts }: Props) => {
           title={post.title}
           date={post.date}
           lastmod={post.lastmod}
+          topics={post.topics}
           summary={(post.summary ?? post.content.replace(/([\s\S]+)\n<!--more-->[\s\S]+/, '$1')) + '…'}
         />
       ))}

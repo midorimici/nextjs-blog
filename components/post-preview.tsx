@@ -2,6 +2,7 @@ import DateFormatter from './date-formatter'
 import CoverImage from './cover-image'
 import Link from 'next/link'
 
+import TopicTip from './topic-tip'
 import { useParsedMarkdown } from './useParsedMarkdown'
 
 type Props = {
@@ -9,6 +10,7 @@ type Props = {
   title: string
   date: string
   lastmod: string
+  topics: string[]
   summary: string
 }
 
@@ -17,6 +19,7 @@ const PostPreview = ({
   title,
   date,
   lastmod,
+  topics,
   summary,
 }: Props) => {
   const parsedTitle = useParsedMarkdown(title)
@@ -48,6 +51,9 @@ const PostPreview = ({
         <div className="text-lg mb-4">
           <DateFormatter dateString={date} type='date' />
           <DateFormatter dateString={lastmod} type='lastmod' />
+        </div>
+        <div className="flex flex-wrap gap-4 mb-4">
+          {topics.map((topic: string) => <TopicTip key={topic} topic={topic} />)}
         </div>
         {summary && (
           <p
