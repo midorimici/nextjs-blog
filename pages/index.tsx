@@ -38,7 +38,7 @@ export const getStaticProps = async () => {
     'slug',
     'summary',
     'lastmod',
-    'tags',
+    'topics',
     'content',
     'published',
   ])

@@ -3,7 +3,7 @@ type PostType = {
   title: string
   date: string
   lastmod: string
-  tags: string[]
+  topics: string[]
   content: string
   katex?: boolean
   summary?: string

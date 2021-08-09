@@ -78,7 +78,7 @@ export async function getStaticProps({ params }: Params) {
     'slug',
     'summary',
     'lastmod',
-    'tags',
+    'topics',
     'katex',
     'content',
     'published',

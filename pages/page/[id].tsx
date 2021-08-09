@@ -29,7 +29,7 @@ export async function getStaticProps({ params }: Params) {
     'slug',
     'summary',
     'lastmod',
-    'tags',
+    'topics',
     'content',
     'published',
   ], PAGINATION_PER_PAGE*(params.id-1))
