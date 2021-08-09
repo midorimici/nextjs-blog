@@ -14,7 +14,7 @@ const Layout = ({ children }: Props) => {
       <div className="min-h-screen bg-yellow-50">
         <Container>
           <Header />
-          <main>{children}</main>
+          <main className="flex-grow">{children}</main>
           <Footer />
         </Container>
       </div>

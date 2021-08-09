@@ -1,3 +1,4 @@
+import type { MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { MDXRemote } from 'next-mdx-remote'
 import { Tweet } from 'react-twitter-widgets'
 
@@ -17,10 +18,7 @@ import Affiliate, { AffiliateProps } from 'components/mdx/affiliate'
 import markdownStyles from './markdown-styles.module.css'
 
 type Props = {
-  source: {
-    compiledSource: string
-    scope: {}
-  }
+  source: MDXRemoteSerializeResult<Record<string, unknown>>
   slug: string
 }
 
