@@ -40,6 +40,7 @@ export const getStaticProps = async () => {
     'lastmod',
     'tags',
     'content',
+    'published',
   ])
   const postNumbers = getTotalPostNumbers()
 

@@ -81,6 +81,7 @@ export async function getStaticProps({ params }: Params) {
     'tags',
     'katex',
     'content',
+    'published',
   ])
   const content = await serialize(post.content || '', {
     mdxOptions: {

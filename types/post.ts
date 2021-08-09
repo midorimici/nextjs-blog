@@ -7,7 +7,7 @@ type PostType = {
   content: string
   katex?: boolean
   summary?: string
-  draft?: boolean
+  published?: boolean
 }
 
 export default PostType

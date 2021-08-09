@@ -1,7 +1,7 @@
 ---
 title: 'About'
 date: 2020-02-01T22:32:05+09:00
-draft: false
+published: true
 ---
 
 <img src="../images/profile.png" alt="プロフィール画像" width={160} />

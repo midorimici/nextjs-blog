@@ -31,6 +31,7 @@ export async function getStaticProps({ params }: Params) {
     'lastmod',
     'tags',
     'content',
+    'published',
   ], PAGINATION_PER_PAGE*(params.id-1))
   const postNumbers = getTotalPostNumbers()
 
