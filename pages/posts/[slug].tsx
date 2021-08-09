@@ -54,6 +54,7 @@ const Post = ({ post, source }: Props) => {
               title={post.title}
               date={post.date}
               lastmod={post.lastmod}
+              topics={post.topics}
             />
             <PostBody source={source} slug={post.slug} />
           </article>
