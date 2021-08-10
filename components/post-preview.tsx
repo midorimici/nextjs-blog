@@ -28,13 +28,14 @@ const PostPreview = ({
   return (
     <article className={`
       post-preview
-      mx-auto
       relative
+      mx-auto
       rounded-2xl
       cursor-pointer
       transition duration-300
       shadow hover:shadow-lg hover:bg-white
       hover:opacity-80
+      break-all
     `}>
       <Link as={`/posts/${slug}`} href="/posts/[slug]">
         <a className="absolute top-0 left-0 w-full h-full z-10"></a>
@@ -45,10 +46,10 @@ const PostPreview = ({
       />
       <section className="m-4">
         <h3
-          className="text-3xl mb-3 leading-snug"
+          className="text-xl sm:text-3xl mb-3 leading-snug"
           dangerouslySetInnerHTML={{ __html: parsedTitle }}
         />
-        <div className="text-lg mb-4">
+        <div className="mb-4">
           <DateFormatter dateString={date} type='date' />
           <DateFormatter dateString={lastmod} type='lastmod' />
         </div>
@@ -57,7 +58,7 @@ const PostPreview = ({
         </div>
         {summary && (
           <p
-            className="text-lg leading-relaxed"
+            className="text-base sm:text-lg leading-relaxed"
             dangerouslySetInnerHTML={{ __html: content }}
           />
         )}

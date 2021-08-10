@@ -22,7 +22,7 @@ const Tags = ({ topicNumberMap }: Props) => {
         <h1
           className={`
             max-w-2xl mx-auto mb-12
-            text-4xl text-left font-bold tracking-wide
+            text-2xl sm:text-4xl text-left font-bold tracking-wide break-all
           `}
         >{TAGS_PAGE_TITLE}</h1>
         <div className="max-w-2xl mx-auto flex flex-wrap gap-4">

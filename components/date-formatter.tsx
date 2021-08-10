@@ -10,7 +10,7 @@ type Props = {
 const DateFormatter = ({ dateString, type }: Props) => {
   const date = parseISO(dateString)
   return (
-    <time dateTime={dateString} className="mx-2 inline-flex items-center gap-2">
+    <time dateTime={dateString} className="mx-2 inline-flex items-center gap-2 text-base sm:text-lg">
       <FontAwesomeIcon
         icon={type === 'date' ? faCalendarAlt : faCalendarCheck}
         className="w-4"

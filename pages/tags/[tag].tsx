@@ -24,7 +24,7 @@ const TagPosts = ({ posts, tag }: Props) => {
         <Container>
           <h1 className={`
             max-w-2xl mx-auto mb-12
-            text-4xl text-left font-bold tracking-wide
+            text-2xl sm:text-4xl text-left font-bold tracking-wide break-all
           `}>
             {tagName}
           </h1>

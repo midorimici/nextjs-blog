@@ -1,5 +1,5 @@
 .markdown {
-  @apply text-lg leading-loose;
+  @apply text-lg leading-loose break-words;
 }
 
 .markdown p,
@@ -18,15 +18,15 @@
 }
 
 .markdown h2 {
-  @apply text-3xl font-bold mt-12 mb-4 leading-relaxed border-b-2 border-yellow-500;
+  @apply text-2xl sm:text-3xl font-bold mt-12 mb-4 leading-relaxed border-b-2 border-yellow-500;
 }
 
 .markdown h3 {
-  @apply text-2xl mt-8 mb-4 pl-4 leading-relaxed border-l-2 border-yellow-500;
+  @apply text-xl sm:text-2xl mt-8 mb-4 pl-4 leading-relaxed border-l-2 border-yellow-500;
 }
 
 .markdown code {
-  @apply mx-1 px-2 py-1 bg-gray-100 rounded font-code break-words;
+  @apply mx-1 px-2 py-1 bg-gray-100 rounded font-code;
 }
 
 .markdown p > a {

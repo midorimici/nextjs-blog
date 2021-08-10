@@ -14,12 +14,12 @@ const TopicTip = ({ topic, number }: Props) => {
     <Link as={`/tags/${topic.toLowerCase()}`} href="/tags/[topic]">
       <a className={`
         flex items-center gap-2 p-2
-        text-base
+        text-sm sm:text-base
         border-2 rounded-3xl
         z-20
         transition-color duration-300 hover:bg-white
       `}>
-        <img src={logo} alt={label} className="w-8 rounded-2xl" />
+        <img src={logo} alt={label} className="w-6 sm:w-8 rounded-2xl" />
         {label + (number ? ` (${number})` : '')}
       </a>
     </Link>

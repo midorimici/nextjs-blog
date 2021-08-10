@@ -4,7 +4,7 @@ date: 2020-02-01T22:32:05+09:00
 published: true
 ---
 
-<img src="../images/profile.png" alt="プロフィール画像" width={160} />
+<img src="about/profile.png" alt="プロフィール画像" width={160} className="mx-auto" />
 
 ## みどり みち
 
