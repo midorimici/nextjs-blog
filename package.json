@@ -16,6 +16,7 @@
     "classnames": "2.3.1",
     "date-fns": "2.21.3",
     "gray-matter": "4.0.3",
+    "markdown-toc": "^1.2.0",
     "next": "latest",
     "next-mdx-remote": "^3.0.4",
     "prism-react-renderer": "^1.2.1",

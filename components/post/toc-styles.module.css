@@ -1,0 +1,17 @@
+.toc > ul {
+  @apply list-disc pl-8;
+}
+
+.toc > ul ul {
+  @apply pl-8;
+  list-style: circle;
+}
+
+.toc > ul ul ul {
+  @apply pl-8;
+  list-style: square;
+}
+
+.toc li {
+  @apply my-4;
+}
