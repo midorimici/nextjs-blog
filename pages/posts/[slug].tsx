@@ -52,7 +52,7 @@ const Post = ({ post, source, tocSource }: Props) => {
               />
             )}
           </Head>
-          <div className="flex">
+          <div className="block lg:flex">
             <article className="flex-grow mb-8">
               <PostHeader
                 title={post.title}
@@ -60,9 +60,9 @@ const Post = ({ post, source, tocSource }: Props) => {
                 lastmod={post.lastmod}
                 topics={post.topics}
               />
-              <PostBody source={source} slug={post.slug} />
+              <PostBody source={source} tocSource={tocSource} slug={post.slug} />
             </article>
-            <aside className="w-96">
+            <aside className="w-96 hidden lg:block">
               <div className="sticky top-16">
                 <TOC source={tocSource} />
               </div>
@@ -84,7 +84,8 @@ type Params = {
 
 export async function getStaticProps({ params }: Params) {
   const post = getPostBySlug(params.slug, necessaryFieldsForPost)
-  const content = await serialize(post.content || '', {
+  const postWithTOC = (post.content || '').replace(/## .+/, '<toc />\n\n$&')
+  const content = await serialize(postWithTOC, {
     mdxOptions: {
       remarkPlugins: [remarkMath],
       rehypePlugins: [rehypeKatex],

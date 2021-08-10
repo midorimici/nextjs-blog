@@ -3,6 +3,7 @@ import { MDXRemote } from 'next-mdx-remote'
 import { Tweet } from 'react-twitter-widgets'
 
 import Heading from '../mdx/heading'
+import MobileTOC from './mobileTOC'
 import PostImage, { PostImageProps } from '../mdx/post-image'
 import Video, { VideoProps } from '../mdx/video'
 import CodeBlock, { CodeBlockProps } from '../mdx/code-block'
@@ -14,21 +15,23 @@ import Manga, { MangaProps } from '../mdx/manga'
 import MangaText, { MangaTextProps } from '../mdx/manga-text'
 import Sandbox from '../mdx/sandbox'
 import YouTube from '../mdx/youtube'
-import Affiliate, { AffiliateProps } from 'components/mdx/affiliate'
+import Affiliate, { AffiliateProps } from '../mdx/affiliate'
 import markdownStyles from './markdown-styles.module.css'
 
 type Props = {
   source: MDXRemoteSerializeResult<Record<string, unknown>>
+  tocSource: MDXRemoteSerializeResult<Record<string, unknown>>
   slug: string
 }
 
-const PostBody = ({ source, slug }: Props) => {
+const PostBody = ({ source, tocSource, slug }: Props) => {
   const components = {
     a: ({ href, children }: { href: string, children: string }) => (
       <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>
     ),
     h2: ({ children }: { children: any }) => <Heading type={2} content={children} />,
     h3: ({ children }: { children: any }) => <Heading type={3} content={children} />,
+    toc: () => <MobileTOC source={tocSource} />,
     postimage: (props: Omit<PostImageProps, 'slug'>) => <PostImage slug={slug} {...props} />,
     video: (props: Omit<VideoProps, 'slug'>) => <Video slug={slug} {...props} />,
     code: (props: CodeBlockProps) => <CodeBlock {...props} />,
@@ -47,9 +50,7 @@ const PostBody = ({ source, slug }: Props) => {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <div
-        className={markdownStyles['markdown']}
-      >
+      <div className={markdownStyles['markdown']}>
         <MDXRemote {...source} components={components} />
       </div>
     </div>
