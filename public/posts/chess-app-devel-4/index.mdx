@@ -276,7 +276,8 @@ def isValidMove(self, piece, startpos, endpos, gameboard):
 
 <details>
 <summary>❓なぜ直接代入しない？</summary>
-<div><br/>
+<div>
+
 `copy()`を使用しないと、盤面の更新をした際にもとの盤面も一緒に書き換えられてしまいます。
 
 これは
