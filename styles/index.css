@@ -110,3 +110,11 @@ body {
   border-top: solid 0.5em transparent;
   border-bottom: solid 0.5em transparent;
 }
+
+.math-display {
+  @apply overflow-x-auto;
+}
+
+.math-inline .katex-html > .base {
+  @apply inline whitespace-normal;
+}
