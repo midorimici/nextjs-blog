@@ -13,6 +13,7 @@ import Layout from 'components/layout'
 import { getPostBySlug, getPostSlugs, necessaryFieldsForPost } from 'lib/api'
 import PostTitle from 'components/post/post-title'
 import TOC from 'components/post/toc'
+import BackToTopButton from 'components/post/backToTopButton'
 
 import { SITE_NAME } from 'lib/constants'
 import type PostType from 'types/post'
@@ -68,6 +69,7 @@ const Post = ({ post, source, tocSource }: Props) => {
               </div>
             </aside>
           </div>
+          <BackToTopButton />
         </>
       )}
     </Layout>
