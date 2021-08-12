@@ -1,7 +1,7 @@
 import { AppProps } from 'next/app'
 import { Prism } from 'prism-react-renderer'
 
-import '../styles/index.css'
+import 'styles/index.css'
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
