@@ -31,6 +31,12 @@ module.exports = {
         small: '0 5px 10px rgba(0, 0, 0, 0.12)',
         medium: '0 8px 30px rgba(0, 0, 0, 0.12)',
       },
+      cursor: {
+        'zoom-out': 'zoom-out',
+      },
+      minWidth: {
+        'fill-available': ['-webkit-fill-available', '-moz-available'],
+      },
       keyframes: {
         rotate: {
           '0%': {
