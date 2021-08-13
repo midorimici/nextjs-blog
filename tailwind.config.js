@@ -37,6 +37,9 @@ module.exports = {
       minWidth: {
         'fill-available': ['-webkit-fill-available', '-moz-available'],
       },
+      zIndex: {
+        '-10': '-10',
+      },
       keyframes: {
         rotate: {
           '0%': {
