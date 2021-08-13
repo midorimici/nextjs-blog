@@ -29,6 +29,7 @@ const PostBody = ({ source, tocSource, slug }: Props) => {
     a: ({ href, children }: { href: string, children: string }) => (
       <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>
     ),
+    inlink: ({ to, children }: { to: string, children: string }) => <a href={to}>{children}</a>,
     h2: ({ children }: { children: any }) => <Heading type={2} content={children} />,
     h3: ({ children }: { children: any }) => <Heading type={3} content={children} />,
     toc: () => <MobileTOC source={tocSource} />,
