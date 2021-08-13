@@ -19,7 +19,13 @@ const TopicTip = ({ topic, number }: Props) => {
         z-20
         transition-color duration-300 hover:bg-white
       `}>
-        <img src={logo} alt={label} className="w-6 sm:w-8 rounded-2xl" />
+        <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-2xl flex justify-center items-center">
+          <img
+            src={logo}
+            alt={label}
+            className="w-4 sm:w-6"
+          />
+        </div>
         {label + (number ? ` (${number})` : '')}
       </a>
     </Link>
