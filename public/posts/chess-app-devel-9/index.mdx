@@ -139,7 +139,9 @@ class Game:
 
 縦軸を $p$、横軸を $t$ としたとき、この赤のグラフは
 
-$$p = \frac{{\sf self.endpos} - {\sf self.startpos}}{10} t + {\sf self.startpos}$$
+$$
+p = \frac{{\sf self.endpos} - {\sf self.startpos}}{10} t + {\sf self.startpos}
+$$
 
 と表すことができます。
 
@@ -155,8 +157,6 @@ draw_img(self.startpos[0] + (self.endpos[0] - self.startpos[0]) * self.time / 10
 
 <details>
 <summary>もっとなめらかな動きにしたいなら？</summary>
-
-<br/>
 
 直線的な補間の場合、動き始めから終わりまでつねに同じ速さです。
 
@@ -180,13 +180,17 @@ $y = \sin x$ のグラフは２点 $\left(-\frac{\pi}{2}, -1 \right), \left(\fra
 
 幅が $\frac{\pi}{2} - \left(-\frac{\pi}{2} \right) = \pi$ だったのを $10$ にするので、$x$ 軸方向に $\frac{10}{\pi}$ 倍に拡大して
 
-$$y = \sin \left(\frac{\pi}{10} x \right)$$
+$$
+y = \sin \left(\frac{\pi}{10} x \right)
+$$
 
 高さが $1 - (-1) = 2$ だったのを ${\sf self.endpos} - {\sf self.startpos}$ にするので、
 
 $y$ 軸方向に $\frac{{\sf self.endpos} - {\sf self.startpos}}{2}$ 倍に拡大して
 
-$$y = \frac{{\sf self.endpos} - {\sf self.startpos}}{2} \sin \left(\frac{\pi}{10} x \right)$$
+$$
+y = \frac{{\sf self.endpos} - {\sf self.startpos}}{2} \sin \left(\frac{\pi}{10} x \right)
+$$
 
 あとは平行移動をします。
 

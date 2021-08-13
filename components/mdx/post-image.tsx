@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import Zoom from 'react-medium-image-zoom'
+import 'react-medium-image-zoom/dist/styles.css'
 
 import { useImageSize } from './useImageSize'
 import { useImagePlaceholder } from 'components/useImagePlaceholder'
@@ -16,15 +18,17 @@ const PostImage = ({ slug, src, alt, ext = 'jpg' }: PostImageProps) => {
   const placeholder = useImagePlaceholder(size.width, size.height)
   
   return (
-    <Image
-      src={path}
-      alt={alt}
-      title={alt}
-      width={size.width}
-      height={size.height}
-      placeholder='blur'
-      blurDataURL={`data:image/svg+xml;base64,${placeholder}`}
-    />
+    <Zoom>
+      <Image
+        src={path}
+        alt={alt}
+        title={alt}
+        width={size.width}
+        height={size.height}
+        placeholder='blur'
+        blurDataURL={`data:image/svg+xml;base64,${placeholder}`}
+      />
+    </Zoom>
   )
 }
 

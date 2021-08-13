@@ -38,6 +38,16 @@ body {
   font-family: genjyuu, "Meiryo", serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}
+
 @media (min-width: 1536px) {
   .post-preview {
     width: 640px;
@@ -109,4 +119,12 @@ body {
   border-left: solid .9em white;
   border-top: solid 0.5em transparent;
   border-bottom: solid 0.5em transparent;
+}
+
+.math-display {
+  @apply overflow-x-auto;
+}
+
+.math-inline .katex-html > .base {
+  @apply inline whitespace-normal;
 }

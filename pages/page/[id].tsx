@@ -5,12 +5,12 @@ import { PAGINATION_PER_PAGE } from 'lib/constants'
 
 type Props = {
   posts: Post[]
-  postNumbers: number
+  allPosts: Post[]
 }
 
-const Posts = ({ posts, postNumbers }: Props) => {
+const Posts = ({ posts, allPosts }: Props) => {
   return (
-    <Index posts={posts} postNumbers={postNumbers} />
+    <Index posts={posts} allPosts={allPosts} />
   )
 }
 
@@ -23,11 +23,11 @@ type Params = {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const posts = getPosts(necessaryFieldsForPostList, { offset: PAGINATION_PER_PAGE*(params.id-1) })
-  const postNumbers = getTotalPostNumbers()
+  const allPosts = getPosts(necessaryFieldsForPostList, { all: true })
+  const posts = allPosts.slice(PAGINATION_PER_PAGE*(params.id-1), PAGINATION_PER_PAGE*params.id)
 
   return {
-    props: { posts, postNumbers },
+    props: { posts, allPosts },
   }
 }
 

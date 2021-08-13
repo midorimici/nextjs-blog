@@ -10,11 +10,25 @@
 }
 
 .markdown ul {
-  @apply list-disc list-inside;
+  @apply list-disc pl-8;
+}
+
+.markdown ul ul {
+  @apply pl-8;
+  list-style: circle;
+}
+
+.markdown ul ul ul {
+  @apply pl-8;
+  list-style: square;
+}
+
+.markdown li {
+  @apply my-4;
 }
 
 .markdown ol {
-  @apply list-decimal list-inside;
+  @apply list-decimal pl-8;
 }
 
 .markdown h2 {
@@ -47,6 +61,26 @@
 
 .markdown tbody > tr {
   @apply border-b border-gray-200;
+}
+
+.markdown details {
+  @apply border rounded-xl;
+}
+
+.markdown details[open] {
+  @apply pb-2 bg-white transition-colors duration-300;
+}
+
+.markdown summary {
+  @apply p-4 rounded-xl bg-yellow-100 cursor-pointer;
+}
+
+.markdown details[open] > summary {
+  @apply p-4 border-b rounded-b-none bg-yellow-100 cursor-pointer;
+}
+
+.markdown details > :not(summary) {
+  @apply mx-6;
 }
 
 .markdown hr {
