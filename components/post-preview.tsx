@@ -42,7 +42,7 @@ const PostPreview = ({
       </Link>
       <CoverImage
         title={title}
-        src={`/posts/${slug}/index.jpg`}
+        src={`/posts/${slug}/_index.jpg`}
       />
       <section className="m-4">
         <h3

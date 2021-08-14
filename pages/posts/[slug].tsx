@@ -31,7 +31,7 @@ const Post = ({ post, source, tocSource }: Props) => {
     return <ErrorPage statusCode={404} />
   }
 
-  const imagePath = `/posts/${post.slug}/index.jpg`
+  const imagePath = `/posts/${post.slug}/_index.jpg`
 
   return (
     <Layout>

@@ -21,7 +21,7 @@ const fetcher = async (url: string) => {
 }
 
 const RelatedPost = ({ link }: RelatedPostProps) => {
-  const imgPath = `/posts/${link}/index.jpg`
+  const imgPath = `/posts/${link}/_index.jpg`
   const placeholder = useImagePlaceholder(320, 180)
 
   const { data, error } = useSWR(`/api/post_titles/${link}`, fetcher)
