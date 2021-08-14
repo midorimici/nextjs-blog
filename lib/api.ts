@@ -36,6 +36,8 @@ export function getPostSlugs() {
 }
 
 export function getPostBySlug(slug: string, fields: (keyof PostType)[] = []) {
+  if (fs.readdirSync(process.cwd()).length < 6)
+    console.log(fs.readdirSync(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/public/posts/${slug}`))
   const fullPath = join(postsDirectory, `${slug}/index.mdx`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const { data, content } = matter(fileContents)

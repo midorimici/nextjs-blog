@@ -12,7 +12,9 @@ export type RelatedPostProps = {
 
 const fetcher = async (url: string) => {
   const res = await fetch(url)
+  console.log(`res: ${await res.text()}`)
   const data = await res.json()
+  console.log(`data: ${data}`)
 
   if (res.status !== 200) {
     throw new Error(data.message)
