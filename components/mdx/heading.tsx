@@ -31,7 +31,7 @@ const Heading = ({ type, content }: Props) => {
   return (
     <HeadingComponent id={link}>
       <Link href={`#${link}`}>
-        <a className="heading-link relative">
+        <a className="heading-link relative" aria-label="リンク">
           {content}
           <FontAwesomeIcon
             icon={faLink}
