@@ -20,16 +20,16 @@ const Pagination = ({ postNumbers }: Props) => {
       previousLabel='<'
       nextLabel='>'
       containerClassName="mt-8 flex justify-center"
-      pageClassName="mx-4 text-4xl"
-      pageLinkClassName="outline-none"
+      pageClassName="mx-2 sm:mx-4 text-lg sm:text-4xl"
+      pageLinkClassName="outline-none cursor-pointer"
       breakClassName="mx-4"
-      breakLinkClassName="outline-none"
-      previousClassName="mr-4 text-4xl"
-      previousLinkClassName="outline-none"
-      nextClassName="ml-4 text-4xl"
-      nextLinkClassName="outline-none"
+      breakLinkClassName="outline-none cursor-pointer"
+      previousClassName="mx-2 sm:mr-4 text-lg sm:text-4xl"
+      previousLinkClassName="outline-none cursor-pointer"
+      nextClassName="mx-2 sm:ml-4 text-lg sm:text-4xl"
+      nextLinkClassName="outline-none cursor-pointer"
       activeClassName="text-pink-400"
-      activeLinkClassName="outline-none"
+      activeLinkClassName="outline-none cursor-pointer"
       disabledClassName="invisible"
     />
   )
