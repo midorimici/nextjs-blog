@@ -20,7 +20,7 @@ import markdownStyles from './markdown-styles.module.css'
 
 type Props = {
   source: MDXRemoteSerializeResult<Record<string, unknown>>
-  tocSource: MDXRemoteSerializeResult<Record<string, unknown>>
+  tocSource?: MDXRemoteSerializeResult<Record<string, unknown>>
   slug: string
 }
 
@@ -32,7 +32,7 @@ const PostBody = ({ source, tocSource, slug }: Props) => {
     inlink: ({ to, children }: { to: string, children: string }) => <a href={to}>{children}</a>,
     h2: ({ children }: { children: any }) => <Heading type={2} content={children} />,
     h3: ({ children }: { children: any }) => <Heading type={3} content={children} />,
-    toc: () => <MobileTOC source={tocSource} />,
+    toc: tocSource ? () => <MobileTOC source={tocSource} /> : () => {},
     postimage: (props: Omit<PostImageProps, 'slug'>) => <PostImage slug={slug} {...props} />,
     video: (props: Omit<VideoProps, 'slug'>) => <Video slug={slug} {...props} />,
     code: (props: CodeBlockProps) => <CodeBlock {...props} />,
