@@ -20,15 +20,18 @@ const Heading = ({ type, content }: Props) => {
     } else return content.props.children
   }
 
+  // https://github.com/jonschlinkert/markdown-toc/blob/master/lib/utils.js#L50
   const link = getHeadingString()
-    .replace(/[:\/?#\[\]@!$&'()*+,;=]/g, '')
-    .replace(/ /g, '-')
     .toLowerCase()
+    .split(' ').join('-')
+    .split(/\t/).join('--')
+    .split(/[|$&`~=\\\/@+*!?({[\]})<>=.,;:'"^]/).join('')
+    .split(/[。？！，、；：“”【】（）〔〕［］﹃﹄“ ”‘’﹁﹂—…－～《》〈〉「」]/).join('')
 
   return (
     <HeadingComponent id={link}>
       <Link href={`#${link}`}>
-        <a className="heading-link relative">
+        <a className="heading-link relative" aria-label="リンク">
           {content}
           <FontAwesomeIcon
             icon={faLink}

@@ -11,7 +11,7 @@ const PostLink = ({ to, label }: PostLinkProps) => {
   const parsedLabel = useParsedMarkdown(label)
   
   return (
-    <Link href={to}>
+    <Link href={`/posts/${to}`}>
       <a
         className="underline transition-colors duration-300 hover:text-pink-400"
         dangerouslySetInnerHTML={{ __html: parsedLabel }}

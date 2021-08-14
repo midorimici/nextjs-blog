@@ -48,7 +48,7 @@ export function getPostBySlug(slug: string, fields: (keyof PostType)[] = []) {
       items[field] = slug
     }
     if (field === 'content') {
-      items[field] = twemoji.parse(content)
+      items[field] = twemoji.parse(content).replace(/class="emoji"/g, 'className="emoji"')
     }
     if (field === 'date' || field === 'lastmod') {
       items[field] = data[field].toISOString()

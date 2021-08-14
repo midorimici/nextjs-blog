@@ -3,6 +3,18 @@ import twemoji from 'twemoji'
 type BrandTopicsMap = Record<string, { label: string, logo: string }>
 
 export const brandTopicsMap: BrandTopicsMap = {
+  docker: {
+    label: 'Docker',
+    logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg',
+  },
+  adsense: {
+    label: 'Google Adsense',
+    logo: 'https://api.iconify.design/logos-google-adsense.svg',
+  },
+  heroku: {
+    label: 'Heroku',
+    logo: 'https://github.com/devicons/devicon/raw/master/icons/heroku/heroku-original.svg',
+  },
   html: {
     label: 'HTML',
     logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg',
@@ -14,6 +26,10 @@ export const brandTopicsMap: BrandTopicsMap = {
   javascript: {
     label: 'JavaScript',
     logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg',
+  },
+  materialui: {
+    label: 'Material-UI',
+    logo: 'https://github.com/mui-org/material-ui/raw/next/docs/public/static/logo.svg',
   },
   netlify: {
     label: 'Netlify',
@@ -27,14 +43,34 @@ export const brandTopicsMap: BrandTopicsMap = {
     label: 'Python',
     logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg',
   },
+  rails: {
+    label: 'Rails',
+    logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/rails/rails-plain-wordmark.svg',
+  },
   react: {
     label: 'React',
     logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg',
   },
+  recoil: {
+    label: 'Recoil',
+    logo: 'https://github.com/facebookexperimental/Recoil/raw/docs/logo/SVG/logo.svg',
+  },
+  svelte: {
+    label: 'Svelte',
+    logo: 'https://raw.githubusercontent.com/sveltejs/svelte/master/site/static/svelte-logo.svg',
+  },
   typescript: {
     label: 'TypeScript',
     logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg',
-  }, 
+  },
+  vim: {
+    label: 'Vim',
+    logo: 'https://github.com/devicons/devicon/raw/master/icons/vim/vim-original.svg',
+  },
+  vscode: {
+    label: 'VSCode',
+    logo: 'https://github.com/devicons/devicon/raw/master/icons/vscode/vscode-original.svg',
+  },
 }
 
 const topicEmojiMap: Record<string, string> = {

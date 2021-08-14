@@ -8,14 +8,19 @@ export const useParsedMarkdown = (markdown: string | ReactElement, minimum: bool
   const [content, setContent] = useState('')
 
   useEffect(() => {
-    parseMarkdown()
+    let isSubscribed = true
+    parseMarkdown().then((html: string) => {
+      if (isSubscribed) setContent(html)
+    })
+    return () => { isSubscribed = false }
   }, [markdown])
 
   const parseMarkdown = async () => {
     const md = typeof markdown === 'string' ? markdown : ReactDOMServer.renderToStaticMarkup(markdown)
     let html = await markdownToHtml(md, minimum)
     html = minimum ? html : await tltpReplaced(html)
-    setContent(html.replace(/<p>([\s\S]*?)<\/p>/g, '$1'))
+    html = html.replace(/<p>([\s\S]*?)<\/p>/g, '$1')
+    return html
   }
 
   const tltpReplaced = async (str: string) => {

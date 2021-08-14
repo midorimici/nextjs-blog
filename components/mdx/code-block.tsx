@@ -121,7 +121,7 @@ const CodeBlock = ({
                     </div>
                   )))}
                 </div>
-                <div className="absolute top-0 right-0 flex gap-2">
+                <div className={`absolute ${zoomCode ? '-top-8' : 'top-0'} right-0 flex gap-2`}>
                   <button
                     title={zoomCode ? '戻す' : '拡大する'}
                     aria-label={zoomCode ? '戻す' : '拡大する'}

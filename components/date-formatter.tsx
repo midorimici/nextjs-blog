@@ -14,6 +14,7 @@ const DateFormatter = ({ dateString, type }: Props) => {
       <FontAwesomeIcon
         icon={type === 'date' ? faCalendarAlt : faCalendarCheck}
         className="w-4"
+        aria-label={type === 'date' ? '公開日' : '更新日'}
       />
       {format(date, 'yyyy.MM.dd')}
     </time>

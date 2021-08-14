@@ -21,13 +21,13 @@ const Header = () => {
         </Link>
         <nav className="flex items-center gap-6 sm:gap-8">
           <Link href="/tags">
-            <a className={buttonStyle}>
+            <a className={buttonStyle} aria-label="Tags">
               <FontAwesomeIcon icon={faTags} className={iconStyle} />
               <span className="hidden sm:block">Tags</span>
             </a>
           </Link>
           <Link href="/about">
-            <a className={buttonStyle}>
+            <a className={buttonStyle} aria-label="About">
               <FontAwesomeIcon icon={faUser} className={iconStyle} />
               <span className="hidden sm:block">About</span>
             </a>

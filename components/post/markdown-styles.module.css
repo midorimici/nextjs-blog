@@ -43,8 +43,12 @@
   @apply mx-1 px-2 py-1 bg-gray-100 rounded font-code;
 }
 
-.markdown p > a {
+.markdown a {
   @apply underline transition-colors duration-300 hover:text-pink-400;
+}
+
+.markdown h2 a, .markdown h3 a {
+  @apply no-underline hover:text-current;
 }
 
 .markdown blockquote {
