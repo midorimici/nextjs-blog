@@ -59,7 +59,7 @@ const PostPreview = ({
         {summary && (
           <p
             className="text-base sm:text-lg leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: content }}
+            dangerouslySetInnerHTML={{ __html: content.replace(/className=/g, 'class=') }}
           />
         )}
       </section>
