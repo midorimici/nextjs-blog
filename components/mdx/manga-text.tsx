@@ -15,9 +15,8 @@ const MangaText = ({ x, y, text, size = 'xl', color }: MangaTextProps) => {
     <div
       className={`
         absolute text-center text-xs md:text-${size}
-        ${color ? `text-${color}` : ''}
       `}
-      style={{ left: `${x}%`, top: `${y}%` }}
+      style={{ left: `${x}%`, top: `${y}%`, color: color ?? 'inherit' }}
       dangerouslySetInnerHTML={{ __html: content }}
     />
   )

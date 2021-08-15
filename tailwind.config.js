@@ -1,5 +1,8 @@
 module.exports = {
-  purge: ['./components/**/*.tsx', './pages/**/*.tsx'],
+  purge: {
+    content: ['./components/**/*.tsx', './pages/**/*.tsx'],
+    safelist: ['xs' , 'sm' , 'base' , 'lg' , 'xl' , '2xl'].map(size => `md:text-${size}`),
+  },
   theme: {
     extend: {
       fontSize: {
