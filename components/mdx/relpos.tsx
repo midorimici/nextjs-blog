@@ -33,7 +33,7 @@ const RelatedPost = ({ link, relatedPosts }: RelatedPostProps) => {
       </Link>
       <section className="flex-grow flex flex-col gap-4 w-full">
         <span className="pb-2 font-bold text-2xl text-pink-400 border-b-2 border-pink-400">
-          <FontAwesomeIcon icon={faBookOpen} />&nbsp;
+          <FontAwesomeIcon icon={faBookOpen} width={28} />&nbsp;
           関連記事
         </span>
         <span dangerouslySetInnerHTML={{ __html : postTitle }} />

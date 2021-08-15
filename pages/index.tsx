@@ -51,7 +51,7 @@ const Index = ({ posts, allPosts }: Props) => {
       <Layout>
         <div className="mb-8">
           <div className="px-4 py-2 flex gap-4 items-center border rounded-xl bg-white">
-            <FontAwesomeIcon icon={faSearch} />
+            <FontAwesomeIcon icon={faSearch} width={20} />
             <input
               type="search"
               placeholder="記事を検索"

@@ -39,6 +39,7 @@ const Heading = ({ type, content }: Props) => {
               heading-icon absolute -left-10 bottom-0
               text-yellow-500 opacity-0 transition-opacity duration-300
             `}
+            width={30}
           />
         </a>
       </Link>

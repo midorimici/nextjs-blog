@@ -15,7 +15,7 @@ const BackToTopButton = () => {
       tansition-all duration-300
     `}>
       <a href="#" aria-label="トップに戻る" className="block p-4">
-        <FontAwesomeIcon icon={faArrowUp} />
+        <FontAwesomeIcon icon={faArrowUp} width={20} />
       </a>
     </div>
   )
