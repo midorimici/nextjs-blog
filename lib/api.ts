@@ -38,7 +38,7 @@ export function getPostSlugs() {
 export function getPostBySlug(slug: string, fields: (keyof PostType)[] = []) {
   if (fs.readdirSync(process.cwd()).length < 6)
     console.log(fs.readdirSync(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/public/posts/${slug}`))
-  const fullPath = join(postsDirectory, `${slug}/index.mdx`)
+  const fullPath = join(postsDirectory, `${slug}/_index.mdx`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const { data, content } = matter(fileContents)
 
@@ -63,7 +63,7 @@ export function getPostBySlug(slug: string, fields: (keyof PostType)[] = []) {
 }
 
 export function getAboutPost() {
-  const fileContents = fs.readFileSync(join(process.cwd(), 'public/about/index.md'), 'utf8')
+  const fileContents = fs.readFileSync(join(process.cwd(), 'public/about/_index.md'), 'utf8')
   const { data, content } = matter(fileContents)
 
   return { title: data.title, content: twemoji.parse(content) }
