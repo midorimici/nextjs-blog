@@ -37,7 +37,7 @@ const Tooltip = ({ label, children }: TooltipProps) => {
     }
   }
 
-  useEffect(() => { alignTooltip() }, [tooltipRef.current])
+  useEffect(() => { alignTooltip() }, [])
 
   return (
     <span

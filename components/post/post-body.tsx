@@ -26,6 +26,7 @@ type Props = {
 }
 
 const PostBody = ({ source, tocSource, slug, relatedPosts }: Props) => {
+  /* eslint-disable react/display-name */
   const components = {
     a: ({ href, children }: { href: string, children: string }) => (
       <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>

@@ -2,11 +2,12 @@ import { useState, useEffect, ReactElement } from 'react'
 import ReactDOMServer from 'react-dom/server'
 
 import Tooltip from './mdx/tltp'
-import markdownToHtml from '../lib/markdownToHtml'
+import markdownToHtml from 'lib/markdownToHtml'
 
 export const useParsedMarkdown = (markdown: string | ReactElement, minimum: boolean = true) => {
   const [content, setContent] = useState('')
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     let isSubscribed = true
     parseMarkdown().then((html: string) => {
@@ -31,7 +32,7 @@ export const useParsedMarkdown = (markdown: string | ReactElement, minimum: bool
     while ((ex = regexg.exec(str)) !== null) {
       const label = ex[1]
       const children = (await markdownToHtml(ex[2])).replace(/<p>([\s\S]*)<\/p>/, '$1')
-      const tltp = ReactDOMServer.renderToStaticMarkup(<Tooltip label={label} children={children} />)
+      const tltp = ReactDOMServer.renderToStaticMarkup(<Tooltip label={label}>{children}</Tooltip>)
       result = result.replace(regex, (await markdownToHtml(tltp))
         .replace(/(<span class="tooltip">)(<\/span>)/, `$1${children}$2`)
         .replace(/<p>([\s\S]*)<\/p>/, '$1')

@@ -7,6 +7,8 @@ type Props = {
   number?: number
 }
 
+/* eslint-disable @next/next/no-img-element */
+
 const TopicTip = ({ topic, number }: Props) => {
   const { label, logo } = brandTopicsMap[topic.toLowerCase()]
     ?? { label: topic, logo: topicEmojiSourceMap[topic] ?? 'https://placehold.jp/150x150.png?text=(-%20-)%3F' }

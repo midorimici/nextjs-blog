@@ -17,7 +17,6 @@ import BackToTopButton from 'components/post/backToTopButton'
 
 import { SITE_NAME } from 'lib/constants'
 import type PostType from 'types/post'
-import RelatedPost from 'components/mdx/relpos'
 
 type Props = {
   post: PostType

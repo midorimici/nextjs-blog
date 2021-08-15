@@ -4,7 +4,6 @@ import { Prism } from 'prism-react-renderer'
 import 'styles/index.css'
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace NodeJS {
     interface Global {
       Prism: any

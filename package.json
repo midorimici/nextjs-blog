@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start",
+    "lint": "next lint",
     "typecheck": "tsc"
   },
   "dependencies": {
@@ -42,6 +43,8 @@
     "@types/react-paginate": "^7.1.1",
     "@types/twemoji": "^12.1.2",
     "autoprefixer": "^10.2.5",
+    "eslint": "^7.32.0",
+    "eslint-config-next": "^11.1.0",
     "postcss": "^8.3.0",
     "tailwindcss": "^2.1.2"
   },

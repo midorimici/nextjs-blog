@@ -21,6 +21,7 @@ const Index = ({ posts, allPosts }: Props) => {
   const [timeoutID, setTimeoutID] = useState<number>()
   const [searchedPosts, setSearchedPosts] = useState<Post[]>([])
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     setSearchedPosts(getSearchedPosts())
     return () => clearTimeout(timeoutID)
