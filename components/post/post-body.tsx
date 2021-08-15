@@ -22,9 +22,10 @@ type Props = {
   source: MDXRemoteSerializeResult<Record<string, unknown>>
   tocSource?: MDXRemoteSerializeResult<Record<string, unknown>>
   slug: string
+  relatedPosts?: Record<string, string>
 }
 
-const PostBody = ({ source, tocSource, slug }: Props) => {
+const PostBody = ({ source, tocSource, slug, relatedPosts }: Props) => {
   const components = {
     a: ({ href, children }: { href: string, children: string }) => (
       <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>
@@ -38,7 +39,9 @@ const PostBody = ({ source, tocSource, slug }: Props) => {
     code: (props: CodeBlockProps) => <CodeBlock {...props} />,
     icode: (props: any) => <code>{props.children}</code>,
     pstlk: (props: PostLinkProps) => <PostLink {...props} />,
-    relpos: (props: RelatedPostProps) => <RelatedPost {...props} />,
+    relpos: (props: Omit<RelatedPostProps, 'relatedPosts'>) => (
+      relatedPosts && <RelatedPost relatedPosts={relatedPosts} {...props} />
+    ),
     tltp: (props: TooltipProps) => <Tooltip {...props} />,
     fukidashi: (props: FukidashiProps) => <Fukidashi {...props} />,
     manga: (props: Omit<MangaProps, 'slug'>) => <Manga slug={slug} {...props} />,

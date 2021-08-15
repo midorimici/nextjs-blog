@@ -17,14 +17,16 @@ import BackToTopButton from 'components/post/backToTopButton'
 
 import { SITE_NAME } from 'lib/constants'
 import type PostType from 'types/post'
+import RelatedPost from 'components/mdx/relpos'
 
 type Props = {
   post: PostType
+  relatedPosts: Record<string, string>
   source: MDXRemoteSerializeResult<Record<string, unknown>>
   tocSource: MDXRemoteSerializeResult<Record<string, unknown>>
 }
 
-const Post = ({ post, source, tocSource }: Props) => {
+const Post = ({ post, relatedPosts, source, tocSource }: Props) => {
   const router = useRouter()
 
   if (!router.isFallback && !post?.slug) {
@@ -61,7 +63,12 @@ const Post = ({ post, source, tocSource }: Props) => {
                 lastmod={post.lastmod}
                 topics={post.topics}
               />
-              <PostBody source={source} tocSource={tocSource} slug={post.slug} />
+              <PostBody
+                source={source}
+                tocSource={tocSource}
+                slug={post.slug}
+                relatedPosts={relatedPosts}
+              />
             </article>
             <aside className="w-96 hidden lg:block">
               <div className="sticky top-16">
@@ -86,7 +93,17 @@ type Params = {
 
 export async function getStaticProps({ params }: Params) {
   const post = getPostBySlug(params.slug, necessaryFieldsForPost)
-  const postWithTOC = (post.content || '').replace(/## .+/, '<toc />\n\n$&')
+  const postContent = post.content ?? ''
+
+  let relatedPosts: Record<string, string> = {}
+  const relatedPostSlugsMatches = postContent.matchAll(/<relpos link="(.+?)" \/>/g)
+  for (const match of relatedPostSlugsMatches) {
+    const slug = match[1]
+    const title = getPostBySlug(slug, ['title']).title ?? ''
+    relatedPosts[slug] = title
+  }
+
+  const postWithTOC = (postContent).replace(/## .+/, '<toc />\n\n$&')
   const content = await serialize(postWithTOC, {
     mdxOptions: {
       remarkPlugins: [remarkMath],
@@ -100,6 +117,7 @@ export async function getStaticProps({ params }: Params) {
       post: {
         ...post,
       },
+      relatedPosts,
       source: content,
       tocSource: toc,
     },
