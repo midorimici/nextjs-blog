@@ -7,19 +7,19 @@ import Container from 'components/container'
 import Stories from 'components/stories'
 import Layout from 'components/layout'
 import Pagination from 'components/pagination'
-import { getPosts, necessaryFieldsForPostList } from 'lib/api'
-import { PAGINATION_PER_PAGE, SITE_NAME } from 'lib/constants'
-import type Post from 'types/post'
+import { getAllPosts, getPosts, necessaryFieldsForPostList } from 'lib/api'
+import { SITE_NAME } from 'lib/constants'
+import type { ContentfulPostFields } from 'types/api'
 
 type Props = {
-  posts: Post[]
-  allPosts: Post[]
+  posts: ContentfulPostFields[]
+  allPosts: ContentfulPostFields[]
 }
 
 const Index = ({ posts, allPosts }: Props) => {
   const [searchText, setSearchText] = useState('')
   const [timeoutID, setTimeoutID] = useState<number>()
-  const [searchedPosts, setSearchedPosts] = useState<Post[]>([])
+  const [searchedPosts, setSearchedPosts] = useState<ContentfulPostFields[]>([])
 
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
@@ -34,7 +34,7 @@ const Index = ({ posts, allPosts }: Props) => {
 
   const getSearchedPosts = () =>
     allPosts.filter(
-      (post: Post) => {
+      (post: ContentfulPostFields) => {
         const content = post.content
           .replace(/<relpos link=".+?" ?\/>/g, '')
           .replace(/<pstlk label="(.+?)" to=".+?" ?\/>/g, '$1')
@@ -77,8 +77,8 @@ const Index = ({ posts, allPosts }: Props) => {
 export default Index
 
 export const getStaticProps = async () => {
-  const allPosts = getPosts(necessaryFieldsForPostList, { all: true })
-  const posts = allPosts.slice(0, PAGINATION_PER_PAGE)
+  const allPosts = await getAllPosts()
+  const posts = await getPosts(necessaryFieldsForPostList)
 
   return {
     props: { posts, allPosts },

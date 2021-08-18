@@ -1,6 +1,7 @@
 import DateFormatter from './date-formatter'
 import CoverImage from './cover-image'
 import Link from 'next/link'
+import twemoji from 'twemoji'
 
 import TopicTip from './topic-tip'
 import { useParsedMarkdown } from './useParsedMarkdown'
@@ -11,6 +12,7 @@ type Props = {
   date: string
   lastmod: string
   topics: string[]
+  coverImageUrl: string
   summary: string
 }
 
@@ -20,10 +22,11 @@ const PostPreview = ({
   date,
   lastmod,
   topics,
+  coverImageUrl,
   summary,
 }: Props) => {
   const parsedTitle = useParsedMarkdown(title)
-  const content = useParsedMarkdown(summary)
+  const content = useParsedMarkdown(twemoji.parse(summary))
   
   return (
     <article className={`
@@ -42,7 +45,7 @@ const PostPreview = ({
       </Link>
       <CoverImage
         title={title}
-        src={`/posts/${slug}/_index.jpg`}
+        src={coverImageUrl}
       />
       <section className="m-4">
         <h3

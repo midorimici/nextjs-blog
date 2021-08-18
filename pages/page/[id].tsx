@@ -1,11 +1,11 @@
 import Index from 'pages/index'
-import Post from 'types/post'
-import { getPosts, getTotalPostNumbers, necessaryFieldsForPostList } from 'lib/api'
+import type { ContentfulPostFields } from 'types/api'
+import { getAllPosts, getPosts, getTotalPostNumbers, necessaryFieldsForPostList } from 'lib/api'
 import { PAGINATION_PER_PAGE } from 'lib/constants'
 
 type Props = {
-  posts: Post[]
-  allPosts: Post[]
+  posts: ContentfulPostFields[]
+  allPosts: ContentfulPostFields[]
 }
 
 const Posts = ({ posts, allPosts }: Props) => {
@@ -23,8 +23,10 @@ type Params = {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const allPosts = getPosts(necessaryFieldsForPostList, { all: true })
-  const posts = allPosts.slice(PAGINATION_PER_PAGE*(params.id-1), PAGINATION_PER_PAGE*params.id)
+  const allPosts = await getAllPosts()
+  const posts = await getPosts(necessaryFieldsForPostList, {
+    offset: PAGINATION_PER_PAGE*(params.id-1),
+  })
 
   return {
     props: { posts, allPosts },
@@ -32,7 +34,7 @@ export async function getStaticProps({ params }: Params) {
 }
 
 export async function getStaticPaths() {
-  const postNumbers = getTotalPostNumbers()
+  const postNumbers = await getTotalPostNumbers()
   const ids = [...Array(Math.ceil(postNumbers/PAGINATION_PER_PAGE))].map((_, i) => i+1)
 
   return {

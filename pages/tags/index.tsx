@@ -38,7 +38,7 @@ const Tags = ({ topicNumberMap }: Props) => {
 export default Tags
 
 export async function getStaticProps() {
-  const topicNumberMap = getPostNumbersByTopics(topicNames)
+  const topicNumberMap = await getPostNumbersByTopics(topicNames)
 
   return {
     props: {

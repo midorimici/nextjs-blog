@@ -6,6 +6,7 @@ import markdownTOC from 'markdown-toc'
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Head from 'next/head'
+import twemoji from 'twemoji'
 
 import PostBody from 'components/post/post-body'
 import PostHeader from 'components/post/post-header'
@@ -16,10 +17,10 @@ import TOC from 'components/post/toc'
 import BackToTopButton from 'components/post/backToTopButton'
 
 import { SITE_NAME } from 'lib/constants'
-import type PostType from 'types/post'
+import type { ContentfulPostFields } from 'types/api'
 
 type Props = {
-  post: PostType
+  post: ContentfulPostFields
   relatedPosts: Record<string, string>
   source: MDXRemoteSerializeResult<Record<string, unknown>>
   tocSource: MDXRemoteSerializeResult<Record<string, unknown>>
@@ -91,14 +92,14 @@ type Params = {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const post = getPostBySlug(params.slug, necessaryFieldsForPost)
-  const postContent = post.content ?? ''
+  const post = await getPostBySlug(params.slug, necessaryFieldsForPost)
+  const postContent = twemoji.parse(post.content).replace(/class="emoji"/g, 'className="emoji"')
 
   let relatedPosts: Record<string, string> = {}
   const relatedPostSlugsMatches = postContent.matchAll(/<relpos link="(.+?)" \/>/g)
   for (const match of relatedPostSlugsMatches) {
     const slug = match[1]
-    const title = getPostBySlug(slug, ['title']).title ?? ''
+    const title = (await getPostBySlug(slug, ['title'])).title ?? ''
     relatedPosts[slug] = title
   }
 
@@ -124,7 +125,7 @@ export async function getStaticProps({ params }: Params) {
 }
 
 export async function getStaticPaths() {
-  const slugs = getPostSlugs()
+  const slugs = await getPostSlugs()
 
   return {
     paths: slugs.map((slug) => {

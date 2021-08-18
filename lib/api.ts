@@ -1,103 +1,127 @@
-import fs from 'fs'
-import { join } from 'path'
-import matter from 'gray-matter'
+import { createClient} from 'contentful'
+import type { Entry, EntryCollection } from 'contentful'
 import twemoji from 'twemoji'
 
-import type PostType from 'types/post'
-import { PAGINATION_PER_PAGE } from './constants'
+import type { ContentfulPostFields, ContentfulAboutPostFields } from 'types/api'
+import {
+  CTF_ACCESS_TOKEN,
+  CTF_SPACE_ID,
+  CTF_ENV_ID,
+  CTF_POST_CONTENT_TYPE_ID,
+  CTF_ABOUT_ENTRY_ID,
+  PAGINATION_PER_PAGE,
+} from './constants'
 
-export const necessaryFieldsForPostList: (keyof PostType)[] = [
+const client = createClient({
+  space: CTF_SPACE_ID,
+  environment: CTF_ENV_ID,
+  accessToken: CTF_ACCESS_TOKEN,
+})
+
+export const necessaryFieldsForPostList: (keyof ContentfulPostFields)[] = [
+  'slug',
   'title',
   'date',
-  'slug',
-  'summary',
   'lastmod',
   'topics',
-  'content',
   'published',
+  'assets',
+  'summary',
+  'content',
 ]
 
-export const necessaryFieldsForPost: (keyof PostType)[] = [
+export const necessaryFieldsForPost: (keyof ContentfulPostFields)[] = [
+  'slug',
   'title',
   'date',
-  'slug',
-  'summary',
   'lastmod',
   'topics',
   'katex',
-  'content',
   'published',
+  'summary',
+  'content',
 ]
 
-const postsDirectory = join(process.cwd(), 'public/posts')
-
-export function getPostSlugs() {
-  return fs.readdirSync(postsDirectory)
-}
-
-export function getPostBySlug(slug: string, fields: (keyof PostType)[] = []) {
-  if (fs.readdirSync(process.cwd()).length < 6)
-    console.log(fs.readdirSync(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/public/posts/${slug}`))
-  const fullPath = join(postsDirectory, `${slug}/_index.mdx`)
-  const fileContents = fs.readFileSync(fullPath, 'utf8')
-  const { data, content } = matter(fileContents)
-
-  const items: Partial<PostType> = {}
-
-  // Ensure only the minimal needed data is exposed
-  fields.forEach((field) => {
-    if (field === 'slug') {
-      items[field] = slug
-    }
-    if (field === 'content') {
-      items[field] = twemoji.parse(content).replace(/class="emoji"/g, 'className="emoji"')
-    }
-    if (field === 'date' || field === 'lastmod') {
-      items[field] = data[field].toISOString()
-    } else if (data[field]) {
-      items[field] = data[field]
-    }
+export async function getPostSlugs() {
+  const entries: EntryCollection<Pick<ContentfulPostFields, 'slug'>> = await client.getEntries({
+    content_type: CTF_POST_CONTENT_TYPE_ID,
+    select: 'fields.slug',
+    limit: 500,
   })
-
-  return items
+  return entries.items.map(item => item.fields.slug)
 }
 
-export function getAboutPost() {
-  const fileContents = fs.readFileSync(join(process.cwd(), 'public/about/_index.md'), 'utf8')
-  const { data, content } = matter(fileContents)
-
-  return { title: data.title, content: twemoji.parse(content) }
+export async function getPostBySlug(slug: string, fields: (keyof ContentfulPostFields)[]) {
+  const entries: EntryCollection<Pick<ContentfulPostFields, (typeof fields)[number]>> = await client.getEntries({
+    content_type: CTF_POST_CONTENT_TYPE_ID,
+    'fields.slug': slug,
+    select: fields.map(field => `fields.${field}`).join(','),
+  })
+  return entries.items[0].fields
 }
 
-export function getPosts(
-  fields: (keyof PostType)[] = [],
-  { offset = 0, all = false, limit = PAGINATION_PER_PAGE }: {
+export async function getAboutPost() {
+  const entry: Entry<ContentfulAboutPostFields> = await client.getEntry(CTF_ABOUT_ENTRY_ID)
+  return {
+    title: entry.fields.title,
+    profileUrl: `https:${entry.fields.profile.fields.file.url}`,
+    content: twemoji.parse(entry.fields.content),
+  }
+}
+
+export async function getPosts(
+  fields: (keyof ContentfulPostFields)[],
+  { offset = 0, limit = PAGINATION_PER_PAGE }: {
     offset?: number,
-    all?: boolean,
     limit?: number,
   } = {}
 ) {
-  const slugs = getPostSlugs()
-  const posts = slugs
-    .map((slug) => getPostBySlug(slug, fields))
-    // sort posts by date in descending order
-    .sort((post1, post2) => (post1.date && post2.date && post1.date > post2.date ? -1 : 1))
-
-  if (all) return posts
-  return posts.slice(offset, offset+limit)
+  const entries: EntryCollection<
+    Pick<ContentfulPostFields, (typeof fields)[number]>
+  > = await client.getEntries({
+    content_type: CTF_POST_CONTENT_TYPE_ID,
+    select: fields.map(field => `fields.${field}`).join(','),
+    order: '-fields.date',
+    limit,
+    skip: offset,
+  })
+  return entries.items.map(item => item.fields)
 }
 
-export function getTotalPostNumbers() {
-  return getPostSlugs().length
+export async function getAllPosts() {
+  const entries: EntryCollection<
+    Pick<ContentfulPostFields, (typeof necessaryFieldsForPostList)[number]>
+  > = await client.getEntries({
+    content_type: CTF_POST_CONTENT_TYPE_ID,
+    select: necessaryFieldsForPostList.map(field => `fields.${field}`).join(','),
+    order: '-fields.date',
+    limit: 500,
+  })
+  return entries.items.map(item => item.fields)
 }
 
-export function getPostNumbersByTopics(topics: string[]) {
+export async function getTotalPostNumbers() {
+  const entries: EntryCollection<ContentfulPostFields> = await client.getEntries({
+    content_type: CTF_POST_CONTENT_TYPE_ID,
+    limit: 500,
+  })
+  return entries.total
+}
+
+export async function getPostNumbersByTopics(topics: string[]) {
+  const entries: EntryCollection<Pick<ContentfulPostFields, 'topics'>> = await client.getEntries({
+    content_type: CTF_POST_CONTENT_TYPE_ID,
+    select: 'fields.topics',
+    limit: 500,
+  })
   const topicNumberMap: Record<string, number> = {}
   for (const topic of topics) {
-    topicNumberMap[topic] = getPosts(['topics'], { all: true })
-      .filter(post => post.topics && post.topics.some((postTopic: string) => (
+    topicNumberMap[topic] = entries.items.filter(entry => {
+      const entryTopics = entry.fields.topics
+      return entryTopics && entryTopics.some((postTopic: string) => (
         postTopic.toLowerCase() === topic.toLowerCase()
-      ))).length
+      ))
+    }).length
   }
   const sortedTopicNumberMap = Object.fromEntries(
     Object.entries(topicNumberMap).sort((a, b) => b[1] - a[1])
@@ -105,11 +129,14 @@ export function getPostNumbersByTopics(topics: string[]) {
   return sortedTopicNumberMap
 }
 
-export function getPostsByTopic(topic: string) {
-  return getPosts(necessaryFieldsForPostList, { all: true })
-    .filter(post => post.topics && post.topics.some((postTopic: string) => (
-      postTopic.toLowerCase() === topic.toLowerCase()
-    )))
-    // sort posts by date in descending order
-    .sort((post1, post2) => (post1.date && post2.date && post1.date > post2.date ? -1 : 1))
+export async function getPostsByTopic(topic: string) {
+  const entries: EntryCollection<
+    Pick<ContentfulPostFields, (typeof necessaryFieldsForPostList)[number]>
+  > = await client.getEntries({
+    content_type: CTF_POST_CONTENT_TYPE_ID,
+    select: necessaryFieldsForPostList.map(field => `fields.${field}`).join(','),
+    'fields.topics': topic,
+    order: '-fields.date',
+  })
+  return entries.items.map(item => item.fields)
 }

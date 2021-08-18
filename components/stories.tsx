@@ -1,8 +1,8 @@
 import PostPreview from './post-preview'
-import Post from '../types/post'
+import type { ContentfulPostFields } from 'types/api'
 
 type Props = {
-  posts: Post[]
+  posts: ContentfulPostFields[]
 }
 
 const Stories = ({ posts }: Props) => {
@@ -16,6 +16,10 @@ const Stories = ({ posts }: Props) => {
           date={post.date}
           lastmod={post.lastmod}
           topics={post.topics}
+          coverImageUrl={`
+            https:${post.assets
+              .find(asset => asset.fields.file.fileName === '_index.jpg')?.fields.file.url ?? ''}
+          `}
           summary={(post.summary ?? post.content.replace(/([\s\S]+)\n<!--more-->[\s\S]+/, '$1')) + '…'}
         />
       ))}
