@@ -21,7 +21,7 @@ import type { ContentfulPostFields } from 'types/api'
 
 type Props = {
   post: ContentfulPostFields
-  relatedPosts: Record<string, string>
+  relatedPosts: Record<string, { title: string, coverImageUrl: string }>
   source: MDXRemoteSerializeResult<Record<string, unknown>>
   tocSource: MDXRemoteSerializeResult<Record<string, unknown>>
 }
@@ -103,12 +103,16 @@ export async function getStaticProps({ params }: Params) {
   const post = await getPostBySlug(params.slug, necessaryFieldsForPost)
   const postContent = twemoji.parse(post.content).replace(/class="emoji"/g, 'className="emoji"')
 
-  let relatedPosts: Record<string, string> = {}
+  let relatedPosts: Record<string, { title: string, coverImageUrl: string }> = {}
   const relatedPostSlugsMatches = postContent.matchAll(/<relpos link="(.+?)" \/>/g)
   for (const match of relatedPostSlugsMatches) {
     const slug = match[1]
-    const title = (await getPostBySlug(slug, ['title'])).title ?? ''
-    relatedPosts[slug] = title
+    const titleAndAssets = await getPostBySlug(slug, ['title', 'assets'])
+    relatedPosts[slug] = {
+      title: titleAndAssets.title,
+      coverImageUrl: 'https:' + titleAndAssets.assets
+        .find(asset => asset.fields.file.fileName === '_index.jpg')?.fields.file.url ?? ''
+    }
   }
 
   const postWithTOC = (postContent).replace(/## .+/, '<toc />\n\n$&')

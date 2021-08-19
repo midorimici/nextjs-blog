@@ -29,7 +29,7 @@ type Props = {
         height: number
     } | undefined
   }>
-  relatedPosts?: Record<string, string>
+  relatedPosts?: Record<string, { title: string, coverImageUrl: string }>
 }
 
 const PostBody = ({ source, tocSource, slug, assets, relatedPosts }: Props) => {

@@ -7,12 +7,13 @@ import { useImagePlaceholder } from 'components/useImagePlaceholder'
 
 export type RelatedPostProps = {
   link: string
-  relatedPosts: Record<string, string>
+  relatedPosts: Record<string, { title: string, coverImageUrl: string }>
 }
 
 const RelatedPost = ({ link, relatedPosts }: RelatedPostProps) => {
-  const postTitle = relatedPosts[link]
-  const imgPath = `/posts/${link}/_index.jpg`
+  const relatedPost = relatedPosts[link]
+  const postTitle = relatedPost.title
+  const imgPath = relatedPost.coverImageUrl
   const placeholder = useImagePlaceholder(320, 180)
   
   return (
