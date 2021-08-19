@@ -1,11 +1,17 @@
-import type { EntryFields, Asset } from 'contentful'
+import type { EntryFields, Asset, Entry } from 'contentful'
+
+export type ContentfulTopicFields = {
+  id: string
+  label: string
+  logoUrl: string
+}
 
 export type ContentfulPostFields = {
   slug: EntryFields.Symbol
   title: EntryFields.Symbol
   date: EntryFields.Date
   lastmod: EntryFields.Date
-  topics: EntryFields.Symbol[]
+  topics: Entry<ContentfulTopicFields>[]
   katex: EntryFields.Boolean
   published: EntryFields.Boolean
   assets: Asset[]

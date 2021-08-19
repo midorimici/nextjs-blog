@@ -1,19 +1,17 @@
 import Link from 'next/link'
 
-import { brandTopicsMap, topicEmojiSourceMap } from 'lib/topics'
+import type { ContentfulTopicFields } from 'types/api'
 
 type Props = {
-  topic: string
+  topic: ContentfulTopicFields
   number?: number
 }
 
 /* eslint-disable @next/next/no-img-element */
 
 const TopicTip = ({ topic, number }: Props) => {
-  const { label, logo } = brandTopicsMap[topic.toLowerCase()]
-    ?? { label: topic, logo: topicEmojiSourceMap[topic] ?? 'https://placehold.jp/150x150.png?text=(-%20-)%3F' }
   return (
-    <Link as={`/tags/${topic.toLowerCase()}`} href="/tags/[topic]">
+    <Link as={`/tags/${topic.id}`} href="/tags/[topic]">
       <a className={`
         flex items-center gap-2 p-2
         text-sm sm:text-base
@@ -23,12 +21,12 @@ const TopicTip = ({ topic, number }: Props) => {
       `}>
         <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-2xl flex justify-center items-center">
           <img
-            src={logo}
-            alt={label}
+            src={topic.logoUrl}
+            alt={topic.label}
             className="w-4 sm:w-6"
           />
         </div>
-        {label + (number ? ` (${number})` : '')}
+        {topic.label + (number ? ` (${number})` : '')}
       </a>
     </Link>
   )

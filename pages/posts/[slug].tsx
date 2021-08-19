@@ -68,12 +68,11 @@ const Post = ({ post, relatedPosts, source, tocSource }: Props) => {
                 title={post.title}
                 date={post.date}
                 lastmod={post.lastmod}
-                topics={post.topics}
+                topics={post.topics.map(topic => topic.fields)}
               />
               <PostBody
                 source={source}
                 tocSource={tocSource}
-                slug={post.slug}
                 assets={assets}
                 relatedPosts={relatedPosts}
               />

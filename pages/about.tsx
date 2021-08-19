@@ -37,7 +37,7 @@ const About = ({ postTitle, profileUrl, source }: Props) => {
               height={160}
             />
           </div>
-          <PostBody source={source} slug='about' />
+          <PostBody source={source} />
         </div>
       </article>
     </Layout>

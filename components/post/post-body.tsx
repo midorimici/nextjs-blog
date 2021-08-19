@@ -21,8 +21,7 @@ import markdownStyles from './markdown-styles.module.css'
 type Props = {
   source: MDXRemoteSerializeResult<Record<string, unknown>>
   tocSource?: MDXRemoteSerializeResult<Record<string, unknown>>
-  slug: string
-  assets: Record<string, {
+  assets?: Record<string, {
     url: string
     size: {
         width: number
@@ -32,7 +31,7 @@ type Props = {
   relatedPosts?: Record<string, { title: string, coverImageUrl: string }>
 }
 
-const PostBody = ({ source, tocSource, slug, assets, relatedPosts }: Props) => {
+const PostBody = ({ source, tocSource, assets, relatedPosts }: Props) => {
   /* eslint-disable react/display-name */
   const components = {
     a: ({ href, children }: { href: string, children: string }) => (
@@ -42,8 +41,8 @@ const PostBody = ({ source, tocSource, slug, assets, relatedPosts }: Props) => {
     h2: ({ children }: { children: any }) => <Heading type={2} content={children} />,
     h3: ({ children }: { children: any }) => <Heading type={3} content={children} />,
     toc: tocSource ? () => <MobileTOC source={tocSource} /> : () => {},
-    postimage: (props: Omit<PostImageProps, 'assets'>) => <PostImage assets={assets} {...props} />,
-    video: (props: Omit<VideoProps, 'assets'>) => <Video assets={assets} {...props} />,
+    postimage: (props: Omit<PostImageProps, 'assets'>) => assets && <PostImage assets={assets} {...props} />,
+    video: (props: Omit<VideoProps, 'assets'>) => assets && <Video assets={assets} {...props} />,
     code: (props: CodeBlockProps) => <CodeBlock {...props} />,
     icode: (props: any) => <code>{props.children}</code>,
     pstlk: (props: PostLinkProps) => <PostLink {...props} />,
@@ -52,7 +51,7 @@ const PostBody = ({ source, tocSource, slug, assets, relatedPosts }: Props) => {
     ),
     tltp: (props: TooltipProps) => <Tooltip {...props} />,
     fukidashi: (props: FukidashiProps) => <Fukidashi {...props} />,
-    manga: (props: Omit<MangaProps, 'assets'>) => <Manga assets={assets} {...props} />,
+    manga: (props: Omit<MangaProps, 'assets'>) => assets && <Manga assets={assets} {...props} />,
     'manga-text': (props: MangaTextProps) => <MangaText {...props} />,
     tweet: ({ id }: { id: string }) => <Tweet tweetId={id} />,
     sandbox: (props: { name: string, link: string }) => <Sandbox {...props} />,

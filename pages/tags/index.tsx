@@ -2,12 +2,12 @@ import Head from 'next/head'
 
 import Layout from 'components/layout'
 import TopicTip from 'components/topic-tip'
+import type { ContentfulTopicFields } from 'types/api'
 import { SITE_NAME, TAGS_PAGE_TITLE } from 'lib/constants'
-import { topicNames } from 'lib/topics'
 import { getPostNumbersByTopics } from 'lib/api'
 
 type Props = {
-  topicNumberMap: Record<string, number>
+  topicNumberMap: Record<string, { count: number, topic: ContentfulTopicFields }>
 }
 
 const Tags = ({ topicNumberMap }: Props) => {
@@ -26,9 +26,12 @@ const Tags = ({ topicNumberMap }: Props) => {
           `}
         >{TAGS_PAGE_TITLE}</h1>
         <div className="max-w-2xl mx-auto flex flex-wrap gap-4">
-          {Object.entries(topicNumberMap).map(([topic, number]: [string, number]) => (
-            <TopicTip key={topic} topic={topic} number={number} />
-          ))}
+          {Object.entries(topicNumberMap).map((
+              [topicId, topic]: [string, { count: number, topic: ContentfulTopicFields }]
+            ) => (
+              <TopicTip key={topicId} topic={topic.topic} number={topic.count} />
+            )
+          )}
         </div>
       </article>
     </Layout>
@@ -38,7 +41,7 @@ const Tags = ({ topicNumberMap }: Props) => {
 export default Tags
 
 export async function getStaticProps() {
-  const topicNumberMap = await getPostNumbersByTopics(topicNames)
+  const topicNumberMap = await getPostNumbersByTopics()
 
   return {
     props: {

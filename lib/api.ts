@@ -2,12 +2,13 @@ import { createClient } from 'contentful'
 import type { Entry, EntryCollection } from 'contentful'
 import twemoji from 'twemoji'
 
-import type { ContentfulPostFields, ContentfulAboutPostFields } from 'types/api'
+import type { ContentfulTopicFields, ContentfulPostFields, ContentfulAboutPostFields } from 'types/api'
 import {
   CTF_ACCESS_TOKEN,
   CTF_SPACE_ID,
   CTF_ENV_ID,
   CTF_POST_CONTENT_TYPE_ID,
+  CTF_TOPIC_CONTENT_TYPE_ID,
   CTF_ABOUT_ENTRY_ID,
   PAGINATION_PER_PAGE,
 } from './constants'
@@ -109,34 +110,61 @@ export async function getTotalPostNumbers() {
   return entries.total
 }
 
-export async function getPostNumbersByTopics(topics: string[]) {
+
+export async function getTopics() {
+  const topics: EntryCollection<ContentfulTopicFields> = await client.getEntries({
+    content_type: CTF_TOPIC_CONTENT_TYPE_ID,
+  })
+  return topics.items.map(item => item.fields)
+}
+
+export async function getTopicLabelFromId(id: string) {
+  const topics: EntryCollection<ContentfulTopicFields> = await client.getEntries({
+    content_type: CTF_TOPIC_CONTENT_TYPE_ID,
+    'fields.id': id,
+    select: 'fields.label',
+  })
+  return topics.items[0].fields.label
+}
+
+export async function getPostNumbersByTopics() {
+  const topics: EntryCollection<ContentfulTopicFields> = await client.getEntries({
+    content_type: CTF_TOPIC_CONTENT_TYPE_ID,
+  })
   const entries: EntryCollection<Pick<ContentfulPostFields, 'topics'>> = await client.getEntries({
     content_type: CTF_POST_CONTENT_TYPE_ID,
     select: 'fields.topics',
     limit: 500,
   })
-  const topicNumberMap: Record<string, number> = {}
-  for (const topic of topics) {
-    topicNumberMap[topic] = entries.items.filter(entry => {
-      const entryTopics = entry.fields.topics
-      return entryTopics && entryTopics.some((postTopic: string) => (
-        postTopic.toLowerCase() === topic.toLowerCase()
-      ))
-    }).length
+  const topicNumberMap: Record<string, { count: number, topic: ContentfulTopicFields }> = {}
+  for (const topic of topics.items) {
+    topicNumberMap[topic.fields.id] = {
+      count: entries.items.filter(entry => {
+        const entryTopics = entry.fields.topics
+        return entryTopics && entryTopics.some((postTopic) => (
+          postTopic.fields.id === topic.fields.id
+        ))
+      }).length,
+      topic: topic.fields,
+    }
   }
   const sortedTopicNumberMap = Object.fromEntries(
-    Object.entries(topicNumberMap).sort((a, b) => b[1] - a[1])
+    Object.entries(topicNumberMap).sort((a, b) => b[1].count - a[1].count)
   )
   return sortedTopicNumberMap
 }
 
 export async function getPostsByTopic(topic: string) {
+  const topicEntryId: string = (await client.getEntries({
+    content_type: CTF_TOPIC_CONTENT_TYPE_ID,
+    'fields.id': topic.toLowerCase()
+  })).items[0].sys.id
   const entries: EntryCollection<
     Pick<ContentfulPostFields, (typeof necessaryFieldsForPostList)[number]>
   > = await client.getEntries({
     content_type: CTF_POST_CONTENT_TYPE_ID,
     select: necessaryFieldsForPostList.map(field => `fields.${field}`).join(','),
-    'fields.topics': topic,
+    links_to_entry: topicEntryId,
     order: '-fields.date',
   })
   return entries.items.map(item => item.fields)

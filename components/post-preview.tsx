@@ -4,6 +4,7 @@ import Link from 'next/link'
 import twemoji from 'twemoji'
 
 import TopicTip from './topic-tip'
+import type { ContentfulTopicFields } from 'types/api'
 import { useParsedMarkdown } from './useParsedMarkdown'
 
 type Props = {
@@ -11,7 +12,7 @@ type Props = {
   title: string
   date: string
   lastmod: string
-  topics: string[]
+  topics: ContentfulTopicFields[]
   coverImageUrl: string
   summary: string
 }
@@ -57,7 +58,7 @@ const PostPreview = ({
           <DateFormatter dateString={lastmod} type='lastmod' />
         </div>
         <div className="flex flex-wrap gap-4 mb-4">
-          {topics.map((topic: string) => <TopicTip key={topic} topic={topic} />)}
+          {topics.map((topic: ContentfulTopicFields) => <TopicTip key={topic.id} topic={topic} />)}
         </div>
         {summary && (
           <p

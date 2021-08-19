@@ -15,7 +15,7 @@ const Stories = ({ posts }: Props) => {
           title={post.title}
           date={post.date}
           lastmod={post.lastmod}
-          topics={post.topics}
+          topics={post.topics.map(topic => topic.fields)}
           coverImageUrl={`
             https:${post.assets
               .find(asset => asset.fields.file.fileName === '_index.jpg')?.fields.file.url ?? ''}
