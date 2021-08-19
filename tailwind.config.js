@@ -1,7 +1,10 @@
 module.exports = {
   purge: {
     content: ['./components/**/*.tsx', './pages/**/*.tsx'],
-    safelist: ['xs' , 'sm' , 'base' , 'lg' , 'xl' , '2xl'].map(size => `md:text-${size}`),
+    safelist: [
+      ...['xs' , 'sm' , 'base' , 'lg' , 'xl' , '2xl'].map(size => `md:text-${size}`),
+      '-z-10',
+    ],
   },
   theme: {
     extend: {
