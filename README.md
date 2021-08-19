@@ -78,7 +78,7 @@ children: string
 `manga` -> [`Manga`](components/mdx/manga.tsx)
 
 ```ts
-src: string   // 画像へのパス
+src: string   // 画像のファイル名（拡張子なし）
 alt: string   // 代替テキスト
 children: Element
 ```
@@ -110,14 +110,12 @@ color?: string    // テキストの色
 `postimage` -> [`PostImage`](components/mdx/post-image.tsx)
 
 ```ts
-src: string   // 画像へのパス
+src: string   // 画像のファイル名（拡張子なし）
 alt: string   // 代替テキスト
-ext?: 'png' | 'gif' | 'jpg' = 'jpg'   // 拡張子
 ```
 
 ```md
 <postimage src="xxx" alt="xxx" />
-<postimage src="xxx" alt="xxx" ext='gif' />
 ```
 
 ### pstlk
@@ -126,7 +124,7 @@ ext?: 'png' | 'gif' | 'jpg' = 'jpg'   // 拡張子
 
 ```ts
 label: string   // 表示するテキスト
-to: string      // リンク先
+to: string      // リンク先のスラッグ
 ```
 
 ```md
@@ -138,7 +136,7 @@ to: string      // リンク先
 `relpos` -> [`RelatedPost`](components/mdx/relpos.tsx)
 
 ```ts
-link: string  // リンク先
+link: string  // リンク先のスラッグ
 ```
 
 ```md
@@ -151,7 +149,7 @@ link: string  // リンク先
 
 ```ts
 name: string  // 代替テキストに使われるプロジェクト名
-link: string  // リンク
+link: string  // リンク URL
 ```
 
 ```md
@@ -186,7 +184,7 @@ id: string
 `video` -> [`Video`](components/mdx/video.tsx)
 
 ```ts
-src: string   // 動画へのパス
+src: string   // 動画のファイル名（拡張子なし）
 control?: boolean = false   // コントロール領域を表示する
 ```
 
