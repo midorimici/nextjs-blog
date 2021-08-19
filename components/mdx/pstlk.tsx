@@ -7,16 +7,25 @@ export type PostLinkProps = {
   to: string
 }
 
-const PostLink = ({ to, label }: PostLinkProps) => {
+const PostLink = ({ label, to }: PostLinkProps) => {
+  const inPage = to[0] === '#'
   const parsedLabel = useParsedMarkdown(label)
   
   return (
-    <Link href={`/posts/${to}`}>
+    inPage ? (
       <a
+        href={to}
         className="underline transition-colors duration-300 hover:text-pink-400"
         dangerouslySetInnerHTML={{ __html: parsedLabel }}
       />
-    </Link>
+    ) : (
+      <Link href={`/posts/${to}`}>
+        <a
+          className="underline transition-colors duration-300 hover:text-pink-400"
+          dangerouslySetInnerHTML={{ __html: parsedLabel }}
+        />
+      </Link>
+    )
   )
 }
 
