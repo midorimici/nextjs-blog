@@ -43,7 +43,7 @@ const PostBody = ({ source, tocSource, slug, assets, relatedPosts }: Props) => {
     h3: ({ children }: { children: any }) => <Heading type={3} content={children} />,
     toc: tocSource ? () => <MobileTOC source={tocSource} /> : () => {},
     postimage: (props: Omit<PostImageProps, 'assets'>) => <PostImage assets={assets} {...props} />,
-    video: (props: Omit<VideoProps, 'slug'>) => <Video slug={slug} {...props} />,
+    video: (props: Omit<VideoProps, 'assets'>) => <Video assets={assets} {...props} />,
     code: (props: CodeBlockProps) => <CodeBlock {...props} />,
     icode: (props: any) => <code>{props.children}</code>,
     pstlk: (props: PostLinkProps) => <PostLink {...props} />,

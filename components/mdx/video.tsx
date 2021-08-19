@@ -1,7 +1,17 @@
-export type VideoProps = { slug: string, src: string, control: boolean }
+export type VideoProps = {
+  assets: Record<string, {
+    url: string
+    size: {
+        width: number
+        height: number
+    } | undefined
+  }>
+  src: string
+  control: boolean
+}
 
-const Video = ({ slug, src, control }: VideoProps) => {
-  const path = `/posts/${slug}/${src}.mp4`
+const Video = ({ assets, src, control }: VideoProps) => {
+  const path = assets[src].url
   if (control) {
     return (
       <video controls className="mx-auto my-4" src={path} />
