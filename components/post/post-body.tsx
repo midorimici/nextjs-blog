@@ -52,7 +52,7 @@ const PostBody = ({ source, tocSource, slug, assets, relatedPosts }: Props) => {
     ),
     tltp: (props: TooltipProps) => <Tooltip {...props} />,
     fukidashi: (props: FukidashiProps) => <Fukidashi {...props} />,
-    manga: (props: Omit<MangaProps, 'slug'>) => <Manga slug={slug} {...props} />,
+    manga: (props: Omit<MangaProps, 'assets'>) => <Manga assets={assets} {...props} />,
     'manga-text': (props: MangaTextProps) => <MangaText {...props} />,
     tweet: ({ id }: { id: string }) => <Tweet tweetId={id} />,
     sandbox: (props: { name: string, link: string }) => <Sandbox {...props} />,

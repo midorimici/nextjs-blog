@@ -1,14 +1,20 @@
 import Image from 'next/image'
 
 export type MangaProps = {
-  slug: string
+  assets: Record<string, {
+    url: string
+    size: {
+        width: number
+        height: number
+    } | undefined
+  }>
   src: string
   alt: string
   children: Element
 }
 
-const Manga = ({ slug, src, alt, children }: MangaProps) => {
-  const imgPath = `/posts/${slug}/${src}.png`
+const Manga = ({ assets, src, alt, children }: MangaProps) => {
+  const imgPath = assets[src].url
   return (
     <div className="relative my-4">
       <Image
