@@ -1,4 +1,4 @@
-import { createClient} from 'contentful'
+import { createClient } from 'contentful'
 import type { Entry, EntryCollection } from 'contentful'
 import twemoji from 'twemoji'
 
@@ -38,6 +38,7 @@ export const necessaryFieldsForPost: (keyof ContentfulPostFields)[] = [
   'topics',
   'katex',
   'published',
+  'assets',
   'summary',
   'content',
 ]

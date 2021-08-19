@@ -22,10 +22,17 @@ type Props = {
   source: MDXRemoteSerializeResult<Record<string, unknown>>
   tocSource?: MDXRemoteSerializeResult<Record<string, unknown>>
   slug: string
+  assets: Record<string, {
+    url: string
+    size: {
+        width: number
+        height: number
+    } | undefined
+  }>
   relatedPosts?: Record<string, string>
 }
 
-const PostBody = ({ source, tocSource, slug, relatedPosts }: Props) => {
+const PostBody = ({ source, tocSource, slug, assets, relatedPosts }: Props) => {
   /* eslint-disable react/display-name */
   const components = {
     a: ({ href, children }: { href: string, children: string }) => (
@@ -35,7 +42,7 @@ const PostBody = ({ source, tocSource, slug, relatedPosts }: Props) => {
     h2: ({ children }: { children: any }) => <Heading type={2} content={children} />,
     h3: ({ children }: { children: any }) => <Heading type={3} content={children} />,
     toc: tocSource ? () => <MobileTOC source={tocSource} /> : () => {},
-    postimage: (props: Omit<PostImageProps, 'slug'>) => <PostImage slug={slug} {...props} />,
+    postimage: (props: Omit<PostImageProps, 'assets'>) => <PostImage assets={assets} {...props} />,
     video: (props: Omit<VideoProps, 'slug'>) => <Video slug={slug} {...props} />,
     code: (props: CodeBlockProps) => <CodeBlock {...props} />,
     icode: (props: any) => <code>{props.children}</code>,

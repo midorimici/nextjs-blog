@@ -33,7 +33,14 @@ const Post = ({ post, relatedPosts, source, tocSource }: Props) => {
     return <ErrorPage statusCode={404} />
   }
 
-  const imagePath = `/posts/${post.slug}/_index.jpg`
+  const assets = Object.fromEntries(
+    post.assets.map(asset => [
+      asset.fields.file.fileName.split('.')[0], {
+        url: `https:${asset.fields.file.url}`,
+        size: asset.fields.file.details.image
+      }
+    ])
+  )
 
   return (
     <Layout>
@@ -45,7 +52,7 @@ const Post = ({ post, relatedPosts, source, tocSource }: Props) => {
             <title>
               {post.title.replace(/<br\/>/g, '')} | {SITE_NAME}
             </title>
-            <meta property="og:image" content={imagePath} />
+            <meta property="og:image" content={assets['_index'].url} />
             {post.katex && (
               <link
                 rel="stylesheet"
@@ -67,6 +74,7 @@ const Post = ({ post, relatedPosts, source, tocSource }: Props) => {
                 source={source}
                 tocSource={tocSource}
                 slug={post.slug}
+                assets={assets}
                 relatedPosts={relatedPosts}
               />
             </article>
