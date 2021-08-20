@@ -1,0 +1,28 @@
+.tooltip, .tooltip-overflow {
+  min-width: 8rem;
+}
+
+.tooltip::after {
+  @apply absolute left-4 -top-3;
+  content: "";
+  border-bottom: solid 1em rgba(252, 231, 243);
+  border-left: solid 0.5em transparent;
+  border-right: solid 0.5em transparent;
+}
+
+.tooltip-overflow::after {
+  @apply absolute right-4 -top-3;
+  content: "";
+  border-bottom: solid 1em rgba(252, 231, 243);
+  border-left: solid 0.5em transparent;
+  border-right: solid 0.5em transparent;
+}
+
+.tooltip-container a {
+  @apply underline;
+}
+
+.tooltip-container:hover > .tooltip,
+.tooltip-container:hover > .tooltip-overflow {
+  @apply opacity-95 shadow-md;
+}

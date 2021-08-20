@@ -2,6 +2,8 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLink } from '@fortawesome/free-solid-svg-icons'
 
+import styles from './heading.module.css'
+
 type Props = { type: 2 | 3, content: any }
 
 const Heading = ({ type, content }: Props) => {
@@ -31,12 +33,12 @@ const Heading = ({ type, content }: Props) => {
   return (
     <HeadingComponent id={link}>
       <Link href={`#${link}`}>
-        <a className="heading-link relative" aria-label="リンク">
+        <a className={`${styles['heading-link']} relative`} aria-label="リンク">
           {content}
           <FontAwesomeIcon
             icon={faLink}
             className={`
-              heading-icon absolute -left-10 bottom-0
+              ${styles['heading-icon']} absolute -left-10 bottom-0
               text-yellow-500 opacity-0 transition-opacity duration-300
             `}
             width={30}

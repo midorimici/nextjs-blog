@@ -2,6 +2,7 @@ import { ReactElement } from 'react'
 import Image from 'next/image'
 
 import { useParsedMarkdown } from 'components/useParsedMarkdown'
+import styles from './fukidashi.module.css'
 
 export type FukidashiProps = {
   children: string | ReactElement
@@ -15,7 +16,7 @@ const Fukidashi = ({ children, face = 'normal' }: FukidashiProps) => {
     <div className="flex gap-8">
       <div
         className={`
-          fukidashi
+          ${styles.fukidashi}
           relative flex-grow p-4
           bg-white border-2 border-gray-600 rounded-2xl
           leading-loose
