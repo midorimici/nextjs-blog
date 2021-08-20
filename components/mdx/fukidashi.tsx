@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 import Image from 'next/image'
 
-import { useParsedMarkdown } from '../useParsedMarkdown'
+import { useParsedMarkdown } from 'components/useParsedMarkdown'
 
 export type FukidashiProps = {
   children: string | ReactElement

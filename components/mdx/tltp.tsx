@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, ReactElement } from 'react'
-import { useParsedMarkdown } from '../useParsedMarkdown'
+import { useParsedMarkdown } from 'components/useParsedMarkdown'
 
 export type TooltipProps = {
   label: string

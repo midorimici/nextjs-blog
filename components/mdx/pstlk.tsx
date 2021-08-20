@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { useParsedMarkdown } from '../useParsedMarkdown'
+import { useParsedMarkdown } from 'components/useParsedMarkdown'
 
 export type PostLinkProps = {
   label: string

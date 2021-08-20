@@ -1,4 +1,4 @@
-import DateFormatter from '../date-formatter'
+import DateFormatter from 'components/date-formatter'
 import PostTitle from './post-title'
 
 import TopicTip from 'components/topic-tip'

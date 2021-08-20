@@ -1,4 +1,4 @@
-import { useParsedMarkdown } from '../useParsedMarkdown'
+import { useParsedMarkdown } from 'components/useParsedMarkdown'
 
 export type MangaTextProps = {
   x: number

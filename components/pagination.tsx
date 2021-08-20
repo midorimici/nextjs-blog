@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import ReactPaginate from 'react-paginate'
 
-import { PAGINATION_PER_PAGE } from '../lib/constants'
+import { PAGINATION_PER_PAGE } from 'lib/constants'
 
 type Props = {
   postNumbers: number
