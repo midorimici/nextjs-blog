@@ -16,7 +16,7 @@ import PostTitle from 'components/post/post-title'
 import TOC from 'components/post/toc'
 import BackToTopButton from 'components/post/backToTopButton'
 
-import { SITE_NAME } from 'lib/constants'
+import { SITE_NAME, HOME_OG_IMAGE_URL } from 'lib/constants'
 import type { ContentfulPostFields } from 'types/api'
 
 type Props = {
@@ -33,14 +33,19 @@ const Post = ({ post, relatedPosts, source, tocSource }: Props) => {
     return <ErrorPage statusCode={404} />
   }
 
-  const assets = Object.fromEntries(
+  const assets = post.assets ? Object.fromEntries(
     post.assets.map(asset => [
       asset.fields.file.fileName.split('.')[0], {
         url: `https:${asset.fields.file.url}`,
         size: asset.fields.file.details.image
       }
     ])
-  )
+  ) : {
+    _index: {
+      url: HOME_OG_IMAGE_URL,
+      size: { width: 640, height: 360 },
+    }
+  }
 
   return (
     <Layout>
@@ -109,8 +114,9 @@ export async function getStaticProps({ params }: Params) {
     const titleAndAssets = await getPostBySlug(slug, ['title', 'assets'])
     relatedPosts[slug] = {
       title: titleAndAssets.title,
-      coverImageUrl: 'https:' + titleAndAssets.assets
-        .find(asset => asset.fields.file.fileName === '_index.jpg')?.fields.file.url ?? ''
+      coverImageUrl: 'https:' + titleAndAssets.assets?.find(
+        asset => asset.fields.file.fileName === '_index.jpg'
+      )?.fields.file.url ?? HOME_OG_IMAGE_URL.slice(6)
     }
   }
 

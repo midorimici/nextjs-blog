@@ -5,6 +5,7 @@ import twemoji from 'twemoji'
 import type { ContentfulTopicFields, ContentfulPostFields, ContentfulAboutPostFields } from 'types/api'
 import {
   CTF_ACCESS_TOKEN,
+  CTF_PREVIEW_ACCESS_TOKEN,
   CTF_SPACE_ID,
   CTF_ENV_ID,
   CTF_POST_CONTENT_TYPE_ID,
@@ -16,7 +17,8 @@ import {
 const client = createClient({
   space: CTF_SPACE_ID,
   environment: CTF_ENV_ID,
-  accessToken: CTF_ACCESS_TOKEN,
+  accessToken: CTF_PREVIEW_ACCESS_TOKEN || CTF_ACCESS_TOKEN,
+  host: CTF_PREVIEW_ACCESS_TOKEN ? 'preview.contentful.com' : 'cdn.contentful.com'
 })
 
 export const necessaryFieldsForPostList: (keyof ContentfulPostFields)[] = [
@@ -25,7 +27,6 @@ export const necessaryFieldsForPostList: (keyof ContentfulPostFields)[] = [
   'date',
   'lastmod',
   'topics',
-  'published',
   'assets',
   'summary',
   'content',
@@ -38,7 +39,6 @@ export const necessaryFieldsForPost: (keyof ContentfulPostFields)[] = [
   'lastmod',
   'topics',
   'katex',
-  'published',
   'assets',
   'summary',
   'content',

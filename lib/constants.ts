@@ -4,6 +4,7 @@ export const HOME_OG_IMAGE_URL =
   'https://placehold.jp/fffbeb/f59e0b/640x360.png?text=(*.%20.)%CF%86_'
 export const PAGINATION_PER_PAGE = 10
 export const CTF_ACCESS_TOKEN = process.env.ctfAccessToken ?? ''
+export const CTF_PREVIEW_ACCESS_TOKEN = process.env.ctfPreviewAccessToken ?? ''
 export const CTF_SPACE_ID = process.env.ctfSpaceId ?? ''
 export const CTF_ENV_ID = process.env.ctfEnvId ?? ''
 export const CTF_POST_CONTENT_TYPE_ID = 'blogPost'

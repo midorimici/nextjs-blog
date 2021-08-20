@@ -12,10 +12,10 @@ export type ContentfulPostFields = {
   date: EntryFields.Date
   lastmod: EntryFields.Date
   topics: Entry<ContentfulTopicFields>[]
-  katex: EntryFields.Boolean
+  katex?: EntryFields.Boolean
   published: EntryFields.Boolean
-  assets: Asset[]
-  summary: EntryFields.Text
+  assets?: Asset[]
+  summary?: EntryFields.Text
   content: EntryFields.Text
 }
 

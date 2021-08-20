@@ -1,6 +1,5 @@
-require('dotenv').config()
 module.exports = {
   images: {
-    domains: ['images.ctfassets.net'],
+    domains: ['images.ctfassets.net', 'placehold.jp'],
   },
 }
