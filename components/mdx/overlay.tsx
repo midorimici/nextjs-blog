@@ -6,7 +6,7 @@ type Props = {
 }
 
 const Overlay = ({ hide, targetRef }: Props) => {
-  if (process.browser && targetRef.current) {
+  if (targetRef.current) {
     window.onscroll = () => {
       const rect = targetRef.current?.getBoundingClientRect()
       if (rect === undefined) return;

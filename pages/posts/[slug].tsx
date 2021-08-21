@@ -3,21 +3,26 @@ import { serialize } from 'next-mdx-remote/serialize'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 import markdownTOC from 'markdown-toc'
-import { useRouter } from 'next/router'
-import ErrorPage from 'next/error'
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import twemoji from 'twemoji'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSun } from '@fortawesome/free-solid-svg-icons'
 
-import PostBody from 'components/post/post-body'
-import PostHeader from 'components/post/post-header'
 import Layout from 'components/layout'
 import { getPostBySlug, getPostSlugs, necessaryFieldsForPost } from 'lib/api'
-import PostTitle from 'components/post/post-title'
-import TOC from 'components/post/toc'
-import BackToTopButton from 'components/post/backToTopButton'
 
 import { SITE_NAME, HOME_OG_IMAGE_URL } from 'lib/constants'
 import type { ContentfulPostFields } from 'types/api'
+
+/* eslint-disable react/display-name */
+const PostHeader = dynamic(() => import('components/post/post-header'))
+const PostBody = dynamic(() => import(
+  'components/post/post-body'),
+  { loading: () => <FontAwesomeIcon icon={faSun} width={20} className="max-w-2xl mx-auto animate-spin" /> },
+)
+const SideTOC = dynamic(() => import('components/post/sideTOC'), { ssr: false })
+const BackToTopButton = dynamic(() => import('components/post/backToTopButton'), { ssr: false })
 
 type Props = {
   post: ContentfulPostFields
@@ -27,12 +32,6 @@ type Props = {
 }
 
 const Post = ({ post, relatedPosts, source, tocSource }: Props) => {
-  const router = useRouter()
-
-  if (!router.isFallback && !post?.slug) {
-    return <ErrorPage statusCode={404} />
-  }
-
   const assets = post.assets ? Object.fromEntries(
     post.assets.map(asset => [
       asset.fields.file.fileName.split('.')[0], {
@@ -48,50 +47,42 @@ const Post = ({ post, relatedPosts, source, tocSource }: Props) => {
   }
 
   return (
-    <Layout>
-      {router.isFallback ? (
-        <PostTitle title='Loading…' />
-      ) : (
-        <>
-          <Head>
-            <title>
-              {post.title.replace(/<br\/>/g, '')} | {SITE_NAME}
-            </title>
-            <meta property="og:image" content={assets['_index'].url} />
-            {post.katex && (
-              <link
-                rel="stylesheet"
-                href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"
-                integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"
-                crossOrigin="anonymous"
-              />
-            )}
-          </Head>
-          <div className="block lg:flex">
-            <article className="flex-grow mb-8">
-              <PostHeader
-                title={post.title}
-                date={post.date}
-                lastmod={post.lastmod}
-                topics={post.topics.map(topic => topic.fields)}
-              />
-              <PostBody
-                source={source}
-                tocSource={tocSource}
-                assets={assets}
-                relatedPosts={relatedPosts}
-              />
-            </article>
-            <aside className="w-96 hidden lg:block">
-              <div className="sticky top-16">
-                <TOC source={tocSource} />
-              </div>
-            </aside>
-          </div>
-          <BackToTopButton />
-        </>
-      )}
-    </Layout>
+    <>
+      <Head>
+        <title>
+          {post.title.replace(/<br\/>/g, '')} | {SITE_NAME}
+        </title>
+        <meta property="og:image" content={assets['_index'].url} />
+        {post.katex && (
+          <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"
+            integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"
+            crossOrigin="anonymous"
+          />
+        )}
+      </Head>
+      <Layout>
+        <div className="block lg:flex">
+          <article className="flex-grow mb-8">
+            <PostHeader
+              title={post.title}
+              date={post.date}
+              lastmod={post.lastmod}
+              topics={post.topics.map(topic => topic.fields)}
+            />
+            <PostBody
+              source={source}
+              tocSource={tocSource}
+              assets={assets}
+              relatedPosts={relatedPosts}
+            />
+          </article>
+          <SideTOC source={tocSource} />
+        </div>
+        <BackToTopButton />
+      </Layout>
+    </>
   )
 }
 

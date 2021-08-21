@@ -7,22 +7,21 @@ import markdownToHtml from 'lib/markdownToHtml'
 export const useParsedMarkdown = (markdown: string | ReactElement, minimum: boolean = true) => {
   const [content, setContent] = useState('')
 
-  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
+    const parseMarkdown = async () => {
+      const md = typeof markdown === 'string' ? markdown : ReactDOMServer.renderToStaticMarkup(markdown)
+      let html = await markdownToHtml(md, minimum)
+      html = minimum ? html : await tltpReplaced(html)
+      html = html.replace(/<p>([\s\S]*?)<\/p>/g, '$1')
+      return html
+    }
+
     let isSubscribed = true
     parseMarkdown().then((html: string) => {
       if (isSubscribed) setContent(html)
     })
     return () => { isSubscribed = false }
-  }, [markdown])
-
-  const parseMarkdown = async () => {
-    const md = typeof markdown === 'string' ? markdown : ReactDOMServer.renderToStaticMarkup(markdown)
-    let html = await markdownToHtml(md, minimum)
-    html = minimum ? html : await tltpReplaced(html)
-    html = html.replace(/<p>([\s\S]*?)<\/p>/g, '$1')
-    return html
-  }
+  }, [markdown, minimum])
 
   const tltpReplaced = async (str: string) => {
     let result = str

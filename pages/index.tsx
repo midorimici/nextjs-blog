@@ -21,27 +21,26 @@ const Index = ({ posts, allPosts }: Props) => {
   const [timeoutID, setTimeoutID] = useState<number>()
   const [searchedPosts, setSearchedPosts] = useState<ContentfulPostFields[]>([])
 
-  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
+    const getSearchedPosts = () =>
+      allPosts.filter(
+        (post: ContentfulPostFields) => {
+          const content = post.content
+            .replace(/<relpos link=".+?" ?\/>/g, '')
+            .replace(/<pstlk label="(.+?)" to=".+?" ?\/>/g, '$1')
+            .replace(/\[(.+?)\]\(.+?\)/g, '$1') || ''
+          return (new RegExp(searchText, 'i')).test(content)
+        }
+      )
+
     setSearchedPosts(getSearchedPosts())
     return () => clearTimeout(timeoutID)
-  }, [searchText])
+  }, [allPosts, searchText, timeoutID])
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     clearTimeout(timeoutID)
     setTimeoutID(window.setTimeout(() => setSearchText(e.target.value), 200))
   }
-
-  const getSearchedPosts = () =>
-    allPosts.filter(
-      (post: ContentfulPostFields) => {
-        const content = post.content
-          .replace(/<relpos link=".+?" ?\/>/g, '')
-          .replace(/<pstlk label="(.+?)" to=".+?" ?\/>/g, '$1')
-          .replace(/\[(.+?)\]\(.+?\)/g, '$1') || ''
-        return (new RegExp(searchText, 'i')).test(content)
-      }
-    )
 
   return (
     <>

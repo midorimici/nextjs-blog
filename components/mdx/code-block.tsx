@@ -1,13 +1,15 @@
 import { useState, useRef } from 'react'
+import dynamic from 'next/dynamic'
 import Highlight, { defaultProps, Language } from 'prism-react-renderer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faCopy, faSearchPlus, faSearchMinus } from '@fortawesome/free-solid-svg-icons'
 
-import Overlay from './overlay'
 import { useHighlightLineNumbers } from './useHighlightLineNumbers'
 import { useInlineHighlightIndices } from './useInlineHighlightIndices'
 import { useCodeCopyHandler } from './useCodeCopyHandler'
 import { theme } from './codeTheme'
+
+const Overlay = dynamic(() => import('./overlay'), { ssr: false })
 
 export type CodeBlockProps = {
   children: string

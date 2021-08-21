@@ -5,9 +5,7 @@ import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 const BackToTopButton = () => {
   const [showButton, setShowButton] = useState(false)
 
-  if (process.browser) {
-    window.onscroll = () => setShowButton(scrollY > 600 ? true : false)
-  }
+  window.onscroll = () => setShowButton(scrollY > 600 ? true : false)
 
   return (
     <div className={`

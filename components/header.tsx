@@ -2,18 +2,21 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTags, faUser } from '@fortawesome/free-solid-svg-icons'
 
-import BrandMi from './brand-mi';
-
 const buttonStyle = "flex items-center gap-2 hover:text-pink-400 transition-colors duration-300"
 const iconStyle = "w-6"
 
+/* eslint-disable @next/next/no-img-element */
 const Header = () => {
   return (
     <header className="py-8">
       <div className="flex justify-between items-center">
         <Link href="/">
           <a className="flex items-center">
-            <BrandMi />
+            <img
+              src="/favicon/safari-pinned-tab.svg"
+              alt="mi"
+              className="w-8 sm:w-12 fill-current"
+            />
             <span className="font-bold sm:text-5xl">
               どりみちのブログ
             </span>

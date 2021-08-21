@@ -1,7 +1,10 @@
+import dynamic from 'next/dynamic'
+
 import Container from './container'
 import Header from './header'
-import Footer from './footer'
 import Meta from './meta'
+
+const Footer = dynamic(() => import('./footer'))
 
 type Props = {
   children: React.ReactNode

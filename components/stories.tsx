@@ -1,6 +1,9 @@
-import PostPreview from './post-preview'
+import dynamic from 'next/dynamic'
+
 import type { ContentfulPostFields } from 'types/api'
 import { HOME_OG_IMAGE_URL } from 'lib/constants'
+
+const PostPreview = dynamic(() => import('./post-preview'))
 
 type Props = {
   posts: ContentfulPostFields[]
