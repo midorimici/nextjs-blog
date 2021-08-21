@@ -5,10 +5,9 @@ import { useImagePlaceholder } from './useImagePlaceholder'
 type Props = {
   title: string
   src: string
-  priority: boolean
 }
 
-const CoverImage = ({ title, src, priority }: Props) => {
+const CoverImage = ({ title, src }: Props) => {
   const placeholder = useImagePlaceholder(640, 360)
   
   return (
@@ -20,7 +19,7 @@ const CoverImage = ({ title, src, priority }: Props) => {
       className="rounded-t-2xl"
       placeholder='blur'
       blurDataURL={`data:image/svg+xml;base64,${placeholder}`}
-      priority={priority}
+      priority
     />
   )
 }
