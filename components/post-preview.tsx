@@ -14,6 +14,7 @@ type Props = {
   lastmod: string
   topics: ContentfulTopicFields[]
   coverImageUrl: string
+  priority: boolean
   summary: string
 }
 
@@ -24,6 +25,7 @@ const PostPreview = ({
   lastmod,
   topics,
   coverImageUrl,
+  priority,
   summary,
 }: Props) => {
   const parsedTitle = useParsedMarkdown(title)
@@ -47,6 +49,7 @@ const PostPreview = ({
       <CoverImage
         title={title}
         src={coverImageUrl}
+        priority={priority}
       />
       <section className="m-4">
         <h3
