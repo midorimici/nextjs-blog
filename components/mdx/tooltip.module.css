@@ -1,5 +1,6 @@
 .tooltip, .tooltip-overflow {
   min-width: 8rem;
+  will-change: opacity;
 }
 
 .tooltip::after {

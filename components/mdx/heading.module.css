@@ -1,3 +1,7 @@
+.heading-icon {
+  will-change: opacity;
+}
+
 .heading-link:hover > .heading-icon {
   @apply opacity-100;
 }
