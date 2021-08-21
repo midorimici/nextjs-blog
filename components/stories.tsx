@@ -24,7 +24,7 @@ const Stories = ({ posts }: Props) => {
           coverImageUrl={
             `https:${coverImage?.fields.file.url ?? HOME_OG_IMAGE_URL.slice(6)}`
           }
-          priority={index === 0}
+          priority={index <= 1}
           summary={(post.summary ?? post.content.replace(/([\s\S]+)\n<!--more-->[\s\S]+/, '$1')) + '…'}
         />
       })}
