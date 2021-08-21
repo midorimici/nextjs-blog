@@ -1,7 +1,6 @@
 import dynamic from 'next/dynamic'
 import type { MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { MDXRemote } from 'next-mdx-remote'
-import { Tweet } from 'react-twitter-widgets'
 import { Prism } from 'prism-react-renderer'
 
 import Heading from 'components/mdx/heading'
@@ -48,6 +47,7 @@ const Tooltip = dynamic(() => import('components/mdx/tltp'))
 const Fukidashi = dynamic(() => import('components/mdx/fukidashi'))
 const Manga = dynamic(() => import('components/mdx/manga'))
 const MangaText = dynamic(() => import('components/mdx/manga-text'))
+const Twitter = dynamic(() => import('components/mdx/twitter'))
 const Sandbox = dynamic(() => import('components/mdx/sandbox'))
 const YouTube = dynamic(() => import('components/mdx/youtube'))
 const Affiliate = dynamic(() => import('components/mdx/affiliate'))
@@ -87,7 +87,7 @@ const PostBody = ({ source, tocSource, assets, relatedPosts }: Props) => {
     fukidashi: (props: FukidashiProps) => <Fukidashi {...props} />,
     manga: (props: Omit<MangaProps, 'assets'>) => assets && <Manga assets={assets} {...props} />,
     'manga-text': (props: MangaTextProps) => <MangaText {...props} />,
-    tweet: ({ id }: { id: string }) => <Tweet tweetId={id} />,
+    tweet: ({ id }: { id: string }) => <Twitter tweetId={id} />,
     sandbox: (props: { name: string, link: string }) => <Sandbox {...props} />,
     yout: ({ id }: { id: string }) => <YouTube id={id} />,
     affiliate: (props: AffiliateProps) => <Affiliate {...props} />,
