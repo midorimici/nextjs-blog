@@ -1,20 +1,12 @@
 import type { MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { serialize } from 'next-mdx-remote/serialize'
-import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Image from 'next/image'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSun } from '@fortawesome/free-solid-svg-icons'
 
 import Layout from 'components/layout'
+import AboutPost from 'components/post/about'
 import { getAboutPost } from 'lib/api'
 import { SITE_NAME } from 'lib/constants'
-
-/* eslint-disable react/display-name */
-const PostBody = dynamic(() => import(
-  'components/post/post-body'),
-  { loading: () => <FontAwesomeIcon icon={faSun} width={20} className="max-w-2xl mx-auto animate-spin" /> },
-)
 
 type Props = {
   postTitle: string
@@ -47,7 +39,7 @@ const About = ({ postTitle, profileUrl, source }: Props) => {
                 priority
               />
             </div>
-            <PostBody source={source} />
+            <AboutPost source={source} />
           </div>
         </article>
       </Layout>

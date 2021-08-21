@@ -94,10 +94,8 @@ const PostBody = ({ source, tocSource, assets, relatedPosts }: Props) => {
   }
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <div className={markdownStyles['markdown']}>
-        <MDXRemote {...source} components={components} />
-      </div>
+    <div className={`${markdownStyles.markdown} max-w-2xl mx-auto`}>
+      <MDXRemote {...source} components={components} />
     </div>
   )
 }
