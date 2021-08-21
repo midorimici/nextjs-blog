@@ -15,6 +15,8 @@ const Header = () => {
             <img
               src="/favicon/safari-pinned-tab.svg"
               alt="mi"
+              width={32}
+              height={32}
               className="w-8 sm:w-12 fill-current"
             />
             <span className="font-bold sm:text-5xl">

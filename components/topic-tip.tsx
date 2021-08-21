@@ -23,6 +23,8 @@ const TopicTip = ({ topic, number }: Props) => {
           <img
             src={topic.logoUrl}
             alt={topic.label}
+            width={16}
+            height={16}
             className="w-4 sm:w-6"
           />
         </div>
