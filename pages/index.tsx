@@ -7,8 +7,8 @@ import Container from 'components/container'
 import Stories from 'components/stories'
 import Layout from 'components/layout'
 import Pagination from 'components/pagination'
-import { getAllPosts, getPosts, necessaryFieldsForPostList } from 'lib/api'
-import { SITE_NAME } from 'lib/constants'
+import { getAllPosts, necessaryFieldsForPostList } from 'lib/api'
+import { PAGINATION_PER_PAGE, SITE_NAME } from 'lib/constants'
 import type { ContentfulPostFields } from 'types/api'
 
 type Props = {
@@ -76,8 +76,8 @@ const Index = ({ posts, allPosts }: Props) => {
 export default Index
 
 export const getStaticProps = async () => {
-  const allPosts = await getAllPosts()
-  const posts = await getPosts(necessaryFieldsForPostList)
+  const allPosts = await getAllPosts(necessaryFieldsForPostList)
+  const posts = allPosts.slice(0, PAGINATION_PER_PAGE)
 
   return {
     props: { posts, allPosts },

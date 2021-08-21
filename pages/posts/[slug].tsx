@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSun } from '@fortawesome/free-solid-svg-icons'
 
 import Layout from 'components/layout'
-import { getPostBySlug, getPostSlugs, necessaryFieldsForPost } from 'lib/api'
+import { getAllPosts, necessaryFieldsForPost } from 'lib/api'
 
 import { SITE_NAME, HOME_OG_IMAGE_URL } from 'lib/constants'
 import type { ContentfulPostFields } from 'types/api'
@@ -95,19 +95,22 @@ type Params = {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const post = await getPostBySlug(params.slug, necessaryFieldsForPost)
-  const postContent = twemoji.parse(post.content).replace(/class="emoji"/g, 'className="emoji"')
+  const posts = await getAllPosts(necessaryFieldsForPost)
+  const post = posts.find(post => post.slug === params.slug)
+  const postContent = twemoji.parse(post?.content ?? '').replace(/class="emoji"/g, 'className="emoji"')
 
   let relatedPosts: Record<string, { title: string, coverImageUrl: string }> = {}
   const relatedPostSlugsMatches = postContent.matchAll(/<relpos link="(.+?)" \/>/g)
   for (const match of relatedPostSlugsMatches) {
     const slug = match[1]
-    const titleAndAssets = await getPostBySlug(slug, ['title', 'assets'])
-    relatedPosts[slug] = {
-      title: titleAndAssets.title,
-      coverImageUrl: 'https:' + titleAndAssets.assets?.find(
-        asset => asset.fields.file.fileName === '_index.jpg'
-      )?.fields.file.url ?? HOME_OG_IMAGE_URL.slice(6)
+    const titleAndAssets = posts.find(post => post.slug === slug)
+    if (titleAndAssets) {
+      relatedPosts[slug] = {
+        title: titleAndAssets.title,
+        coverImageUrl: 'https:' + titleAndAssets.assets?.find(
+          asset => asset.fields.file.fileName === '_index.jpg'
+        )?.fields.file.url ?? HOME_OG_IMAGE_URL.slice(6)
+      }
     }
   }
 
@@ -118,7 +121,7 @@ export async function getStaticProps({ params }: Params) {
       rehypePlugins: [rehypeKatex],
     }
   })
-  const toc = await serialize(markdownTOC(post.content).content)
+  const toc = await serialize(markdownTOC(post?.content ?? '').content)
 
   return {
     props: {
@@ -133,7 +136,8 @@ export async function getStaticProps({ params }: Params) {
 }
 
 export async function getStaticPaths() {
-  const slugs = await getPostSlugs()
+  const posts = await getAllPosts(necessaryFieldsForPost)
+  const slugs = posts.map(post => post.slug)
 
   return {
     paths: slugs.map((slug) => {

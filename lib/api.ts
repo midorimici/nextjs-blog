@@ -11,7 +11,6 @@ import {
   CTF_POST_CONTENT_TYPE_ID,
   CTF_TOPIC_CONTENT_TYPE_ID,
   CTF_ABOUT_ENTRY_ID,
-  PAGINATION_PER_PAGE,
 } from './constants'
 
 const client = createClient({
@@ -44,24 +43,6 @@ export const necessaryFieldsForPost: (keyof ContentfulPostFields)[] = [
   'content',
 ]
 
-export async function getPostSlugs() {
-  const entries: EntryCollection<Pick<ContentfulPostFields, 'slug'>> = await client.getEntries({
-    content_type: CTF_POST_CONTENT_TYPE_ID,
-    select: 'fields.slug',
-    limit: 500,
-  })
-  return entries.items.map(item => item.fields.slug)
-}
-
-export async function getPostBySlug(slug: string, fields: (keyof ContentfulPostFields)[]) {
-  const entries: EntryCollection<Pick<ContentfulPostFields, (typeof fields)[number]>> = await client.getEntries({
-    content_type: CTF_POST_CONTENT_TYPE_ID,
-    'fields.slug': slug,
-    select: fields.map(field => `fields.${field}`).join(','),
-  })
-  return entries.items[0].fields
-}
-
 export async function getAboutPost() {
   const entry: Entry<ContentfulAboutPostFields> = await client.getEntry(CTF_ABOUT_ENTRY_ID)
   return {
@@ -71,31 +52,12 @@ export async function getAboutPost() {
   }
 }
 
-export async function getPosts(
-  fields: (keyof ContentfulPostFields)[],
-  { offset = 0, limit = PAGINATION_PER_PAGE }: {
-    offset?: number,
-    limit?: number,
-  } = {}
-) {
+export async function getAllPosts(fields: (keyof ContentfulPostFields)[]) {
   const entries: EntryCollection<
     Pick<ContentfulPostFields, (typeof fields)[number]>
   > = await client.getEntries({
     content_type: CTF_POST_CONTENT_TYPE_ID,
     select: fields.map(field => `fields.${field}`).join(','),
-    order: '-fields.date',
-    limit,
-    skip: offset,
-  })
-  return entries.items.map(item => item.fields)
-}
-
-export async function getAllPosts() {
-  const entries: EntryCollection<
-    Pick<ContentfulPostFields, (typeof necessaryFieldsForPostList)[number]>
-  > = await client.getEntries({
-    content_type: CTF_POST_CONTENT_TYPE_ID,
-    select: necessaryFieldsForPostList.map(field => `fields.${field}`).join(','),
     order: '-fields.date',
     limit: 500,
   })
@@ -152,20 +114,4 @@ export async function getPostNumbersByTopics() {
     Object.entries(topicNumberMap).sort((a, b) => b[1].count - a[1].count)
   )
   return sortedTopicNumberMap
-}
-
-export async function getPostsByTopic(topic: string) {
-  const topicEntryId: string = (await client.getEntries({
-    content_type: CTF_TOPIC_CONTENT_TYPE_ID,
-    'fields.id': topic.toLowerCase()
-  })).items[0].sys.id
-  const entries: EntryCollection<
-    Pick<ContentfulPostFields, (typeof necessaryFieldsForPostList)[number]>
-  > = await client.getEntries({
-    content_type: CTF_POST_CONTENT_TYPE_ID,
-    select: necessaryFieldsForPostList.map(field => `fields.${field}`).join(','),
-    links_to_entry: topicEntryId,
-    order: '-fields.date',
-  })
-  return entries.items.map(item => item.fields)
 }

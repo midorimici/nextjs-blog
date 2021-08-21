@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Layout from 'components/layout'
 import Container from 'components/container'
 import Stories from 'components/stories'
-import { getPostsByTopic, getTopicLabelFromId, getTopics } from 'lib/api'
+import { getAllPosts, getTopics, getTopicLabelFromId, necessaryFieldsForPostList } from 'lib/api'
 import { SITE_NAME } from 'lib/constants'
 import type { ContentfulPostFields } from 'types/api'
 
@@ -42,11 +42,12 @@ type Params = {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const posts = await getPostsByTopic(params.tag)
+  const posts = await getAllPosts(necessaryFieldsForPostList)
+  const topicPosts = posts.filter(post => post.topics.some(topic => topic.fields.id === params.tag))
   const topic = await getTopicLabelFromId(params.tag)
 
   return {
-    props: { posts, tagName: topic },
+    props: { posts: topicPosts, tagName: topic },
   }
 }
 
