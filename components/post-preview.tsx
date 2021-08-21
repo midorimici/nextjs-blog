@@ -42,7 +42,7 @@ const PostPreview = ({
       break-all
     `}>
       <Link as={`/posts/${slug}`} href="/posts/[slug]">
-        <a className="absolute top-0 left-0 w-full h-full z-10"></a>
+        <a className="absolute top-0 left-0 w-full h-full z-10" aria-label={title}></a>
       </Link>
       <CoverImage
         title={title}
