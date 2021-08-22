@@ -1,11 +1,12 @@
 import Head from 'next/head'
-import Image from 'next/image'
 
 import Layout from 'components/layout'
 import AboutPost from 'components/post/about'
 import { getAboutPost } from 'lib/api'
 import { SITE_NAME } from 'lib/constants'
 import { markdownToHtml } from 'lib/markdownToHtml'
+
+export const config = { amp: true }
 
 type Props = {
   postTitle: string
@@ -30,12 +31,11 @@ const About = ({ postTitle, profileUrl, content }: Props) => {
               `}
             >{postTitle}</h1>
             <div className="flex justify-center">
-              <Image
+              <amp-img
                 src={profileUrl}
                 alt="プロフィール画像"
                 width={160}
                 height={160}
-                priority
               />
             </div>
             <AboutPost content={content} />

@@ -70,10 +70,105 @@ html {
   @apply inline-block mx-1 w-6
 }
 
+/* post */
+
 .math-display {
   @apply overflow-x-auto;
 }
 
 .math-inline .katex-html > .base {
   @apply inline whitespace-normal;
+}
+
+.markdown {
+  @apply text-lg leading-loose break-words;
+}
+
+.markdown p,
+.markdown ul,
+.markdown ol,
+.markdown blockquote {
+  @apply my-6;
+}
+
+.markdown ul {
+  @apply list-disc pl-8;
+}
+
+.markdown ul ul {
+  @apply pl-8;
+  list-style: circle;
+}
+
+.markdown ul ul ul {
+  @apply pl-8;
+  list-style: square;
+}
+
+.markdown li {
+  @apply my-4;
+}
+
+.markdown ol {
+  @apply list-decimal pl-8;
+}
+
+.markdown h2 {
+  @apply text-2xl sm:text-3xl font-bold mt-12 mb-4 leading-relaxed border-b-2 border-yellow-500;
+}
+
+.markdown h3 {
+  @apply text-xl sm:text-2xl mt-8 mb-4 pl-4 leading-relaxed border-l-2 border-yellow-500;
+}
+
+.markdown code {
+  @apply mx-1 px-2 py-1 bg-gray-100 rounded font-code;
+}
+
+.markdown a {
+  @apply underline transition-colors duration-300 hover:text-pink-400;
+}
+
+.markdown h2 a, .markdown h3 a {
+  @apply no-underline hover:text-current;
+}
+
+.markdown blockquote {
+  @apply pl-4 border-l-4 border-gray-200 rounded-lg;
+}
+
+.markdown th, .markdown td {
+  @apply p-2;
+}
+
+.markdown thead {
+  @apply border-t border-b border-yellow-200 bg-yellow-100;
+}
+
+.markdown tbody > tr {
+  @apply border-b border-gray-200;
+}
+
+.markdown details {
+  @apply border rounded-xl;
+}
+
+.markdown details[open] {
+  @apply pb-2 bg-white transition-colors duration-300;
+}
+
+.markdown summary {
+  @apply p-4 rounded-xl bg-yellow-100 cursor-pointer;
+}
+
+.markdown details[open] > summary {
+  @apply p-4 border-b rounded-b-none bg-yellow-100 cursor-pointer;
+}
+
+.markdown details > :not(summary) {
+  @apply mx-6;
+}
+
+.markdown hr {
+  @apply my-4;
 }
