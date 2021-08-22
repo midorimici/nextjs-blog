@@ -1,9 +1,8 @@
 import { useState } from 'react'
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 
 import tocStyles from './toc-styles.module.css'
 
-const SideTOC = ({ source }: { source: MDXRemoteSerializeResult<Record<string, unknown>> }) => {
+const SideTOC = ({ toc }: { toc: string }) => {
   const [visible, setVisible] = useState(false)
 
   if (window.matchMedia('(min-width: 1024px)').matches && !visible) setVisible(true)
@@ -18,9 +17,10 @@ const SideTOC = ({ source }: { source: MDXRemoteSerializeResult<Record<string, u
         >
           目次
         </div>
-        <div className={tocStyles['toc']}>
-          <MDXRemote {...source} />
-        </div>
+        <div
+          className={tocStyles['toc']}
+          dangerouslySetInnerHTML={{ __html: toc }}
+        />
       </div>
     </aside>
   )

@@ -1,5 +1,3 @@
-// import type { MDXRemoteSerializeResult } from 'next-mdx-remote'
-// import { serialize } from 'next-mdx-remote/serialize'
 import Head from 'next/head'
 import Image from 'next/image'
 
@@ -7,12 +5,12 @@ import Layout from 'components/layout'
 import AboutPost from 'components/post/about'
 import { getAboutPost } from 'lib/api'
 import { SITE_NAME } from 'lib/constants'
-import markdownToHtml from 'lib/markdownToHtml'
+import { markdownToHtml } from 'lib/markdownToHtml'
 
 type Props = {
   postTitle: string
   profileUrl: string
-  content: string // MDXRemoteSerializeResult<Record<string, unknown>>
+  content: string
 }
 
 const About = ({ postTitle, profileUrl, content }: Props) => {
@@ -53,7 +51,6 @@ export default About
 export async function getStaticProps() {
   const post = await getAboutPost()
   const content = await markdownToHtml(post.content ?? '')
-  // const content = await serialize(post.content || '')
 
   return {
     props: {

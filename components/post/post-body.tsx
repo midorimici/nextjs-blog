@@ -54,7 +54,7 @@ const Affiliate = dynamic(() => import('components/mdx/affiliate'))
 
 type Props = {
   source: MDXRemoteSerializeResult<Record<string, unknown>>
-  tocSource?: MDXRemoteSerializeResult<Record<string, unknown>>
+  toc: string
   assets?: Record<string, {
     url: string
     size: {
@@ -62,10 +62,10 @@ type Props = {
         height: number
     } | undefined
   }>
-  relatedPosts?: Record<string, { title: string, coverImageUrl: string }>
+  relatedPosts: Record<string, { title: string, coverImageUrl: string }>
 }
 
-const PostBody = ({ source, tocSource, assets, relatedPosts }: Props) => {
+const PostBody = ({ source, toc, assets, relatedPosts }: Props) => {
   /* eslint-disable react/display-name */
   const components = {
     a: ({ href, children }: { href: string, children: string }) => (
@@ -74,14 +74,14 @@ const PostBody = ({ source, tocSource, assets, relatedPosts }: Props) => {
     inlink: ({ to, children }: { to: string, children: string }) => <a href={to}>{children}</a>,
     h2: ({ children }: { children: any }) => <Heading type={2} content={children} />,
     h3: ({ children }: { children: any }) => <Heading type={3} content={children} />,
-    toc: () => tocSource && <MobileTOC source={tocSource} />,
+    toc: () => <MobileTOC toc={toc} />,
     postimage: (props: Omit<PostImageProps, 'assets'>) => assets && <PostImage assets={assets} {...props} />,
     video: (props: Omit<VideoProps, 'assets'>) => assets && <Video assets={assets} {...props} />,
     code: (props: CodeBlockProps) => <CodeBlock {...props} />,
     icode: (props: any) => <code>{props.children}</code>,
     pstlk: (props: PostLinkProps) => <PostLink {...props} />,
     relpos: (props: Omit<RelatedPostProps, 'relatedPosts'>) => (
-      relatedPosts && <RelatedPost relatedPosts={relatedPosts} {...props} />
+      <RelatedPost relatedPosts={relatedPosts} {...props} />
     ),
     tltp: (props: TooltipProps) => <Tooltip {...props} />,
     fukidashi: (props: FukidashiProps) => <Fukidashi {...props} />,

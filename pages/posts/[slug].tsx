@@ -14,6 +14,7 @@ import { getAllPosts, necessaryFieldsForPost } from 'lib/api'
 
 import { SITE_NAME, HOME_OG_IMAGE_URL } from 'lib/constants'
 import type { ContentfulPostFields } from 'types/api'
+import { markdownToHtml } from 'lib/markdownToHtml'
 
 /* eslint-disable react/display-name */
 const PostHeader = dynamic(() => import('components/post/post-header'))
@@ -28,10 +29,10 @@ type Props = {
   post: ContentfulPostFields
   relatedPosts: Record<string, { title: string, coverImageUrl: string }>
   source: MDXRemoteSerializeResult<Record<string, unknown>>
-  tocSource: MDXRemoteSerializeResult<Record<string, unknown>>
+  toc: string
 }
 
-const Post = ({ post, relatedPosts, source, tocSource }: Props) => {
+const Post = ({ post, relatedPosts, source, toc }: Props) => {
   const assets = post.assets ? Object.fromEntries(
     post.assets.map(asset => [
       asset.fields.file.fileName.split('.')[0], {
@@ -73,12 +74,12 @@ const Post = ({ post, relatedPosts, source, tocSource }: Props) => {
             />
             <PostBody
               source={source}
-              tocSource={tocSource}
+              toc={toc}
               assets={assets}
               relatedPosts={relatedPosts}
             />
           </article>
-          <SideTOC source={tocSource} />
+          <SideTOC toc={toc} />
         </div>
         <BackToTopButton />
       </Layout>
@@ -121,7 +122,7 @@ export async function getStaticProps({ params }: Params) {
       rehypePlugins: [rehypeKatex],
     }
   })
-  const toc = await serialize(markdownTOC(post?.content ?? '').content)
+  const toc = await markdownToHtml(markdownTOC(post?.content ?? '').content, { targetBlank: false })
 
   return {
     props: {
@@ -130,7 +131,7 @@ export async function getStaticProps({ params }: Params) {
       },
       relatedPosts,
       source: content,
-      tocSource: toc,
+      toc,
     },
   }
 }

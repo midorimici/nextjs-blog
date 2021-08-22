@@ -2,15 +2,18 @@ import { useState, useEffect, ReactElement } from 'react'
 import ReactDOMServer from 'react-dom/server'
 
 import Tooltip from './mdx/tltp'
-import markdownToHtml from 'lib/markdownToHtml'
+import { markdownToHtml, Options } from 'lib/markdownToHtml'
 
-export const useParsedMarkdown = (markdown: string | ReactElement, minimum: boolean = true) => {
+export const useParsedMarkdown = (markdown: string | ReactElement, {
+  minimum = true,
+  targetBlank = true,
+}: Options = {}) => {
   const [content, setContent] = useState('')
 
   useEffect(() => {
     const parseMarkdown = async () => {
       const md = typeof markdown === 'string' ? markdown : ReactDOMServer.renderToStaticMarkup(markdown)
-      let html = await markdownToHtml(md, minimum)
+      let html = await markdownToHtml(md, { minimum, targetBlank })
       html = minimum ? html : await tltpReplaced(html)
       html = html.replace(/<p>([\s\S]*?)<\/p>/g, '$1')
       return html
@@ -21,7 +24,7 @@ export const useParsedMarkdown = (markdown: string | ReactElement, minimum: bool
       if (isSubscribed) setContent(html)
     })
     return () => { isSubscribed = false }
-  }, [markdown, minimum])
+  }, [markdown, minimum, targetBlank])
 
   const tltpReplaced = async (str: string) => {
     let result = str
