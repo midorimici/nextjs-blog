@@ -7,9 +7,9 @@ declare namespace JSX {
     children?: Element
     alt?: string
     src?: string
-    width?: number
-    height?: number
-    layout?: string
+    width?: number | string
+    height?: number | string
+    layout?: 'fill' | 'fixed' | 'fixed-height' | 'flex-item' | 'intrinsic' | 'nodisplay' | 'responsive'
     className?: string
   }
 

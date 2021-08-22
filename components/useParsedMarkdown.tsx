@@ -7,15 +7,15 @@ import { markdownToHtml, Options } from 'lib/markdownToHtml'
 export const useParsedMarkdown = (markdown: string | ReactElement, {
   minimum = true,
   targetBlank = true,
+  removeP = true,
 }: Options = {}) => {
   const [content, setContent] = useState('')
 
   useEffect(() => {
     const parseMarkdown = async () => {
       const md = typeof markdown === 'string' ? markdown : ReactDOMServer.renderToStaticMarkup(markdown)
-      let html = await markdownToHtml(md, { minimum, targetBlank })
+      let html = await markdownToHtml(md, { minimum, targetBlank, removeP })
       html = minimum ? html : await tltpReplaced(html)
-      html = html.replace(/<p>([\s\S]*?)<\/p>/g, '$1')
       return html
     }
 

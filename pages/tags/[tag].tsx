@@ -1,18 +1,24 @@
 import Head from 'next/head'
+import twemoji from 'twemoji'
 
 import Layout from 'components/layout'
 import Container from 'components/container'
 import Stories from 'components/stories'
 import { getAllPosts, getTopics, getTopicLabelFromId, necessaryFieldsForPostList } from 'lib/api'
+import { markdownToHtml } from 'lib/markdownToHtml'
 import { SITE_NAME } from 'lib/constants'
 import type { ContentfulPostFields } from 'types/api'
+
+export const config = { amp: true }
 
 type Props = {
   posts: ContentfulPostFields[]
   tagName: string
+  titles: string[]
+  summaries: string[]
 }
 
-const TagPosts = ({ posts, tagName }: Props) => {
+const TagPosts = ({ posts, tagName, titles, summaries }: Props) => {
   return (
     <>
       <Layout>
@@ -26,7 +32,13 @@ const TagPosts = ({ posts, tagName }: Props) => {
           `}>
             {tagName}
           </h1>
-          {posts.length > 0 && <Stories posts={posts} />}
+          {posts.length > 0 && (
+            <Stories
+              posts={posts}
+              titles={titles}
+              summaries={summaries}
+            />
+          )}
         </Container>
       </Layout>
     </>
@@ -42,12 +54,30 @@ type Params = {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const posts = await getAllPosts(necessaryFieldsForPostList)
-  const topicPosts = posts.filter(post => post.topics.some(topic => topic.fields.id === params.tag))
+  const allPosts = await getAllPosts(necessaryFieldsForPostList)
+  const posts = allPosts.filter(post => post.topics.some(topic => topic.fields.id === params.tag))
   const topic = await getTopicLabelFromId(params.tag)
+  const titles = await Promise.all(posts.map(async (post) =>
+    await markdownToHtml(post.title)
+  ))
+  const summaries = await Promise.all(posts.map(async (post) =>
+    await markdownToHtml(
+      twemoji.parse(
+        (post.summary ?? post.content.replace(/([\s\S]+)\n<!--more-->[\s\S]+/, '$1')) + '…'
+      )
+      .replace(/className=/g, 'class=')
+      .replace(/<img/g, '<amp-img width="1.5rem" height="1.5rem"'),
+      { removeP: false },
+    )
+  ))
 
   return {
-    props: { posts: topicPosts, tagName: topic },
+    props: {
+      posts,
+      tagName: topic,
+      titles,
+      summaries,
+    },
   }
 }
 
