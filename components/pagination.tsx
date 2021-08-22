@@ -1,18 +1,25 @@
+import { useState, useEffect } from 'react'
+import useSWR from 'swr'
 import { useRouter } from 'next/router'
 import ReactPaginate from 'react-paginate'
 
 import { PAGINATION_PER_PAGE } from 'lib/constants'
 
-type Props = {
-  postNumbers: number
-}
-
-const Pagination = ({ postNumbers }: Props) => {
+const Pagination = () => {
   const router = useRouter()
+  const [pageCount, setPageCount] = useState(10)
+  const { data } = useSWR(
+    '/api/allPosts',
+    async (url: string) => await fetch(url).then(res => res.json()),
+  )
+  
+  useEffect(() => {
+    if (data) setPageCount(Math.ceil(data.posts.length/PAGINATION_PER_PAGE))
+  }, [data])
   
   return (
     <ReactPaginate
-      pageCount={Math.ceil(postNumbers/PAGINATION_PER_PAGE)}
+      pageCount={pageCount}
       pageRangeDisplayed={3}
       marginPagesDisplayed={2}
       initialPage={router.query.id ? +router.query.id-1 : 0}

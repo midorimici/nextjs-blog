@@ -81,7 +81,7 @@ const Index = ({ posts }: Props) => {
         <Container>
           {posts.length > 0 && <Stories posts={searchText === '' ? posts : searchedPosts} />}
         </Container>
-        {searchText === '' && <Pagination postNumbers={allPosts.length} />}
+        {searchText === '' && <Pagination />}
       </Layout>
     </>
   )
