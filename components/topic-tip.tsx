@@ -7,8 +7,6 @@ type Props = {
   number?: number
 }
 
-/* eslint-disable @next/next/no-img-element */
-
 const TopicTip = ({ topic, number }: Props) => {
   return (
     <Link as={`/tags/${topic.id}`} href="/tags/[topic]">
@@ -20,11 +18,12 @@ const TopicTip = ({ topic, number }: Props) => {
         transition-color duration-300 hover:bg-white
       `}>
         <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-2xl flex justify-center items-center">
-          <img
+          <amp-img
             src={topic.logoUrl}
             alt={topic.label}
             width={16}
             height={16}
+            layout="responsive"
             className="w-4 sm:w-6"
           />
         </div>

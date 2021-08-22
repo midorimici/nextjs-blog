@@ -6,6 +6,8 @@ import type { ContentfulTopicFields } from 'types/api'
 import { SITE_NAME, TAGS_PAGE_TITLE } from 'lib/constants'
 import { getPostNumbersByTopics } from 'lib/api'
 
+export const config = { amp: true }
+
 const TopicTip = dynamic(() => import('components/topic-tip'))
 
 type Props = {
