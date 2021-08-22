@@ -3,6 +3,10 @@ import type { Entry, EntryCollection } from 'contentful'
 import twemoji from 'twemoji'
 
 import type { ContentfulTopicFields, ContentfulPostFields, ContentfulAboutPostFields } from 'types/api'
+import { PAGINATION_PER_PAGE } from './constants'
+
+const POST_CONTENT_TYPE = 'blogPost'
+const TOPIC_CONTENT_TYPE = 'topic'
 
 const client = createClient({
   space: process.env.ctfSpaceId ?? '',
@@ -43,11 +47,30 @@ export async function getAboutPost() {
   }
 }
 
+export async function getPosts(
+  fields: (keyof ContentfulPostFields)[],
+  { offset = 0, limit = PAGINATION_PER_PAGE }: {
+    offset?: number,
+    limit?: number,
+  } = {}
+) {
+  const entries: EntryCollection<
+    Pick<ContentfulPostFields, (typeof fields)[number]>
+  > = await client.getEntries({
+    content_type: POST_CONTENT_TYPE,
+    select: fields.map(field => `fields.${field}`).join(','),
+    order: '-fields.date',
+    limit,
+    skip: offset,
+  })
+  return entries.items.map(item => item.fields)
+}
+
 export async function getAllPosts(fields: (keyof ContentfulPostFields)[]) {
   const entries: EntryCollection<
     Pick<ContentfulPostFields, (typeof fields)[number]>
   > = await client.getEntries({
-    content_type: 'blogPost',
+    content_type: POST_CONTENT_TYPE,
     select: fields.map(field => `fields.${field}`).join(','),
     order: '-fields.date',
     limit: 500,
@@ -57,7 +80,7 @@ export async function getAllPosts(fields: (keyof ContentfulPostFields)[]) {
 
 export async function getTotalPostNumbers() {
   const entries: EntryCollection<ContentfulPostFields> = await client.getEntries({
-    content_type: 'blogPost',
+    content_type: POST_CONTENT_TYPE,
     limit: 500,
   })
   return entries.total
@@ -66,14 +89,14 @@ export async function getTotalPostNumbers() {
 
 export async function getTopics() {
   const topics: EntryCollection<ContentfulTopicFields> = await client.getEntries({
-    content_type: 'topic',
+    content_type: TOPIC_CONTENT_TYPE,
   })
   return topics.items.map(item => item.fields)
 }
 
 export async function getTopicLabelFromId(id: string) {
   const topics: EntryCollection<ContentfulTopicFields> = await client.getEntries({
-    content_type: 'topic',
+    content_type: TOPIC_CONTENT_TYPE,
     'fields.id': id,
     select: 'fields.label',
   })
@@ -82,10 +105,10 @@ export async function getTopicLabelFromId(id: string) {
 
 export async function getPostNumbersByTopics() {
   const topics: EntryCollection<ContentfulTopicFields> = await client.getEntries({
-    content_type: 'topic',
+    content_type: TOPIC_CONTENT_TYPE,
   })
   const entries: EntryCollection<Pick<ContentfulPostFields, 'topics'>> = await client.getEntries({
-    content_type: 'blogPost',
+    content_type: POST_CONTENT_TYPE,
     select: 'fields.topics',
     limit: 500,
   })

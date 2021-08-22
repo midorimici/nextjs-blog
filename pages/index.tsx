@@ -1,4 +1,5 @@
 import { useState, useEffect, ChangeEvent } from 'react'
+import useSWR from 'swr'
 import Head from 'next/head'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
@@ -7,20 +8,33 @@ import Container from 'components/container'
 import Stories from 'components/stories'
 import Layout from 'components/layout'
 import Pagination from 'components/pagination'
-import { getAllPosts, necessaryFieldsForPostList } from 'lib/api'
-import { PAGINATION_PER_PAGE, SITE_NAME } from 'lib/constants'
+import { getPosts, necessaryFieldsForPostList } from 'lib/api'
+import { SITE_NAME } from 'lib/constants'
 import type { ContentfulPostFields } from 'types/api'
 
 type Props = {
   posts: ContentfulPostFields[]
-  allPosts: ContentfulPostFields[]
 }
 
-const Index = ({ posts, allPosts }: Props) => {
+const Index = ({ posts }: Props) => {
   const [searchText, setSearchText] = useState('')
   const [timeoutID, setTimeoutID] = useState<number>()
   const [searchedPosts, setSearchedPosts] = useState<ContentfulPostFields[]>([])
+  const [allPosts, setAllPosts] = useState<ContentfulPostFields[]>([])
+  const [fetchPosts, setFetchPosts] = useState(false)
+  const { data } = useSWR(
+    fetchPosts ? '/api/allPosts' : null,
+    async (url: string) => await fetch(url).then(res => res.json()),
+  )
 
+  useEffect(() => {
+    if (allPosts.length === 0 && searchText !== '') setFetchPosts(true)
+  }, [searchText])
+
+  useEffect(() => {
+    if (data) setAllPosts(data.posts)
+  }, [fetchPosts])
+  
   useEffect(() => {
     const getSearchedPosts = () =>
       allPosts.filter(
@@ -35,7 +49,7 @@ const Index = ({ posts, allPosts }: Props) => {
 
     setSearchedPosts(getSearchedPosts())
     return () => clearTimeout(timeoutID)
-  }, [allPosts, searchText, timeoutID])
+  }, [searchText, allPosts])
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     clearTimeout(timeoutID)
@@ -76,10 +90,9 @@ const Index = ({ posts, allPosts }: Props) => {
 export default Index
 
 export const getStaticProps = async () => {
-  const allPosts = await getAllPosts(necessaryFieldsForPostList)
-  const posts = allPosts.slice(0, PAGINATION_PER_PAGE)
+  const posts = await getPosts(necessaryFieldsForPostList)
 
   return {
-    props: { posts, allPosts },
+    props: { posts },
   }
 }
