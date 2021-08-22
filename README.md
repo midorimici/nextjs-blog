@@ -71,6 +71,19 @@ children: string
 <icode>xxx</icode>
 ```
 
+### inlink
+
+ページ内リンク用。
+
+```ts
+to: string
+children: string  // markdown 対応
+```
+
+```md
+<inlink to="#xxx">aaa</inlink>
+```
+
 ### manga
 
 `manga-text` と一緒に使う。
