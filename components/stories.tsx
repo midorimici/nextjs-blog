@@ -7,8 +7,8 @@ const PostPreview = dynamic(() => import('./post-preview'))
 
 type Props = {
   posts: ContentfulPostFields[]
-  titles: string[]
-  summaries: string[]
+  titles?: string[]
+  summaries?: string[]
 }
 
 const Stories = ({ posts, titles, summaries }: Props) => {
@@ -19,14 +19,18 @@ const Stories = ({ posts, titles, summaries }: Props) => {
         return <PostPreview
           key={post.slug}
           slug={post.slug}
-          title={titles[index]}
+          title={titles ? titles[index] : post.title}
           date={post.date}
           lastmod={post.lastmod}
           topics={post.topics.map(topic => topic.fields)}
           coverImageUrl={
             `https:${coverImage?.fields.file.url ?? HOME_OG_IMAGE_URL.slice(6)}`
           }
-          summary={summaries[index]}
+          summary={
+            summaries ?
+              summaries[index] :
+              ((post.summary ?? post.content.replace(/([\s\S]+)\n<!--more-->[\s\S]+/, '$1')) + '…')
+          }
         />
       })}
     </div>

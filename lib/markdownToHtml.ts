@@ -20,5 +20,5 @@ export async function markdownToHtml(markdown: string, {
   let result = parsedMd.toString()
   if (targetBlank) result = result.replace(/<a (.*?)>/g, '<a $1 target="_blank" rel="noopener noreferrer">')
   if (removeP) result = result.replace(/<p>([\s\S]*?)<\/p>/g, '$1')
-  return result
+  return result.replace(/(<\/?)i(code>)/g, '$1$2')
 }
