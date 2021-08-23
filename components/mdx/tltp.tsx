@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef, ReactElement } from 'react'
 import { useParsedMarkdown } from 'components/useParsedMarkdown'
 
-import styles from './tooltip.module.css'
-
 export type TooltipProps = {
   label: string
   children: string | ReactElement
@@ -43,7 +41,7 @@ const Tooltip = ({ label, children }: TooltipProps) => {
 
   return (
     <span
-      className={`${styles['tooltip-container']} relative text-pink-400`}
+      className={`tooltip-container relative text-pink-400`}
       onMouseOver={handleMouseOver}
       onMouseOut={visible ? () => {} : handleMouseOut}
       onTouchStart={() => {}}
@@ -51,7 +49,7 @@ const Tooltip = ({ label, children }: TooltipProps) => {
       <span
         ref={tooltipRef}
         className={`
-          ${styles[tooltipOverflow ? 'tooltip-overflow' : 'tooltip']}
+          ${tooltipOverflow ? 'tooltip-overflow' : 'tooltip'}
           absolute top-full${tooltipOverflow ? ' right-0' : ''} mt-4 p-2
           opacity-0 bg-pink-100 rounded text-sm
           transition duration-300

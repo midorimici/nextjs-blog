@@ -1,3 +1,4 @@
+import { useAmp } from 'next/amp'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTags, faUser } from '@fortawesome/free-solid-svg-icons'
@@ -7,19 +8,31 @@ const iconStyle = "w-6"
 
 /* eslint-disable @next/next/no-img-element */
 const Header = () => {
+  const isAmp = useAmp()
+
   return (
     <header className="py-8">
       <div className="flex justify-between items-center">
         <Link href="/">
           <a className="flex items-center">
-            <amp-img
-              src="/favicon/safari-pinned-tab.svg"
-              alt="mi"
-              width={32}
-              height={32}
-              layout="responsive"
-              className="w-8 sm:w-12 fill-current"
-            />
+            {isAmp ? (
+              <amp-img
+                src="/favicon/safari-pinned-tab.svg"
+                alt="mi"
+                width={32}
+                height={32}
+                layout="responsive"
+                className="w-8 sm:w-12 fill-current"
+              />
+            ) : (
+              <img
+                src="/favicon/safari-pinned-tab.svg"
+                alt="mi"
+                width={32}
+                height={32}
+                className="w-8 sm:w-12 fill-current"
+              />
+            )}
             <span className="font-bold sm:text-5xl">
               どりみちのブログ
             </span>

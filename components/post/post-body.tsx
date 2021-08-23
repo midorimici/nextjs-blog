@@ -14,7 +14,6 @@ import type { FukidashiProps } from 'components/mdx/fukidashi'
 import type { MangaProps } from 'components/mdx/manga'
 import type { MangaTextProps } from 'components/mdx/manga-text'
 import type { AffiliateProps } from 'components/mdx/affiliate'
-import markdownStyles from './markdown-styles.module.css'
 
 declare global {
   namespace NodeJS {
@@ -94,7 +93,7 @@ const PostBody = ({ source, toc, assets, relatedPosts }: Props) => {
   }
 
   return (
-    <div className={`${markdownStyles.markdown} max-w-2xl mx-auto`}>
+    <div className={`markdown max-w-2xl mx-auto`}>
       <MDXRemote {...source} components={components} />
     </div>
   )

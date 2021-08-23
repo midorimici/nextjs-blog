@@ -1,7 +1,5 @@
 import { useState } from 'react'
 
-import tocStyles from './toc-styles.module.css'
-
 const SideTOC = ({ toc }: { toc: string }) => {
   const [visible, setVisible] = useState(false)
 
@@ -18,7 +16,7 @@ const SideTOC = ({ toc }: { toc: string }) => {
           目次
         </div>
         <div
-          className={tocStyles['toc']}
+          className='toc'
           dangerouslySetInnerHTML={{ __html: toc }}
         />
       </div>

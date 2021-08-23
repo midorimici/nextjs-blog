@@ -1,9 +1,12 @@
+import { useAmp } from 'next/amp'
+import Link from 'next/link'
+import twemoji from 'twemoji'
+
 import DateFormatter from './date-formatter'
 import CoverImage from './cover-image'
-import Link from 'next/link'
-
 import TopicTip from './topic-tip'
 import type { ContentfulTopicFields } from 'types/api'
+import { useParsedMarkdown } from './useParsedMarkdown'
 
 type Props = {
   slug: string
@@ -24,6 +27,12 @@ const PostPreview = ({
   coverImageUrl,
   summary,
 }: Props) => {
+  const isAmp = useAmp()
+  const parsedTitle = useParsedMarkdown(title)
+  const parsedSummary = useParsedMarkdown(twemoji.parse(summary))
+  const titleToRender = isAmp ? title : parsedTitle
+  const summaryToRender = isAmp ? summary : parsedSummary
+
   return (
     <article className={`
       post-preview
@@ -37,16 +46,16 @@ const PostPreview = ({
       break-all
     `}>
       <Link as={`/posts/${slug}`} href="/posts/[slug]">
-        <a className="absolute top-0 left-0 w-full h-full z-10" aria-label={title} />
+        <a className="absolute top-0 left-0 w-full h-full z-10" aria-label={titleToRender} />
       </Link>
       <CoverImage
-        title={title}
+        title={titleToRender}
         src={coverImageUrl}
       />
       <section className="m-4">
         <h3
           className="text-xl sm:text-3xl mb-3 leading-snug"
-          dangerouslySetInnerHTML={{ __html: title }}
+          dangerouslySetInnerHTML={{ __html: titleToRender }}
         />
         <div className="mb-4">
           <DateFormatter dateString={date} type='date' />
@@ -58,7 +67,7 @@ const PostPreview = ({
         {summary && (
           <div
             className="text-base sm:text-lg leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: summary }}
+            dangerouslySetInnerHTML={{ __html: summaryToRender }}
           />
         )}
       </section>

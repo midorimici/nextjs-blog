@@ -71,6 +71,7 @@ html {
 }
 
 /* post */
+/* purgecss start ignore */
 
 .math-display {
   @apply overflow-x-auto;
@@ -172,3 +173,85 @@ html {
 .markdown hr {
   @apply my-4;
 }
+
+
+.toc {
+  @apply break-words;
+}
+
+.toc > ul {
+  @apply list-disc pl-8;
+}
+
+.toc > ul ul {
+  @apply pl-8;
+  list-style: circle;
+}
+
+.toc > ul ul ul {
+  @apply pl-8;
+  list-style: square;
+}
+
+.toc li {
+  @apply my-4;
+}
+
+
+.tooltip, .tooltip-overflow {
+  min-width: 8rem;
+  will-change: opacity;
+}
+
+.tooltip::after {
+  @apply absolute left-4 -top-3;
+  content: "";
+  border-bottom: solid 1em rgba(252, 231, 243);
+  border-left: solid 0.5em transparent;
+  border-right: solid 0.5em transparent;
+}
+
+.tooltip-overflow::after {
+  @apply absolute right-4 -top-3;
+  content: "";
+  border-bottom: solid 1em rgba(252, 231, 243);
+  border-left: solid 0.5em transparent;
+  border-right: solid 0.5em transparent;
+}
+
+.tooltip-container a {
+  @apply underline;
+}
+
+.tooltip-container:hover > .tooltip,
+.tooltip-container:hover > .tooltip-overflow {
+  @apply opacity-95 shadow-md;
+}
+
+
+.heading-icon {
+  will-change: opacity;
+}
+
+.heading-link:hover > .heading-icon {
+  @apply opacity-100;
+}
+
+
+.fukidashi::before {
+  @apply absolute -right-5 top-8;
+  content: "";
+  border-left: solid 1em #333333;
+  border-top: solid .5em transparent;
+  border-bottom: solid .5em transparent;
+}
+
+.fukidashi::after {
+  @apply absolute -right-4 top-8;
+  content: "";
+  border-left: solid .9em white;
+  border-top: solid 0.5em transparent;
+  border-bottom: solid 0.5em transparent;
+}
+
+/* purgecss end ignore */
