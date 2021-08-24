@@ -2,7 +2,7 @@ import { useState, useEffect, ChangeEvent } from 'react'
 import useSWR from 'swr'
 import Head from 'next/head'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faSun } from '@fortawesome/free-solid-svg-icons'
 
 import Container from 'components/container'
 import Stories from 'components/stories'
@@ -22,6 +22,7 @@ const Index = ({ posts }: Props) => {
   const [searchedPosts, setSearchedPosts] = useState<ContentfulPostFields[]>([])
   const [allPosts, setAllPosts] = useState<ContentfulPostFields[]>([])
   const [fetchPosts, setFetchPosts] = useState(false)
+  const [refetchToggle, setRefetchToggle] = useState(false)
   const { data } = useSWR(
     fetchPosts ? '/api/allPosts' : null,
     async (url: string) => await fetch(url).then(res => res.json()),
@@ -33,7 +34,10 @@ const Index = ({ posts }: Props) => {
 
   useEffect(() => {
     if (data) setAllPosts(data.posts)
-  }, [fetchPosts])
+    else {
+      setTimeout(() => setRefetchToggle(prev => !prev), 200)
+    }
+  }, [fetchPosts, refetchToggle])
   
   useEffect(() => {
     const getSearchedPosts = () =>
@@ -74,7 +78,11 @@ const Index = ({ posts }: Props) => {
           </div>
           {searchText && (
             <div className="mt-4">
-              {searchedPosts.length} 件の記事
+              {
+                searchedPosts.length
+                ? `${searchedPosts.length} 件の記事`
+                : <FontAwesomeIcon icon={faSun} width={20} className="text-yellow-500 animate-spin" />
+              }
             </div>
           )}
         </div>
