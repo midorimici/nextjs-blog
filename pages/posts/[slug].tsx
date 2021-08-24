@@ -20,7 +20,15 @@ import { markdownToHtml } from 'lib/markdownToHtml'
 const PostHeader = dynamic(() => import('components/post/post-header'))
 const PostBody = dynamic(() => import(
   'components/post/post-body'),
-  { loading: () => <FontAwesomeIcon icon={faSun} width={20} className="max-w-2xl mx-auto animate-spin" /> },
+  { 
+    loading: () => (
+      <FontAwesomeIcon
+        icon={faSun}
+        width={20}
+        className="text-center text-yellow-500 animate-spin"
+      />
+    )
+  },
 )
 const SideTOC = dynamic(() => import('components/post/sideTOC'), { ssr: false })
 const BackToTopButton = dynamic(() => import('components/post/backToTopButton'), { ssr: false })
