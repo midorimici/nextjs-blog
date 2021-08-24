@@ -138,6 +138,10 @@ html {
   @apply pl-4 border-l-4 border-gray-200 rounded-lg;
 }
 
+.markdown table {
+  @apply block overflow-auto;
+}
+
 .markdown th, .markdown td {
   @apply p-2;
 }
