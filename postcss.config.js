@@ -4,6 +4,7 @@ const purgecssOption = {
     ...['xs' , 'sm' , 'base' , 'lg' , 'xl' , '2xl'].map(size => `md:text-${size}`),
     '-z-10',
   ],
+  keyframes: true,
   defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
 }
 
