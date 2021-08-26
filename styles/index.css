@@ -22,24 +22,25 @@ http://jikasei.me/font/genjyuu/
 */
 
 @font-face {
-  font-family: 'genjyuu';
-  font-display: swap;
-  font-weight: inherit;
-  font-style: inherit;
-  src: url("/fonts/genjyuu/GenJyuuGothic-Regular_subset.eot");
-  src: url("/fonts/genjyuu/GenJyuuGothic-Regular_subset.eot?#iefix") format('embedded-opentype'),
-  url("/fonts/genjyuu/GenJyuuGothic-Regular_subset.woff2") format('woff2'),
-  url("/fonts/genjyuu/GenJyuuGothic-Regular_subset.woff") format('woff'),
-  url("/fonts/genjyuu/GenJyuuGothic-Regular_subset.ttf") format('truetype');
+	font-family: 'genjyuu';
+	font-display: swap;
+	font-weight: inherit;
+	font-style: inherit;
+	src: url('/fonts/genjyuu/GenJyuuGothic-Regular_subset.eot');
+	src: url('/fonts/genjyuu/GenJyuuGothic-Regular_subset.eot?#iefix')
+			format('embedded-opentype'),
+		url('/fonts/genjyuu/GenJyuuGothic-Regular_subset.woff2') format('woff2'),
+		url('/fonts/genjyuu/GenJyuuGothic-Regular_subset.woff') format('woff'),
+		url('/fonts/genjyuu/GenJyuuGothic-Regular_subset.ttf') format('truetype');
 }
 
 body {
-  @apply sm:text-xl text-gray-600 tracking-wider;
-  font-family: genjyuu, "Meiryo", serif;
+	@apply sm:text-xl text-gray-600 tracking-wider;
+	font-family: genjyuu, 'Meiryo', serif;
 }
 
 html {
-  scroll-behavior: smooth;
+	scroll-behavior: smooth;
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
@@ -49,213 +50,216 @@ html {
 }
 
 @media (min-width: 1536px) {
-  .post-preview {
-    width: 640px;
-  }
+	.post-preview {
+		width: 640px;
+	}
 }
 
 ::-webkit-scrollbar {
-  @apply w-2 h-2
+	@apply w-2 h-2;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-transparent
+	@apply bg-transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply rounded bg-gray-200 transition-colors duration-300 hover:bg-pink-200
+	@apply rounded bg-gray-200 transition-colors duration-300 hover:bg-pink-200;
 }
 
 .emoji {
-  @apply inline-block mx-1 w-6
+	@apply inline-block mx-1 w-6;
+}
+
+/* purgecss start ignore */
+amp-list div[role='list'] {
+	@apply grid grid-cols-1 md:grid-cols-2 md:gap-x-8 gap-y-8 mb-4;
 }
 
 /* post */
-/* purgecss start ignore */
 
 .math-display {
-  @apply overflow-x-auto;
+	@apply overflow-x-auto;
 }
 
 .math-inline .katex-html > .base {
-  @apply inline whitespace-normal;
+	@apply inline whitespace-normal;
 }
 
 .markdown {
-  @apply text-lg leading-loose break-words;
+	@apply text-lg leading-loose break-words;
 }
 
 .markdown p,
 .markdown ul,
 .markdown ol,
 .markdown blockquote {
-  @apply my-6;
+	@apply my-6;
 }
 
 .markdown ul {
-  @apply list-disc pl-8;
+	@apply list-disc pl-8;
 }
 
 .markdown ul ul {
-  @apply pl-8;
-  list-style: circle;
+	@apply pl-8;
+	list-style: circle;
 }
 
 .markdown ul ul ul {
-  @apply pl-8;
-  list-style: square;
+	@apply pl-8;
+	list-style: square;
 }
 
 .markdown li {
-  @apply my-4;
+	@apply my-4;
 }
 
 .markdown ol {
-  @apply list-decimal pl-8;
+	@apply list-decimal pl-8;
 }
 
 .markdown h2 {
-  @apply text-2xl sm:text-3xl font-bold mt-12 mb-4 leading-relaxed border-b-2 border-yellow-500;
+	@apply text-2xl sm:text-3xl font-bold mt-12 mb-4 leading-relaxed border-b-2 border-yellow-500;
 }
 
 .markdown h3 {
-  @apply text-xl sm:text-2xl mt-8 mb-4 pl-4 leading-relaxed border-l-2 border-yellow-500;
+	@apply text-xl sm:text-2xl mt-8 mb-4 pl-4 leading-relaxed border-l-2 border-yellow-500;
 }
 
 .markdown code {
-  @apply mx-1 px-2 py-1 bg-gray-100 rounded font-code;
+	@apply mx-1 px-2 py-1 bg-gray-100 rounded font-code;
 }
 
 .markdown a {
-  @apply underline transition-colors duration-300 hover:text-pink-400;
+	@apply underline transition-colors duration-300 hover:text-pink-400;
 }
 
-.markdown h2 a, .markdown h3 a {
-  @apply no-underline hover:text-current;
+.markdown h2 a,
+.markdown h3 a {
+	@apply no-underline hover:text-current;
 }
 
 .markdown blockquote {
-  @apply pl-4 border-l-4 border-gray-200 rounded-lg;
+	@apply pl-4 border-l-4 border-gray-200 rounded-lg;
 }
 
 .markdown table {
-  @apply block overflow-auto;
+	@apply block overflow-auto;
 }
 
-.markdown th, .markdown td {
-  @apply p-2;
+.markdown th,
+.markdown td {
+	@apply p-2;
 }
 
 .markdown thead {
-  @apply border-t border-b border-yellow-200 bg-yellow-100;
+	@apply border-t border-b border-yellow-200 bg-yellow-100;
 }
 
 .markdown tbody > tr {
-  @apply border-b border-gray-200;
+	@apply border-b border-gray-200;
 }
 
 .markdown details {
-  @apply border rounded-xl;
+	@apply border rounded-xl;
 }
 
 .markdown details[open] {
-  @apply pb-2 bg-white transition-colors duration-300;
+	@apply pb-2 bg-white transition-colors duration-300;
 }
 
 .markdown summary {
-  @apply p-4 rounded-xl bg-yellow-100 cursor-pointer;
+	@apply p-4 rounded-xl bg-yellow-100 cursor-pointer;
 }
 
 .markdown details[open] > summary {
-  @apply p-4 border-b rounded-b-none bg-yellow-100 cursor-pointer;
+	@apply p-4 border-b rounded-b-none bg-yellow-100 cursor-pointer;
 }
 
 .markdown details > :not(summary) {
-  @apply mx-6;
+	@apply mx-6;
 }
 
 .markdown hr {
-  @apply my-4;
+	@apply my-4;
 }
 
-
 .toc {
-  @apply break-words;
+	@apply break-words;
 }
 
 .toc > ul {
-  @apply list-disc pl-8;
+	@apply list-disc pl-8;
 }
 
 .toc > ul ul {
-  @apply pl-8;
-  list-style: circle;
+	@apply pl-8;
+	list-style: circle;
 }
 
 .toc > ul ul ul {
-  @apply pl-8;
-  list-style: square;
+	@apply pl-8;
+	list-style: square;
 }
 
 .toc li {
-  @apply my-4;
+	@apply my-4;
 }
 
-
-.tooltip, .tooltip-overflow {
-  min-width: 8rem;
-  will-change: opacity;
+.tooltip,
+.tooltip-overflow {
+	min-width: 8rem;
+	will-change: opacity;
 }
 
 .tooltip::after {
-  @apply absolute left-4 -top-3;
-  content: "";
-  border-bottom: solid 1em rgba(252, 231, 243);
-  border-left: solid 0.5em transparent;
-  border-right: solid 0.5em transparent;
+	@apply absolute left-4 -top-3;
+	content: '';
+	border-bottom: solid 1em rgba(252, 231, 243);
+	border-left: solid 0.5em transparent;
+	border-right: solid 0.5em transparent;
 }
 
 .tooltip-overflow::after {
-  @apply absolute right-4 -top-3;
-  content: "";
-  border-bottom: solid 1em rgba(252, 231, 243);
-  border-left: solid 0.5em transparent;
-  border-right: solid 0.5em transparent;
+	@apply absolute right-4 -top-3;
+	content: '';
+	border-bottom: solid 1em rgba(252, 231, 243);
+	border-left: solid 0.5em transparent;
+	border-right: solid 0.5em transparent;
 }
 
 .tooltip-container a {
-  @apply underline;
+	@apply underline;
 }
 
 .tooltip-container:hover > .tooltip,
 .tooltip-container:hover > .tooltip-overflow {
-  @apply opacity-95 shadow-md;
+	@apply opacity-95 shadow-md;
 }
 
-
 .heading-icon {
-  will-change: opacity;
+	will-change: opacity;
 }
 
 .heading-link:hover > .heading-icon {
-  @apply opacity-100;
+	@apply opacity-100;
 }
 
-
 .fukidashi::before {
-  @apply absolute -right-5 top-8;
-  content: "";
-  border-left: solid 1em #333333;
-  border-top: solid .5em transparent;
-  border-bottom: solid .5em transparent;
+	@apply absolute -right-5 top-8;
+	content: '';
+	border-left: solid 1em #333333;
+	border-top: solid 0.5em transparent;
+	border-bottom: solid 0.5em transparent;
 }
 
 .fukidashi::after {
-  @apply absolute -right-4 top-8;
-  content: "";
-  border-left: solid .9em white;
-  border-top: solid 0.5em transparent;
-  border-bottom: solid 0.5em transparent;
+	@apply absolute -right-4 top-8;
+	content: '';
+	border-left: solid 0.9em white;
+	border-top: solid 0.5em transparent;
+	border-bottom: solid 0.5em transparent;
 }
 
 /* purgecss end ignore */
