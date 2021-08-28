@@ -53,7 +53,7 @@ export async function getAboutPost() {
 	return {
 		title: entry.fields.title,
 		profileUrl: `https:${entry.fields.profile.fields.file.url}`,
-		content: twemoji.parse(entry.fields.content),
+		content: await markdownToHtml(twemoji.parse(entry.fields.content), { removeP: false }),
 	}
 }
 
