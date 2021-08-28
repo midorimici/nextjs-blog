@@ -6,7 +6,7 @@ import Container from 'components/container'
 import Layout from 'components/layout'
 import AmpStories from 'components/amp-stories'
 import Pagination from 'components/pagination'
-import { getPosts } from 'lib/api'
+import { getPosts, pageCount } from 'lib/api'
 import { SITE_NAME } from 'lib/constants'
 import type { PostFieldsToIndex } from 'types/api'
 
@@ -14,9 +14,10 @@ export const config = { amp: true }
 
 type Props = {
 	posts: PostFieldsToIndex[]
+	pageCount: number
 }
 
-const Index = ({ posts }: Props) => {
+const Index = ({ posts, pageCount }: Props) => {
 	return (
 		<>
 			<Head>
@@ -50,7 +51,7 @@ const Index = ({ posts }: Props) => {
 					<AmpStories />
 				</Container>
 				<div data-amp-bind-class="searchText ? 'hidden' : 'block'">
-					<Pagination />
+					<Pagination pageCount={pageCount} />
 				</div>
 			</Layout>
 		</>
@@ -61,8 +62,9 @@ export default Index
 
 export const getStaticProps = async () => {
 	const posts = await getPosts()
+	const count = await pageCount
 
 	return {
-		props: { posts },
+		props: { posts, pageCount: count },
 	}
 }

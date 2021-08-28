@@ -75,6 +75,10 @@ amp-list div[role='list'] {
 	@apply grid grid-cols-1 md:grid-cols-2 md:gap-x-8 gap-y-8 mb-4 mt-0;
 }
 
+.pagination > li {
+	@apply mx-2 sm:mx-4 text-lg sm:text-4xl;
+}
+
 /* post */
 
 .math-display {

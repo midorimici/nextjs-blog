@@ -228,12 +228,11 @@ export async function getAllPosts<
 export const allPosts = getAllPosts(necessaryFieldsForPostList)
 
 export async function getTotalPostNumbers() {
-	// const entries: EntryCollection<ContentfulPostFields> = await client.getEntries({
-	// 	content_type: POST_CONTENT_TYPE,
-	// 	limit: 500,
-	// })
 	return (await allPosts).length
 }
+
+export const pageCount = (async () =>
+	Math.ceil((await getTotalPostNumbers()) / PAGINATION_PER_PAGE))()
 
 export async function getTopics() {
 	const topics: EntryCollection<ContentfulTopicFields> = await client.getEntries({
@@ -255,11 +254,6 @@ export async function getPostNumbersByTopics() {
 	const topics: EntryCollection<ContentfulTopicFields> = await client.getEntries({
 		content_type: TOPIC_CONTENT_TYPE,
 	})
-	// const entries: EntryCollection<Pick<ContentfulPostFields, 'topics'>> = await client.getEntries({
-	// 	content_type: POST_CONTENT_TYPE,
-	// 	select: 'fields.topics',
-	// 	limit: 500,
-	// })
 	const posts = await allPosts
 	const topicNumberMap: Record<string, { count: number; topic: ContentfulTopicFields }> = {}
 	for (const topic of topics.items) {

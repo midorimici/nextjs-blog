@@ -1,16 +1,17 @@
 import Index from 'pages/index'
 import type { PostFieldsToIndex } from 'types/api'
-import { getPosts, getTotalPostNumbers } from 'lib/api'
+import { getPosts, pageCount } from 'lib/api'
 import { PAGINATION_PER_PAGE } from 'lib/constants'
 
 export const config = { amp: true }
 
 type Props = {
 	posts: PostFieldsToIndex[]
+	pageCount: number
 }
 
-const Posts = ({ posts }: Props) => {
-	return <Index posts={posts} />
+const Posts = (props: Props) => {
+	return <Index {...props} />
 }
 
 export default Posts
@@ -23,15 +24,15 @@ type Params = {
 
 export async function getStaticProps({ params }: Params) {
 	const posts = await getPosts({ offset: PAGINATION_PER_PAGE * (params.id - 1) })
+	const count = await pageCount
 
 	return {
-		props: { posts },
+		props: { posts, pageCount: count },
 	}
 }
 
 export async function getStaticPaths() {
-	const postNumbers = await getTotalPostNumbers()
-	const ids = [...Array(Math.ceil(postNumbers / PAGINATION_PER_PAGE))].map((_, i) => i + 1)
+	const ids = [...Array(await pageCount)].map((_, i) => i + 1)
 
 	return {
 		paths: ids.map((id) => {
