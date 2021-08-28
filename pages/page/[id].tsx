@@ -1,10 +1,10 @@
 import Index from 'pages/index'
-import type { ContentfulPostFields } from 'types/api'
-import { getPosts, getTotalPostNumbers, necessaryFieldsForPostList } from 'lib/api'
+import type { PostFieldsToIndex } from 'types/api'
+import { getPosts, getTotalPostNumbers } from 'lib/api'
 import { PAGINATION_PER_PAGE } from 'lib/constants'
 
 type Props = {
-  posts: ContentfulPostFields[]
+  posts: PostFieldsToIndex[]
 }
 
 const Posts = ({ posts }: Props) => {
@@ -22,7 +22,7 @@ type Params = {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const posts = await getPosts(necessaryFieldsForPostList, { offset: PAGINATION_PER_PAGE*(params.id-1) })
+  const posts = await getPosts({ offset: PAGINATION_PER_PAGE*(params.id-1) })
 
   return {
     props: { posts },

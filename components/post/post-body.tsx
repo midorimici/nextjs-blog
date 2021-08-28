@@ -54,7 +54,7 @@ const Affiliate = dynamic(() => import('components/mdx/affiliate'))
 type Props = {
   source: MDXRemoteSerializeResult<Record<string, unknown>>
   toc: string
-  assets?: Record<string, {
+  assets: Record<string, {
     url: string
     size: {
         width: number
@@ -74,8 +74,8 @@ const PostBody = ({ source, toc, assets, relatedPosts }: Props) => {
     h2: ({ children }: { children: any }) => <Heading type={2} content={children} />,
     h3: ({ children }: { children: any }) => <Heading type={3} content={children} />,
     toc: () => <MobileTOC toc={toc} />,
-    postimage: (props: Omit<PostImageProps, 'assets'>) => assets && <PostImage assets={assets} {...props} />,
-    video: (props: Omit<VideoProps, 'assets'>) => assets && <Video assets={assets} {...props} />,
+    postimage: (props: Omit<PostImageProps, 'assets'>) => <PostImage assets={assets} {...props} />,
+    video: (props: Omit<VideoProps, 'assets'>) => <Video assets={assets} {...props} />,
     code: (props: CodeBlockProps) => <CodeBlock {...props} />,
     icode: (props: any) => <code>{props.children}</code>,
     pstlk: (props: PostLinkProps) => <PostLink {...props} />,
@@ -84,7 +84,7 @@ const PostBody = ({ source, toc, assets, relatedPosts }: Props) => {
     ),
     tltp: (props: TooltipProps) => <Tooltip {...props} />,
     fukidashi: (props: FukidashiProps) => <Fukidashi {...props} />,
-    manga: (props: Omit<MangaProps, 'assets'>) => assets && <Manga assets={assets} {...props} />,
+    manga: (props: Omit<MangaProps, 'assets'>) => <Manga assets={assets} {...props} />,
     'manga-text': (props: MangaTextProps) => <MangaText {...props} />,
     tweet: ({ id }: { id: string }) => <Twitter tweetId={id} />,
     sandbox: (props: { name: string, link: string }) => <Sandbox {...props} />,
