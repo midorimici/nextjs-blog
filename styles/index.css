@@ -27,8 +27,7 @@ http://jikasei.me/font/genjyuu/
 	font-weight: inherit;
 	font-style: inherit;
 	src: url('/fonts/genjyuu/GenJyuuGothic-Regular_subset.eot');
-	src: url('/fonts/genjyuu/GenJyuuGothic-Regular_subset.eot?#iefix')
-			format('embedded-opentype'),
+	src: url('/fonts/genjyuu/GenJyuuGothic-Regular_subset.eot?#iefix') format('embedded-opentype'),
 		url('/fonts/genjyuu/GenJyuuGothic-Regular_subset.woff2') format('woff2'),
 		url('/fonts/genjyuu/GenJyuuGothic-Regular_subset.woff') format('woff'),
 		url('/fonts/genjyuu/GenJyuuGothic-Regular_subset.ttf') format('truetype');
@@ -73,7 +72,7 @@ html {
 
 /* purgecss start ignore */
 amp-list div[role='list'] {
-	@apply grid grid-cols-1 md:grid-cols-2 md:gap-x-8 gap-y-8 mb-4;
+	@apply grid grid-cols-1 md:grid-cols-2 md:gap-x-8 gap-y-8 mb-4 mt-0;
 }
 
 /* post */

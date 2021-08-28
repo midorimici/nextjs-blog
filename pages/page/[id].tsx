@@ -3,6 +3,8 @@ import type { PostFieldsToIndex } from 'types/api'
 import { getPosts, getTotalPostNumbers } from 'lib/api'
 import { PAGINATION_PER_PAGE } from 'lib/constants'
 
+export const config = { amp: true }
+
 type Props = {
 	posts: PostFieldsToIndex[]
 }

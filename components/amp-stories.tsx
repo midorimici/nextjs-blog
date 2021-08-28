@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSun } from '@fortawesome/free-solid-svg-icons'
 
 import CoverImage from './cover-image'
 import DateFormatter from './date-formatter'
@@ -10,7 +12,12 @@ const AmpStories = () => {
 			data-amp-bind-src="'/api/posts?query=' + searchText"
 			items="posts"
 			layout="flex-item"
+			binding="no"
+			data-amp-bind-is-layout-container
 		>
+			<div placeholder="">
+				<FontAwesomeIcon icon={faSun} width={32} className="m-auto text-yellow-500 animate-spin" />
+			</div>
 			<template type="amp-mustache">
 				<article
 					className={`
@@ -41,7 +48,32 @@ const AmpStories = () => {
 						<div
 							className="flex flex-wrap gap-4 mb-4"
 							dangerouslySetInnerHTML={{
-								__html: `{{/topics}}`,
+								__html: `
+                {{#topics}}
+                  <a
+                    href="/tags/{{id}}"
+                    class="
+                      flex items-center gap-2 p-2
+                      text-sm sm:text-base
+                      border-2 rounded-3xl
+                      z-20
+                      transition-color duration-300 hover:bg-white
+                    "
+                  >
+                    <div class="w-6 h-6 sm:w-8 sm:h-8 rounded-2xl flex justify-center items-center">
+                      <amp-img
+                        src={{logoUrl}}
+                        alt={{label}}
+                        width="16"
+                        height="16"
+                        layout="responsive"
+                        class="w-4 sm:w-6"
+                      />
+                    </div>
+                    {{label}}
+                  </a>
+                {{/topics}}
+                `,
 							}}
 						></div>
 						<div

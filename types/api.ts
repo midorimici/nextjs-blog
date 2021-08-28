@@ -32,6 +32,7 @@ export type PostFieldsToIndex = {
 	topics: ContentfulTopicFields[]
 	coverImageUrl: string
 	summary: string
+	content: string
 }
 
 export type PostFieldsToShow = {

@@ -58,7 +58,10 @@ export async function getAboutPost() {
 }
 
 type ModifiedFieldsReturn<T> = T extends Pick<ContentfulPostFields, 'summary'>
-	? Pick<PostFieldsToIndex, 'title' | 'date' | 'lastmod' | 'topics' | 'coverImageUrl' | 'summary'>
+	? Pick<
+			PostFieldsToIndex,
+			'title' | 'date' | 'lastmod' | 'topics' | 'coverImageUrl' | 'summary' | 'content'
+	  >
 	: Pick<PostFieldsToShow, 'title' | 'date' | 'lastmod' | 'topics' | 'assets' | 'content' | 'toc'>
 
 const modifiedFields = async <
@@ -78,6 +81,12 @@ const modifiedFields = async <
 	const date = format(parseISO(fields.date), 'yyyy-MM-dd')
 	const lastmod = format(parseISO(fields.lastmod), 'yyyy-MM-dd')
 	const topics = fields.topics.map((topic) => topic.fields)
+	// MDX 通すのでこの段階では HTML 化不要
+	const content = twemoji
+		.parse(fields.content)
+		.replace(/className=/g, 'class=')
+		.replace(/<img/g, '<amp-img width="1.5rem" height="1.5rem"')
+		.replace(/## .+/, '<toc />\n\n$&')
 	if (isPostListFieldKey(fields)) {
 		const summaryToShow =
 			(fields.summary || fields.content.replace(/([\s\S]+)\n<!--more-->[\s\S]+/, '$1')) + '…'
@@ -98,6 +107,7 @@ const modifiedFields = async <
 			topics,
 			coverImageUrl,
 			summary,
+			content,
 		} as ModifiedFieldsReturn<T>
 	} else {
 		const f = fields as Pick<ContentfulPostFields, typeof necessaryFieldsForPost[number]>
@@ -117,12 +127,6 @@ const modifiedFields = async <
 						size: { width: 640, height: 360 },
 					},
 			  }
-		// MDX 通すのでこの段階では markdown 不要
-		const content = twemoji
-			.parse(f.content)
-			.replace(/className=/g, 'class=')
-			.replace(/<img/g, '<amp-img width="1.5rem" height="1.5rem"')
-			.replace(/## .+/, '<toc />\n\n$&')
 
 		const toc = await markdownToHtml(markdownTOC(content).content, {
 			targetBlank: false,
@@ -217,16 +221,18 @@ export async function getAllPosts<
 				}
 				return newFields
 			})
-		) as any
+		) as Promise<GetAllPostsReturn<T>>
 	}
 }
 
+export const allPosts = getAllPosts(necessaryFieldsForPostList)
+
 export async function getTotalPostNumbers() {
-	const entries: EntryCollection<ContentfulPostFields> = await client.getEntries({
-		content_type: POST_CONTENT_TYPE,
-		limit: 500,
-	})
-	return entries.total
+	// const entries: EntryCollection<ContentfulPostFields> = await client.getEntries({
+	// 	content_type: POST_CONTENT_TYPE,
+	// 	limit: 500,
+	// })
+	return (await allPosts).length
 }
 
 export async function getTopics() {
@@ -249,19 +255,18 @@ export async function getPostNumbersByTopics() {
 	const topics: EntryCollection<ContentfulTopicFields> = await client.getEntries({
 		content_type: TOPIC_CONTENT_TYPE,
 	})
-	const entries: EntryCollection<Pick<ContentfulPostFields, 'topics'>> = await client.getEntries({
-		content_type: POST_CONTENT_TYPE,
-		select: 'fields.topics',
-		limit: 500,
-	})
+	// const entries: EntryCollection<Pick<ContentfulPostFields, 'topics'>> = await client.getEntries({
+	// 	content_type: POST_CONTENT_TYPE,
+	// 	select: 'fields.topics',
+	// 	limit: 500,
+	// })
+	const posts = await allPosts
 	const topicNumberMap: Record<string, { count: number; topic: ContentfulTopicFields }> = {}
 	for (const topic of topics.items) {
 		topicNumberMap[topic.fields.id] = {
-			count: entries.items.filter((entry) => {
-				const entryTopics = entry.fields.topics
-				return (
-					entryTopics && entryTopics.some((postTopic) => postTopic.fields.id === topic.fields.id)
-				)
+			count: posts.filter((post) => {
+				const postTopics = post.topics
+				return postTopics && postTopics.some((postTopic) => postTopic.id === topic.fields.id)
 			}).length,
 			topic: topic.fields,
 		}
@@ -291,7 +296,7 @@ export async function getPostBySlug(slug: string) {
 }
 
 export async function getRelatedPosts(content: string) {
-	const posts = await getAllPosts(necessaryFieldsForPostList)
+	const posts = await allPosts
 	let relatedPosts: Record<string, { title: string; coverImageUrl: string }> = {}
 	const relatedPostSlugsMatches = content.matchAll(/<relpos link="(.+?)" \/>/g)
 	for (const match of relatedPostSlugsMatches) {
