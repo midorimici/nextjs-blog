@@ -5,10 +5,10 @@ import Container from 'components/container'
 import Stories from 'components/stories'
 import { getAllPosts, getTopics, getTopicLabelFromId, necessaryFieldsForPostList } from 'lib/api'
 import { SITE_NAME } from 'lib/constants'
-import type { ContentfulPostFields } from 'types/api'
+import type { PostFieldsToIndex } from 'types/api'
 
 type Props = {
-  posts: ContentfulPostFields[]
+  posts: PostFieldsToIndex[]
   tagName: string
 }
 
@@ -17,13 +17,17 @@ const TagPosts = ({ posts, tagName }: Props) => {
     <>
       <Layout>
         <Head>
-          <title>{tagName} | {SITE_NAME}</title>
+          <title>
+            {tagName} | {SITE_NAME}
+          </title>
         </Head>
         <Container>
-          <h1 className={`
+          <h1
+            className={`
             max-w-2xl mx-auto mb-12
             text-2xl sm:text-4xl text-left font-bold tracking-wide break-all
-          `}>
+          `}
+          >
             {tagName}
           </h1>
           {posts.length > 0 && <Stories posts={posts} />}
@@ -43,7 +47,7 @@ type Params = {
 
 export async function getStaticProps({ params }: Params) {
   const posts = await getAllPosts(necessaryFieldsForPostList)
-  const topicPosts = posts.filter(post => post.topics.some(topic => topic.fields.id === params.tag))
+  const topicPosts = posts.filter((post) => post.topics.some((topic) => topic.id === params.tag))
   const topic = await getTopicLabelFromId(params.tag)
 
   return {
@@ -54,9 +58,9 @@ export async function getStaticProps({ params }: Params) {
 export async function getStaticPaths() {
   const topics = await getTopics()
   return {
-    paths: topics.map(topic => ({
+    paths: topics.map((topic) => ({
       params: {
-        tag: topic.id
+        tag: topic.id,
       },
     })),
     fallback: false,

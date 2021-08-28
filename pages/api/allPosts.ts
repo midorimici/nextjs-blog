@@ -1,13 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { ContentfulPostFields } from 'types/api'
-import { getAllPosts, necessaryFieldsForPostList } from 'lib/api'
+import { PostFieldsToIndex } from 'types/api'
+import { allPosts } from 'lib/api'
 
 type Data = {
-  posts: ContentfulPostFields[]
+  posts: PostFieldsToIndex[]
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-  const posts = await getAllPosts(necessaryFieldsForPostList)
+  const posts = await allPosts
   res.status(200).json({ posts })
 }

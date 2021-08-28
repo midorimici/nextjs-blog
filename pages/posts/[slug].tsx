@@ -2,58 +2,40 @@ import type { MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { serialize } from 'next-mdx-remote/serialize'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
-import markdownTOC from 'markdown-toc'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import twemoji from 'twemoji'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSun } from '@fortawesome/free-solid-svg-icons'
 
 import Layout from 'components/layout'
-import { getAllPosts, necessaryFieldsForPost } from 'lib/api'
-
-import { SITE_NAME, HOME_OG_IMAGE_URL } from 'lib/constants'
-import type { ContentfulPostFields } from 'types/api'
-import { markdownToHtml } from 'lib/markdownToHtml'
+import { getAllPosts, getPostBySlug, getRelatedPosts, necessaryFieldsForPost } from 'lib/api'
+import { SITE_NAME } from 'lib/constants'
+import type { PostFieldsToShow } from 'types/api'
 
 /* eslint-disable react/display-name */
 const PostHeader = dynamic(() => import('components/post/post-header'))
-const PostBody = dynamic(() => import(
-  'components/post/post-body'),
-  { loading: () => <FontAwesomeIcon icon={faSun} width={20} className="max-w-2xl mx-auto animate-spin" /> },
-)
+const PostBody = dynamic(() => import('components/post/post-body'), {
+  loading: () => (
+    <FontAwesomeIcon icon={faSun} width={20} className="max-w-2xl mx-auto animate-spin" />
+  ),
+})
 const SideTOC = dynamic(() => import('components/post/sideTOC'), { ssr: false })
 const BackToTopButton = dynamic(() => import('components/post/backToTopButton'), { ssr: false })
 
 type Props = {
-  post: ContentfulPostFields
-  relatedPosts: Record<string, { title: string, coverImageUrl: string }>
+  post: PostFieldsToShow
+  relatedPosts: Record<string, { title: string; coverImageUrl: string }>
   source: MDXRemoteSerializeResult<Record<string, unknown>>
-  toc: string
 }
 
-const Post = ({ post, relatedPosts, source, toc }: Props) => {
-  const assets = post.assets ? Object.fromEntries(
-    post.assets.map(asset => [
-      asset.fields.file.fileName.split('.')[0], {
-        url: `https:${asset.fields.file.url}`,
-        size: asset.fields.file.details.image
-      }
-    ])
-  ) : {
-    _index: {
-      url: HOME_OG_IMAGE_URL,
-      size: { width: 640, height: 360 },
-    }
-  }
-
+const Post = ({ post, relatedPosts, source }: Props) => {
   return (
     <>
       <Head>
         <title>
           {post.title.replace(/<br\/>/g, '')} | {SITE_NAME}
         </title>
-        <meta property="og:image" content={assets['_index'].url} />
+        <meta property="og:image" content={post.assets['_index'].url} />
         {post.katex && (
           <link
             rel="stylesheet"
@@ -70,16 +52,16 @@ const Post = ({ post, relatedPosts, source, toc }: Props) => {
               title={post.title}
               date={post.date}
               lastmod={post.lastmod}
-              topics={post.topics.map(topic => topic.fields)}
+              topics={post.topics}
             />
             <PostBody
               source={source}
-              toc={toc}
-              assets={assets}
+              toc={post.toc}
+              assets={post.assets}
               relatedPosts={relatedPosts}
             />
           </article>
-          <SideTOC toc={toc} />
+          <SideTOC toc={post.toc} />
         </div>
         <BackToTopButton />
       </Layout>
@@ -96,33 +78,17 @@ type Params = {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const posts = await getAllPosts(necessaryFieldsForPost)
-  const post = posts.find(post => post.slug === params.slug)
-  const postContent = twemoji.parse(post?.content ?? '').replace(/class="emoji"/g, 'className="emoji"')
+  const post = await getPostBySlug(params.slug)
+  const postContent = post?.content ?? ''
 
-  let relatedPosts: Record<string, { title: string, coverImageUrl: string }> = {}
-  const relatedPostSlugsMatches = postContent.matchAll(/<relpos link="(.+?)" \/>/g)
-  for (const match of relatedPostSlugsMatches) {
-    const slug = match[1]
-    const titleAndAssets = posts.find(post => post.slug === slug)
-    if (titleAndAssets) {
-      relatedPosts[slug] = {
-        title: titleAndAssets.title,
-        coverImageUrl: 'https:' + titleAndAssets.assets?.find(
-          asset => asset.fields.file.fileName === '_index.jpg'
-        )?.fields.file.url ?? HOME_OG_IMAGE_URL.slice(6)
-      }
-    }
-  }
+  const relatedPosts = await getRelatedPosts(postContent)
 
-  const postWithTOC = (postContent).replace(/## .+/, '<toc />\n\n$&')
-  const content = await serialize(postWithTOC, {
+  const content = await serialize(postContent, {
     mdxOptions: {
       remarkPlugins: [remarkMath],
       rehypePlugins: [rehypeKatex],
-    }
+    },
   })
-  const toc = await markdownToHtml(markdownTOC(post?.content ?? '').content, { targetBlank: false })
 
   return {
     props: {
@@ -131,14 +97,13 @@ export async function getStaticProps({ params }: Params) {
       },
       relatedPosts,
       source: content,
-      toc,
     },
   }
 }
 
 export async function getStaticPaths() {
   const posts = await getAllPosts(necessaryFieldsForPost)
-  const slugs = posts.map(post => post.slug)
+  const slugs = posts.map((post) => post.slug)
 
   return {
     paths: slugs.map((slug) => {

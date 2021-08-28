@@ -8,23 +8,23 @@ import Container from 'components/container'
 import Stories from 'components/stories'
 import Layout from 'components/layout'
 import Pagination from 'components/pagination'
-import { getPosts, necessaryFieldsForPostList } from 'lib/api'
+import { getPosts } from 'lib/api'
 import { SITE_NAME } from 'lib/constants'
-import type { ContentfulPostFields } from 'types/api'
+import type { PostFieldsToIndex } from 'types/api'
 
 type Props = {
-  posts: ContentfulPostFields[]
+  posts: PostFieldsToIndex[]
 }
 
 const Index = ({ posts }: Props) => {
   const [searchText, setSearchText] = useState('')
   const [timeoutID, setTimeoutID] = useState<number>()
-  const [searchedPosts, setSearchedPosts] = useState<ContentfulPostFields[]>([])
-  const [allPosts, setAllPosts] = useState<ContentfulPostFields[]>([])
+  const [searchedPosts, setSearchedPosts] = useState<PostFieldsToIndex[]>([])
+  const [allPosts, setAllPosts] = useState<PostFieldsToIndex[]>([])
   const [fetchPosts, setFetchPosts] = useState(false)
   const { data } = useSWR(
     fetchPosts ? '/api/allPosts' : null,
-    async (url: string) => await fetch(url).then(res => res.json()),
+    async (url: string) => await fetch(url).then((res) => res.json())
   )
 
   useEffect(() => {
@@ -34,18 +34,17 @@ const Index = ({ posts }: Props) => {
   useEffect(() => {
     if (data) setAllPosts(data.posts)
   }, [fetchPosts])
-  
+
   useEffect(() => {
     const getSearchedPosts = () =>
-      allPosts.filter(
-        (post: ContentfulPostFields) => {
-          const content = post.content
+      allPosts.filter((post: PostFieldsToIndex) => {
+        const content =
+          post.content
             .replace(/<relpos link=".+?" ?\/>/g, '')
             .replace(/<pstlk label="(.+?)" to=".+?" ?\/>/g, '$1')
             .replace(/\[(.+?)\]\(.+?\)/g, '$1') || ''
-          return (new RegExp(searchText, 'i')).test(content)
-        }
-      )
+        return new RegExp(searchText, 'i').test(content)
+      })
 
     setSearchedPosts(getSearchedPosts())
     return () => clearTimeout(timeoutID)
@@ -72,11 +71,7 @@ const Index = ({ posts }: Props) => {
               onChange={handleChange}
             />
           </div>
-          {searchText && (
-            <div className="mt-4">
-              {searchedPosts.length} 件の記事
-            </div>
-          )}
+          {searchText && <div className="mt-4">{searchedPosts.length} 件の記事</div>}
         </div>
         <Container>
           {posts.length > 0 && <Stories posts={searchText === '' ? posts : searchedPosts} />}
@@ -90,7 +85,7 @@ const Index = ({ posts }: Props) => {
 export default Index
 
 export const getStaticProps = async () => {
-  const posts = await getPosts(necessaryFieldsForPostList)
+  const posts = await getPosts()
 
   return {
     props: { posts },

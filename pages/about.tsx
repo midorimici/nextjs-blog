@@ -5,7 +5,6 @@ import Layout from 'components/layout'
 import AboutPost from 'components/post/about'
 import { getAboutPost } from 'lib/api'
 import { SITE_NAME } from 'lib/constants'
-import { markdownToHtml } from 'lib/markdownToHtml'
 
 type Props = {
   postTitle: string
@@ -28,15 +27,11 @@ const About = ({ postTitle, profileUrl, content }: Props) => {
               className={`
                 mb-12 text-2xl sm:text-4xl text-left font-bold tracking-wide break-all
               `}
-            >{postTitle}</h1>
+            >
+              {postTitle}
+            </h1>
             <div className="flex justify-center">
-              <Image
-                src={profileUrl}
-                alt="プロフィール画像"
-                width={160}
-                height={160}
-                priority
-              />
+              <Image src={profileUrl} alt="プロフィール画像" width={160} height={160} priority />
             </div>
             <AboutPost content={content} />
           </div>
@@ -50,13 +45,12 @@ export default About
 
 export async function getStaticProps() {
   const post = await getAboutPost()
-  const content = await markdownToHtml(post.content ?? '')
 
   return {
     props: {
       postTitle: post.title,
       profileUrl: post.profileUrl,
-      content,
+      content: post.content,
     },
   }
 }

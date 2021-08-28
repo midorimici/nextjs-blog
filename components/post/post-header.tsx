@@ -16,11 +16,13 @@ const PostHeader = ({ title, date, lastmod, topics }: Props) => {
     <div className="max-w-2xl mx-auto">
       <PostTitle title={title} />
       <div className="mb-6 text-lg">
-        <DateFormatter dateString={date} type='date' />
-        <DateFormatter dateString={lastmod} type='lastmod' />
+        <DateFormatter date={date} type="date" />
+        <DateFormatter date={lastmod} type="lastmod" />
       </div>
       <div className="flex flex-wrap gap-4 mb-6">
-        {topics.map((topic: ContentfulTopicFields) => <TopicTip key={topic.id} topic={topic} />)}
+        {topics.map((topic: ContentfulTopicFields) => (
+          <TopicTip key={topic.id} topic={topic} />
+        ))}
       </div>
     </div>
   )

@@ -10,22 +10,24 @@ const Pagination = () => {
   const [pageCount, setPageCount] = useState(10)
   const { data } = useSWR(
     '/api/allPosts',
-    async (url: string) => await fetch(url).then(res => res.json()),
+    async (url: string) => await fetch(url).then((res) => res.json())
   )
-  
+
   useEffect(() => {
-    if (data) setPageCount(Math.ceil(data.posts.length/PAGINATION_PER_PAGE))
+    if (data) setPageCount(Math.ceil(data.posts.length / PAGINATION_PER_PAGE))
   }, [data])
-  
+
   return (
     <ReactPaginate
       pageCount={pageCount}
       pageRangeDisplayed={3}
       marginPagesDisplayed={2}
-      initialPage={router.query.id ? +router.query.id-1 : 0}
-      onPageChange={({ selected }) => { router.push(selected === 0 ? '/' : `/page/${selected+1}`)}}
-      previousLabel='<'
-      nextLabel='>'
+      initialPage={router.query.id ? +router.query.id - 1 : 0}
+      onPageChange={({ selected }) => {
+        router.push(selected === 0 ? '/' : `/page/${selected + 1}`)
+      }}
+      previousLabel="<"
+      nextLabel=">"
       containerClassName="mt-8 flex justify-center"
       pageClassName="mx-2 sm:mx-4 text-lg sm:text-4xl"
       pageLinkClassName="outline-none cursor-pointer"

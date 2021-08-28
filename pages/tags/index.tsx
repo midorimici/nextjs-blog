@@ -1,15 +1,13 @@
 import Head from 'next/head'
-import dynamic from 'next/dynamic'
 
 import Layout from 'components/layout'
+import TopicTip from 'components/topic-tip'
 import type { ContentfulTopicFields } from 'types/api'
 import { SITE_NAME, TAGS_PAGE_TITLE } from 'lib/constants'
 import { getPostNumbersByTopics } from 'lib/api'
 
-const TopicTip = dynamic(() => import('components/topic-tip'))
-
 type Props = {
-  topicNumberMap: Record<string, { count: number, topic: ContentfulTopicFields }>
+  topicNumberMap: Record<string, { count: number; topic: ContentfulTopicFields }>
 }
 
 const Tags = ({ topicNumberMap }: Props) => {
@@ -27,11 +25,12 @@ const Tags = ({ topicNumberMap }: Props) => {
               max-w-2xl mx-auto mb-12
               text-2xl sm:text-4xl text-left font-bold tracking-wide break-all
             `}
-          >{TAGS_PAGE_TITLE}</h1>
+          >
+            {TAGS_PAGE_TITLE}
+          </h1>
           <div className="max-w-2xl mx-auto flex flex-wrap gap-4">
-            {Object.entries(topicNumberMap).map((
-                [topicId, topic]: [string, { count: number, topic: ContentfulTopicFields }]
-              ) => (
+            {Object.entries(topicNumberMap).map(
+              ([topicId, topic]: [string, { count: number; topic: ContentfulTopicFields }]) => (
                 <TopicTip key={topicId} topic={topic.topic} number={topic.count} />
               )
             )}
@@ -49,7 +48,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      topicNumberMap
+      topicNumberMap,
     },
   }
 }
