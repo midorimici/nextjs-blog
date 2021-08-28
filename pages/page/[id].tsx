@@ -6,7 +6,7 @@ import { PAGINATION_PER_PAGE } from 'lib/constants'
 export const config = { amp: true }
 
 type Props = {
-	posts: PostFieldsToIndex[]
+	posts: Omit<PostFieldsToIndex, 'content'>[]
 	pageCount: number
 }
 
@@ -27,7 +27,10 @@ export async function getStaticProps({ params }: Params) {
 	const count = await pageCount
 
 	return {
-		props: { posts, pageCount: count },
+		props: {
+			posts,
+			pageCount: count,
+		},
 	}
 }
 

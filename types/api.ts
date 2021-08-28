@@ -46,12 +46,10 @@ export type PostFieldsToShow = {
 		string,
 		{
 			url: string
-			size:
-				| {
-						width: number
-						height: number
-				  }
-				| undefined
+			size: {
+				width: number
+				height: number
+			} | null
 		}
 	>
 	content: string

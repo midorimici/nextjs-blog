@@ -13,7 +13,7 @@ import type { PostFieldsToIndex } from 'types/api'
 export const config = { amp: true }
 
 type Props = {
-	posts: PostFieldsToIndex[]
+	posts: Omit<PostFieldsToIndex, 'content'>[]
 	pageCount: number
 }
 
@@ -65,6 +65,9 @@ export const getStaticProps = async () => {
 	const count = await pageCount
 
 	return {
-		props: { posts, pageCount: count },
+		props: {
+			posts,
+			pageCount: count,
+		},
 	}
 }

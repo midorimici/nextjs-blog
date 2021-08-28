@@ -5,7 +5,7 @@ import { allPosts, getPosts } from 'lib/api'
 import { PAGINATION_PER_PAGE } from 'lib/constants'
 
 type Data = {
-	posts: PostFieldsToIndex[]
+	posts: Omit<PostFieldsToIndex, 'content'>[]
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {

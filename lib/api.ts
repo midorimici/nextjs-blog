@@ -117,7 +117,7 @@ const modifiedFields = async <
 						asset.fields.file.fileName.split('.')[0],
 						{
 							url: `https:${asset.fields.file.url}`,
-							size: asset.fields.file.details.image,
+							size: asset.fields.file.details.image ?? null,
 						},
 					])
 			  )
@@ -150,7 +150,7 @@ export async function getPosts({
 }: {
 	offset?: number
 	limit?: number
-} = {}) {
+} = {}): Promise<Omit<PostFieldsToIndex, 'content'>[]> {
 	const entries: EntryCollection<
 		Pick<ContentfulPostFields, typeof necessaryFieldsForPostList[number]>
 	> = await client.getEntries({
@@ -171,7 +171,8 @@ export async function getPosts({
 				slug: fields.slug,
 				...modified,
 			}
-			return newFields
+			const { content, ...omitContent } = newFields
+			return omitContent
 		})
 	)
 }
@@ -216,7 +217,7 @@ export async function getAllPosts<
 				const modified = await modifiedFields(f)
 				const newFields: PostFieldsToShow = {
 					slug: f.slug,
-					katex: f.katex,
+					katex: f.katex ?? false,
 					...modified,
 				}
 				return newFields
@@ -283,7 +284,7 @@ export async function getPostBySlug(slug: string) {
 	const modified = await modifiedFields(entryPost)
 	const newFields: PostFieldsToShow = {
 		slug: entryPost.slug,
-		katex: entryPost.katex,
+		katex: entryPost.katex ?? false,
 		...modified,
 	}
 	return newFields
