@@ -1,12 +1,8 @@
-import { useParsedMarkdown } from 'components/useParsedMarkdown'
-
 type Props = {
   title: string
 }
 
 const PostTitle = ({ title }: Props) => {
-  const parsedTitle = useParsedMarkdown(title)
-  
   return (
     <h1
       className={`
@@ -18,7 +14,7 @@ const PostTitle = ({ title }: Props) => {
         leading-relaxed
         break-words
       `}
-      dangerouslySetInnerHTML={{ __html: parsedTitle }}
+      dangerouslySetInnerHTML={{ __html: title }}
     />
   )
 }

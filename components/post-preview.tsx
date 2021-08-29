@@ -1,11 +1,9 @@
 import DateFormatter from './date-formatter'
 import CoverImage from './cover-image'
 import Link from 'next/link'
-import twemoji from 'twemoji'
 
 import TopicTip from './topic-tip'
 import type { ContentfulTopicFields } from 'types/api'
-import { useParsedMarkdown } from './useParsedMarkdown'
 
 type Props = {
   slug: string
@@ -28,9 +26,6 @@ const PostPreview = ({
   priority,
   summary,
 }: Props) => {
-  const parsedTitle = useParsedMarkdown(title)
-  const content = useParsedMarkdown(twemoji.parse(summary))
-
   return (
     <article
       className={`
@@ -52,7 +47,7 @@ const PostPreview = ({
       <section className="m-4">
         <h3
           className="text-xl sm:text-3xl mb-3 leading-snug"
-          dangerouslySetInnerHTML={{ __html: parsedTitle }}
+          dangerouslySetInnerHTML={{ __html: title }}
         />
         <div className="mb-4">
           <DateFormatter date={date} type="date" />
@@ -63,12 +58,10 @@ const PostPreview = ({
             <TopicTip key={topic.id} topic={topic} />
           ))}
         </div>
-        {summary && (
-          <p
-            className="text-base sm:text-lg leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: content.replace(/className=/g, 'class=') }}
-          />
-        )}
+        <div
+          className="text-base sm:text-lg leading-relaxed"
+          dangerouslySetInnerHTML={{ __html: summary }}
+        />
       </section>
     </article>
   )
