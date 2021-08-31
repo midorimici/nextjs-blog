@@ -81,9 +81,20 @@ const modifiedFields = async <
   const date = format(parseISO(fields.date), 'yyyy-MM-dd')
   const lastmod = format(parseISO(fields.lastmod), 'yyyy-MM-dd')
   const topics = fields.topics.map((topic) => topic.fields)
+
+  // コードブロックの絵文字の twemoji 化を防止
+  const splitted = fields.content.split(/(```(?:.|\n)+?```)/)
+  const res: string[] = []
+  for (const part of splitted) {
+    if (part.slice(0, 3) === '```') {
+      res.push(part)
+    } else {
+      res.push(twemoji.parse(part))
+    }
+  }
   // MDX 通すのでこの段階では HTML 化不要
-  const content = twemoji
-    .parse(fields.content)
+  const content = res
+    .join('')
     .replace(/class="emoji"/g, 'className="emoji"')
     .replace(/## .+/, '<toc />\n\n$&')
   if (isPostListFieldKey(fields)) {
