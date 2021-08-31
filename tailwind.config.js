@@ -2,17 +2,18 @@ module.exports = {
   purge: {
     content: ['./components/**/*.tsx', './pages/**/*.tsx'],
     safelist: [
-      ...['xs' , 'sm' , 'base' , 'lg' , 'xl' , '2xl'].map(size => `md:text-${size}`),
+      ...['xs', 'sm', 'base', 'lg', 'xl', '2xl'].map((size) => `md:text-${size}`),
       '-z-10',
     ],
   },
   theme: {
     extend: {
       fontSize: {
+        '4xl': ['2.25rem', '3.5rem'],
         '5xl': '2.5rem',
       },
       fontFamily: {
-        'code': ['"Fira Code"', '"Source Code Pro"'],
+        code: ['"Fira Code"', '"Source Code Pro"'],
       },
       cursor: {
         'zoom-out': 'zoom-out',
@@ -55,7 +56,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/aspect-ratio'),
-  ],
+  plugins: [require('@tailwindcss/aspect-ratio')],
 }

@@ -11,7 +11,6 @@ const PostTitle = ({ title }: Props) => {
         text-left
         font-bold
         tracking-wide
-        leading-relaxed
         break-words
       `}
       dangerouslySetInnerHTML={{ __html: title }}
