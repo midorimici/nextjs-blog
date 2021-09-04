@@ -43,7 +43,7 @@ const Index = ({ posts }: Props) => {
             .replace(/<relpos link=".+?" ?\/>/g, '')
             .replace(/<pstlk label="(.+?)" to=".+?" ?\/>/g, '$1')
             .replace(/\[(.+?)\]\(.+?\)/g, '$1') || ''
-        return new RegExp(searchText, 'i').test(content)
+        return searchText.split(' ').every((query: string) => new RegExp(query, 'i').test(content))
       })
 
     setSearchedPosts(getSearchedPosts())
@@ -52,7 +52,7 @@ const Index = ({ posts }: Props) => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     clearTimeout(timeoutID)
-    setTimeoutID(window.setTimeout(() => setSearchText(e.target.value), 200))
+    setTimeoutID(window.setTimeout(() => setSearchText(e.target.value), 300))
   }
 
   return (
