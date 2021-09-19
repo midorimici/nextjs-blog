@@ -4,6 +4,7 @@ module.exports = {
     safelist: [
       ...['xs', 'sm', 'base', 'lg', 'xl', '2xl'].map((size) => `md:text-${size}`),
       '-z-10',
+      'top-full',
     ],
   },
   theme: {
