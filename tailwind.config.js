@@ -5,6 +5,9 @@ module.exports = {
       ...['xs', 'sm', 'base', 'lg', 'xl', '2xl'].map((size) => `md:text-${size}`),
       '-z-10',
       'top-full',
+      ...['yellow', 'red', 'green']
+        .map((color) => [`bg-${color}-100`, `from-${color}-50`, `border-${color}-300`])
+        .flat(),
     ],
   },
   theme: {
