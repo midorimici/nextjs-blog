@@ -5,17 +5,19 @@ export type Options = {
   minimum?: boolean
   targetBlank?: boolean
   removeP?: boolean
+  removePBeforehand?: boolean
 }
 
 export async function markdownToHtml(
   markdown: string,
-  { minimum = true, targetBlank = true, removeP = true }: Options = {}
+  { minimum = true, targetBlank = true, removeP = true, removePBeforehand = false }: Options = {}
 ) {
-  const parseMarkdown = minimum
+  let parseMarkdown = minimum
     ? markdown
         .replace(/<pstlk label=["'](.+?)["'] to=["'].+?["'] \/>/g, '$1')
         .replace(/<tltp label=["'](.+)["']>(?:(?:.|\n)+)<\/tltp>/g, '$1')
     : markdown
+  if (removePBeforehand) parseMarkdown = parseMarkdown.replace(/<p>([\s\S]*?)<\/p>/g, '$1')
   const parsedMd = await remark().use(html).process(parseMarkdown)
   let result = parsedMd.toString()
   if (targetBlank)

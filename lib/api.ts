@@ -100,7 +100,9 @@ const modifiedFields = async <
   if (isPostListFieldKey(fields)) {
     const summaryToShow =
       (fields.summary || fields.content.replace(/([\s\S]+)\n<!--more-->[\s\S]+/, '$1')) + '…'
-    const summary = twemoji.parse(await markdownToHtml(summaryToShow, { removeP: false }))
+    const summary = twemoji.parse(
+      await markdownToHtml(summaryToShow, { removeP: false, removePBeforehand: true })
+    )
     const coverImage = fields.assets?.find((asset) => asset.fields.file.fileName === '_index.jpg')
       ?.fields.file.url
     const coverImageUrl = `https:${coverImage ?? HOME_OG_IMAGE_URL.slice(6)}`
