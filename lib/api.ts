@@ -103,8 +103,9 @@ const modifiedFields = async <
     const summary = twemoji.parse(
       await markdownToHtml(summaryToShow, { removeP: false, removePBeforehand: true })
     )
-    const coverImage = fields.assets?.find((asset) => asset.fields.file.fileName === '_index.jpg')
-      ?.fields.file.url
+    const coverImage = fields.assets?.find(
+      (asset) => asset.fields.title.slice(-10) === '_index.jpg'
+    )?.fields.file.url
     const coverImageUrl = `https:${coverImage ?? HOME_OG_IMAGE_URL.slice(6)}`
     return {
       title,
@@ -120,7 +121,7 @@ const modifiedFields = async <
     const assets = f.assets
       ? Object.fromEntries(
           f.assets.map((asset) => [
-            asset.fields.file.fileName.split('.')[0],
+            asset.fields.title.split('/')[1].split('.')[0],
             {
               url: `https:${asset.fields.file.url}`,
               size: asset.fields.file.details.image ?? null,
