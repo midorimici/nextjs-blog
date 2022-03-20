@@ -2,7 +2,6 @@ import { unified } from 'unified'
 import remarkParse from 'remark-parse/lib'
 import remarkRehype from 'remark-rehype'
 import rehypeRaw from 'rehype-raw'
-import rehypeSanitize from 'rehype-sanitize'
 import rehypeStringify from 'rehype-stringify/lib'
 
 export type Options = {
@@ -26,7 +25,6 @@ export async function markdownToHtml(
     .use(remarkParse)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
-    .use(rehypeSanitize)
     .use(rehypeStringify)
     .process(parseMarkdown)
   let result = String(parsedMd)
