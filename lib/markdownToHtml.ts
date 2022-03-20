@@ -1,5 +1,9 @@
-import remark from 'remark'
-import html from 'remark-html'
+import { unified } from 'unified'
+import remarkParse from 'remark-parse/lib'
+import remarkRehype from 'remark-rehype'
+import rehypeRaw from 'rehype-raw'
+import rehypeSanitize from 'rehype-sanitize'
+import rehypeStringify from 'rehype-stringify/lib'
 
 export type Options = {
   minimum?: boolean
@@ -18,8 +22,14 @@ export async function markdownToHtml(
         .replace(/<tltp label=["'](.+)["']>(?:(?:.|\n)+)<\/tltp>/g, '$1')
     : markdown
   if (removePBeforehand) parseMarkdown = parseMarkdown.replace(/<p>([\s\S]*?)<\/p>/g, '$1')
-  const parsedMd = await remark().use(html).process(parseMarkdown)
-  let result = parsedMd.toString()
+  const parsedMd = await unified()
+    .use(remarkParse)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeRaw)
+    .use(rehypeSanitize)
+    .use(rehypeStringify)
+    .process(parseMarkdown)
+  let result = String(parsedMd)
   if (targetBlank)
     result = result.replace(/<a (.*?)>/g, '<a $1 target="_blank" rel="noopener noreferrer">')
   if (removeP) result = result.replace(/<p>([\s\S]*?)<\/p>/g, '$1')
