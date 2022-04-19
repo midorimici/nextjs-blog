@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCloudSun, faTags, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faTags, faUser } from '@fortawesome/free-solid-svg-icons'
 
 const buttonStyle = 'flex items-center gap-2 hover:text-pink-400 transition-colors duration-300'
 const iconStyle = 'w-6'
@@ -23,14 +23,6 @@ const Header = () => {
           </a>
         </Link>
         <nav className="flex items-center gap-6 sm:gap-8">
-          <FontAwesomeIcon
-            icon={faCloudSun}
-            className={`${iconStyle} hover:cursor-pointer`}
-            role="button"
-            aria-label="light-dark-mode"
-            title="ダークモード切替"
-            onClick={() => document.documentElement.classList.toggle('dark')}
-          />
           <Link href="/tags">
             <a className={buttonStyle} aria-label="Tags">
               <FontAwesomeIcon icon={faTags} className={iconStyle} />
