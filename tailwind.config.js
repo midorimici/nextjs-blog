@@ -6,7 +6,13 @@ module.exports = {
       '-z-10',
       'top-full',
       ...['yellow', 'red', 'green']
-        .map((color) => [`bg-${color}-100`, `from-${color}-50`, `border-${color}-300`])
+        .map((color) => [
+          `bg-${color}-100`,
+          `bg-${color}-800`,
+          `from-${color}-50`,
+          `from-${color}-900`,
+          `border-${color}-300`,
+        ])
         .flat(),
     ],
   },
