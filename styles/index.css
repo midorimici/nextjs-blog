@@ -26,16 +26,16 @@ http://jikasei.me/font/genjyuu/
   font-display: swap;
   font-weight: inherit;
   font-style: inherit;
-  src: url("/fonts/genjyuu/GenJyuuGothic-Regular_subset.eot");
-  src: url("/fonts/genjyuu/GenJyuuGothic-Regular_subset.eot?#iefix") format('embedded-opentype'),
-  url("/fonts/genjyuu/GenJyuuGothic-Regular_subset.woff2") format('woff2'),
-  url("/fonts/genjyuu/GenJyuuGothic-Regular_subset.woff") format('woff'),
-  url("/fonts/genjyuu/GenJyuuGothic-Regular_subset.ttf") format('truetype');
+  src: url('/fonts/genjyuu/GenJyuuGothic-Regular_subset.eot');
+  src: url('/fonts/genjyuu/GenJyuuGothic-Regular_subset.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/genjyuu/GenJyuuGothic-Regular_subset.woff2') format('woff2'),
+    url('/fonts/genjyuu/GenJyuuGothic-Regular_subset.woff') format('woff'),
+    url('/fonts/genjyuu/GenJyuuGothic-Regular_subset.ttf') format('truetype');
 }
 
 body {
-  @apply sm:text-xl text-gray-600 tracking-wider;
-  font-family: genjyuu, "Meiryo", serif;
+  @apply sm:text-xl text-gray-600 dark:text-gray-200 tracking-wider;
+  font-family: genjyuu, 'Meiryo', serif;
 }
 
 html {
@@ -43,9 +43,9 @@ html {
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
-	html {
-		scroll-behavior: auto;
-	}
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 @media (min-width: 1536px) {
@@ -55,19 +55,19 @@ html {
 }
 
 ::-webkit-scrollbar {
-  @apply w-2 h-2
+  @apply w-2 h-2;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-transparent
+  @apply bg-transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply rounded bg-gray-200 transition-colors duration-300 hover:bg-pink-200
+  @apply rounded bg-gray-200 transition-colors duration-300 hover:bg-pink-200;
 }
 
 .emoji {
-  @apply inline-block mx-1 w-6
+  @apply inline-block mx-1 w-6;
 }
 
 .math-display {

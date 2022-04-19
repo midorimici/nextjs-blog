@@ -2,8 +2,8 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTags, faUser } from '@fortawesome/free-solid-svg-icons'
 
-const buttonStyle = "flex items-center gap-2 hover:text-pink-400 transition-colors duration-300"
-const iconStyle = "w-6"
+const buttonStyle = 'flex items-center gap-2 hover:text-pink-400 transition-colors duration-300'
+const iconStyle = 'w-6'
 
 /* eslint-disable @next/next/no-img-element */
 const Header = () => {
@@ -17,11 +17,9 @@ const Header = () => {
               alt="mi"
               width={32}
               height={32}
-              className="w-8 sm:w-12 fill-current"
+              className="w-8 sm:w-12 fill-current dark:invert"
             />
-            <span className="font-bold sm:text-5xl">
-              どりみちのブログ
-            </span>
+            <span className="font-bold sm:text-5xl">どりみちのブログ</span>
           </a>
         </Link>
         <nav className="flex items-center gap-6 sm:gap-8">

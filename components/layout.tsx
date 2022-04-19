@@ -14,7 +14,7 @@ const Layout = ({ children }: Props) => {
   return (
     <>
       <Meta />
-      <div className="min-h-screen bg-yellow-50">
+      <div className="min-h-screen bg-yellow-50 dark:bg-slate-600">
         <Container>
           <Header />
           <main className="flex-grow">{children}</main>

@@ -12,13 +12,15 @@ type Props = {
 const TopicTip = ({ topic, number }: Props) => {
   return (
     <Link as={`/tags/${topic.id}`} href="/tags/[topic]">
-      <a className={`
+      <a
+        className={`
         flex items-center gap-2 p-2
         text-sm sm:text-base
         border-2 rounded-3xl
         z-20
-        transition-color duration-300 hover:bg-white
-      `}>
+        transition-color duration-300 hover:bg-white dark:hover:bg-slate-800
+      `}
+      >
         <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-2xl flex justify-center items-center">
           <img
             src={topic.logoUrl}

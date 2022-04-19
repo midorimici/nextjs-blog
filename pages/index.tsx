@@ -62,7 +62,7 @@ const Index = ({ posts }: Props) => {
       </Head>
       <Layout>
         <div className="mb-8">
-          <div className="px-4 py-2 flex gap-4 items-center border rounded-xl bg-white">
+          <div className="px-4 py-2 flex gap-4 items-center border rounded-xl bg-white text-gray-600">
             <FontAwesomeIcon icon={faSearch} width={20} />
             <input
               type="search"

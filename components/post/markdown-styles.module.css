@@ -40,14 +40,15 @@
 }
 
 .markdown code {
-  @apply mx-1 px-2 py-1 bg-gray-100 rounded font-code;
+  @apply mx-1 px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded font-code;
 }
 
 .markdown a {
   @apply underline transition-colors duration-300 hover:text-pink-400;
 }
 
-.markdown h2 a, .markdown h3 a {
+.markdown h2 a,
+.markdown h3 a {
   @apply no-underline hover:text-current;
 }
 
@@ -55,7 +56,8 @@
   @apply pl-4 border-l-4 border-gray-200 rounded-lg;
 }
 
-.markdown th, .markdown td {
+.markdown th,
+.markdown td {
   @apply p-2;
 }
 

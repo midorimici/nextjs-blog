@@ -7,7 +7,7 @@ import { useImagePlaceholder } from 'components/useImagePlaceholder'
 
 export type RelatedPostProps = {
   link: string
-  relatedPosts: Record<string, { title: string, coverImageUrl: string }>
+  relatedPosts: Record<string, { title: string; coverImageUrl: string }>
 }
 
 const RelatedPost = ({ link, relatedPosts }: RelatedPostProps) => {
@@ -15,17 +15,19 @@ const RelatedPost = ({ link, relatedPosts }: RelatedPostProps) => {
   const postTitle = relatedPost.title
   const imgPath = relatedPost.coverImageUrl
   const placeholder = useImagePlaceholder(320, 180)
-  
+
   return (
-    <section className={`
+    <section
+      className={`
       relative flex flex-col sm:flex-row items-end sm:items-start gap-4
       p-4 my-4
       rounded-2xl
       cursor-pointer
       transition duration-300
-      shadow hover:shadow-lg hover:bg-white
+      shadow hover:shadow-lg hover:bg-white dark:hover:bg-slate-800
       hover:opacity-80
-    `}>
+    `}
+    >
       <Link as={`/posts/${link}`} href="/posts/[slug]">
         <a
           className="absolute top-0 left-0 w-full h-full z-10"
@@ -34,10 +36,10 @@ const RelatedPost = ({ link, relatedPosts }: RelatedPostProps) => {
       </Link>
       <section className="flex-grow flex flex-col gap-4 w-full">
         <span className="pb-2 font-bold text-2xl text-pink-400 border-b-2 border-pink-400">
-          <FontAwesomeIcon icon={faBookOpen} width={28} />&nbsp;
-          関連記事
+          <FontAwesomeIcon icon={faBookOpen} width={28} />
+          &nbsp; 関連記事
         </span>
-        <span dangerouslySetInnerHTML={{ __html : postTitle }} />
+        <span dangerouslySetInnerHTML={{ __html: postTitle }} />
       </section>
       <section className="flex-shrink-0 flex">
         <Image

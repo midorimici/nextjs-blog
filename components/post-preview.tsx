@@ -35,7 +35,7 @@ const PostPreview = ({
       rounded-2xl
       cursor-pointer
       transition duration-300
-      shadow hover:shadow-lg hover:bg-white
+      shadow hover:shadow-lg hover:bg-white dark:hover:bg-slate-800
       hover:opacity-80
       break-all
     `}
