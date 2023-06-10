@@ -4,7 +4,7 @@ import { faLink } from '@fortawesome/free-solid-svg-icons'
 
 import styles from './heading.module.css'
 
-type Props = { type: 2 | 3, content: any }
+type Props = { type: 2 | 3 | 4; content: any }
 
 const Heading = ({ type, content }: Props) => {
   const HeadingComponent: React.ElementType = `h${type}`
@@ -25,10 +25,14 @@ const Heading = ({ type, content }: Props) => {
   // https://github.com/jonschlinkert/markdown-toc/blob/master/lib/utils.js#L50
   const link = getHeadingString()
     .toLowerCase()
-    .split(' ').join('-')
-    .split(/\t/).join('--')
-    .split(/[|$&`~=\\\/@+*!?({[\]})<>=.,;:'"^]/).join('')
-    .split(/[。？！，、；：“”【】（）〔〕［］﹃﹄“ ”‘’﹁﹂—…－～《》〈〉「」]/).join('')
+    .split(' ')
+    .join('-')
+    .split(/\t/)
+    .join('--')
+    .split(/[|$&`~=\\\/@+*!?({[\]})<>=.,;:'"^]/)
+    .join('')
+    .split(/[。？！，、；：“”【】（）〔〕［］﹃﹄“ ”‘’﹁﹂—…－～《》〈〉「」]/)
+    .join('')
 
   return (
     <HeadingComponent id={link}>
