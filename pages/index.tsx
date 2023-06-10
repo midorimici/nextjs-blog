@@ -2,7 +2,7 @@ import { useState, useEffect, ChangeEvent } from 'react'
 import useSWR from 'swr'
 import Head from 'next/head'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faEllipsis, faSearch, faSun } from '@fortawesome/free-solid-svg-icons'
 
 import Container from 'components/container'
 import Stories from 'components/stories'
@@ -11,6 +11,29 @@ import Pagination from 'components/pagination'
 import { getPosts } from 'lib/api'
 import { SITE_NAME } from 'lib/constants'
 import type { PostFieldsToIndex } from 'types/api'
+
+type StatusProps = {
+  timeoutID: number | undefined
+  isValidating: boolean
+  searchText: string
+  postCount: number
+}
+
+const Status = ({ timeoutID, isValidating, searchText, postCount }: StatusProps) => {
+  if (timeoutID !== undefined) {
+    return <FontAwesomeIcon icon={faEllipsis} width={20} className="ml-4" />
+  }
+
+  if (isValidating) {
+    return <FontAwesomeIcon icon={faSun} width={20} className="ml-4 animate-spin" />
+  }
+
+  if (searchText === '') {
+    return null
+  }
+
+  return <>{`${postCount} 件の記事`}</>
+}
 
 type Props = {
   posts: PostFieldsToIndex[]
@@ -22,7 +45,7 @@ const Index = ({ posts }: Props) => {
   const [searchedPosts, setSearchedPosts] = useState<PostFieldsToIndex[]>([])
   const [allPosts, setAllPosts] = useState<PostFieldsToIndex[]>([])
   const [fetchPosts, setFetchPosts] = useState(false)
-  const { data } = useSWR(
+  const { data, isValidating } = useSWR(
     fetchPosts ? '/api/allPosts' : null,
     async (url: string) => await fetch(url).then((res) => res.json())
   )
@@ -52,7 +75,12 @@ const Index = ({ posts }: Props) => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     clearTimeout(timeoutID)
-    setTimeoutID(window.setTimeout(() => setSearchText(e.target.value), 300))
+    setTimeoutID(
+      window.setTimeout(() => {
+        setSearchText(e.target.value)
+        setTimeoutID(undefined)
+      }, 300)
+    )
   }
 
   return (
@@ -71,7 +99,14 @@ const Index = ({ posts }: Props) => {
               onChange={handleChange}
             />
           </div>
-          {searchText && <div className="mt-4">{searchedPosts.length} 件の記事</div>}
+          <div className="h-8 mt-4">
+            <Status
+              timeoutID={timeoutID}
+              isValidating={isValidating}
+              searchText={searchText}
+              postCount={searchedPosts.length}
+            />
+          </div>
         </div>
         <Container>
           {posts.length > 0 && <Stories posts={searchText === '' ? posts : searchedPosts} />}
