@@ -2,7 +2,7 @@ import { createClient } from 'contentful'
 import type { Entry, EntryCollection } from 'contentful'
 import { parseISO, format } from 'date-fns'
 import markdownTOC from 'markdown-toc'
-import twemoji from 'twemoji'
+import twemoji from '@twemoji/api'
 
 import type {
   ContentfulTopicFields,
